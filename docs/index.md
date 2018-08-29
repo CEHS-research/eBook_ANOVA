@@ -1,7 +1,7 @@
 --- 
 title: "Encyclopedia of Quantitative Methods in R, vol. 2: Testing Mean Differences"
 author: "Sarah Schwartz & Tyson Barrett"
-date: "Last updated: 2018-08-25"
+date: "Last updated: 2018-08-29"
 documentclass: book
 description: "t-tests, ANOVA, RM ANOVA, and post hoc tests."
 knit: "bookdown::render_book"
@@ -113,7 +113,7 @@ THis is what the output of the $R$ code above will look:
   </tr>
   <tr>
    <td style="text-align:center;"> Sarah.Schwartz@usu.edu </td>
-   <td style="text-align:center;"> Tyson.Battett@usu.edu </td>
+   <td style="text-align:center;"> Tyson.Barrett@usu.edu </td>
   </tr>
   <tr>
    <td style="text-align:center;"> [Statistical Consulting Studio](https://cehs.usu.edu/research/statstudio/index) </td>
