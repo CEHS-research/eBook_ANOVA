@@ -1,6 +1,9 @@
-bookdown::gitbook:
-  css: style.css
+bookdown::html_book:
+  theme: cosmo
+  css: [style.css, toc.css]
   split_by: chapter
+  split_bib: false
+  number_sections: FALSE
   config:
     toc:
       collapse: section

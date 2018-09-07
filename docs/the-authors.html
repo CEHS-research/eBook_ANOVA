@@ -31,7 +31,7 @@ MathJax.Hub.Config({
 
 <script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
 <script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -84,8 +84,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </style>
 
 
-<link rel="stylesheet" href="style.css" type="text/css" />
-<link rel="stylesheet" href="toc.css" type="text/css" />
 
 <style type = "text/css">
 .main-container {
@@ -114,31 +112,13 @@ img {
 <div id="TOC">
 <ul>
 <li class="has-sub"><a href="index.html#welcome">Welcome</a><ul>
-<li><a href="index.html#blocked-notes">Blocked Notes</a></li>
-<li><a href="index.html#code-and-output">Code and Output</a></li>
-<li class="has-sub"><a href="index.html#the-authors">The Authors</a><ul>
-<li><a href="index.html#why-choose-r">Why choose R ?</a></li>
-<li><a href="index.html#fyi">FYI</a></li>
+<li><a href="blocked-notes.html#blocked-notes">Blocked Notes</a></li>
+<li><a href="code-and-output.html#code-and-output">Code and Output</a></li>
+<li><a href="why-choose-r.html#why-choose-r">Why choose R ?</a></li>
+<li><a href="the-authors.html#the-authors">The Authors</a></li>
+<li><a href="fyi.html#fyi">FYI</a></li>
 </ul></li>
-</ul></li>
-<li class="has-sub"><a href="ex-obese.html#ex-obese">Ex: Obese</a><ul>
-<li><a href="ex-obese.html#dataset-background">Dataset Background</a></li>
-<li class="has-sub"><a href="ex-obese.html#data-wrangling-preparation">Data Wrangling &amp; Preparation</a><ul>
-<li><a href="ex-obese.html#read-in-raw-data">Read in Raw Data</a></li>
-<li><a href="ex-obese.html#format-variables">Format Variables</a></li>
-<li><a href="ex-obese.html#create-new-variables">Create New VAriables</a></li>
-<li><a href="ex-obese.html#restructure">Restructure</a></li>
-</ul></li>
-<li class="has-sub"><a href="ex-obese.html#exploratory-analysis-of-raw-data">Exploratory Analysis of Raw Data</a><ul>
-<li><a href="ex-obese.html#tabulate">Tabulate</a></li>
-<li><a href="ex-obese.html#visualize">Visualize</a></li>
-</ul></li>
-<li class="has-sub"><a href="ex-obese.html#inferncial-analysis-with-modeling">Inferncial Analysis with Modeling</a><ul>
-<li><a href="ex-obese.html#anova">ANOVA</a></li>
-<li><a href="ex-obese.html#regression">Regression</a></li>
-</ul></li>
-<li><a href="ex-obese.html#results-discussion">Results &amp; Discussion</a></li>
-</ul></li>
+<li><a href="1-testing.html#testing"><span class="toc-section-number">1</span> Testing</a></li>
 <li><a href="references.html#references">References</a></li>
 </ul>
 </div>
@@ -146,54 +126,6 @@ img {
 </div>
 <div class="row">
 <div class="col-sm-12">
-<div id="header">
-<h1 class="title">Encyclopedia of Quantitative Methods in R, vol. 2: Testing Mean Differences</h1>
-<h4 class="author"><em>Sarah Schwartz &amp; Tyson Barrett</em></h4>
-<h4 class="date"><em>Last updated: 2018-09-07</em></h4>
-</div>
-<div id="welcome" class="section level1 unnumbered">
-<h1>Welcome</h1>
-<p>Backgroup and links to other volumes of this encyclopedia may be found at the <a href="https://cehs-research.github.io/eBooks/">Encyclopedia’s Home Website</a>.</p>
-<div class="figure">
-<img src="images/common/EQM_v2_header.png" />
-
-</div>
-<div id="blocked-notes" class="section level2 unnumbered">
-<h2>Blocked Notes</h2>
-<p>Thoughout all the eBooks in this encyclopedia, several small secitons will be blocked out in the following ways:</p>
-<div class="rmdconstruct">
-<p>
-These blocks denote an area <strong>UNDER CONSTRUCTION</strong>, so check back often. This massive undertaking started during the summer of 2018 and is far from complete. The outline of seven volumes is given above despite any one being complete. Feedback is welcome via either author’s email.
-</p>
-</div>
-<div class="rmdimportant">
-<p>
-These blocks denote something <strong>EXTREMELY IMPORTANT</strong>. Do NOT skip these notes as they will be used very sparingly.
-</p>
-</div>
-<div class="rmddownload">
-<p>
-These blocks denote something to <strong>DOWNLOAD</strong>. This may include software installations, example datasets, or notebook code files.
-</p>
-</div>
-<div class="rmdlightbulb">
-<p>
-These blocks denote something <strong>INTERESTING</strong>. These point out information we found of interest or added value.
-</p>
-</div>
-<div class="rmdlink">
-<p>
-These blocks denote <strong>LINKS</strong> to other websites. This may include instructional video clips, articles, or blog posts. We are all about NOT re-creating the wheel. If somebody else has described or illustrated a topic well, we celebrate it!
-</p>
-</div>
-</div>
-<div id="code-and-output" class="section level2 unnumbered">
-<h2>Code and Output</h2>
-<p>This is how <span class="math inline">\(R\)</span> code is shown:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
-<p>This is what the output of the <span class="math inline">\(R\)</span> code above will look:</p>
-<pre><code>## [1] 2</code></pre>
-</div>
 <div id="the-authors" class="section level2 unnumbered">
 <h2>The Authors</h2>
 <table>
@@ -250,28 +182,10 @@ Dr. Tyson Barrett
 </tr>
 </tbody>
 </table>
-<div id="why-choose-r" class="section level3 unnumbered">
-<h3>Why choose R ?</h3>
-<div class="rmdlink">
-<p>
-<strong>Check it out:</strong> an article from Fall 2016… <a href="https://datahowler.wordpress.com/2016/09/10/no-more-excuses-r-is-better-than-spss-for-psychology-undergrads-and-students-agree/">No more excuses: R is better than SPSS for psychology undergrads, and students agree</a>
-</p>
-</div>
-</div>
-<div id="fyi" class="section level3 unnumbered">
-<h3>FYI</h3>
-<p>This entire encyclopedia is written in <span class="math inline">\(R Markdown\)</span>, using <span class="math inline">\(R Studio\)</span> as the text editor and the <code>bookdown</code> package to turn a collection of markdown documents into a coherent whole. The book’s source code is hosted on GitHub. If you notice typos or other issues, feel free to email either of the authors.</p>
-<p>This work is licensed under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode">Attribution-NonCommercial-NoDerivatives 4.0 International</a> License.</p>
-<div class="figure">
-<img src="images/common/Education_Logo_WHITE-02.png" width="300" />
-
-</div>
-
-</div>
-</div>
 </div>
 <p style="text-align: center;">
-<a href="ex-obese.html"><button class="btn btn-default">Next</button></a>
+<a href="why-choose-r.html"><button class="btn btn-default">Previous</button></a>
+<a href="fyi.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>
 </div>
