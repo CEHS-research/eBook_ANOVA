@@ -1,14 +1,13 @@
-bookdown::html_book:
-  theme: cosmo
-  css: [style.css, toc.css]
+bookdown::gitbook:
+  css: style.css
   split_by: chapter
-  split_bib: false
-  number_sections: FALSE
+  split_bib: FALSE
+  df_print: tibble
   config:
     toc:
       collapse: section
       before: |
-        <li><a href="./">Vol. 2: Testing Mean Differences</a></li>
+        <li><a href="./">Vol. 3: Testing Mean Differences</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 

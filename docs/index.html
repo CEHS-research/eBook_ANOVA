@@ -1,45 +1,54 @@
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html >
 
 <head>
 
-<meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:title" content="Encyclopedia of Quantitative Methods in R, vol. 2: Testing Mean Differences" />
-<meta property="og:type" content="book" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
+  <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
-<meta property="og:image" content="EQM_v1_cover.png" />
-<meta property="og:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
-<meta name="github-repo" content="cehs-research/eBook_wrangle" />
+  <meta property="og:title" content="Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="EQM_v1_cover.png" />
+  <meta property="og:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
+  <meta name="github-repo" content="cehs-research/eBook_wrangle" />
 
-<meta name="author" content="Sarah Schwartz &amp; Tyson Barrett" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  
+  <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
+  <meta name="twitter:image" content="EQM_v1_cover.png" />
+
+<meta name="author" content="Sarah Schwartz &amp; Tyson Barrett">
 
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-});
-</script>
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 
-<meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
 
-<title>Encyclopedia of Quantitative Methods in R, vol. 2: Testing Mean Differences</title>
+<link rel="next" href="ex-obese.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 
-<script src="libs/jquery-1.11.3/jquery.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+
+
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -77,77 +86,72 @@ code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Ann
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
-
 
 <link rel="stylesheet" href="style.css" type="text/css" />
-<link rel="stylesheet" href="toc.css" type="text/css" />
-
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
-img {
-  max-width:100%;
-  height: auto;
-}
-</style>
 </head>
 
 <body>
 
-<div class="container-fluid main-container">
 
 
-<div class="row">
-<div class="col-sm-12">
-<div id="TOC">
-<ul>
-<li class="has-sub"><a href="index.html#welcome">Welcome</a><ul>
-<li><a href="index.html#blocked-notes">Blocked Notes</a></li>
-<li><a href="index.html#code-and-output">Code and Output</a></li>
-<li class="has-sub"><a href="index.html#the-authors">The Authors</a><ul>
-<li><a href="index.html#why-choose-r">Why choose R ?</a></li>
-<li><a href="index.html#fyi">FYI</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Vol. 3: Testing Mean Differences</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-authors"><i class="fa fa-check"></i>The Authors</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
 </ul></li>
 </ul></li>
-<li class="has-sub"><a href="ex-obese.html#ex-obese">Ex: Obese</a><ul>
-<li><a href="ex-obese.html#dataset-background">Dataset Background</a></li>
-<li class="has-sub"><a href="ex-obese.html#data-wrangling-preparation">Data Wrangling &amp; Preparation</a><ul>
-<li><a href="ex-obese.html#read-in-raw-data">Read in Raw Data</a></li>
-<li><a href="ex-obese.html#format-variables">Format Variables</a></li>
-<li><a href="ex-obese.html#create-new-variables">Create New VAriables</a></li>
-<li><a href="ex-obese.html#restructure">Restructure</a></li>
+<li class="chapter" data-level="1" data-path="ex-obese.html"><a href="ex-obese.html"><i class="fa fa-check"></i><b>1</b> Ex: Obese</a><ul>
+<li class="chapter" data-level="1.1" data-path="ex-obese.html"><a href="ex-obese.html#dataset-background"><i class="fa fa-check"></i><b>1.1</b> Dataset Background</a></li>
+<li class="chapter" data-level="1.2" data-path="ex-obese.html"><a href="ex-obese.html#data-wrangling-preparation"><i class="fa fa-check"></i><b>1.2</b> Data Wrangling &amp; Preparation</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="ex-obese.html"><a href="ex-obese.html#read-in-raw-data"><i class="fa fa-check"></i><b>1.2.1</b> Read in Raw Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="ex-obese.html"><a href="ex-obese.html#format-variables"><i class="fa fa-check"></i><b>1.2.2</b> Format Variables</a></li>
+<li class="chapter" data-level="1.2.3" data-path="ex-obese.html"><a href="ex-obese.html#create-new-variables"><i class="fa fa-check"></i><b>1.2.3</b> Create New VAriables</a></li>
+<li class="chapter" data-level="1.2.4" data-path="ex-obese.html"><a href="ex-obese.html#restructure"><i class="fa fa-check"></i><b>1.2.4</b> Restructure</a></li>
 </ul></li>
-<li class="has-sub"><a href="ex-obese.html#exploratory-analysis-of-raw-data">Exploratory Analysis of Raw Data</a><ul>
-<li><a href="ex-obese.html#tabulate">Tabulate</a></li>
-<li><a href="ex-obese.html#visualize">Visualize</a></li>
+<li class="chapter" data-level="1.3" data-path="ex-obese.html"><a href="ex-obese.html#exploratory-analysis-of-raw-data"><i class="fa fa-check"></i><b>1.3</b> Exploratory Analysis of Raw Data</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="ex-obese.html"><a href="ex-obese.html#tabulate"><i class="fa fa-check"></i><b>1.3.1</b> Tabulate</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ex-obese.html"><a href="ex-obese.html#visualize"><i class="fa fa-check"></i><b>1.3.2</b> Visualize</a></li>
 </ul></li>
-<li class="has-sub"><a href="ex-obese.html#inferncial-analysis-with-modeling">Inferncial Analysis with Modeling</a><ul>
-<li><a href="ex-obese.html#anova">ANOVA</a></li>
-<li><a href="ex-obese.html#regression">Regression</a></li>
+<li class="chapter" data-level="1.4" data-path="ex-obese.html"><a href="ex-obese.html#inferncial-analysis-with-modeling"><i class="fa fa-check"></i><b>1.4</b> Inferncial Analysis with Modeling</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="ex-obese.html"><a href="ex-obese.html#anova"><i class="fa fa-check"></i><b>1.4.1</b> ANOVA</a></li>
+<li class="chapter" data-level="1.4.2" data-path="ex-obese.html"><a href="ex-obese.html#regression"><i class="fa fa-check"></i><b>1.4.2</b> Regression</a></li>
 </ul></li>
-<li><a href="ex-obese.html#results-discussion">Results &amp; Discussion</a></li>
+<li class="chapter" data-level="1.5" data-path="ex-obese.html"><a href="ex-obese.html#results-discussion"><i class="fa fa-check"></i><b>1.5</b> Results &amp; Discussion</a></li>
 </ul></li>
-<li><a href="references.html#references">References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-12">
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Encyclopedia of Quantitative Methods in R, vol. 2: Testing Mean Differences</h1>
+<h1 class="title">Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</h1>
 <h4 class="author"><em>Sarah Schwartz &amp; Tyson Barrett</em></h4>
 <h4 class="date"><em>Last updated: 2018-09-07</em></h4>
 </div>
@@ -155,7 +159,7 @@ img {
 <h1>Welcome</h1>
 <p>Backgroup and links to other volumes of this encyclopedia may be found at the <a href="https://cehs-research.github.io/eBooks/">Encyclopedia’s Home Website</a>.</p>
 <div class="figure">
-<img src="images/common/EQM_v2_header.png" />
+<img src="images/common/EQM_v3_header.png" />
 
 </div>
 <div id="blocked-notes" class="section level2 unnumbered">
@@ -270,23 +274,66 @@ Dr. Tyson Barrett
 </div>
 </div>
 </div>
-<p style="text-align: center;">
-<a href="ex-obese.html"><button class="btn btn-default">Next</button></a>
-</p>
-</div>
-</div>
+            </section>
 
+          </div>
+        </div>
+      </div>
 
-</div>
-
+<a href="ex-obese.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-
-// add bootstrap table styles to pandoc tables
-$(document).ready(function () {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
 });
-
+});
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
+
 </html>

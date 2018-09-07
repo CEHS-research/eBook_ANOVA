@@ -1,5 +1,5 @@
 --- 
-title: "Encyclopedia of Quantitative Methods in R, vol. 2: Testing Mean Differences"
+title: "Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences"
 author: "Sarah Schwartz & Tyson Barrett"
 date: "Last updated: `r Sys.Date()`"
 documentclass: book
@@ -22,7 +22,7 @@ Backgroup and links to other volumes of this encyclopedia may be found at the [E
 
 
 
-![](images/common/EQM_v2_header.png)
+![](images/common/EQM_v3_header.png)
 
 
 
