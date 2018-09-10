@@ -26,7 +26,6 @@ Backgroup and links to other volumes of this encyclopedia may be found at the [E
 
 
 
-
 ```{r, echo=FALSE, include=FALSE, comment=FALSE, message=FALSE}
 library(tidyverse, quietly = TRUE)
 library(kableExtra)

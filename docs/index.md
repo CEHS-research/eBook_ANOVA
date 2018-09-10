@@ -30,7 +30,6 @@ Backgroup and links to other volumes of this encyclopedia may be found at the [E
 
 
 
-
 ## Blocked Notes {-}
 
 Thoughout all the eBooks in this encyclopedia, several small secitons will be blocked out in the following ways:
