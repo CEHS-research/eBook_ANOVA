@@ -1,0 +1,114 @@
+# t TEST FOR THE MEAN OF 1 SAMPLE
+
+
+```{r global_options, include=FALSE}
+# set global chunk options...  
+#  this changes the defaults so you don't have to repeat yourself
+knitr::opts_chunk$set(comment     = NA,
+                      cache       = TRUE,
+                      echo        = TRUE, 
+                      warning     = FALSE, 
+                      message     = FALSE)
+```
+
+
+
+## Required Packages 
+
+```{r load_libraries}
+library(tidyverse)    # Loads several very helpful 'tidy' packages
+library(haven)        # Read in SPSS datasets
+```
+
+
+## Example Dataset - Cancer Experiment 
+
+#### Source of Data {-}
+
+Mid-Michigan Medical Center, Midland, Michigan, 1999: A  study of oral condition of cancer patients.
+
+#### Description of the Study {-}
+
+The data set contains part of the data for a study of oral condition of cancer patients conducted at the Mid-Michigan Medical Center.  The oral conditions of the patients were measured and recorded at the initial stage, at the end of the second week, at the end of the fourth week, and at the end of the sixth week.  The variables age, initial weight and initial cancer stage of the patients were recorded.  Patients were divided into two groups at random:  One group received a placebo and the other group received aloe juice treatment.
+
+Sample size $n = 25$ patients with neck cancer. The treatment is **Aloe Juice**. 
+
+#### Variables Included {-}
+
+* `ID` patient identification number
+
+* `trt` treatment group 
+    + `0` *placebo* 
+    + `1` *aloe juice*
+
+* `age` patient's age, *in years*
+
+* `weightin` patient's weight *(pounds)* at the initial stage
+
+* `stage`	initial cancer stage
+    + coded `1` through `4`
+
+* `totalcin` oral condition at the *initial stage*
+* `totalcw2` oral condition at the end of *week 2*
+* `totalcw4` oral condition at the end of *week 4*
+* `totalcw6` oral condition at the end of *week 6*
+
+
+
+
+```{r, include=FALSE}
+cancer_raw <- haven::read_spss("data/cancer.sav")
+
+cancer_clean <- cancer_raw %>% 
+  dplyr::rename_all(tolower) %>% 
+  dplyr::mutate(id = factor(id)) %>% 
+  dplyr::mutate(trt = factor(trt,
+                             labels = c("Placebo", 
+                                        "Aloe Juice"))) %>% 
+  dplyr::mutate(stage = factor(stage))
+```
+
+
+```{r}
+head(cancer_raw)
+```
+
+
+
+
+## 1 Sample Mean vs. historic control
+
+example: Do the patients weigh more than 165 pounds at intake, on average?
+
+
+```{r}
+cancer_clean %>% 
+  dplyr::pull(weighin) %>% 
+  t.test(mu = 165)
+```
+
+
+
+## Change the Confidence Level
+
+Find a 99% confience level for the population mean weight.
+
+```{r}
+cancer_clean %>% 
+  dplyr::pull(weighin) %>% 
+  t.test(mu = 165,
+         conf.level = 0.99)
+```
+
+
+## Restrict to a Subsample
+
+Do the patients with .dcoral[stage 3 & 4] cancer weigh more than 165 pounds at intake, on average?
+
+```{r}
+cancer_clean %>% 
+  dplyr::filter(stage %in% c("3", "4")) %>% 
+  dplyr::pull(weighin) %>% 
+  t.test(mu = 165)
+```
+

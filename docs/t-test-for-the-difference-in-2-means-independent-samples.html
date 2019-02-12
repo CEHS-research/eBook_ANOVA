@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
+  <title>2 t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
   <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta property="og:title" content="2 t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="EQM_v1_cover.png" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="cehs-research/eBook_wrangle" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta name="twitter:title" content="2 t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   
   <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="twitter:image" content="EQM_v1_cover.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="t-test-for-the-mean-of-1-sample.html">
+<link rel="prev" href="t-test-for-the-mean-of-1-sample.html">
+<link rel="next" href="ex-obese.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -169,128 +169,143 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</h1>
-<p class="author"><em>Sarah Schwartz &amp; Tyson Barrett</em></p>
-<p class="date"><em>Last updated: 2019-02-12</em></p>
+<div id="t-test-for-the-difference-in-2-means-independent-samples" class="section level1">
+<h1><span class="header-section-number">2</span> t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES</h1>
+<div id="required-packages-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Required Packages</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)    <span class="co"># Loads several very helpful &#39;tidy&#39; packages</span>
+<span class="kw">library</span>(haven)        <span class="co"># Read in SPSS datasets</span>
+<span class="kw">library</span>(car)          <span class="co"># Companion for Applied Regression (and ANOVA)</span></code></pre></div>
 </div>
-<div id="welcome" class="section level1 unnumbered">
-<h1>Welcome</h1>
-<p>Backgroup and links to other volumes of this encyclopedia may be found at the <a href="https://cehs-research.github.io/eBooks/">Encyclopedia’s Home Website</a>.</p>
-<div class="figure">
-<img src="images/common/EQM_v3_header.png" />
+<div id="example-dataset---cancer-experiment-1" class="section level2">
+<h2><span class="header-section-number">2.2</span> Example Dataset - Cancer Experiment</h2>
+<p>The <code>Cancer</code> dataset was introduced in “t TEST FOR THE MEAN OF 1 SAMPLE”.</p>
+</div>
+<div id="check-means-and-sds" class="section level2">
+<h2><span class="header-section-number">2.3</span> Check Means and SD’s</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(trt) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>furniture<span class="op">::</span><span class="kw">table1</span>(totalcin, totalcw4)</code></pre></div>
+<pre><code>
+--------------------------------
+                 trt 
+          Placebo    Aloe Juice
+          n = 14     n = 11    
+ totalcin                      
+          6.6 (0.9)  6.5 (2.1) 
+ totalcw4                      
+          10.1 (3.6) 10.6 (3.5)
+--------------------------------</code></pre>
+<hr />
+</div>
+<div id="assumtion-check" class="section level2">
+<h2><span class="header-section-number">2.4</span> Assumtion Check</h2>
+<div id="eyeball-method" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Eyeball method</h3>
+<p>Do the two groups, treatment and control, have the same amount of spread (standard deviations) BUT different centers (means)?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> trt,
+             <span class="dt">y =</span> totalcin)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
+<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> trt,
+             <span class="dt">y =</span> totalcw4)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
+<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<hr />
+</div>
+<div id="homogeneity-of-variance-hov-formal-test" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Homogeneity of Variance (HOV) Formal Test</h3>
+<p>Before performing the <span class="math inline">\(t\)</span> test, check to see if the assumption of homogeneity of variance is met using <strong>Levene’s Test</strong>. For a independent samples <code>t</code>-test for means, the groups need to have the same amount of spread (SD) in the measure of interest.</p>
+<p>Use the <code>car:leveneTest()</code> function to do this. Inside the funtion you need to specify at least three things (sepearated by commas):</p>
+<ul>
+<li>the formula: <code>continuous_var ~ grouping_var</code> (replace with your variable names)</li>
+<li>the dataset: <code>data = .</code> to pipe it from above</li>
+<li>the center: <code>center = &quot;mean&quot;</code> since we are comparing means</li>
+</ul>
+<blockquote>
+<p>Do the participants in the treatment and control groups have the same spread in oral condition at BASELINE?</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>car<span class="op">::</span><span class="kw">leveneTest</span>(totalcin <span class="op">~</span><span class="st"> </span>trt,    <span class="co"># formula: continuous_var ~ grouping_var</span>
+                  <span class="dt">data =</span> .,          <span class="co"># pipe in the dataset</span>
+                  <span class="dt">center =</span> <span class="st">&quot;mean&quot;</span>)   <span class="co"># The default is &quot;median&quot;</span></code></pre></div>
+<pre><code>Levene&#39;s Test for Homogeneity of Variance (center = &quot;mean&quot;)
+      Df F value Pr(&gt;F)
+group  1  2.2103 0.1507
+      23               </code></pre>
+<p>No violations of homogeneity were detected, <span class="math inline">\(F(1, 23) = 2.210, p = .151\)</span>.</p>
+<blockquote>
+<p>Do the participants in the treatment and control groups have the same spread in oral condition at the FOURTH WEEK?</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>car<span class="op">::</span><span class="kw">leveneTest</span>(totalcw4 <span class="op">~</span><span class="st"> </span>trt,    <span class="co"># formula: continuous_var ~ grouping_var</span>
+                  <span class="dt">data =</span> .,          <span class="co"># pipe in the dataset</span>
+                  <span class="dt">center =</span> <span class="st">&quot;mean&quot;</span>)   <span class="co"># The default is &quot;median&quot;</span></code></pre></div>
+<pre><code>Levene&#39;s Test for Homogeneity of Variance (center = &quot;mean&quot;)
+      Df F value Pr(&gt;F)
+group  1       0  0.995
+      23               </code></pre>
+<p>No violations of homogeneity were detected, <span class="math inline">\(F(1, 23) = 0, p = .995\)</span>.</p>
+<hr />
+</div>
+</div>
+<div id="independent-sample-means" class="section level2">
+<h2><span class="header-section-number">2.5</span> 2 independent Sample Means</h2>
+<p>Use the same <code>t.test()</code> funtion we have used in the prior chapters. This time you need to speficy a few more options.</p>
+<ul>
+<li><p>the formula: <code>continuous_var ~ grouping_var</code> (replace with your variable names)</p></li>
+<li><p>the dataset: <code>data = .</code> to pipe it from above</p></li>
+<li><p>is homogeneity satified?: <code>var.equal = TRUE</code> (<strong>NOT the default</strong>)</p></li>
+<li><p>number of tails: <code>alternative = &quot;two.sided&quot;</code></p></li>
+<li><p>independent vs. paired: <code>paired = FALSE</code></p></li>
+<li><p>confidence level: <code>conf.level = #</code></p></li>
+</ul>
+<blockquote>
+<p>Do the participants in the treatment group have a different average oral condition at BASELINE, compared to the control group?</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Minimal syntax</span>
+cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">t.test</span>(totalcin <span class="op">~</span><span class="st"> </span>trt,   <span class="co"># formula: continuous_var ~ grouping_var</span>
+         <span class="dt">data =</span> .,         <span class="co"># pipe in the dataset</span>
+         <span class="dt">var.equal =</span> <span class="ot">TRUE</span>) <span class="co"># HOV was violated (option = TRUE)</span></code></pre></div>
+<pre><code>
+    Two Sample t-test
 
-</div>
-<div id="blocked-notes" class="section level2 unnumbered">
-<h2>Blocked Notes</h2>
-<p>Thoughout all the eBooks in this encyclopedia, several small secitons will be blocked out in the following ways:</p>
-<div class="rmdconstruct">
-<p>
-These blocks denote an area <strong>UNDER CONSTRUCTION</strong>, so check back often. This massive undertaking started during the summer of 2018 and is far from complete. The outline of seven volumes is given above despite any one being complete. Feedback is welcome via either author’s email.
-</p>
-</div>
-<div class="rmdimportant">
-<p>
-These blocks denote something <strong>EXTREMELY IMPORTANT</strong>. Do NOT skip these notes as they will be used very sparingly.
-</p>
-</div>
-<div class="rmddownload">
-<p>
-These blocks denote something to <strong>DOWNLOAD</strong>. This may include software installations, example datasets, or notebook code files.
-</p>
-</div>
-<div class="rmdlightbulb">
-<p>
-These blocks denote something <strong>INTERESTING</strong>. These point out information we found of interest or added value.
-</p>
-</div>
-<div class="rmdlink">
-<p>
-These blocks denote <strong>LINKS</strong> to other websites. This may include instructional video clips, articles, or blog posts. We are all about NOT re-creating the wheel. If somebody else has described or illustrated a topic well, we celebrate it!
-</p>
-</div>
-</div>
-<div id="code-and-output" class="section level2 unnumbered">
-<h2>Code and Output</h2>
-<p>This is how <span class="math inline">\(R\)</span> code is shown:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
-<p>This is what the output of the <span class="math inline">\(R\)</span> code above will look:</p>
-<pre><code>## [1] 2</code></pre>
-</div>
-<div id="the-authors" class="section level2 unnumbered">
-<h2>The Authors</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center;font-size: 20px;">
-Dr. Sarah Schwartz
-</th>
-<th style="text-align:center;font-size: 20px;">
-Dr. Tyson Barrett
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;">
-<img src="images/common/Sarah_headshot.jpg" width="300" />
-</td>
-<td style="text-align:center;">
-<img src="images/common/Tyson_headshot.jpg" width="300" />
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<a href="http://www.sarahschwartzstats.com/">www.SarahSchwartzStats.com</a>
-</td>
-<td style="text-align:center;">
-<a href="http://tysonbarrett.com/">www.TysonBarrett.com</a>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<a href="mailto:Sarah.Schwartz@usu.edu">Sarah.Schwartz@usu.edu</a>
-</td>
-<td style="text-align:center;">
-<a href="mailto:Tyson.Barrett@usu.edu">Tyson.Barrett@usu.edu</a>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<a href="https://cehs.usu.edu/research/statstudio/index">Statistical Consulting Studio</a>
-</td>
-<td style="text-align:center;">
-<a href="https://cehs.usu.edu/research/dsdu/index">Data Science and Discover Unit</a>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<img src="images/common/StatStudioLogo_dark_small.png" width="300" />
-</td>
-<td style="text-align:center;">
-<img src="images/common/dsdu_logo.PNG" width="300" />
-</td>
-</tr>
-</tbody>
-</table>
-<div id="why-choose-r" class="section level3 unnumbered">
-<h3>Why choose R ?</h3>
-<div class="rmdlink">
-<p>
-<strong>Check it out:</strong> an article from Fall 2016… <a href="https://datahowler.wordpress.com/2016/09/10/no-more-excuses-r-is-better-than-spss-for-psychology-undergrads-and-students-agree/">No more excuses: R is better than SPSS for psychology undergrads, and students agree</a>
-</p>
-</div>
-</div>
-<div id="fyi" class="section level3 unnumbered">
-<h3>FYI</h3>
-<p>This entire encyclopedia is written in <span class="math inline">\(R Markdown\)</span>, using <span class="math inline">\(R Studio\)</span> as the text editor and the <code>bookdown</code> package to turn a collection of markdown documents into a coherent whole. The book’s source code is hosted on GitHub. If you notice typos or other issues, feel free to email either of the authors.</p>
-<p>This work is licensed under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode">Attribution-NonCommercial-NoDerivatives 4.0 International</a> License.</p>
-<div class="figure">
-<img src="images/common/Education_Logo_WHITE-02.png" width="300" />
+data:  totalcin by trt
+t = 0.18566, df = 23, p-value = 0.8543
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -1.185479  1.419245
+sample estimates:
+   mean in group Placebo mean in group Aloe Juice 
+                6.571429                 6.454545 </code></pre>
+<p>No evidence of a differnece in mean oral condition at baseline, <span class="math inline">\(t(23) = 0.186, p = .854\)</span>.</p>
+<blockquote>
+<p>Do the participants in the treatment group have a different average oral condition at the FOURTH WEEK, compared to the control group?</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fully specified function</span>
+cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">t.test</span>(totalcw4 <span class="op">~</span><span class="st"> </span>trt,             <span class="co"># formula: continuous_var ~ grouping_var</span>
+         <span class="dt">data =</span> .,                   <span class="co"># pipe in the dataset</span>
+         <span class="dt">var.equal =</span> <span class="ot">TRUE</span>,           <span class="co"># default: HOV was violated (option = TRUE)</span>
+         <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,  <span class="co"># default: 2 sided (options = &quot;less&quot;, &quot;greater&quot;)</span>
+         <span class="dt">paired =</span> <span class="ot">FALSE</span>,             <span class="co"># default: independent (option = TRUE)</span>
+         <span class="dt">conf.level =</span> .<span class="dv">95</span>)           <span class="co"># default: 95% (option = .9, .90, ect.)</span></code></pre></div>
+<pre><code>
+    Two Sample t-test
 
-</div>
+data:  totalcw4 by trt
+t = -0.34598, df = 23, p-value = 0.7325
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -3.444215  2.457202
+sample estimates:
+   mean in group Placebo mean in group Aloe Juice 
+                10.14286                 10.63636 </code></pre>
+<p>No evidence of a differnece in mean oral condition at the fourth week, <span class="math inline">\(t(23) = -0.350, p = .733\)</span>.</p>
 
-</div>
 </div>
 </div>
             </section>
@@ -298,8 +313,8 @@ Dr. Tyson Barrett
           </div>
         </div>
       </div>
-
-<a href="t-test-for-the-mean-of-1-sample.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="t-test-for-the-mean-of-1-sample.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ex-obese.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

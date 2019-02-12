@@ -1,7 +1,7 @@
 --- 
 title: "Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences"
 author: "Sarah Schwartz & Tyson Barrett"
-date: "Last updated: 2018-09-17"
+date: "Last updated: 2019-02-12"
 documentclass: book
 description: "t-tests, ANOVA, RM ANOVA, and post hoc tests."
 knit: "bookdown::render_book"

@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
+  <title>References | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
   <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta property="og:title" content="References | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="EQM_v1_cover.png" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="cehs-research/eBook_wrangle" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta name="twitter:title" content="References | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   
   <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="twitter:image" content="EQM_v1_cover.png" />
@@ -35,6 +35,7 @@
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -112,23 +113,40 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="ex-obese.html"><a href="ex-obese.html"><i class="fa fa-check"></i><b>1</b> Ex: Obese</a><ul>
-<li class="chapter" data-level="1.1" data-path="ex-obese.html"><a href="ex-obese.html#dataset-background"><i class="fa fa-check"></i><b>1.1</b> Dataset Background</a></li>
-<li class="chapter" data-level="1.2" data-path="ex-obese.html"><a href="ex-obese.html#data-wrangling-preparation"><i class="fa fa-check"></i><b>1.2</b> Data Wrangling &amp; Preparation</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="ex-obese.html"><a href="ex-obese.html#read-in-raw-data"><i class="fa fa-check"></i><b>1.2.1</b> Read in Raw Data</a></li>
-<li class="chapter" data-level="1.2.2" data-path="ex-obese.html"><a href="ex-obese.html#format-variables"><i class="fa fa-check"></i><b>1.2.2</b> Format Variables</a></li>
-<li class="chapter" data-level="1.2.3" data-path="ex-obese.html"><a href="ex-obese.html#create-new-variables"><i class="fa fa-check"></i><b>1.2.3</b> Create New VAriables</a></li>
-<li class="chapter" data-level="1.2.4" data-path="ex-obese.html"><a href="ex-obese.html#restructure"><i class="fa fa-check"></i><b>1.2.4</b> Restructure</a></li>
+<li class="chapter" data-level="1" data-path="t-test-for-the-mean-of-1-sample.html"><a href="t-test-for-the-mean-of-1-sample.html"><i class="fa fa-check"></i><b>1</b> t TEST FOR THE MEAN OF 1 SAMPLE</a><ul>
+<li class="chapter" data-level="1.1" data-path="t-test-for-the-mean-of-1-sample.html"><a href="t-test-for-the-mean-of-1-sample.html#required-packages"><i class="fa fa-check"></i><b>1.1</b> Required Packages</a></li>
+<li class="chapter" data-level="1.2" data-path="t-test-for-the-mean-of-1-sample.html"><a href="t-test-for-the-mean-of-1-sample.html#example-dataset---cancer-experiment"><i class="fa fa-check"></i><b>1.2</b> Example Dataset - Cancer Experiment</a></li>
+<li class="chapter" data-level="1.3" data-path="t-test-for-the-mean-of-1-sample.html"><a href="t-test-for-the-mean-of-1-sample.html#sample-mean-vs.historic-control"><i class="fa fa-check"></i><b>1.3</b> 1 Sample Mean vs. historic control</a></li>
+<li class="chapter" data-level="1.4" data-path="t-test-for-the-mean-of-1-sample.html"><a href="t-test-for-the-mean-of-1-sample.html#change-the-confidence-level"><i class="fa fa-check"></i><b>1.4</b> Change the Confidence Level</a></li>
+<li class="chapter" data-level="1.5" data-path="t-test-for-the-mean-of-1-sample.html"><a href="t-test-for-the-mean-of-1-sample.html#restrict-to-a-subsample"><i class="fa fa-check"></i><b>1.5</b> Restrict to a Subsample</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="ex-obese.html"><a href="ex-obese.html#exploratory-analysis-of-raw-data"><i class="fa fa-check"></i><b>1.3</b> Exploratory Analysis of Raw Data</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="ex-obese.html"><a href="ex-obese.html#tabulate"><i class="fa fa-check"></i><b>1.3.1</b> Tabulate</a></li>
-<li class="chapter" data-level="1.3.2" data-path="ex-obese.html"><a href="ex-obese.html#visualize"><i class="fa fa-check"></i><b>1.3.2</b> Visualize</a></li>
+<li class="chapter" data-level="2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html"><i class="fa fa-check"></i><b>2</b> t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES</a><ul>
+<li class="chapter" data-level="2.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#required-packages-1"><i class="fa fa-check"></i><b>2.1</b> Required Packages</a></li>
+<li class="chapter" data-level="2.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#example-dataset---cancer-experiment-1"><i class="fa fa-check"></i><b>2.2</b> Example Dataset - Cancer Experiment</a></li>
+<li class="chapter" data-level="2.3" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#check-means-and-sds"><i class="fa fa-check"></i><b>2.3</b> Check Means and SD’s</a></li>
+<li class="chapter" data-level="2.4" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#assumtion-check"><i class="fa fa-check"></i><b>2.4</b> Assumtion Check</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#eyeball-method"><i class="fa fa-check"></i><b>2.4.1</b> Eyeball method</a></li>
+<li class="chapter" data-level="2.4.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#homogeneity-of-variance-hov-formal-test"><i class="fa fa-check"></i><b>2.4.2</b> Homogeneity of Variance (HOV) Formal Test</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="ex-obese.html"><a href="ex-obese.html#inferncial-analysis-with-modeling"><i class="fa fa-check"></i><b>1.4</b> Inferncial Analysis with Modeling</a><ul>
-<li class="chapter" data-level="1.4.1" data-path="ex-obese.html"><a href="ex-obese.html#anova"><i class="fa fa-check"></i><b>1.4.1</b> ANOVA</a></li>
-<li class="chapter" data-level="1.4.2" data-path="ex-obese.html"><a href="ex-obese.html#regression"><i class="fa fa-check"></i><b>1.4.2</b> Regression</a></li>
+<li class="chapter" data-level="2.5" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#independent-sample-means"><i class="fa fa-check"></i><b>2.5</b> 2 independent Sample Means</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="ex-obese.html"><a href="ex-obese.html#results-discussion"><i class="fa fa-check"></i><b>1.5</b> Results &amp; Discussion</a></li>
+<li class="chapter" data-level="3" data-path="ex-obese.html"><a href="ex-obese.html"><i class="fa fa-check"></i><b>3</b> Ex: Obese</a><ul>
+<li class="chapter" data-level="3.1" data-path="ex-obese.html"><a href="ex-obese.html#dataset-background"><i class="fa fa-check"></i><b>3.1</b> Dataset Background</a></li>
+<li class="chapter" data-level="3.2" data-path="ex-obese.html"><a href="ex-obese.html#data-wrangling-preparation"><i class="fa fa-check"></i><b>3.2</b> Data Wrangling &amp; Preparation</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="ex-obese.html"><a href="ex-obese.html#read-in-raw-data"><i class="fa fa-check"></i><b>3.2.1</b> Read in Raw Data</a></li>
+<li class="chapter" data-level="3.2.2" data-path="ex-obese.html"><a href="ex-obese.html#format-variables"><i class="fa fa-check"></i><b>3.2.2</b> Format Variables</a></li>
+<li class="chapter" data-level="3.2.3" data-path="ex-obese.html"><a href="ex-obese.html#create-new-variables"><i class="fa fa-check"></i><b>3.2.3</b> Create New VAriables</a></li>
+<li class="chapter" data-level="3.2.4" data-path="ex-obese.html"><a href="ex-obese.html#restructure"><i class="fa fa-check"></i><b>3.2.4</b> Restructure</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="ex-obese.html"><a href="ex-obese.html#exploratory-analysis-of-raw-data"><i class="fa fa-check"></i><b>3.3</b> Exploratory Analysis of Raw Data</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="ex-obese.html"><a href="ex-obese.html#tabulate"><i class="fa fa-check"></i><b>3.3.1</b> Tabulate</a></li>
+<li class="chapter" data-level="3.3.2" data-path="ex-obese.html"><a href="ex-obese.html#visualize"><i class="fa fa-check"></i><b>3.3.2</b> Visualize</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="ex-obese.html"><a href="ex-obese.html#inferncial-analysis-with-modeling"><i class="fa fa-check"></i><b>3.4</b> Inferncial Analysis with Modeling</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="ex-obese.html"><a href="ex-obese.html#anova"><i class="fa fa-check"></i><b>3.4.1</b> ANOVA</a></li>
+<li class="chapter" data-level="3.4.2" data-path="ex-obese.html"><a href="ex-obese.html#regression"><i class="fa fa-check"></i><b>3.4.2</b> Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="ex-obese.html"><a href="ex-obese.html#results-discussion"><i class="fa fa-check"></i><b>3.5</b> Results &amp; Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -181,7 +199,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -191,6 +209,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -208,7 +230,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
