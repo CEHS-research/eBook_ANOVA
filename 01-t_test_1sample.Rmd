@@ -1,4 +1,4 @@
-# t TEST FOR THE MEAN OF 1 SAMPLE
+# 1 SAMPLE t-TEST: for the MEAN
 
 
 ```{r global_options, include=FALSE}
@@ -8,12 +8,14 @@ knitr::opts_chunk$set(comment     = NA,
                       cache       = TRUE,
                       echo        = TRUE, 
                       warning     = FALSE, 
-                      message     = FALSE)
+                      message     = FALSE,
+                      out.width   = "75%")
 ```
 
 
+## Background
 
-## Required Packages 
+### Required Packages 
 
 ```{r load_libraries}
 library(tidyverse)    # Loads several very helpful 'tidy' packages
@@ -21,7 +23,7 @@ library(haven)        # Read in SPSS datasets
 ```
 
 
-## Example Dataset - Cancer Experiment 
+### Example Dataset - Cancer Experiment 
 
 #### Source of Data {-}
 
@@ -56,9 +58,13 @@ Sample size $n = 25$ patients with neck cancer. The treatment is **Aloe Juice**.
 
 
 
-```{r, include=FALSE}
-cancer_raw <- haven::read_spss("data/cancer.sav")
+```{r}
+cancer_raw <- haven::read_spss("https://raw.githubusercontent.com/CEHS-research/eBook_ANOVA/master/data/Cancer.sav")
 
+tibble::glimpse(cancer_raw)
+```
+
+```{r}
 cancer_clean <- cancer_raw %>% 
   dplyr::rename_all(tolower) %>% 
   dplyr::mutate(id = factor(id)) %>% 
@@ -66,49 +72,186 @@ cancer_clean <- cancer_raw %>%
                              labels = c("Placebo", 
                                         "Aloe Juice"))) %>% 
   dplyr::mutate(stage = factor(stage))
-```
 
+tibble::glimpse(cancer_clean)
+```
 
 ```{r}
-head(cancer_raw)
+psych::headTail(cancer_clean)
 ```
 
 
 
+## Exploratory Data Analysis: i.e. the eyeball method
 
-## 1 Sample Mean vs. historic control
+**Is the baseline weight more than 165 pounds?**
 
-example: Do the patients weigh more than 165 pounds at intake, on average?
+
+### Mean and SD
+
+```{r}
+cancer_clean %>% 
+  furniture::table1(weighin,
+                    na.rm = FALSE)
+```
+
+```{r}
+32 / sqrt(25)
+```
+
+> Since the stadard deviation ($s_X$) is 32.0, the standard error for the mean (SEM = SE = $s_{\overline{X}}$) is 6.4.  So even though the observed average of 178.3 is a higher number than 165, it may or may not we statistically significant.
+
+
+### Histogram
+
+```{r}
+cancer_clean %>% 
+  ggplot(aes(weighin)) +
+  geom_histogram(binwidth = 10) +
+  geom_vline(xintercept = 165, color = "red", size = 1)  # Add a thick red line at 165 pounds
+```
+
+
+
+## Assumptions
+
+### Random Sampling
+
+The Sample was drawn at random (at least as representative as possible)
+
+* Nothing can be done to fix NON-representative samples!     
+* Can not for with any statistically test
+
+
+
+### Normality
+
+> A variable is said to follow the normal distribution if it resembles the normal curve.  Specifically it is symetrical, unimodal, and bell shaped.
+
+The continuous variable has a **NORMAL** distribution in BOTH populations
+
+* Not as important if the sample is large *(Central Limit Theorem)*
+* IF the sample is far from normal &/or small, might want to use a different method  
+
+**Options to judging normality:**
+
+1. Visualization of each sample's distribution    
+    + Stacked **histograms**, but is sensitive to binning choices *(number or width)*
+    + Side-by-side **boxplots**, shows *median* instead of *mean* as central line
+    + Seperate **QQ plots** (straight $45^\circ$ line), but is sensitive to outliers!    
+    
+2. Calculate **Skewness** and **Kurtosis** 
+    + Divided each value by its standard error (SE)    
+    + A result $\gt \pm 2$ indicates issues  
+
+3. Formal Inferencial Tests for Normality  
+    + Null-hypothesis: population is normally distributed
+    + A $p \lt .05$ ???indicate snon-normality
+    + For smaller samples, use **Shapiro-Wilk's Test** 
+    + For larger samples, use **Kolmogorov-Smirnov's Test**
+
 
 
 ```{r}
 cancer_clean %>% 
-  dplyr::pull(weighin) %>% 
-  t.test(mu = 165)
+  ggplot(aes(sample = weighin)) +    # make sure to include "sample = "
+  geom_qq() +                        # layer on the dots
+  stat_qq_line() +                   # layer on the line
+  facet_grid(. ~ trt)                # panel by group
 ```
-
-
-
-## Change the Confidence Level
-
-Find a 99% confience level for the population mean weight.
 
 ```{r}
 cancer_clean %>% 
-  dplyr::pull(weighin) %>% 
-  t.test(mu = 165,
-         conf.level = 0.99)
+  dplyr::pull(weighin) %>%                 # extract the continuous variable
+  shapiro.test()                            # test for normality
 ```
 
 
-## Restrict to a Subsample
+> Shapiro-Wilk's tests yielded no evidence that weight is not normaly distributed at baseline, $W = .939, p = .140$,.  
 
-Do the patients with .dcoral[stage 3 & 4] cancer weigh more than 165 pounds at intake, on average?
+
+
+
+## Inference
+
+**Formal Statistical Test: t-Test for Difference in Independent Group Means**
+
+```{block type='rmdlightbulb', echo=TRUE}
+Use the `t.test()` funtion for a single sample.
+
+**Before you can run the t Test, you must seperate out or 'PULL' your variable out of the dataset.**
+
+Use the `dplyr::pull(continuous_variable)`step befor running the t Test
+
+**Inside the funtion you need to specify one option:**
+ 
+* the null-hypothesis value:  `mu = ##` (replace with your number) 
+
+
+**You MAY need/want to specify some or all of the following options you may way to leave as the default or override:**
+
+* Number of tails:    
+    + `alternative = "two.sided"` **Default** Allows for a 2-sided alternative 
+    + `alternative = "less"` Only Allows: group 1 < group 2
+    + `alternative = "greater"` Only Allows: group 1 > group 2
+    
+    
+* Confidence level:   
+    + `conf.level = 0.95` **Default** Computes the 95% confidence inverval    
+    + `conf.level = 0.90`  Changes to a 90% confidence interval
+```
+
+
+
+### All Defaults
 
 ```{r}
 cancer_clean %>% 
-  dplyr::filter(stage %in% c("3", "4")) %>% 
-  dplyr::pull(weighin) %>% 
-  t.test(mu = 165)
+  dplyr::pull(weighin) %>%    # pull the continuous varaible out
+  t.test(mu = 165)            # specify the null hypothesis value
 ```
+
+> There is evidence that cancer patients weight more (N = 25, M = 178.28) now than the historic average of 165 pound, $t(24) = 2.077, p = .049, 95% CI: 165.08, 191.48$.
+
+
+
+### Confidence Level other than 95%
+
+**Find a 99% confience level for the population mean weight.**
+
+```{r}
+cancer_clean %>% 
+  dplyr::pull(weighin) %>%    # pull the continuous varaible out
+  t.test(mu = 165,            # specify the null hypothesis value
+         conf.level = 0.99)   # over-ride the default of 95% CI
+```
+
+> There is evidence that cancer patients weight more (N = 25, M = 178.28) now than the historic average of 165 pound, $t(24) = 2.077, p = .049, 99% CI: 160.39, 196.17$.
+
+### One-Sided Test, instead of Two
+
+**Find a 99% confience level for the population mean weight.**
+
+```{r}
+cancer_clean %>% 
+  dplyr::pull(weighin) %>%          # pull the continuous varaible out
+  t.test(mu = 165,                  # specify the null hypothesis value
+         alternative = "greater")   # over-ride the default of 95% CI
+```
+
+> There is evidence that cancer patients weight more (N = 25, M = 178.28) now than the historic average of 165 pound, $t(24) = 2.077, p = .024$.  
+
+
+### Restrict to a Subsample
+
+**Do the patients with *stage 3 and 4* cancer weigh more than 165 pounds at intake, on average?**
+
+```{r}
+cancer_clean %>% 
+  dplyr::filter(stage %in% c("3", "4")) %>%    # select a sub-sample 
+  dplyr::pull(weighin) %>%                     # pull the continuous varaible out
+  t.test(mu = 165)                             # specify the null hypothesis value
+```
+
+> There is NO evidence that stage three and four cancer (n = 6, M = 178.25) patients weight more now than the historic average of 165 pound, $t(24) = 0.826, p = .446$.  
 

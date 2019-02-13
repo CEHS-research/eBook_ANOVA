@@ -1,4 +1,4 @@
-# t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES 
+# 2 INDEPENDENT SAMPLES t-TEST: for the Difference in MEANS
 
 
 ```{r global_options, include=FALSE}
@@ -120,7 +120,7 @@ cancer_clean %>%
 
 ## Assumptions
 
-### 1. Independence
+### Independence
 
 BOTH Samples were drawn **INDEPENDENTLY** at random (at least as representative as possible)
 
@@ -130,7 +130,7 @@ BOTH Samples were drawn **INDEPENDENTLY** at random (at least as representative 
 
 
 
-### 2. Normality
+### Normality
 
 > A variable is said to follow the normal distribution if it resembles the normal curve.  Specifically it is symetrical, unimodal, and bell shaped.
 
@@ -220,7 +220,7 @@ cancer_clean %>%
 > Shapiro-Wilk's tests yielded no evidence that oral condition is NOT normally distributed four weeks after baseline in the placebo group, $W = .883, p = .064$, and the treatment group, $W = .929, p = .401$.  
 
 
-### 2. HOV
+### HOV
 
 > Two Populations exhibit Homogeneity of Variance (HOV), i.e. have about the same amount of spread
 
