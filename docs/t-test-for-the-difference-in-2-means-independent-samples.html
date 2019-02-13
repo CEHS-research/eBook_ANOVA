@@ -123,7 +123,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html"><i class="fa fa-check"></i><b>2</b> t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES</a><ul>
 <li class="chapter" data-level="2.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#required-packages-1"><i class="fa fa-check"></i><b>2.1</b> Required Packages</a></li>
 <li class="chapter" data-level="2.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#example-dataset---cancer-experiment-1"><i class="fa fa-check"></i><b>2.2</b> Example Dataset - Cancer Experiment</a></li>
-<li class="chapter" data-level="2.3" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#eyeball-method"><i class="fa fa-check"></i><b>2.3</b> Eyeball method</a><ul>
+<li class="chapter" data-level="2.3" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#exploratory-data-analysis-the-eyeball-method"><i class="fa fa-check"></i><b>2.3</b> Exploratory Data Analysis: the eyeball method</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#means-and-sds"><i class="fa fa-check"></i><b>2.3.1</b> Means and SDs</a></li>
 <li class="chapter" data-level="2.3.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#stacked-histograms"><i class="fa fa-check"></i><b>2.3.2</b> Stacked Histograms</a></li>
 <li class="chapter" data-level="2.3.3" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#side-by-side-boxplots"><i class="fa fa-check"></i><b>2.3.3</b> Side-by-Side Boxplots</a></li>
@@ -231,9 +231,9 @@ $ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, ...<
 8   50 Aloe Juice  60     164     2        6        8       16     &lt;NA&gt;
 9   58 Aloe Juice  54   172.8     4        7        8       10        8</code></pre>
 </div>
-<div id="eyeball-method" class="section level2">
-<h2><span class="header-section-number">2.3</span> Eyeball method</h2>
-<p><strong>Do the two groups, treatment and control, have different oral conditions at initial observation?</strong></p>
+<div id="exploratory-data-analysis-the-eyeball-method" class="section level2">
+<h2><span class="header-section-number">2.3</span> Exploratory Data Analysis: the eyeball method</h2>
+<p><strong>Do the two groups, treatment and control, have different oral conditions at initial observation? What about four weeks later?</strong></p>
 <p>Judge any difference in centers (means) within the context of the within group spread (stadard deviation/variance)</p>
 <div id="means-and-sds" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Means and SDs</h3>
@@ -260,7 +260,7 @@ $ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, ...<
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(totalcin)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">10</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>(trt <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
-<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-5-1.png" width="75%" /></p>
 </div>
 <div id="four-weeks-oral-condition" class="section level4">
 <h4><span class="header-section-number">2.3.2.2</span> Four Weeks Oral Condition</h4>
@@ -268,7 +268,7 @@ $ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, ...<
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(totalcw4)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">10</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>(trt <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
-<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-6-1.png" width="75%" /></p>
 </div>
 </div>
 <div id="side-by-side-boxplots" class="section level3">
@@ -279,7 +279,7 @@ $ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, ...<
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> trt,
              <span class="dt">y =</span> totalcin)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-7-1.png" width="75%" /></p>
 </div>
 <div id="four-weeks-oral-condition-1" class="section level4">
 <h4><span class="header-section-number">2.3.3.2</span> Four Weeks Oral Condition</h4>
@@ -287,7 +287,7 @@ $ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, ...<
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> trt,
              <span class="dt">y =</span> totalcw4)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-8-1.png" width="75%" /></p>
 </div>
 </div>
 </div>
@@ -307,7 +307,7 @@ $ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, ...<
 <span class="st">  </span><span class="kw">geom_qq</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_qq_line</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>trt)</code></pre></div>
-<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-9-1.png" width="75%" /></p>
 </div>
 <div id="four-weeks-oral-condition-2" class="section level4">
 <h4><span class="header-section-number">2.4.2.2</span> Four Weeks Oral Condition</h4>
@@ -316,7 +316,7 @@ $ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, ...<
 <span class="st">  </span><span class="kw">geom_qq</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_qq_line</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>trt)</code></pre></div>
-<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-10-1.png" width="75%" /></p>
 </div>
 </div>
 <div id="assumption-2-two-populations-exhibit-homogeneity-of-variance-hov" class="section level3">
@@ -411,10 +411,10 @@ Number of tails:
 <code>alternative = “two.sided”</code> <strong>Default</strong> Allows for a 2-sided alternative
 </li>
 <li>
-<code>alternative = “less”</code> Only Allows <span class="math inline"><span class="math inline">\(H_0: \mu_1 - \mu_2 &amp;lt; 0\)</span></span>
+<code>alternative = “less”</code> Only Allows: group 1 &lt; group 2
 </li>
 <li>
-<code>alternative = “more</code> Only Allows <span class="math inline"><span class="math inline">\(H_0: \mu_1 - \mu_2 &amp;gt; 0\)</span></span>
+<code>alternative = “more”</code> Only Allows: group 1 &gt; group 2
 </li>
 </ul>
 </li>

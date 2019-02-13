@@ -8,7 +8,8 @@ knitr::opts_chunk$set(comment     = NA,
                       cache       = TRUE,
                       echo        = TRUE, 
                       warning     = FALSE, 
-                      message     = FALSE)
+                      message     = FALSE,
+                      out.width   = "75%")
 ```
 
 
@@ -55,11 +56,11 @@ psych::headTail(cancer_clean)
 
 
 
-## Eyeball method
+## Exploratory Data Analysis: the eyeball method
 
-**Do the two groups, treatment and control, have different oral conditions at initial observation?**
+**Do the two groups, treatment and control, have different oral conditions at initial observation?  What about four weeks later?**
 
-Judge any difference in centers (means) within the context of the  within  group spread (stadard deviation/variance)
+Judge any difference in centers (means) within the context of the within group spread (stadard deviation/variance)
 
 
 
@@ -218,8 +219,8 @@ Use the same `t.test()` funtion we have used for a single sample, but speficy a 
 
 * Number of tails:    
     + `alternative = "two.sided"` **Default** Allows for a 2-sided alternative 
-    + `alternative = "less"` Only Allows $H_0: \mu_1 - \mu_2 < 0$
-    + `alternative = "more` Only Allows $H_0: \mu_1 - \mu_2 > 0$
+    + `alternative = "less"` Only Allows: group 1 < group 2
+    + `alternative = "more"` Only Allows: group 1 > group 2
     
     
 * Independent vs. paired:    

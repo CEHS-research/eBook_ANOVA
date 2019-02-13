@@ -92,11 +92,11 @@ psych::headTail(cancer_clean)
 
 
 
-## Eyeball method
+## Exploratory Data Analysis: the eyeball method
 
-**Do the two groups, treatment and control, have different oral conditions at initial observation?**
+**Do the two groups, treatment and control, have different oral conditions at initial observation?  What about four weeks later?**
 
-Judge any difference in centers (means) within the context of the  within  group spread (stadard deviation/variance)
+Judge any difference in centers (means) within the context of the within group spread (stadard deviation/variance)
 
 
 
@@ -136,7 +136,7 @@ cancer_clean %>%
   facet_grid(trt ~ .)
 ```
 
-<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-5-1.png" width="75%" />
 
 
 #### Four Weeks Oral Condition
@@ -149,7 +149,7 @@ cancer_clean %>%
   facet_grid(trt ~ .)
 ```
 
-<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-6-1.png" width="75%" />
 
 
 ### Side-by-Side Boxplots
@@ -164,7 +164,7 @@ cancer_clean %>%
   geom_boxplot()
 ```
 
-<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-7-1.png" width="75%" />
 
 
 
@@ -178,7 +178,7 @@ cancer_clean %>%
   geom_boxplot()
 ```
 
-<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-8-1.png" width="75%" />
 
 ## Formal Statistical Test
 
@@ -202,7 +202,7 @@ cancer_clean %>%
   facet_grid(. ~ trt)
 ```
 
-<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-9-1.png" width="75%" />
 
 
 
@@ -218,7 +218,7 @@ cancer_clean %>%
   facet_grid(. ~ trt)
 ```
 
-<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-10-1.png" width="75%" />
 
 
 
@@ -304,8 +304,8 @@ group  1       0  0.995
 <li>Number of tails:
 <ul>
 <li><code>alternative = &quot;two.sided&quot;</code> <strong>Default</strong> Allows for a 2-sided alternative</li>
-<li><code>alternative = &quot;less&quot;</code> Only Allows <span class="math inline">\(H_0: \mu_1 - \mu_2 &lt; 0\)</span></li>
-<li><code>alternative = &quot;more</code> Only Allows <span class="math inline">\(H_0: \mu_1 - \mu_2 &gt; 0\)</span></li>
+<li><code>alternative = &quot;less&quot;</code> Only Allows: group 1 &lt; group 2</li>
+<li><code>alternative = &quot;more&quot;</code> Only Allows: group 1 &gt; group 2</li>
 </ul></li>
 <li>Independent vs. paired:
 <ul>
