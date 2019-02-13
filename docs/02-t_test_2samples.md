@@ -3,9 +3,9 @@
 
 
 
+## Background
 
-
-## Required Packages 
+### Required Packages 
 
 
 ```r
@@ -17,7 +17,7 @@ library(car)          # Companion for Applied Regression (and ANOVA)
 
 
 
-## Example Dataset - Cancer Experiment 
+### Example Dataset - Cancer Experiment 
 
 The `Cancer` dataset was introduced in "t TEST FOR THE MEAN OF 1 SAMPLE".
 
@@ -92,7 +92,7 @@ psych::headTail(cancer_clean)
 
 
 
-## Exploratory Data Analysis: the eyeball method
+## Exploratory Data Analysis: i.e. the eyeball method
 
 **Do the two groups, treatment and control, have different oral conditions at initial observation?  What about four weeks later?**
 
@@ -180,30 +180,96 @@ cancer_clean %>%
 
 <img src="02-t_test_2samples_files/figure-html/unnamed-chunk-8-1.png" width="75%" />
 
-## Formal Statistical Test
+## Assumptions
 
-### Assumption (1): Two Samples are Indepdented, Simple-Random Samples
+### 1. Independence
 
-Can not check statistically.  Can only ensure through good sampling.
+BOTH Samples were drawn **INDEPENDENTLY** at random (at least as representative as possible)
+
+* Nothing can be done to fix NON-representative samples!     
+* Can not for with any statistically test
+* If idenpendence is violated, you may want to use a paired-samples t-test 
 
 
-### Assumption (2): Two Populations are Normaly Distributed
 
-The first assumption to check is if the continuous variable of interest (dependent variable, DV, or outcome) is NORMALLY approximately distributed within each sample.  This is best done visually with a histogram (above) or a  quantile-quantile plot (below).  On the QQ plot, a normally distributed sample will have all the data points along a straight diagnoal line.  
+### 2. Normality
+
+> A variable is said to follow the normal distribution if it resembles the normal curve.  Specifically it is symetrical, unimodal, and bell shaped.
+
+The continuous variable has a **NORMAL** distribution in BOTH populations
+
+* Not as important if the sample is large *(Central Limit Theorem)*
+* IF the sample is far from normal &/or small, might want to use a different method  
+
+**Options to judging normality:**
+
+1. Visualization of each sample's distribution    
+    + Stacked **histograms**, but is sensitive to binning choices *(number or width)*
+    + Side-by-side **boxplots**, shows *median* instead of *mean* as central line
+    + Seperate **QQ plots** (straight $45^\circ$ line), but is sensitive to outliers!    
+    
+2. Calculate **Skewness** and **Kurtosis**, within each group 
+    + Divided each value by its standard error (SE)    
+    + A result $\gt \pm 2$ indicates issues  
+
+3. Formal Inferencial Tests for Normality, on each group   
+    + Null-hypothesis: population is normally distributed
+    + A $p \lt .05$ ???indicate snon-normality
+    + For smaller samples, use **Shapiro-Wilk's Test** 
+    + For larger samples, use **Kolmogorov-Smirnov's Test**
+
+
+  
 
 #### Baseline Oral Condition
 
 
 ```r
 cancer_clean %>% 
-  ggplot(aes(sample = totalcin)) +
-  geom_qq() +
-  stat_qq_line() +
-  facet_grid(. ~ trt)
+  ggplot(aes(sample = totalcin)) +   # make sure to include "sample = "
+  geom_qq() +                        # layer on the dots
+  stat_qq_line() +                   # layer on the line
+  facet_grid(. ~ trt)                # panel by group
 ```
 
 <img src="02-t_test_2samples_files/figure-html/unnamed-chunk-9-1.png" width="75%" />
 
+
+
+
+```r
+cancer_clean %>% 
+  dplyr::filter(trt == "Placebo") %>%   # select one group
+  dplyr::pull(totalcin) %>%             # extract the continuous variable
+  shapiro.test()                        # test for normality
+```
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  .
+W = 0.6807, p-value = 0.0002349
+```
+
+
+```r
+cancer_clean %>% 
+  dplyr::filter(trt == "Aloe Juice") %>%    # select one group
+  dplyr::pull(totalcin) %>%                 # extract the continuous variable
+  shapiro.test()                            # test for normality
+```
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  .
+W = 0.78534, p-value = 0.006034
+```
+
+
+> Shapiro-Wilk's tests yield evidence that baseline oral condition is NOT normally distributed in the placebo group, W = .681, p <.001, nor the treatment group, W = .785, p = .006.  Visual inspection suggests that violatioins may by more extreme in the placebo group.
 
 
 #### Four Weeks Oral Condition
@@ -212,18 +278,55 @@ cancer_clean %>%
 
 ```r
 cancer_clean %>% 
-  ggplot(aes(sample = totalcw4)) +
-  geom_qq() +
-  stat_qq_line() +
-  facet_grid(. ~ trt)
+  ggplot(aes(sample = totalcw4)) +   # make sure to include "sample = "
+  geom_qq() +                        # layer on the dots
+  stat_qq_line() +                   # layer on the line
+  facet_grid(. ~ trt)                # panel by group
 ```
 
-<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-10-1.png" width="75%" />
+<img src="02-t_test_2samples_files/figure-html/unnamed-chunk-12-1.png" width="75%" />
 
 
 
 
-### Assumption (2): Two Populations exhibit Homogeneity of Variance (HOV)
+```r
+cancer_clean %>% 
+  dplyr::filter(trt == "Placebo") %>%   # select one group
+  dplyr::pull(totalcw4) %>%             # extract the continuous variable
+  shapiro.test()                        # test for normality
+```
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  .
+W = 0.88272, p-value = 0.06356
+```
+
+
+```r
+cancer_clean %>% 
+  dplyr::filter(trt == "Aloe Juice") %>%    # select one group
+  dplyr::pull(totalcw4) %>%                 # extract the continuous variable
+  shapiro.test()                            # test for normality
+```
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  .
+W = 0.92906, p-value = 0.4014
+```
+
+
+> Shapiro-Wilk's tests yielded no evidence that oral condition is NOT normally distributed four weeks after baseline in the placebo group, $W = .883, p = .064$, and the treatment group, $W = .929, p = .401$.  
+
+
+### 2. HOV
+
+> Two Populations exhibit Homogeneity of Variance (HOV), i.e. have about the same amount of spread
 
 Before performing the $t$ test, check to see if the assumption of homogeneity of variance is met using **Levene's Test**.  For a independent samples `t`-test for means, the groups need to have the same amount of spread (SD) in the measure of interest.
 
@@ -283,7 +386,9 @@ group  1       0  0.995
 > No violations of homogeneity were detected, $F(1, 23) = 0, p = .995$.
 
 
-### t-Test for Difference in Means
+## Inference
+
+**Formal Statistical Test: t-Test for Difference in Independent Group Means**
 
 <div class="rmdlightbulb">
 <p>Use the same <code>t.test()</code> funtion we have used for a single sample, but speficy a few more options.</p>
@@ -322,6 +427,9 @@ group  1       0  0.995
 </ul>
 </div>
 
+### Pooled Variance Test 
+
+Use when there are no violations of HOV
 
 #### Baseline Oral Condition
 
@@ -350,7 +458,7 @@ sample estimates:
                 6.571429                 6.454545 
 ```
 
-> No evidence of a differnece in mean oral condition at baseline, $t(23) = 0.186, p = .854$.
+> No evidence of a differnece in mean oral condition at baseline, $t(23) = 0.186, p = .854$.  Note: this test may be unreliable due to the non-normality of the samll samples.
 
 
 
@@ -389,4 +497,9 @@ sample estimates:
 
 > No evidence of a differnece in mean oral condition at the fourth week, $t(23) = -0.350, p = .733$.
 
+
+
+### Seperate Variance Test 
+
+Use if there are violations of HOV or the samples are difference sizes
 
