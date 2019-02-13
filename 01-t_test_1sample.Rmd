@@ -1,4 +1,4 @@
-# 1 SAMPLE t-TEST: for the MEAN
+# ONE SAMPLE t-TEST: for the MEAN
 
 
 ```{r global_options, include=FALSE}

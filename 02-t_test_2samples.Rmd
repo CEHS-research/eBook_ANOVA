@@ -1,4 +1,4 @@
-# 2 INDEPENDENT SAMPLES t-TEST: for the Difference in MEANS
+# TWO INDEPENDENT SAMPLES t-TEST: for the Difference in MEANS
 
 
 ```{r global_options, include=FALSE}
@@ -289,7 +289,7 @@ Use the same `t.test()` funtion we have used for a single sample, but speficy a 
 * Number of tails:    
     + `alternative = "two.sided"` **Default** Allows for a 2-sided alternative 
     + `alternative = "less"` Only Allows: group 1 < group 2
-    + `alternative = "more"` Only Allows: group 1 > group 2
+    + `alternative = "greater"` Only Allows: group 1 > group 2
     
     
 * Independent vs. paired:    

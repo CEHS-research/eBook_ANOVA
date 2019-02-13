@@ -1,4 +1,4 @@
-# 2 INDEPENDENT SAMPLES t-TEST: for the Difference in MEANS
+# TWO INDEPENDENT SAMPLES t-TEST: for the Difference in MEANS
 
 
 
@@ -410,7 +410,7 @@ group  1       0  0.995
 <ul>
 <li><code>alternative = &quot;two.sided&quot;</code> <strong>Default</strong> Allows for a 2-sided alternative</li>
 <li><code>alternative = &quot;less&quot;</code> Only Allows: group 1 &lt; group 2</li>
-<li><code>alternative = &quot;more&quot;</code> Only Allows: group 1 &gt; group 2</li>
+<li><code>alternative = &quot;greater&quot;</code> Only Allows: group 1 &gt; group 2</li>
 </ul></li>
 <li>Independent vs. paired:
 <ul>
