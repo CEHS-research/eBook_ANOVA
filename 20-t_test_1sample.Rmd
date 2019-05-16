@@ -1,83 +1,12 @@
 # ONE SAMPLE t-TEST: for the MEAN
 
 
-```{r global_options, include=FALSE}
-# set global chunk options...  
-#  this changes the defaults so you don't have to repeat yourself
-knitr::opts_chunk$set(comment     = NA,
-                      cache       = TRUE,
-                      echo        = TRUE, 
-                      warning     = FALSE, 
-                      message     = FALSE,
-                      out.width   = "75%")
-```
+Using the `t.test()` function
 
 
-## Background
-
-### Required Packages 
-
-```{r load_libraries}
-library(tidyverse)    # Loads several very helpful 'tidy' packages
-library(haven)        # Read in SPSS datasets
-```
-
-
-### Example Dataset - Cancer Experiment 
-
-#### Source of Data {-}
-
-Mid-Michigan Medical Center, Midland, Michigan, 1999: A  study of oral condition of cancer patients.
-
-#### Description of the Study {-}
-
-The data set contains part of the data for a study of oral condition of cancer patients conducted at the Mid-Michigan Medical Center.  The oral conditions of the patients were measured and recorded at the initial stage, at the end of the second week, at the end of the fourth week, and at the end of the sixth week.  The variables age, initial weight and initial cancer stage of the patients were recorded.  Patients were divided into two groups at random:  One group received a placebo and the other group received aloe juice treatment.
-
-Sample size $n = 25$ patients with neck cancer. The treatment is **Aloe Juice**. 
-
-#### Variables Included {-}
-
-* `ID` patient identification number
-
-* `trt` treatment group 
-    + `0` *placebo* 
-    + `1` *aloe juice*
-
-* `age` patient's age, *in years*
-
-* `weightin` patient's weight *(pounds)* at the initial stage
-
-* `stage`	initial cancer stage
-    + coded `1` through `4`
-
-* `totalcin` oral condition at the *initial stage*
-* `totalcw2` oral condition at the end of *week 2*
-* `totalcw4` oral condition at the end of *week 4*
-* `totalcw6` oral condition at the end of *week 6*
-
-
-
-
-```{r}
-cancer_raw <- haven::read_spss("https://raw.githubusercontent.com/CEHS-research/eBook_ANOVA/master/data/Cancer.sav")
-
-tibble::glimpse(cancer_raw)
-```
-
-```{r}
-cancer_clean <- cancer_raw %>% 
-  dplyr::rename_all(tolower) %>% 
-  dplyr::mutate(id = factor(id)) %>% 
-  dplyr::mutate(trt = factor(trt,
-                             labels = c("Placebo", 
-                                        "Aloe Juice"))) %>% 
-  dplyr::mutate(stage = factor(stage))
-
-tibble::glimpse(cancer_clean)
-```
-
-```{r}
-psych::headTail(cancer_clean)
+```{r, message=FALSE, error=FALSE}
+library(psych)  # lots of nice tidbits 
+library(car)    # Compantion
 ```
 
 
@@ -89,11 +18,15 @@ psych::headTail(cancer_clean)
 
 ### Mean and SD
 
+
 ```{r}
 cancer_clean %>% 
   furniture::table1(weighin,
                     na.rm = FALSE)
 ```
+
+
+
 
 ```{r}
 32 / sqrt(25)
@@ -101,15 +34,6 @@ cancer_clean %>%
 
 > Since the stadard deviation ($s_X$) is 32.0, the standard error for the mean (SEM = SE = $s_{\overline{X}}$) is 6.4.  So even though the observed average of 178.3 is a higher number than 165, it may or may not we statistically significant.
 
-
-### Histogram
-
-```{r}
-cancer_clean %>% 
-  ggplot(aes(weighin)) +
-  geom_histogram(binwidth = 10) +
-  geom_vline(xintercept = 165, color = "red", size = 1)  # Add a thick red line at 165 pounds
-```
 
 
 
@@ -152,22 +76,50 @@ The continuous variable has a **NORMAL** distribution in BOTH populations
 
 
 
+
+```{r}
+cancer_clean %>% 
+  ggplot(aes(weighin)) +
+  geom_histogram(binwidth = 12) +
+  geom_vline(xintercept = 165,       # Add a thick red line at the grand mean of 165 pounds
+             color = "red", 
+             size = 1) 
+```
+
+
+> The **histogram** is not truely normal, but it is fairly unimodal and somewhat bell shaped.  There are mild concerns regarding the values above the mean.
+
+
+
 ```{r}
 cancer_clean %>% 
   ggplot(aes(sample = weighin)) +    # make sure to include "sample = "
   geom_qq() +                        # layer on the dots
-  stat_qq_line() +                   # layer on the line
-  facet_grid(. ~ trt)                # panel by group
+  stat_qq_line()                     # layer on the line
 ```
+
+
+> The **Q-Q Plot** displays a fairly linear pattern, but there are mild concerns at the highter values.
+
+```{r}
+cancer_clean %>% 
+  dplyr::select(age, weighin) %>%   # we have to select MORE than one variable
+  psych::describe()
+```
+
+
+
+> The **skew** is $0.73$ which is close to $1$, but the **kurtosis** is $0.07$ which is NOT close to $1$.  This reflects that the distribution is fairly symetrical, but more spread out and not as peaked as a truely normal distribution.
+
 
 ```{r}
 cancer_clean %>% 
   dplyr::pull(weighin) %>%                 # extract the continuous variable
-  shapiro.test()                            # test for normality
+  shapiro.test()                           # test for normality (from base R)
 ```
 
 
-> Shapiro-Wilk's tests yielded no evidence that weight is not normaly distributed at baseline, $W = .939, p = .140$,.  
+> The **Shapiro-Wilk's test** yielded NO evidence that weight is not normaly distributed at baseline, $W = .939, p = .140$,.  
 
 
 
@@ -205,13 +157,16 @@ Use the `dplyr::pull(continuous_variable)`step befor running the t Test
 
 ### All Defaults
 
+
+**Is there evidence the population mean weight is DIFFERENT than 165?**
+
 ```{r}
 cancer_clean %>% 
   dplyr::pull(weighin) %>%    # pull the continuous varaible out
   t.test(mu = 165)            # specify the null hypothesis value
 ```
 
-> There is evidence that cancer patients weight more (N = 25, M = 178.28) now than the historic average of 165 pound, $t(24) = 2.077, p = .049, 95% CI: 165.08, 191.48$.
+> There is evidence that cancer patients weight more (*N* = 25, *M* = 178.28) now than the historic average of 165 pound, $t(24) = 2.077, p = .049, 95% CI: 165.08, 191.48$.
 
 
 
@@ -226,11 +181,11 @@ cancer_clean %>%
          conf.level = 0.99)   # over-ride the default of 95% CI
 ```
 
-> There is evidence that cancer patients weight more (N = 25, M = 178.28) now than the historic average of 165 pound, $t(24) = 2.077, p = .049, 99% CI: 160.39, 196.17$.
+> There is evidence that cancer patients weight more (*N* = 25, *M* = 178.28) now than the historic average of 165 pound, $t(24) = 2.077, p = .049, 99% CI: 160.39, 196.17$.
 
 ### One-Sided Test, instead of Two
 
-**Find a 99% confience level for the population mean weight.**
+**Is there evidence the population mean weight is GREATER than 165?**
 
 ```{r}
 cancer_clean %>% 
@@ -239,7 +194,9 @@ cancer_clean %>%
          alternative = "greater")   # over-ride the default of 95% CI
 ```
 
-> There is evidence that cancer patients weight more (N = 25, M = 178.28) now than the historic average of 165 pound, $t(24) = 2.077, p = .024$.  
+Notice than one end of the confidence interval is `Inf` for infinity.  This always happens when you specify a one-tail test, so you should IGNORE the conficence interval reported when you specify `alternative = `.
+
+> There is evidence that cancer patients weight more (*N* = 25, *M* = 178.28) now than the historic average of 165 pound, $t(24) = 2.077, p = .024$.  
 
 
 ### Restrict to a Subsample

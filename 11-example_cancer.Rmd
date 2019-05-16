@@ -1,0 +1,108 @@
+# Intro: Cancer Experiemnt
+
+```{r, message=FALSE, error=FALSE}
+library(tidyverse)       # super helpful everything!
+library(haven)           # inporting SPSS, SAS, & Stata data files
+library(psych)           # lots of nice tidbits 
+```
+
+
+
+## Source of Data 
+
+Mid-Michigan Medical Center, Midland, Michigan, 1999: A  study of oral condition of cancer patients.
+
+## Description of the Study 
+
+The data set contains part of the data for a study of **oral condition** of cancer patients conducted at the Mid-Michigan Medical Center.  The oral conditions of the patients were measured and recorded at the *initial* stage, at the end of the *second week*, at the end of the *fourth week*, and at the end of the *sixth week*.  The variables age, initial weight and initial cancer stage of the patients were recorded.  Patients were divided into two groups **at random**:  One group received a placebo and the other group received aloe juice treatment.
+
+
+> Sample size n = 25 patients with neck cancer. 
+>
+> The treatment is Aloe Juice. 
+
+## Variables 
+
+* `ID` patient identification number
+
+* `trt` treatment group 
+    + `0` *placebo* 
+    + `1` *aloe juice*
+
+* `age` patient's age, *in years*
+
+* `weightin` patient's weight *(pounds)* at the initial stage
+
+* `stage`	initial cancer stage
+    + coded `1` through `4`
+
+* `totalcin` oral condition at the *initial stage*
+* `totalcw2` oral condition at the end of *week 2*
+* `totalcw4` oral condition at the end of *week 4*
+* `totalcw6` oral condition at the end of *week 6*
+
+
+
+
+
+## Import Data
+
+The `Cancer` dataset is saved in SPSS format, which is evident from the `.sav` ending on the file name.
+
+The `haven` package is downloaded as part of the `tidyverse` set of packages, but is not automatically loaded.  It must have its own `library()` function call *(see above)*.  The `haven::read_spss()` function works very simarly to the `readxl::read_excel()` function we used last chapter [@R-haven].
+
+* Make sure the **dataset** is saved in the same *folder* as this file
+* Make sure the that *folder* is the **working directory**
+
+```{r}
+cancer_raw <- haven::read_spss("https://github.com/CEHS-research/PSY-6600_students/raw/master/Data/Cancer.sav")
+```
+
+
+```{r}
+tibble::glimpse(cancer_raw)
+```
+
+
+## Wrangle Data
+
+```{r}
+cancer_clean <- cancer_raw %>% 
+  dplyr::rename_all(tolower) %>% 
+  dplyr::mutate(id = factor(id)) %>% 
+  dplyr::mutate(trt = factor(trt,
+                             labels = c("Placebo", 
+                                        "Aloe Juice"))) %>% 
+  dplyr::mutate(stage = factor(stage))
+```
+
+
+## Overview
+
+
+### Dimentions (size) of the dataset
+
+
+```{r}
+dim(cancer_clean)
+```
+
+### Variable Names
+
+```{r}
+names(cancer_clean)
+```
+
+### Quick Glimpse
+
+```{r}
+tibble::glimpse(cancer_clean)
+```
+
+
+### Top and Bottom Rows
+
+```{r}
+psych::headTail(cancer_clean)
+```
+

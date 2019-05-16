@@ -1,56 +1,12 @@
 # TWO INDEPENDENT SAMPLES t-TEST: for the Difference in MEANS
 
 
-```{r global_options, include=FALSE}
-# set global chunk options...  
-#  this changes the defaults so you don't have to repeat yourself
-knitr::opts_chunk$set(comment     = NA,
-                      cache       = TRUE,
-                      echo        = TRUE, 
-                      warning     = FALSE, 
-                      message     = FALSE,
-                      out.width   = "75%")
-```
+Using the `t.test()` function
 
-## Background
 
-### Required Packages 
 
-```{r load_libraries}
-library(tidyverse)    # Loads several very helpful 'tidy' packages
-library(haven)        # Read in SPSS datasets
+```{r, message=FALSE, error=FALSE}
 library(car)          # Companion for Applied Regression (and ANOVA)
-```
-
-
-
-
-### Example Dataset - Cancer Experiment 
-
-The `Cancer` dataset was introduced in "t TEST FOR THE MEAN OF 1 SAMPLE".
-
-
-
-```{r}
-cancer_raw <- haven::read_spss("https://raw.githubusercontent.com/CEHS-research/eBook_ANOVA/master/data/Cancer.sav")
-
-tibble::glimpse(cancer_raw)
-```
-
-```{r}
-cancer_clean <- cancer_raw %>% 
-  dplyr::rename_all(tolower) %>% 
-  dplyr::mutate(id = factor(id)) %>% 
-  dplyr::mutate(trt = factor(trt,
-                             labels = c("Placebo", 
-                                        "Aloe Juice"))) %>% 
-  dplyr::mutate(stage = factor(stage))
-
-tibble::glimpse(cancer_clean)
-```
-
-```{r}
-psych::headTail(cancer_clean)
 ```
 
 

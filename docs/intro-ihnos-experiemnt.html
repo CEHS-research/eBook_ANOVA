@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
+  <title>1 Intro: Ihno’s Experiemnt | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
   <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta property="og:title" content="1 Intro: Ihno’s Experiemnt | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="EQM_v1_cover.png" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="cehs-research/eBook_wrangle" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta name="twitter:title" content="1 Intro: Ihno’s Experiemnt | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   
   <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="twitter:image" content="EQM_v1_cover.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="intro-ihnos-experiemnt.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="intro-cancer-experiemnt.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -214,120 +214,153 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</h1>
-<p class="author"><em>Sarah Schwartz &amp; Tyson Barrett</em></p>
-<p class="date"><em>Last updated: 2019-05-16</em></p>
-</div>
-<div id="welcome" class="section level1 unnumbered">
-<h1>Welcome</h1>
-<p>Backgroup and links to other volumes of this encyclopedia may be found at the <a href="https://cehs-research.github.io/eBooks/">Encyclopedia’s Home Website</a>.</p>
-<p><img src="images/common/EQM_v3_header.png" /></p>
-<div id="blocked-notes" class="section level2 unnumbered">
-<h2>Blocked Notes</h2>
-<p>Thoughout all the eBooks in this encyclopedia, several small secitons will be blocked out in the following ways:</p>
-<div class="rmdconstruct">
+<div id="intro-ihnos-experiemnt" class="section level1">
+<h1><span class="header-section-number">1</span> Intro: Ihno’s Experiemnt</h1>
+<p><img src="images/common/Ihno_header.PNG" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)       <span class="co"># super helpful everything!</span>
+<span class="kw">library</span>(haven)           <span class="co"># inporting SPSS, SAS, &amp; Stata data files</span>
+<span class="kw">library</span>(psych)           <span class="co"># lots of nice tidbits </span></code></pre>
+<div id="background-of-data" class="section level2">
+<h2><span class="header-section-number">1.1</span> Background of Data</h2>
+<div class="rmdlink">
 <p>
-These blocks denote an area <strong>UNDER CONSTRUCTION</strong>, so check back often. This massive undertaking started during the summer of 2018 and is far from complete. The outline of seven volumes is given above despite any one being complete. Feedback is welcome via either author’s email.
+<span class="citation"><span class="citation">(<span class="citeproc-not-found" data-reference-id="epse4"><strong>???</strong></span>)</span></span>: has made the data from his textbook “Explaining Spychological Statistics, 4th edition” available on his <a href="http://www.psych.nyu.edu/cohen/EPS4e.html">website</a>
 </p>
 </div>
-<div class="rmdimportant">
-<p>
-These blocks denote something <strong>EXTREMELY IMPORTANT</strong>. Do NOT skip these notes as they will be used very sparingly.
-</p>
-</div>
-<div class="rmddownload">
-<p>
-These blocks denote something to <strong>DOWNLOAD</strong>. This may include software installations, example datasets, or notebook code files.
-</p>
-</div>
+<p>The data come from a <em>hypothetical</em> study performed by <strong>Ihno</strong> <em>(pronounced “Eee-know”)</em>, an advanced doctoral student, who was the teaching assistant (TA) for several sections of a statistics course. The <strong>100 participants</strong> in the data set are the students who were enrolled in Ihno’s sections, and voluntarily consented to be in her study, which was approved by the appropriate review board at her hypothetical school. Her data were collected on two different days. On the ﬁrst day of classes, the students who came to one of Ihno’s sections ﬁlled in a brief <strong>background questionnaire</strong> on which they provided contact information, some qualitative data (<code>gender</code>, undergrad <code>major</code>, why they had enrolled in statistics (<code>reason</code>), and whether they have a habit of drinking <code>coffee</code>), and some quantitative data (number of math courses already completed (<code>prevmath</code>), the score they received on a diagnostic math background quiz they were all required to take before registering for statistics <code>mathquiz</code>, and a rating of their math <code>phobia</code> on a scale from 0 to 10). You will see that, due to late registration and other factors, not all of Ihno’s students took the diagnostic math background quiz.</p>
+<p>The rest of Ihno’s data were collected as part of an <strong>experiment</strong> that she conducted during her recitation sessions on one day in the middle of the semester. (The one exception is that her students took a regular 10 question quiz the week before her experiment (<code>statquiz</code>), and she decided to add those scores to her data set.) At the beginning of the experiment, Ihno explained how each student could take his or her own pulse. She then provided a half-minute interval during which they counted the number of beats, and then wrote down twice that number as their heart rate (<code>hr_base</code>) in beats per minute (bpm). Then, each student reported how many cups of coffee they had consumed since waking up that morning (<code>num_cups</code>), and ﬁlled out an anxiety questionnaire consisting of 10 items, each rated (0 to 4) on a 5-point Likertscale. Total scores could range from 0 to 40, and provided a measure of baseline anxiety (<code>anx_base</code>).</p>
+<p>Next, Ihno announced a pop quiz. She handed out a page containing 11 multiple-choice statistics questions on material covered during the preceding two weeks, and asked the students to keep this page face down while taking and recording their pulse (<code>hr_pre</code>) and ﬁlling out a anxiety questionnaire (<code>anx_pre</code>). Then Ihno told the students they had 15 minutes to take the fairly difﬁcult quiz. She also told them that the ﬁrst 10 questions were worth 1 point each but that the 11th question was worth 3 points of extra credit. Ihno’s experimental manipulation consisted of varying the difﬁculty of the 11th question. Twenty-ﬁve quizzes were distributed at each level of difﬁculty of the ﬁnal question: easy, moderate, difﬁcult, and impossible to solve (<code>exp_cond</code>). After the quizzes were collected, Ihno asked the students to provide heart rate and anxiety data one more time (<code>hr_post</code>, <code>anx_post</code>). Finally, Ihno explained the experiment, adding that the 11th quiz question would not be scored and that, although the students would get back their quizzes with their score for the ﬁrst 10 items (<code>statquiz</code>), that score would not inﬂuence their grade for the statistics course.</p>
 <div class="rmdlightbulb">
 <p>
-These blocks denote something <strong>INTERESTING</strong>. These point out information we found of interest or added value.
-</p>
-</div>
-<div class="rmdlink">
-<p>
-These blocks denote <strong>LINKS</strong> to other websites. This may include instructional video clips, articles, or blog posts. We are all about NOT re-creating the wheel. If somebody else has described or illustrated a topic well, we celebrate it!
+You can use a file’s <strong>link</strong> to read data directly off a website
 </p>
 </div>
 </div>
-<div id="code-and-output" class="section level2 unnumbered">
-<h2>Code and Output</h2>
-<p>This is how <span class="math inline">\(R\)</span> code is shown:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre>
-<p>This is what the output of the <span class="math inline">\(R\)</span> code above will look:</p>
-<pre><code>[1] 2</code></pre>
+<div id="import-wrangle-the-data" class="section level2">
+<h2><span class="header-section-number">1.2</span> Import &amp; Wrangle the Data</h2>
+<p>The <code>Cancer</code> dataset is saved in SPSS format, which is evident from the <code>.sav</code> ending on the file name.</p>
+<p>The <code>haven</code> package is downloaded as part of the <code>tidyverse</code> set of packages, but is not automatically loaded. It must have its own <code>library()</code> function call <em>(see above)</em>. The <code>haven::read_spss()</code> function works very simarly to the <code>readxl::read_excel()</code> function we used last chapter <span class="citation">(Wickham and Miller <a href="references.html#ref-R-haven">2019</a>)</span>.</p>
+<ul>
+<li>Make sure the <strong>dataset</strong> is saved in the same <em>folder</em> as this file</li>
+<li>Make sure the that <em>folder</em> is the <strong>working directory</strong></li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">data_ihno &lt;-<span class="st"> </span><span class="kw">read_spss</span>(<span class="st">&quot;http://www.psych.nyu.edu/cohen/Ihno_dataset.sav&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">rename_all</span>(tolower) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">genderF =</span> <span class="kw">factor</span>(gender, 
+                                 <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),
+                                 <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Female&quot;</span>, 
+                                            <span class="st">&quot;Male&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">majorF =</span> <span class="kw">factor</span>(major, 
+                                <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>,<span class="dv">5</span>),
+                                <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Psychology&quot;</span>,
+                                           <span class="st">&quot;Premed&quot;</span>,
+                                           <span class="st">&quot;Biology&quot;</span>,
+                                           <span class="st">&quot;Sociology&quot;</span>,
+                                           <span class="st">&quot;Economics&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">reasonF =</span> <span class="kw">factor</span>(reason,
+                                 <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),
+                                 <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Program requirement&quot;</span>,
+                                            <span class="st">&quot;Personal interest&quot;</span>,
+                                            <span class="st">&quot;Advisor recommendation&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">exp_condF =</span> <span class="kw">factor</span>(exp_cond,
+                                   <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),
+                                   <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Easy&quot;</span>,
+                                              <span class="st">&quot;Moderate&quot;</span>,
+                                              <span class="st">&quot;Difficult&quot;</span>,
+                                              <span class="st">&quot;Impossible&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">coffeeF =</span> <span class="kw">factor</span>(coffee,
+                                 <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+                                 <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Not a regular coffee drinker&quot;</span>,
+                                            <span class="st">&quot;Regularly drinks coffee&quot;</span>))) </code></pre>
 </div>
-<div id="the-authors" class="section level2 unnumbered">
-<h2>The Authors</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center;font-size: 20px;">
-Dr. Sarah Schwartz
-</th>
-<th style="text-align:center;font-size: 20px;">
-Dr. Tyson Barrett
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;">
-<img src="images/common/Sarah_headshot.jpg" width="300" />
-</td>
-<td style="text-align:center;">
-<img src="images/common/Tyson_headshot.jpg" width="300" />
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<a href="http://www.sarahschwartzstats.com/">www.SarahSchwartzStats.com</a>
-</td>
-<td style="text-align:center;">
-<a href="http://tysonbarrett.com/">www.TysonBarrett.com</a>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<a href="mailto:Sarah.Schwartz@usu.edu" class="email">Sarah.Schwartz@usu.edu</a>
-</td>
-<td style="text-align:center;">
-<a href="mailto:Tyson.Barrett@usu.edu" class="email">Tyson.Barrett@usu.edu</a>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<a href="https://cehs.usu.edu/research/statstudio/index">Statistical Consulting Studio</a>
-</td>
-<td style="text-align:center;">
-<a href="https://cehs.usu.edu/research/dsdu/index">Data Science and Discover Unit</a>
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-<img src="images/common/StatStudioLogo_dark_small.png" width="300" />
-</td>
-<td style="text-align:center;">
-<img src="images/common/dsdu_logo.PNG" width="300" />
-</td>
-</tr>
-</tbody>
-</table>
-<div id="why-choose-r" class="section level3 unnumbered">
-<h3>Why choose R ?</h3>
-<div class="rmdlink">
-<p>
-<strong>Check it out:</strong> an article from Fall 2016… <a href="https://datahowler.wordpress.com/2016/09/10/no-more-excuses-r-is-better-than-spss-for-psychology-undergrads-and-students-agree/">No more excuses: R is better than SPSS for psychology undergrads, and students agree</a>
-</p>
+<div id="overview" class="section level2">
+<h2><span class="header-section-number">1.3</span> Overview</h2>
+<div id="dimentions-size-of-the-dataset" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Dimentions (size) of the dataset</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(data_ihno)</code></pre>
+<pre><code>[1] 100  23</code></pre>
 </div>
+<div id="variable-names" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Variable Names</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(data_ihno)</code></pre>
+<pre><code> [1] &quot;sub_num&quot;   &quot;gender&quot;    &quot;major&quot;     &quot;reason&quot;    &quot;exp_cond&quot; 
+ [6] &quot;coffee&quot;    &quot;num_cups&quot;  &quot;phobia&quot;    &quot;prevmath&quot;  &quot;mathquiz&quot; 
+[11] &quot;statquiz&quot;  &quot;exp_sqz&quot;   &quot;hr_base&quot;   &quot;hr_pre&quot;    &quot;hr_post&quot;  
+[16] &quot;anx_base&quot;  &quot;anx_pre&quot;   &quot;anx_post&quot;  &quot;genderF&quot;   &quot;majorF&quot;   
+[21] &quot;reasonF&quot;   &quot;exp_condF&quot; &quot;coffeeF&quot;  </code></pre>
 </div>
-<div id="fyi" class="section level3 unnumbered">
-<h3>FYI</h3>
-<p>This entire encyclopedia is written in <span class="math inline">\(R Markdown\)</span>, using <span class="math inline">\(R Studio\)</span> as the text editor and the <code>bookdown</code> package to turn a collection of markdown documents into a coherent whole. The book’s source code is hosted on GitHub. If you notice typos or other issues, feel free to email either of the authors.</p>
-<p>This work is licensed under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode">Attribution-NonCommercial-NoDerivatives 4.0 International</a> License.</p>
-<p><img src="images/common/Education_Logo_WHITE-02.png" width="300" /></p>
+<div id="quick-glimpse" class="section level3">
+<h3><span class="header-section-number">1.3.3</span> Quick Glimpse</h3>
+<pre class="sourceCode r"><code class="sourceCode r">tibble<span class="op">::</span><span class="kw">glimpse</span>(data_ihno)</code></pre>
+<pre><code>Observations: 100
+Variables: 23
+$ sub_num   &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1...
+$ gender    &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
+$ major     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
+$ reason    &lt;dbl&gt; 3, 2, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1...
+$ exp_cond  &lt;dbl&gt; 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4...
+$ coffee    &lt;dbl&gt; 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1...
+$ num_cups  &lt;dbl&gt; 0, 0, 0, 0, 1, 1, 0, 2, 0, 2, 1, 0, 1, 2, 3, 0, 0, 3...
+$ phobia    &lt;dbl&gt; 1, 1, 4, 4, 10, 4, 4, 4, 4, 5, 5, 4, 7, 4, 3, 8, 4, ...
+$ prevmath  &lt;dbl&gt; 3, 4, 1, 0, 1, 1, 2, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1...
+$ mathquiz  &lt;dbl&gt; 43, 49, 26, 29, 31, 20, 13, 23, 38, NA, 29, 32, 18, ...
+$ statquiz  &lt;dbl&gt; 6, 9, 8, 7, 6, 7, 3, 7, 8, 7, 8, 8, 1, 5, 8, 3, 8, 7...
+$ exp_sqz   &lt;dbl&gt; 7, 11, 8, 8, 6, 6, 4, 7, 7, 6, 10, 7, 3, 4, 6, 1, 7,...
+$ hr_base   &lt;dbl&gt; 71, 73, 69, 72, 71, 70, 71, 77, 73, 78, 74, 73, 73, ...
+$ hr_pre    &lt;dbl&gt; 68, 75, 76, 73, 83, 71, 70, 87, 72, 76, 72, 74, 76, ...
+$ hr_post   &lt;dbl&gt; 65, 68, 72, 78, 74, 76, 66, 84, 67, 74, 73, 74, 78, ...
+$ anx_base  &lt;dbl&gt; 17, 17, 19, 19, 26, 12, 12, 17, 20, 20, 21, 32, 19, ...
+$ anx_pre   &lt;dbl&gt; 22, 19, 14, 13, 30, 15, 16, 19, 14, 24, 25, 35, 23, ...
+$ anx_post  &lt;dbl&gt; 20, 16, 15, 16, 25, 19, 17, 22, 17, 19, 22, 33, 20, ...
+$ genderF   &lt;fct&gt; Female, Female, Female, Female, Female, Female, Fema...
+$ majorF    &lt;fct&gt; Psychology, Psychology, Psychology, Psychology, Psyc...
+$ reasonF   &lt;fct&gt; Advisor recommendation, Personal interest, Program r...
+$ exp_condF &lt;fct&gt; Easy, Easy, Easy, Easy, Easy, Moderate, Moderate, Mo...
+$ coffeeF   &lt;fct&gt; Regularly drinks coffee, Not a regular coffee drinke...</code></pre>
+</div>
+<div id="top-and-bottom-rows" class="section level3">
+<h3><span class="header-section-number">1.3.4</span> Top and Bottom Rows</h3>
+<pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">headTail</span>(data_ihno)</code></pre>
+<pre><code>  sub_num gender major reason exp_cond coffee num_cups phobia prevmath
+1       1      1     1      3        1      1        0      1        3
+2       2      1     1      2        1      0        0      1        4
+3       3      1     1      1        1      0        0      4        1
+4       4      1     1      1        1      0        0      4        0
+5     ...    ...   ...    ...      ...    ...      ...    ...      ...
+6      97      2     5      2        3      0        0      0        2
+7      98      2     5      2        3      0        0      2        2
+8      99      2     5      2        4      1        1      1        4
+9     100      2     5      1        2      0        0      2        2
+  mathquiz statquiz exp_sqz hr_base hr_pre hr_post anx_base anx_pre
+1       43        6       7      71     68      65       17      22
+2       49        9      11      73     75      68       17      19
+3       26        8       8      69     76      72       19      14
+4       29        7       8      72     73      78       19      13
+5      ...      ...     ...     ...    ...     ...      ...     ...
+6       28        8       9      70     66      65       17      12
+7       38        9      10      65     65      69       18      14
+8       41        8       8      72     68      73       17      11
+9       39        7       7      70     70      64       17      11
+  anx_post genderF     majorF                reasonF  exp_condF
+1       20  Female Psychology Advisor recommendation       Easy
+2       16  Female Psychology      Personal interest       Easy
+3       15  Female Psychology    Program requirement       Easy
+4       16  Female Psychology    Program requirement       Easy
+5      ...    &lt;NA&gt;       &lt;NA&gt;                   &lt;NA&gt;       &lt;NA&gt;
+6       13    Male  Economics      Personal interest  Difficult
+7       19    Male  Economics      Personal interest  Difficult
+8       18    Male  Economics      Personal interest Impossible
+9       14    Male  Economics    Program requirement   Moderate
+                       coffeeF
+1      Regularly drinks coffee
+2 Not a regular coffee drinker
+3 Not a regular coffee drinker
+4 Not a regular coffee drinker
+5                         &lt;NA&gt;
+6 Not a regular coffee drinker
+7 Not a regular coffee drinker
+8      Regularly drinks coffee
+9 Not a regular coffee drinker</code></pre>
 
 </div>
 </div>
@@ -337,8 +370,8 @@ Dr. Tyson Barrett
           </div>
         </div>
       </div>
-
-<a href="intro-ihnos-experiemnt.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intro-cancer-experiemnt.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -24,6 +24,16 @@ Backgroup and links to other volumes of this encyclopedia may be found at the [E
 
 ![](images/common/EQM_v3_header.png)
 
+```{r global_options, include=FALSE}
+# set global chunk options...  
+#  this changes the defaults so you don't have to repeat yourself
+knitr::opts_chunk$set(comment     = NA,
+                      cache       = TRUE,
+                      echo        = TRUE, 
+                      warning     = FALSE, 
+                      message     = FALSE,
+                      out.width   = "75%")
+```
 
 
 ```{r, echo=FALSE, include=FALSE, comment=FALSE, message=FALSE}
