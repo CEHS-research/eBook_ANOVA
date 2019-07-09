@@ -1,0 +1,129 @@
+# One-Way ANOVA
+
+
+Required Packages 
+
+```{r}
+library(tidyverse)    # Loads several very helpful 'tidy' packages
+library(furniture)    # Nice tables (by our own Tyson Barrett)
+library(car)          # Companion for Applied Regression (and ANOVA)
+library(afex)         # Analysis of Factorial Experiments
+library(emmeans)      # Estimated marginal means (Least-squares means)
+library(multcomp)     # Simultaneous Inference in General Parametric Models 
+```
+
+
+
+## Prepare for Modeling
+
+### Ensure the Data is in "long" Format 
+
+First, the data must be restructured from **wide** to **long** format, so that each observation is on its own line.  All categorical variables must be declared as fators.  We also must add an distinct indicator variable.  
+
+```{r, eval=FALSE}
+# convert the dataset: wide --> long
+data_long <- data_wide %>% 
+  tidyr::gather(key   = group_IV,                      # new var name = groups
+                value = continuous_DV,                 # new var name = measurements
+                var_1, var_2, var_3, ... , var_k) %>%  # all old variable names
+  dplyr::mutate(id_var = row_number()) %>%             # create a sequential id variable
+  dplyr::select(id_var, group_IV, continuous_DV) %>%   # reorder the variables
+  dplyr::mutate_at(vars(id_var, group_IV), factor)     # declare factors
+
+data_long %>% head(n = 10)                             # display the top 10 rows only
+```
+
+
+
+
+
+### Compute Summary Statistics
+
+Second, check the summary statistics for each of the $k$ groups.
+
+```{r, eval=FALSE}
+# Raw data: summary table
+data_long %>% 
+  dplyr::group_by(group_IV) %>%          # divide into groups
+  furniture::table1(continuous_DV)       # gives M(SD)
+```
+
+
+
+
+
+### Plot the Raw Data
+
+Third, plot the data to eyeball the potential effect.  Remember the center line in each box represents the median, not the mean.
+
+```{r, eval=FALSE}
+# Raw data: boxplots
+data_long %>% 
+  ggplot(aes(x = group_IV,
+             y = continuous_DV)) + 
+  geom_boxplot() +
+  geom_point() 
+```
+
+
+```{r, eval=FALSE}
+# Raw data: Mean-SD plots
+data_long %>% 
+  ggplot(aes(x = group_IV,
+             y = continuous_DV)) + 
+  stat_summary() 
+```
+
+
+
+
+## Fitting One-way ANOVA Model
+
+
+The `aov_4()` function from the `afex` package fits ANOVA models *(oneway, two-way, repeated measures, and mixed design)*. It needs at least two arguments:
+
+1. formula:  `continuous_DV ~ group_IV + (1|id_var)`  *one observation per subject and `id_var` is distinct for each subject*
+
+2. dataset: `data = .` *we use the period to signify that the datset is being piped from above*
+
+
+Here is an outline of what your syntax should look like when you **fit and save a one-way ANOVA**.  Of course you will replace the dataset name and the variable names, as well as the name you are saving it as.
+
+> **NOTE:** The `aov_4()` function works on data in LONG format only.  Each observation needs to be on its one line or row with seperate variables for the group membership (categorical factor or `fct`) and the continuous measurement (numberic or `dbl`).
+
+```{r, eval=FALSE}
+# One-way ANOVA: fit and save
+aov_name <- data_long %>% 
+  afex::aov_4(continuous_DV ~ group_IV + (1|id_var),
+              data = .)
+```
+
+
+## ANOVA Output
+
+By running the name you saved you model under, you will get a brief set of output, including a measure of **Effect Size**.
+
+> **NOTE:** The `ges` is the *generalized eta squared*.  In a one-way ANOVA, the eta-squared effect size is only one value, ie. generalized $\eta_g$ and partial $\eta_p$ are the same.
+
+```{r, eval=FALSE}
+# Display basic ANOVA results (includes effect size)
+aov_name 
+```
+
+
+------------------------------
+
+To fully fill out a standard ANOVA table and compute other effect sizes, you will need a more complete set of output, including the **Sum of Squares** components, you will need to add `$Anova` at the end of the model name before running it.
+
+> **NOTE:** IGNORE the first line that starts with `(Intercept)`!  Also, the 'mean sum of squares' are not included in this table, nor is the **Total** line at the bottom of the standard ANOVA table.  You will need to manually compute these values and add them on the homework page.  Remember that `Sum of Squares (SS)` and `degrees of freedom (df)` add up, but `Mean Sum of Squreas (MS)` do not add up.  Also: `MS = SS/df` for each term.
+
+
+```{r, eval=FALSE}
+# Display fuller ANOVA results (includes sum of squares)
+aov_name$Anova 
+```
+
+
+
+
+
