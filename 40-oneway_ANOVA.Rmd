@@ -89,7 +89,9 @@ The `aov_4()` function from the `afex` package fits ANOVA models *(oneway, two-w
 
 Here is an outline of what your syntax should look like when you **fit and save a one-way ANOVA**.  Of course you will replace the dataset name and the variable names, as well as the name you are saving it as.
 
-> **NOTE:** The `aov_4()` function works on data in LONG format only.  Each observation needs to be on its one line or row with seperate variables for the group membership (categorical factor or `fct`) and the continuous measurement (numberic or `dbl`).
+```{block type='rmdlightbulb', echo=TRUE}
+**NOTE:** The `aov_4()` function works on data in LONG format only.  Each observation needs to be on its one line or row with seperate variables for the group membership (categorical factor or `fct`) and the continuous measurement (numberic or `dbl`).
+```
 
 ```{r, eval=FALSE}
 # One-way ANOVA: fit and save
@@ -103,20 +105,20 @@ aov_name <- data_long %>%
 
 By running the name you saved you model under, you will get a brief set of output, including a measure of **Effect Size**.
 
-> **NOTE:** The `ges` is the *generalized eta squared*.  In a one-way ANOVA, the eta-squared effect size is only one value, ie. generalized $\eta_g$ and partial $\eta_p$ are the same.
+```{block type='rmdlightbulb', echo=TRUE}
+**NOTE:** The `ges` is the *generalized eta squared*.  In a one-way ANOVA, the eta-squared effect size is only one value, ie. generalized $\eta_g$ and partial $\eta_p$ are the same.
+```
 
 ```{r, eval=FALSE}
 # Display basic ANOVA results (includes effect size)
 aov_name 
 ```
 
-
-------------------------------
-
 To fully fill out a standard ANOVA table and compute other effect sizes, you will need a more complete set of output, including the **Sum of Squares** components, you will need to add `$Anova` at the end of the model name before running it.
 
-> **NOTE:** IGNORE the first line that starts with `(Intercept)`!  Also, the 'mean sum of squares' are not included in this table, nor is the **Total** line at the bottom of the standard ANOVA table.  You will need to manually compute these values and add them on the homework page.  Remember that `Sum of Squares (SS)` and `degrees of freedom (df)` add up, but `Mean Sum of Squreas (MS)` do not add up.  Also: `MS = SS/df` for each term.
-
+```{block type='rmdlightbulb', echo=TRUE}
+ **NOTE:** IGNORE the first line that starts with `(Intercept)`!  Also, the 'mean sum of squares' are not included in this table, nor is the **Total** line at the bottom of the standard ANOVA table.  You will need to manually compute these values and add them on the homework page.  Remember that `Sum of Squares (SS)` and `degrees of freedom (df)` add up, but `Mean Sum of Squreas (MS)` do not add up.  Also: `MS = SS/df` for each term.
+```
 
 ```{r, eval=FALSE}
 # Display fuller ANOVA results (includes sum of squares)

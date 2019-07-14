@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Repeated Measures ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
+  <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Repeated Measures ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="EQM_v1_cover.png" />
+  <meta property="og:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
+  <meta name="github-repo" content="cehs-research/eBook_wrangle" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Repeated Measures ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  
+  <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
+  <meta name="twitter:image" content="EQM_v1_cover.png" />
+
+<meta name="author" content="Sarah Schwartz &amp; Tyson Barrett" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="one-way-anova.html">
+<link rel="next" href="mixed-design-anova.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="heading.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Vol. 3: Testing Mean Differences</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-authors"><i class="fa fa-check"></i>The Authors</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html"><i class="fa fa-check"></i><b>1</b> Intro: Ihno’s Experiemnt</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#background-of-data"><i class="fa fa-check"></i><b>1.1</b> Background of Data</a></li>
+<li class="chapter" data-level="1.2" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#import-wrangle-the-data"><i class="fa fa-check"></i><b>1.2</b> Import &amp; Wrangle the Data</a></li>
+<li class="chapter" data-level="1.3" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#overview"><i class="fa fa-check"></i><b>1.3</b> Overview</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#dimentions-size-of-the-dataset"><i class="fa fa-check"></i><b>1.3.1</b> Dimentions (size) of the dataset</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#variable-names"><i class="fa fa-check"></i><b>1.3.2</b> Variable Names</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#quick-glimpse"><i class="fa fa-check"></i><b>1.3.3</b> Quick Glimpse</a></li>
+<li class="chapter" data-level="1.3.4" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#top-and-bottom-rows"><i class="fa fa-check"></i><b>1.3.4</b> Top and Bottom Rows</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html"><i class="fa fa-check"></i><b>2</b> Intro: Cancer Experiemnt</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#source-of-data"><i class="fa fa-check"></i><b>2.1</b> Source of Data</a></li>
+<li class="chapter" data-level="2.2" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#description-of-the-study"><i class="fa fa-check"></i><b>2.2</b> Description of the Study</a></li>
+<li class="chapter" data-level="2.3" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#variables"><i class="fa fa-check"></i><b>2.3</b> Variables</a></li>
+<li class="chapter" data-level="2.4" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#import-data"><i class="fa fa-check"></i><b>2.4</b> Import Data</a></li>
+<li class="chapter" data-level="2.5" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#wrangle-data"><i class="fa fa-check"></i><b>2.5</b> Wrangle Data</a></li>
+<li class="chapter" data-level="2.6" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#overview-1"><i class="fa fa-check"></i><b>2.6</b> Overview</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#dimentions-size-of-the-dataset-1"><i class="fa fa-check"></i><b>2.6.1</b> Dimentions (size) of the dataset</a></li>
+<li class="chapter" data-level="2.6.2" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#variable-names-1"><i class="fa fa-check"></i><b>2.6.2</b> Variable Names</a></li>
+<li class="chapter" data-level="2.6.3" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#quick-glimpse-1"><i class="fa fa-check"></i><b>2.6.3</b> Quick Glimpse</a></li>
+<li class="chapter" data-level="2.6.4" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#top-and-bottom-rows-1"><i class="fa fa-check"></i><b>2.6.4</b> Top and Bottom Rows</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html"><i class="fa fa-check"></i><b>3</b> ONE SAMPLE t-TEST: for the MEAN</a><ul>
+<li class="chapter" data-level="3.1" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#exploratory-data-analysis-i.e.the-eyeball-method"><i class="fa fa-check"></i><b>3.1</b> Exploratory Data Analysis: i.e. the eyeball method</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#mean-and-sd"><i class="fa fa-check"></i><b>3.1.1</b> Mean and SD</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#assumptions"><i class="fa fa-check"></i><b>3.2</b> Assumptions</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#random-sampling"><i class="fa fa-check"></i><b>3.2.1</b> Random Sampling</a></li>
+<li class="chapter" data-level="3.2.2" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#normality"><i class="fa fa-check"></i><b>3.2.2</b> Normality</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#inference"><i class="fa fa-check"></i><b>3.3</b> Inference</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#all-defaults"><i class="fa fa-check"></i><b>3.3.1</b> All Defaults</a></li>
+<li class="chapter" data-level="3.3.2" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#confidence-level-other-than-95"><i class="fa fa-check"></i><b>3.3.2</b> Confidence Level other than 95%</a></li>
+<li class="chapter" data-level="3.3.3" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#one-sided-test-instead-of-two"><i class="fa fa-check"></i><b>3.3.3</b> One-Sided Test, instead of Two</a></li>
+<li class="chapter" data-level="3.3.4" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#restrict-to-a-subsample"><i class="fa fa-check"></i><b>3.3.4</b> Restrict to a Subsample</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html"><i class="fa fa-check"></i><b>4</b> TWO INDEPENDENT SAMPLES t-TEST: for the Difference in MEANS</a><ul>
+<li class="chapter" data-level="4.1" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#exploratory-data-analysis-i.e.the-eyeball-method-1"><i class="fa fa-check"></i><b>4.1</b> Exploratory Data Analysis: i.e. the eyeball method</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#means-and-sds"><i class="fa fa-check"></i><b>4.1.1</b> Means and SDs</a></li>
+<li class="chapter" data-level="4.1.2" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#stacked-histograms"><i class="fa fa-check"></i><b>4.1.2</b> Stacked Histograms</a></li>
+<li class="chapter" data-level="4.1.3" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#side-by-side-boxplots"><i class="fa fa-check"></i><b>4.1.3</b> Side-by-Side Boxplots</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#assumptions-1"><i class="fa fa-check"></i><b>4.2</b> Assumptions</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#independence"><i class="fa fa-check"></i><b>4.2.1</b> Independence</a></li>
+<li class="chapter" data-level="4.2.2" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#normality-1"><i class="fa fa-check"></i><b>4.2.2</b> Normality</a></li>
+<li class="chapter" data-level="4.2.3" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#hov"><i class="fa fa-check"></i><b>4.2.3</b> HOV</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#inference-1"><i class="fa fa-check"></i><b>4.3</b> Inference</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#pooled-variance-test"><i class="fa fa-check"></i><b>4.3.1</b> Pooled Variance Test</a></li>
+<li class="chapter" data-level="4.3.2" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#seperate-variance-test"><i class="fa fa-check"></i><b>4.3.2</b> Seperate Variance Test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="5.1" data-path="one-way-anova.html"><a href="one-way-anova.html#prepare-for-modeling"><i class="fa fa-check"></i><b>5.1</b> Prepare for Modeling</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#ensure-the-data-is-in-long-format"><i class="fa fa-check"></i><b>5.1.1</b> Ensure the Data is in “long” Format</a></li>
+<li class="chapter" data-level="5.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#compute-summary-statistics"><i class="fa fa-check"></i><b>5.1.2</b> Compute Summary Statistics</a></li>
+<li class="chapter" data-level="5.1.3" data-path="one-way-anova.html"><a href="one-way-anova.html#plot-the-raw-data"><i class="fa fa-check"></i><b>5.1.3</b> Plot the Raw Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="one-way-anova.html"><a href="one-way-anova.html#fitting-one-way-anova-model"><i class="fa fa-check"></i><b>5.2</b> Fitting One-way ANOVA Model</a></li>
+<li class="chapter" data-level="5.3" data-path="one-way-anova.html"><a href="one-way-anova.html#anova-output"><i class="fa fa-check"></i><b>5.3</b> ANOVA Output</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>6</b> Repeated Measures ANOVA</a><ul>
+<li class="chapter" data-level="6.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>6.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
+<li class="chapter" data-level="6.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a"><i class="fa fa-check"></i><b>6.2</b> Words Recalled Data Example (Chapter 15, section A)</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#data-prep"><i class="fa fa-check"></i><b>6.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="6.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-independent-anova"><i class="fa fa-check"></i><b>6.2.2</b> One-Way Independent ANOVA</a></li>
+<li class="chapter" data-level="6.2.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-rm-anova"><i class="fa fa-check"></i><b>6.2.3</b> One-Way RM ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#another-example---weight-loss"><i class="fa fa-check"></i><b>6.3</b> Another Example - Weight Loss</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format"><i class="fa fa-check"></i><b>6.3.1</b> Restructure the data from wide to long format</a></li>
+<li class="chapter" data-level="6.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#does-weight-long-change-over-time"><i class="fa fa-check"></i><b>6.3.2</b> Does weight long change over time?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html"><i class="fa fa-check"></i><b>7</b> Mixed Design ANOVA</a><ul>
+<li class="chapter" data-level="7.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>7.1</b> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code></a></li>
+<li class="chapter" data-level="7.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a"><i class="fa fa-check"></i><b>7.2</b> Words Recalled Data Example (Chapter 16, section A)</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#data-prep-1"><i class="fa fa-check"></i><b>7.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="7.2.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#one-way-rm-anova-1"><i class="fa fa-check"></i><b>7.2.2</b> One-Way RM ANOVA</a></li>
+<li class="chapter" data-level="7.2.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#mixed-anova"><i class="fa fa-check"></i><b>7.2.3</b> Mixed ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#conclusion"><i class="fa fa-check"></i><b>7.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="repeated-measures-anova" class="section level1">
+<h1><span class="header-section-number">6</span> Repeated Measures ANOVA</h1>
+<p>Required Packages</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)    <span class="co"># Loads several very helpful &#39;tidy&#39; packages</span></code></pre></div>
+<pre><code>## -- Attaching packages ------------------------------------------------------------------------ tidyverse 1.2.1 --</code></pre>
+<pre><code>## v ggplot2 3.0.0     v purrr   0.2.5
+## v tibble  1.4.2     v dplyr   0.7.6
+## v tidyr   0.8.1     v stringr 1.3.1
+## v readr   1.1.1     v forcats 0.3.0</code></pre>
+<pre><code>## -- Conflicts --------------------------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(furniture)    <span class="co"># Nice tables (by our own Tyson Barrett)</span></code></pre></div>
+<pre><code>## -- furniture 1.8.0 ------------------------------------------------------------ learn more at tysonbarrett.com --
+## v furniture attached
+## v No potential conflicts found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(afex)         <span class="co"># needed for ANOVA, emmeans is loaded automatically.</span></code></pre></div>
+<pre><code>## Loading required package: lme4</code></pre>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## 
+## Attaching package: &#39;Matrix&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
+## 
+##     expand</code></pre>
+<pre><code>## Loading required package: emmeans</code></pre>
+<pre><code>## NOTE: As of emmeans versions &gt; 1.2.3,
+##       The &#39;cld&#39; function will be deprecated in favor of &#39;CLD&#39;.
+##       You may use &#39;cld&#39; only if you have package:multcomp attached.</code></pre>
+<pre><code>## ************
+## Welcome to afex. For support visit: http://afex.singmann.science/</code></pre>
+<pre><code>## - Functions for ANOVAs: aov_car(), aov_ez(), and aov_4()
+## - Methods for calculating p-values with mixed(): &#39;KR&#39;, &#39;S&#39;, &#39;LRT&#39;, and &#39;PB&#39;
+## - &#39;afex_aov&#39; and &#39;mixed&#39; objects can be passed to emmeans() for follow-up tests
+## - Get and set global package options with: afex_options()
+## - Set orthogonal sum-to-zero contrasts globally: set_sum_contrasts()
+## - For example analyses see: browseVignettes(&quot;afex&quot;)
+## ************</code></pre>
+<pre><code>## 
+## Attaching package: &#39;afex&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:lme4&#39;:
+## 
+##     lmer</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(multcomp)     <span class="co"># for advanced control for multiple testing/Type 1 error</span></code></pre></div>
+<pre><code>## Loading required package: mvtnorm</code></pre>
+<pre><code>## Loading required package: survival</code></pre>
+<pre><code>## Loading required package: TH.data</code></pre>
+<pre><code>## Loading required package: MASS</code></pre>
+<pre><code>## 
+## Attaching package: &#39;MASS&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     select</code></pre>
+<pre><code>## 
+## Attaching package: &#39;TH.data&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:MASS&#39;:
+## 
+##     geyser</code></pre>
+<pre><code>## 
+## Attaching package: &#39;multcomp&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:emmeans&#39;:
+## 
+##     cld</code></pre>
+<div id="tutorial---fitting-rm-anova-models-with-afexaov_4" class="section level2">
+<h2><span class="header-section-number">6.1</span> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</h2>
+<p>The <code>aov_4()</code> function from the <code>afex</code> package fits ANOVA models (oneway, two-way, repeated measures, and mixed design). It needs at least two arguments:</p>
+<ol style="list-style-type: decimal">
+<li><p>formula: <code>continuous_var ~ 1 + (RM_var|id_var)</code> <em>one observation per subject for each level of the <code>RMvar</code>, so each <code>id_var</code> has multiple lines for each subject</em></p></li>
+<li><p>dataset: <code>data = .</code> <em>we use the period to signify that the datset is being piped from above</em></p></li>
+</ol>
+<p>Here is an outline of what your syntax should look like when you <strong>fit and save a RM ANOVA</strong>. Of course you will replace the dataset name and the variable names, as well as the name you are saving it as.</p>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> The <code>aov_4()</code> function works on data in LONG format only. Each observation needs to be on its one line or row with seperate variables for the group membership (categorical factor or <code>fct</code>) and the continuous measurement (numberic or <code>dbl</code>).
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># RM ANOVA: fit and save</span>
+aov_name &lt;-<span class="st"> </span>data_name <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(continuous_var <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(RM_var<span class="op">|</span>id_var),
+              <span class="dt">data =</span> .)</code></pre></div>
+<p>By running the name you saved you model under, you will get a brief set of output, including a measure of <strong>Effect Size</strong>.</p>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> The <code>ges</code> is the <em>generalized eta squared</em>. In a one-way ANOVA, the eta-squared effect size is the same value, ie. generalized <span class="math inline"><span class="math inline">\(\eta_g\)</span></span> and partial <span class="math inline"><span class="math inline">\(\eta_p\)</span></span> are the same.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Display basic ANOVA results (includes effect size)</span>
+aov_name </code></pre></div>
+<p>To fully fill out a standard ANOVA table and compute other effect sizes, you will need a more complete set of output, including the <strong>Sum of Squares</strong> components, you will need to add <code>summary()</code> piped at the end of the model name before running it or after the model with a pipe.</p>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> IGNORE the first line that starts with <code>(Intercept)</code>! Also, the ‘mean sum of squares’ are not included in this table, nor is the <strong>Total</strong> line at the bottom of the standard ANOVA table. You will need to manually compute these values and add them on the homework page. Remember that <code>Sum of Squares (SS)</code> and <code>degrees of freedom (df)</code> add up, but <code>Mean Sum of Squreas (MS)</code> do not add up. Also: <code>MS = SS/df</code> for each term.
+</p>
+</div>
+<p>This also runs and displays the results of Mauchly Tests for Sphericity, as well as the Greenhouse-Geisser (GG) and Huynh-Feldt (HF) Corrections to the p-value. If the Mauchly’s p-value is bigger than .05, do not use the corrections. If Mauchly’s p-value is less than .05, then apply the epsilon (<code>eps</code> or <span class="math inline">\(\epsilon\)</span>) to multiply the degree’s of freedom. Yes, the df will be decimal numbers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Display fuller ANOVA results (sphericity tests)</span>
+<span class="kw">summary</span>(aov_name)</code></pre></div>
+<p>To see all the Sumes-of-Squared residuals for ALL of the model comoponents, you add <code>$aov</code> at the end of the model name.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Display all the sum of squares</span>
+aov_name<span class="op">$</span>aov</code></pre></div>
+<p>Repeated Measures MANOVA Tests (Pillai test statistic) is computed is you add <code>$Anova</code> at the end of the model name. This is a so called ‘Multivariate Test’. <strong>This is NOT what you want to do!</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Display fuller ANOVA results (includes sum of squares)</span>
+aov_name<span class="op">$</span>Anova</code></pre></div>
+<p>If you only need to obtain the omnibus (overall) F-test without a correction for violation of sphericity, you can add an option for <code>correction = &quot;none&quot;</code>. You can also request both the generalized and partial <span class="math inline">\(\eta^2\)</span> effect sizes with <code>es = c(&quot;ges&quot;, &quot;pes&quot;)</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># RM ANOVA: no correction, both effect sizes</span>
+data_name <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(continuous_var <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(RM_var<span class="op">|</span>id_var),
+              <span class="dt">data =</span> .,
+              <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>,
+                                 <span class="dt">es =</span> <span class="kw">c</span>(<span class="st">&quot;ges&quot;</span>, <span class="st">&quot;pes&quot;</span>)))</code></pre></div>
+<p>Post Hoc tests may be ran the same way as the 1 and 2-way ANOVAs from the last unit.</p>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> Use Fisher’s LSD (<code>adjust = “none”</code>) if the omnibus F-test is significant AND there are THREE measurements per subject or block. Tukey’s HSD (<code>adjust = “tukey”</code>) may be used even if the F-test is not significant or if there are four or more repeated measures.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># RM ANOVA: post hoc all pairwise tests with Fisher&#39;s LSD correction</span>
+aov_name <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmeans</span>(<span class="op">~</span><span class="st"> </span>RM_var) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pairs</span>(<span class="dt">adjust =</span> <span class="st">&quot;none&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># RM ANOVA: post hoc all pairwise tests with Tukey&#39;s HSD correction</span>
+aov_name <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmeans</span>(<span class="op">~</span><span class="st"> </span>RM_var) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pairs</span>(<span class="dt">adjust =</span> <span class="st">&quot;tukey&quot;</span>)</code></pre></div>
+<p>A means plot (model based) can help you write up your results. This zooms in on just the means and will make all differences seem significant, so make sure to interpret it in conjunction with the ANOVA and post hoc tests.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># RM ANOVA: means plot</span>
+aov_name <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmip</span>(<span class="op">~</span><span class="st"> </span>RM_var)</code></pre></div>
+</div>
+<div id="words-recalled-data-example-chapter-15-section-a" class="section level2">
+<h2><span class="header-section-number">6.2</span> Words Recalled Data Example (Chapter 15, section A)</h2>
+<div id="data-prep" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Data Prep</h3>
+<p>I input the data as a <code>tribble</code> which saves it as a <code>data.frame</code> and then cleaned up a few of the important variables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tribble</span>(
+  <span class="op">~</span>ID, <span class="op">~</span>word_type, <span class="op">~</span>words_recalled,
+    <span class="dv">1</span>,          <span class="dv">1</span>,              <span class="dv">20</span>,
+    <span class="dv">2</span>,          <span class="dv">1</span>,              <span class="dv">16</span>,
+    <span class="dv">3</span>,          <span class="dv">1</span>,               <span class="dv">8</span>,
+    <span class="dv">4</span>,          <span class="dv">1</span>,              <span class="dv">17</span>,
+    <span class="dv">5</span>,          <span class="dv">1</span>,              <span class="dv">15</span>,
+    <span class="dv">6</span>,          <span class="dv">1</span>,              <span class="dv">10</span>,
+    <span class="dv">1</span>,          <span class="dv">2</span>,              <span class="dv">21</span>,
+    <span class="dv">2</span>,          <span class="dv">2</span>,              <span class="dv">18</span>,
+    <span class="dv">3</span>,          <span class="dv">2</span>,               <span class="dv">7</span>,
+    <span class="dv">4</span>,          <span class="dv">2</span>,              <span class="dv">15</span>,
+    <span class="dv">5</span>,          <span class="dv">2</span>,              <span class="dv">10</span>,
+    <span class="dv">6</span>,          <span class="dv">2</span>,               <span class="dv">4</span>,
+    <span class="dv">1</span>,          <span class="dv">3</span>,              <span class="dv">17</span>,
+    <span class="dv">2</span>,          <span class="dv">3</span>,              <span class="dv">11</span>,
+    <span class="dv">3</span>,          <span class="dv">3</span>,               <span class="dv">4</span>,
+    <span class="dv">4</span>,          <span class="dv">3</span>,              <span class="dv">18</span>,
+    <span class="dv">5</span>,          <span class="dv">3</span>,              <span class="dv">13</span>,
+    <span class="dv">6</span>,          <span class="dv">3</span>,              <span class="dv">10</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">word_type =</span> <span class="kw">factor</span>(word_type,
+                            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Neutral&quot;</span>, <span class="st">&quot;Positive&quot;</span>, <span class="st">&quot;Negative&quot;</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">fake_id =</span> <span class="kw">row_number</span>())
+
+d</code></pre></div>
+<pre><code>## # A tibble: 18 x 4
+##       ID word_type words_recalled fake_id
+##    &lt;dbl&gt; &lt;fct&gt;              &lt;dbl&gt;   &lt;int&gt;
+##  1     1 Neutral               20       1
+##  2     2 Neutral               16       2
+##  3     3 Neutral                8       3
+##  4     4 Neutral               17       4
+##  5     5 Neutral               15       5
+##  6     6 Neutral               10       6
+##  7     1 Positive              21       7
+##  8     2 Positive              18       8
+##  9     3 Positive               7       9
+## 10     4 Positive              15      10
+## 11     5 Positive              10      11
+## 12     6 Positive               4      12
+## 13     1 Negative              17      13
+## 14     2 Negative              11      14
+## 15     3 Negative               4      15
+## 16     4 Negative              18      16
+## 17     5 Negative              13      17
+## 18     6 Negative              10      18</code></pre>
+</div>
+<div id="one-way-independent-anova" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> One-Way Independent ANOVA</h3>
+<p>First, let’s ignore the fact that we know this has repeated measures. As such, we will assume that each word type group is independent. Let’s look at what happens:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ind_anova &lt;-<span class="st"> </span>d <span class="op">%&gt;%</span>
+<span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(words_recalled <span class="op">~</span><span class="st"> </span>word_type <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>fake_id),
+              <span class="dt">data =</span> .)</code></pre></div>
+<pre><code>## Contrasts set to contr.sum for the following variables: word_type</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ind_anova<span class="op">$</span>Anova</code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: dv
+##              Sum Sq Df  F value    Pr(&gt;F)    
+## (Intercept) 3042.00  1 101.4752 4.538e-08 ***
+## word_type     16.33  2   0.2724    0.7652    
+## Residuals    449.67 15                       
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>If we ignored that the <code>word_type</code> groups are not independent, we get an F-statistic = 0.272 and p = 0.765.</p>
+<p>What do you think will happen if we account for the repeated measures? Will the F-statistic increase or decrease?</p>
+</div>
+<div id="one-way-rm-anova" class="section level3">
+<h3><span class="header-section-number">6.2.3</span> One-Way RM ANOVA</h3>
+<p>Now, let’s look at the repeated measures. We do this by using <code>afex::aov_4()</code> and then the <code>summary()</code> functions as shown below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">oneway &lt;-<span class="st"> </span>d <span class="op">%&gt;%</span>
+<span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(words_recalled <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(word_type<span class="op">|</span>ID),
+              <span class="dt">data =</span> .)
+<span class="kw">summary</span>(oneway)</code></pre></div>
+<pre><code>## 
+## Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
+## 
+##              Sum Sq num Df Error SS den Df F value   Pr(&gt;F)   
+## (Intercept) 3042.00      1   381.33      5 39.8864 0.001466 **
+## word_type     16.33      2    68.33     10  1.1951 0.342453   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## 
+## Mauchly Tests for Sphericity
+## 
+##           Test statistic  p-value
+## word_type         0.2134 0.045538
+## 
+## 
+## Greenhouse-Geisser and Huynh-Feldt Corrections
+##  for Departure from Sphericity
+## 
+##            GG eps Pr(&gt;F[GG])
+## word_type 0.55972     0.3282
+## 
+##              HF eps Pr(&gt;F[HF])
+## word_type 0.6077293  0.3309148</code></pre>
+<p>Here, we see a number of pieces of information, including the sums of squares, F-statistic, and p-value. The F-statistic is now 1.195 and the p-value (although still not signfiicant) is .342. So what happened to the F-statistic? It decreased! So by using the information that these are repeated measures, we have more power. Why is that?</p>
+<p>If we look at the output for the two ANOVAs above, both have the sums of squares for <code>word_type</code> at 16.33 so that didn’t change at all. So what did change? Well, it comes down to understanding what is happening to the error term. Although not shown explicitly in the tables above, consider that:</p>
+<p><span class="math display">\[
+\text{Independent ANOVA: } SS_{total} = SS_{bet} + SS_w
+\]</span></p>
+<p><span class="math display">\[
+\text{RM ANOVA: } SS_{total} = SS_{RM} + SS_{sub} + SS_{inter}
+\]</span></p>
+<p><span class="math inline">\(SS_{total}\)</span> is the same in both and <span class="math inline">\(SS_{RM} = SS_{RM}\)</span> so what we are doing is splitting up the <span class="math inline">\(SS_w\)</span> into <span class="math inline">\(SS_{sub} + SS_{inter}\)</span> where only the <span class="math inline">\(SS_{inter}\)</span> is the error term now.</p>
+<p>This means we have more power with the same amount of data.</p>
+<p>Let’s now plot this using a spaghetti plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(word_type, words_recalled, <span class="dt">group =</span> ID)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>The output provides us with a bit of an understanding of why there is not a significant effect of <code>word_type</code>. In addition to a spaghetti plot, it is often useful to show what the overall repeated measure factor is doing, not the individuals (especially if your sample size is larger than 20). To do that, we can use:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">oneway <span class="op">%&gt;%</span>
+<span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmip</span>(<span class="op">~</span><span class="st"> </span>word_type)</code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Although there is a pattern here, we need to consider the scale. Looking at the spaghetti plot, we have individuals that range from 5 to 20 so a difference of 2 or 3 is not large. However, it is clear that a pattern may exist and so we should probably investigate this further, possibly with a larger sample size.</p>
+</div>
+</div>
+<div id="another-example---weight-loss" class="section level2">
+<h2><span class="header-section-number">6.3</span> Another Example - Weight Loss</h2>
+<p>Contrived data on weight loss and self esteem over three months, for three groups of individuals: Control, Diet and Diet + Exercise. The data constitute a double-multivariate design.</p>
+<div id="restructure-the-data-from-wide-to-long-format" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Restructure the data from wide to long format</h3>
+<p>Wide format</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(carData<span class="op">::</span>WeightLoss, <span class="dt">n =</span> <span class="dv">6</span>)</code></pre></div>
+<pre><code>##     group wl1 wl2 wl3 se1 se2 se3
+## 1 Control   4   3   3  14  13  15
+## 2 Control   4   4   3  13  14  17
+## 3 Control   4   3   1  17  12  16
+## 4 Control   3   2   1  11  11  12
+## 5 Control   5   3   2  16  15  14
+## 6 Control   6   5   4  17  18  18</code></pre>
+<p>Restructure</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">WeightLoss_long &lt;-<span class="st"> </span>carData<span class="op">::</span>WeightLoss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="kw">row_number</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">gather</span>(<span class="dt">key =</span> var,
+                <span class="dt">value =</span> value,
+                <span class="kw">starts_with</span>(<span class="st">&quot;wl&quot;</span>), <span class="kw">starts_with</span>(<span class="st">&quot;se&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">separate</span>(var,
+                  <span class="dt">sep =</span> <span class="dv">2</span>,
+                  <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;measure&quot;</span>, <span class="st">&quot;month&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">spread</span>(<span class="dt">key =</span> measure,
+                <span class="dt">value =</span> value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(id, group, month, wl, se) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(id, month), factor) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>(id, month) </code></pre></div>
+<p>Long format</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(WeightLoss_long, <span class="dt">n =</span> <span class="dv">20</span>)</code></pre></div>
+<pre><code>##    id   group month wl se
+## 1   1 Control     1  4 14
+## 2   1 Control     2  3 13
+## 3   1 Control     3  3 15
+## 4   2 Control     1  4 13
+## 5   2 Control     2  4 14
+## 6   2 Control     3  3 17
+## 7   3 Control     1  4 17
+## 8   3 Control     2  3 12
+## 9   3 Control     3  1 16
+## 10  4 Control     1  3 11
+## 11  4 Control     2  2 11
+## 12  4 Control     3  1 12
+## 13  5 Control     1  5 16
+## 14  5 Control     2  3 15
+## 15  5 Control     3  2 14
+## 16  6 Control     1  6 17
+## 17  6 Control     2  5 18
+## 18  6 Control     3  4 18
+## 19  7 Control     1  6 17
+## 20  7 Control     2  5 16</code></pre>
+<p>Summary table</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">WeightLoss_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(group, month) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>furniture<span class="op">::</span><span class="kw">table1</span>(wl, se)</code></pre></div>
+<pre><code>## Using dplyr::group_by() groups: group, month</code></pre>
+<pre><code>## 
+## -------------------------------------------------------------------------------------------------------
+##                                              group, month 
+##     Control_1  Diet_1     DietEx_1   Control_2  Diet_2     DietEx_2  
+##     n = 12     n = 12     n = 10     n = 12     n = 12     n = 10    
+##  wl                                                                  
+##     4.5 (1.0)  5.3 (1.4)  6.2 (2.3)  3.3 (1.1)  3.9 (1.4)  6.1 (1.4) 
+##  se                                                                  
+##     14.8 (1.9) 14.8 (2.4) 15.2 (1.3) 14.3 (1.9) 13.8 (2.8) 13.3 (1.9)
+##  Control_3  Diet_3     DietEx_3  
+##  n = 12     n = 12     n = 10    
+##                                  
+##  2.1 (1.2)  2.2 (1.1)  2.2 (1.2) 
+##                                  
+##  15.1 (2.4) 16.2 (2.5) 17.6 (1.0)
+## -------------------------------------------------------------------------------------------------------</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">carData<span class="op">::</span>WeightLoss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(group) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>furniture<span class="op">::</span><span class="kw">table1</span>(wl1, wl2, wl3,
+                    se1, se2, se3)</code></pre></div>
+<pre><code>## Using dplyr::group_by() groups: group</code></pre>
+<pre><code>## 
+## --------------------------------------
+##                 group 
+##      Control    Diet       DietEx    
+##      n = 12     n = 12     n = 10    
+##  wl1                                 
+##      4.5 (1.0)  5.3 (1.4)  6.2 (2.3) 
+##  wl2                                 
+##      3.3 (1.1)  3.9 (1.4)  6.1 (1.4) 
+##  wl3                                 
+##      2.1 (1.2)  2.2 (1.1)  2.2 (1.2) 
+##  se1                                 
+##      14.8 (1.9) 14.8 (2.4) 15.2 (1.3)
+##  se2                                 
+##      14.3 (1.9) 13.8 (2.8) 13.3 (1.9)
+##  se3                                 
+##      15.1 (2.4) 16.2 (2.5) 17.6 (1.0)
+## --------------------------------------</code></pre>
+<p>Raw data plot (exploratory)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">WeightLoss_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">gather</span>(<span class="dt">key =</span> measure,
+                <span class="dt">value =</span> value,
+                wl, se) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">measure =</span> <span class="kw">fct_recode</span>(measure,
+                                      <span class="st">&quot;Weight Loss, lb&quot;</span> =<span class="st"> &quot;wl&quot;</span>,
+                                      <span class="st">&quot;Self Esteem Rating&quot;</span> =<span class="st"> &quot;se&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> month,
+             <span class="dt">y =</span> value <span class="op">%&gt;%</span><span class="st"> </span>as.numeric <span class="op">%&gt;%</span><span class="st"> </span>jitter,
+             <span class="dt">group =</span> id)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(measure <span class="op">~</span><span class="st"> </span>group, 
+             <span class="dt">scale =</span> <span class="st">&quot;free_y&quot;</span>,
+             <span class="dt">switch =</span> <span class="st">&quot;y&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time, months&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;Measurement Value&quot;</span>,
+       <span class="dt">title =</span> <span class="st">&quot;Person Profile Plot&quot;</span>,
+       <span class="dt">subtitle =</span> <span class="st">&quot;Raw Data&quot;</span>)</code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="does-weight-long-change-over-time" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> Does weight long change over time?</h3>
+<p>Fit the model</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl &lt;-<span class="st"> </span>WeightLoss_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(wl <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(month<span class="op">|</span>id),
+            <span class="dt">data =</span> .)</code></pre></div>
+<p>Brief output - uses the Greenhouse-Geisser correction for violations of sphericity (by default)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: wl
+##   Effect          df  MSE         F ges p.value
+## 1  month 2.00, 65.94 1.08 80.31 *** .43  &lt;.0001
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1
+## 
+## Sphericity correction method: GG</code></pre>
+<p>Lots more output</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fit_wl)</code></pre></div>
+<pre><code>## Warning in summary.Anova.mlm(object$Anova, multivariate = FALSE): HF eps &gt;
+## 1 treated as 1</code></pre>
+<pre><code>## 
+## Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
+## 
+##              Sum Sq num Df Error SS den Df F value    Pr(&gt;F)    
+## (Intercept) 1584.35      1  162.314     33 322.115 &lt; 2.2e-16 ***
+## month        173.88      2   71.451     66  80.308 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## 
+## Mauchly Tests for Sphericity
+## 
+##       Test statistic p-value
+## month        0.99908 0.98539
+## 
+## 
+## Greenhouse-Geisser and Huynh-Feldt Corrections
+##  for Departure from Sphericity
+## 
+##        GG eps Pr(&gt;F[GG])    
+## month 0.99908  &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##         HF eps   Pr(&gt;F[HF])
+## month 1.063446 2.090759e-18</code></pre>
+<p>To force no GG correction:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl_noGG &lt;-<span class="st"> </span>WeightLoss_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(wl <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(month<span class="op">|</span>id),
+            <span class="dt">data =</span> .,
+              <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)) 
+
+fit_wl_noGG</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: wl
+##   Effect    df  MSE         F ges p.value
+## 1  month 2, 66 1.08 80.31 *** .43  &lt;.0001
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>To request BOTH effect sizes: partial eta squared and generalized eta squared</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl_2es &lt;-<span class="st"> </span>WeightLoss_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(wl <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(month<span class="op">|</span>id),
+            <span class="dt">data =</span> .,
+              <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="kw">c</span>(<span class="st">&quot;ges&quot;</span>, <span class="st">&quot;pes&quot;</span>))) 
+
+fit_wl_2es</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: wl
+##   Effect          df  MSE         F ges pes p.value
+## 1  month 2.00, 65.94 1.08 80.31 *** .43 .71  &lt;.0001
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1
+## 
+## Sphericity correction method: GG</code></pre>
+<p>To force no GG correction AND request BOTH effect sizes</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl_noGG &lt;-<span class="st"> </span>WeightLoss_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(wl <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(month<span class="op">|</span>id),
+            <span class="dt">data =</span> .,
+              <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>,
+                                 <span class="dt">es =</span> <span class="kw">c</span>(<span class="st">&quot;ges&quot;</span>, <span class="st">&quot;pes&quot;</span>))) 
+
+fit_wl_noGG</code></pre></div>
+<pre><code>## Anova Table (Type 3 tests)
+## 
+## Response: wl
+##   Effect    df  MSE         F ges pes p.value
+## 1  month 2, 66 1.08 80.31 *** .43 .71  &lt;.0001
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Estimated marginal means</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmeans</span>(<span class="op">~</span><span class="st"> </span>month)</code></pre></div>
+<pre><code>##  month   emmean        SE   df lower.CL upper.CL
+##  X1    5.294118 0.2635314 62.4 4.767393 5.820842
+##  X2    4.352941 0.2635314 62.4 3.826217 4.879665
+##  X3    2.176471 0.2635314 62.4 1.649746 2.703195
+## 
+## Confidence level used: 0.95</code></pre>
+<p>pairwise post hoc</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmeans</span>(<span class="op">~</span><span class="st"> </span>month) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pairs</span>(<span class="dt">adjust =</span> <span class="st">&quot;none&quot;</span>)</code></pre></div>
+<pre><code>##  contrast  estimate        SE df t.ratio p.value
+##  X1 - X2  0.9411765 0.2523525 66   3.730  0.0004
+##  X1 - X3  3.1176471 0.2523525 66  12.354  &lt;.0001
+##  X2 - X3  2.1764706 0.2523525 66   8.625  &lt;.0001</code></pre>
+<p>means plot</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmip</span>( <span class="op">~</span><span class="st"> </span>month)</code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="one-way-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mixed-design-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

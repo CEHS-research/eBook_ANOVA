@@ -46,7 +46,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -271,9 +270,11 @@ aov_name &lt;-<span class="st"> </span>data_long <span class="op">%&gt;%</span><
 aov_name </code></pre></div>
 <hr />
 <p>To fully fill out a standard ANOVA table and compute other effect sizes, you will need a more complete set of output, including the <strong>Sum of Squares</strong> components, you will need to add <code>$Anova</code> at the end of the model name before running it.</p>
-<blockquote>
-<p><strong>NOTE:</strong> IGNORE the first line that starts with <code>(Intercept)</code>! Also, the ‘mean sum of squares’ are not included in this table, nor is the <strong>Total</strong> line at the bottom of the standard ANOVA table. You will need to manually compute these values and add them on the homework page. Remember that <code>Sum of Squares (SS)</code> and <code>degrees of freedom (df)</code> add up, but <code>Mean Sum of Squreas (MS)</code> do not add up. Also: <code>MS = SS/df</code> for each term.</p>
-</blockquote>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> IGNORE the first line that starts with <code>(Intercept)</code>! Also, the ‘mean sum of squares’ are not included in this table, nor is the <strong>Total</strong> line at the bottom of the standard ANOVA table. You will need to manually compute these values and add them on the homework page. Remember that <code>Sum of Squares (SS)</code> and <code>degrees of freedom (df)</code> add up, but <code>Mean Sum of Squreas (MS)</code> do not add up. Also: <code>MS = SS/df</code> for each term.
+</p>
+</div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Display fuller ANOVA results (includes sum of squares)</span>
 aov_name<span class="op">$</span>Anova </code></pre></div>
 
