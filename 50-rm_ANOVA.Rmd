@@ -2,7 +2,7 @@
 
 Required Packages 
 
-```{r load_libraries}
+```{r}
 library(tidyverse)    # Loads several very helpful 'tidy' packages
 library(furniture)    # Nice tables (by our own Tyson Barrett)
 library(afex)         # needed for ANOVA, emmeans is loaded automatically.

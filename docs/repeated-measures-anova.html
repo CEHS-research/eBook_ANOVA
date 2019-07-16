@@ -46,6 +46,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -219,65 +220,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="repeated-measures-anova" class="section level1">
 <h1><span class="header-section-number">6</span> Repeated Measures ANOVA</h1>
 <p>Required Packages</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)    <span class="co"># Loads several very helpful &#39;tidy&#39; packages</span></code></pre></div>
-<pre><code>## -- Attaching packages ------------------------------------------------------------------------ tidyverse 1.2.1 --</code></pre>
-<pre><code>## v ggplot2 3.0.0     v purrr   0.2.5
-## v tibble  1.4.2     v dplyr   0.7.6
-## v tidyr   0.8.1     v stringr 1.3.1
-## v readr   1.1.1     v forcats 0.3.0</code></pre>
-<pre><code>## -- Conflicts --------------------------------------------------------------------------- tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(furniture)    <span class="co"># Nice tables (by our own Tyson Barrett)</span></code></pre></div>
-<pre><code>## -- furniture 1.8.0 ------------------------------------------------------------ learn more at tysonbarrett.com --
-## v furniture attached
-## v No potential conflicts found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(afex)         <span class="co"># needed for ANOVA, emmeans is loaded automatically.</span></code></pre></div>
-<pre><code>## Loading required package: lme4</code></pre>
-<pre><code>## Loading required package: Matrix</code></pre>
-<pre><code>## 
-## Attaching package: &#39;Matrix&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
-## 
-##     expand</code></pre>
-<pre><code>## Loading required package: emmeans</code></pre>
-<pre><code>## NOTE: As of emmeans versions &gt; 1.2.3,
-##       The &#39;cld&#39; function will be deprecated in favor of &#39;CLD&#39;.
-##       You may use &#39;cld&#39; only if you have package:multcomp attached.</code></pre>
-<pre><code>## ************
-## Welcome to afex. For support visit: http://afex.singmann.science/</code></pre>
-<pre><code>## - Functions for ANOVAs: aov_car(), aov_ez(), and aov_4()
-## - Methods for calculating p-values with mixed(): &#39;KR&#39;, &#39;S&#39;, &#39;LRT&#39;, and &#39;PB&#39;
-## - &#39;afex_aov&#39; and &#39;mixed&#39; objects can be passed to emmeans() for follow-up tests
-## - Get and set global package options with: afex_options()
-## - Set orthogonal sum-to-zero contrasts globally: set_sum_contrasts()
-## - For example analyses see: browseVignettes(&quot;afex&quot;)
-## ************</code></pre>
-<pre><code>## 
-## Attaching package: &#39;afex&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:lme4&#39;:
-## 
-##     lmer</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(multcomp)     <span class="co"># for advanced control for multiple testing/Type 1 error</span></code></pre></div>
-<pre><code>## Loading required package: mvtnorm</code></pre>
-<pre><code>## Loading required package: survival</code></pre>
-<pre><code>## Loading required package: TH.data</code></pre>
-<pre><code>## Loading required package: MASS</code></pre>
-<pre><code>## 
-## Attaching package: &#39;MASS&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     select</code></pre>
-<pre><code>## 
-## Attaching package: &#39;TH.data&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:MASS&#39;:
-## 
-##     geyser</code></pre>
-<pre><code>## 
-## Attaching package: &#39;multcomp&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:emmeans&#39;:
-## 
-##     cld</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)    <span class="co"># Loads several very helpful &#39;tidy&#39; packages</span>
+<span class="kw">library</span>(furniture)    <span class="co"># Nice tables (by our own Tyson Barrett)</span>
+<span class="kw">library</span>(afex)         <span class="co"># needed for ANOVA, emmeans is loaded automatically.</span>
+<span class="kw">library</span>(multcomp)     <span class="co"># for advanced control for multiple testing/Type 1 error</span></code></pre></div>
 <div id="tutorial---fitting-rm-anova-models-with-afexaov_4" class="section level2">
 <h2><span class="header-section-number">6.1</span> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</h2>
 <p>The <code>aov_4()</code> function from the <code>afex</code> package fits ANOVA models (oneway, two-way, repeated measures, and mixed design). It needs at least two arguments:</p>
@@ -374,45 +320,44 @@ aov_name <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">fake_id =</span> <span class="kw">row_number</span>())
 
 d</code></pre></div>
-<pre><code>## # A tibble: 18 x 4
-##       ID word_type words_recalled fake_id
-##    &lt;dbl&gt; &lt;fct&gt;              &lt;dbl&gt;   &lt;int&gt;
-##  1     1 Neutral               20       1
-##  2     2 Neutral               16       2
-##  3     3 Neutral                8       3
-##  4     4 Neutral               17       4
-##  5     5 Neutral               15       5
-##  6     6 Neutral               10       6
-##  7     1 Positive              21       7
-##  8     2 Positive              18       8
-##  9     3 Positive               7       9
-## 10     4 Positive              15      10
-## 11     5 Positive              10      11
-## 12     6 Positive               4      12
-## 13     1 Negative              17      13
-## 14     2 Negative              11      14
-## 15     3 Negative               4      15
-## 16     4 Negative              18      16
-## 17     5 Negative              13      17
-## 18     6 Negative              10      18</code></pre>
+<pre><code># A tibble: 18 x 4
+      ID word_type words_recalled fake_id
+   &lt;dbl&gt; &lt;fct&gt;              &lt;dbl&gt;   &lt;int&gt;
+ 1     1 Neutral               20       1
+ 2     2 Neutral               16       2
+ 3     3 Neutral                8       3
+ 4     4 Neutral               17       4
+ 5     5 Neutral               15       5
+ 6     6 Neutral               10       6
+ 7     1 Positive              21       7
+ 8     2 Positive              18       8
+ 9     3 Positive               7       9
+10     4 Positive              15      10
+11     5 Positive              10      11
+12     6 Positive               4      12
+13     1 Negative              17      13
+14     2 Negative              11      14
+15     3 Negative               4      15
+16     4 Negative              18      16
+17     5 Negative              13      17
+18     6 Negative              10      18</code></pre>
 </div>
 <div id="one-way-independent-anova" class="section level3">
 <h3><span class="header-section-number">6.2.2</span> One-Way Independent ANOVA</h3>
 <p>First, let’s ignore the fact that we know this has repeated measures. As such, we will assume that each word type group is independent. Let’s look at what happens:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ind_anova &lt;-<span class="st"> </span>d <span class="op">%&gt;%</span>
 <span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(words_recalled <span class="op">~</span><span class="st"> </span>word_type <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>fake_id),
-              <span class="dt">data =</span> .)</code></pre></div>
-<pre><code>## Contrasts set to contr.sum for the following variables: word_type</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ind_anova<span class="op">$</span>Anova</code></pre></div>
-<pre><code>## Anova Table (Type III tests)
-## 
-## Response: dv
-##              Sum Sq Df  F value    Pr(&gt;F)    
-## (Intercept) 3042.00  1 101.4752 4.538e-08 ***
-## word_type     16.33  2   0.2724    0.7652    
-## Residuals    449.67 15                       
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+              <span class="dt">data =</span> .)
+ind_anova<span class="op">$</span>Anova</code></pre></div>
+<pre><code>Anova Table (Type III tests)
+
+Response: dv
+             Sum Sq Df  F value    Pr(&gt;F)    
+(Intercept) 3042.00  1 101.4752 4.538e-08 ***
+word_type     16.33  2   0.2724    0.7652    
+Residuals    449.67 15                       
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>If we ignored that the <code>word_type</code> groups are not independent, we get an F-statistic = 0.272 and p = 0.765.</p>
 <p>What do you think will happen if we account for the repeated measures? Will the F-statistic increase or decrease?</p>
 </div>
@@ -423,30 +368,30 @@ d</code></pre></div>
 <span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(words_recalled <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(word_type<span class="op">|</span>ID),
               <span class="dt">data =</span> .)
 <span class="kw">summary</span>(oneway)</code></pre></div>
-<pre><code>## 
-## Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
-## 
-##              Sum Sq num Df Error SS den Df F value   Pr(&gt;F)   
-## (Intercept) 3042.00      1   381.33      5 39.8864 0.001466 **
-## word_type     16.33      2    68.33     10  1.1951 0.342453   
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## 
-## Mauchly Tests for Sphericity
-## 
-##           Test statistic  p-value
-## word_type         0.2134 0.045538
-## 
-## 
-## Greenhouse-Geisser and Huynh-Feldt Corrections
-##  for Departure from Sphericity
-## 
-##            GG eps Pr(&gt;F[GG])
-## word_type 0.55972     0.3282
-## 
-##              HF eps Pr(&gt;F[HF])
-## word_type 0.6077293  0.3309148</code></pre>
+<pre><code>
+Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
+
+             Sum Sq num Df Error SS den Df F value   Pr(&gt;F)   
+(Intercept) 3042.00      1   381.33      5 39.8864 0.001466 **
+word_type     16.33      2    68.33     10  1.1951 0.342453   
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+
+Mauchly Tests for Sphericity
+
+          Test statistic  p-value
+word_type         0.2134 0.045538
+
+
+Greenhouse-Geisser and Huynh-Feldt Corrections
+ for Departure from Sphericity
+
+           GG eps Pr(&gt;F[GG])
+word_type 0.55972     0.3282
+
+             HF eps Pr(&gt;F[HF])
+word_type 0.6077293  0.3309148</code></pre>
 <p>Here, we see a number of pieces of information, including the sums of squares, F-statistic, and p-value. The F-statistic is now 1.195 and the p-value (although still not signfiicant) is .342. So what happened to the F-statistic? It decreased! So by using the information that these are repeated measures, we have more power. Why is that?</p>
 <p>If we look at the output for the two ANOVAs above, both have the sums of squares for <code>word_type</code> at 16.33 so that didn’t change at all. So what did change? Well, it comes down to understanding what is happening to the error term. Although not shown explicitly in the tables above, consider that:</p>
 <p><span class="math display">\[
@@ -462,11 +407,11 @@ d</code></pre></div>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(word_type, words_recalled, <span class="dt">group =</span> ID)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-77-1.png" width="75%" /></p>
 <p>The output provides us with a bit of an understanding of why there is not a significant effect of <code>word_type</code>. In addition to a spaghetti plot, it is often useful to show what the overall repeated measure factor is doing, not the individuals (especially if your sample size is larger than 20). To do that, we can use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">oneway <span class="op">%&gt;%</span>
 <span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmip</span>(<span class="op">~</span><span class="st"> </span>word_type)</code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-78-1.png" width="75%" /></p>
 <p>Although there is a pattern here, we need to consider the scale. Looking at the spaghetti plot, we have individuals that range from 5 to 20 so a difference of 2 or 3 is not large. However, it is clear that a pattern may exist and so we should probably investigate this further, possibly with a larger sample size.</p>
 </div>
 </div>
@@ -477,13 +422,13 @@ d</code></pre></div>
 <h3><span class="header-section-number">6.3.1</span> Restructure the data from wide to long format</h3>
 <p>Wide format</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(carData<span class="op">::</span>WeightLoss, <span class="dt">n =</span> <span class="dv">6</span>)</code></pre></div>
-<pre><code>##     group wl1 wl2 wl3 se1 se2 se3
-## 1 Control   4   3   3  14  13  15
-## 2 Control   4   4   3  13  14  17
-## 3 Control   4   3   1  17  12  16
-## 4 Control   3   2   1  11  11  12
-## 5 Control   5   3   2  16  15  14
-## 6 Control   6   5   4  17  18  18</code></pre>
+<pre><code>    group wl1 wl2 wl3 se1 se2 se3
+1 Control   4   3   3  14  13  15
+2 Control   4   4   3  13  14  17
+3 Control   4   3   1  17  12  16
+4 Control   3   2   1  11  11  12
+5 Control   5   3   2  16  15  14
+6 Control   6   5   4  17  18  18</code></pre>
 <p>Restructure</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">WeightLoss_long &lt;-<span class="st"> </span>carData<span class="op">::</span>WeightLoss <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="kw">row_number</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -500,71 +445,69 @@ d</code></pre></div>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>(id, month) </code></pre></div>
 <p>Long format</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(WeightLoss_long, <span class="dt">n =</span> <span class="dv">20</span>)</code></pre></div>
-<pre><code>##    id   group month wl se
-## 1   1 Control     1  4 14
-## 2   1 Control     2  3 13
-## 3   1 Control     3  3 15
-## 4   2 Control     1  4 13
-## 5   2 Control     2  4 14
-## 6   2 Control     3  3 17
-## 7   3 Control     1  4 17
-## 8   3 Control     2  3 12
-## 9   3 Control     3  1 16
-## 10  4 Control     1  3 11
-## 11  4 Control     2  2 11
-## 12  4 Control     3  1 12
-## 13  5 Control     1  5 16
-## 14  5 Control     2  3 15
-## 15  5 Control     3  2 14
-## 16  6 Control     1  6 17
-## 17  6 Control     2  5 18
-## 18  6 Control     3  4 18
-## 19  7 Control     1  6 17
-## 20  7 Control     2  5 16</code></pre>
+<pre><code>   id   group month wl se
+1   1 Control     1  4 14
+2   1 Control     2  3 13
+3   1 Control     3  3 15
+4   2 Control     1  4 13
+5   2 Control     2  4 14
+6   2 Control     3  3 17
+7   3 Control     1  4 17
+8   3 Control     2  3 12
+9   3 Control     3  1 16
+10  4 Control     1  3 11
+11  4 Control     2  2 11
+12  4 Control     3  1 12
+13  5 Control     1  5 16
+14  5 Control     2  3 15
+15  5 Control     3  2 14
+16  6 Control     1  6 17
+17  6 Control     2  5 18
+18  6 Control     3  4 18
+19  7 Control     1  6 17
+20  7 Control     2  5 16</code></pre>
 <p>Summary table</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">WeightLoss_long <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(group, month) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>furniture<span class="op">::</span><span class="kw">table1</span>(wl, se)</code></pre></div>
-<pre><code>## Using dplyr::group_by() groups: group, month</code></pre>
-<pre><code>## 
-## -------------------------------------------------------------------------------------------------------
-##                                              group, month 
-##     Control_1  Diet_1     DietEx_1   Control_2  Diet_2     DietEx_2  
-##     n = 12     n = 12     n = 10     n = 12     n = 12     n = 10    
-##  wl                                                                  
-##     4.5 (1.0)  5.3 (1.4)  6.2 (2.3)  3.3 (1.1)  3.9 (1.4)  6.1 (1.4) 
-##  se                                                                  
-##     14.8 (1.9) 14.8 (2.4) 15.2 (1.3) 14.3 (1.9) 13.8 (2.8) 13.3 (1.9)
-##  Control_3  Diet_3     DietEx_3  
-##  n = 12     n = 12     n = 10    
-##                                  
-##  2.1 (1.2)  2.2 (1.1)  2.2 (1.2) 
-##                                  
-##  15.1 (2.4) 16.2 (2.5) 17.6 (1.0)
-## -------------------------------------------------------------------------------------------------------</code></pre>
+<pre><code>
+-------------------------------------------------------------------------------------------------------
+                                             group, month 
+    Control_1  Diet_1     DietEx_1   Control_2  Diet_2     DietEx_2  
+    n = 12     n = 12     n = 10     n = 12     n = 12     n = 10    
+ wl                                                                  
+    4.5 (1.0)  5.3 (1.4)  6.2 (2.3)  3.3 (1.1)  3.9 (1.4)  6.1 (1.4) 
+ se                                                                  
+    14.8 (1.9) 14.8 (2.4) 15.2 (1.3) 14.3 (1.9) 13.8 (2.8) 13.3 (1.9)
+ Control_3  Diet_3     DietEx_3  
+ n = 12     n = 12     n = 10    
+                                 
+ 2.1 (1.2)  2.2 (1.1)  2.2 (1.2) 
+                                 
+ 15.1 (2.4) 16.2 (2.5) 17.6 (1.0)
+-------------------------------------------------------------------------------------------------------</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">carData<span class="op">::</span>WeightLoss <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(group) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>furniture<span class="op">::</span><span class="kw">table1</span>(wl1, wl2, wl3,
                     se1, se2, se3)</code></pre></div>
-<pre><code>## Using dplyr::group_by() groups: group</code></pre>
-<pre><code>## 
-## --------------------------------------
-##                 group 
-##      Control    Diet       DietEx    
-##      n = 12     n = 12     n = 10    
-##  wl1                                 
-##      4.5 (1.0)  5.3 (1.4)  6.2 (2.3) 
-##  wl2                                 
-##      3.3 (1.1)  3.9 (1.4)  6.1 (1.4) 
-##  wl3                                 
-##      2.1 (1.2)  2.2 (1.1)  2.2 (1.2) 
-##  se1                                 
-##      14.8 (1.9) 14.8 (2.4) 15.2 (1.3)
-##  se2                                 
-##      14.3 (1.9) 13.8 (2.8) 13.3 (1.9)
-##  se3                                 
-##      15.1 (2.4) 16.2 (2.5) 17.6 (1.0)
-## --------------------------------------</code></pre>
+<pre><code>
+--------------------------------------
+                group 
+     Control    Diet       DietEx    
+     n = 12     n = 12     n = 10    
+ wl1                                 
+     4.5 (1.0)  5.3 (1.4)  6.2 (2.3) 
+ wl2                                 
+     3.3 (1.1)  3.9 (1.4)  6.1 (1.4) 
+ wl3                                 
+     2.1 (1.2)  2.2 (1.1)  2.2 (1.2) 
+ se1                                 
+     14.8 (1.9) 14.8 (2.4) 15.2 (1.3)
+ se2                                 
+     14.3 (1.9) 13.8 (2.8) 13.3 (1.9)
+ se3                                 
+     15.1 (2.4) 16.2 (2.5) 17.6 (1.0)
+--------------------------------------</code></pre>
 <p>Raw data plot (exploratory)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">WeightLoss_long <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>tidyr<span class="op">::</span><span class="kw">gather</span>(<span class="dt">key =</span> measure,
@@ -585,7 +528,7 @@ d</code></pre></div>
        <span class="dt">y =</span> <span class="st">&quot;Measurement Value&quot;</span>,
        <span class="dt">title =</span> <span class="st">&quot;Person Profile Plot&quot;</span>,
        <span class="dt">subtitle =</span> <span class="st">&quot;Raw Data&quot;</span>)</code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-84-1.png" width="75%" /></p>
 </div>
 <div id="does-weight-long-change-over-time" class="section level3">
 <h3><span class="header-section-number">6.3.2</span> Does weight long change over time?</h3>
@@ -595,45 +538,43 @@ d</code></pre></div>
             <span class="dt">data =</span> .)</code></pre></div>
 <p>Brief output - uses the Greenhouse-Geisser correction for violations of sphericity (by default)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl</code></pre></div>
-<pre><code>## Anova Table (Type 3 tests)
-## 
-## Response: wl
-##   Effect          df  MSE         F ges p.value
-## 1  month 2.00, 65.94 1.08 80.31 *** .43  &lt;.0001
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1
-## 
-## Sphericity correction method: GG</code></pre>
+<pre><code>Anova Table (Type 3 tests)
+
+Response: wl
+  Effect          df  MSE         F ges p.value
+1  month 2.00, 65.94 1.08 80.31 *** .43  &lt;.0001
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1
+
+Sphericity correction method: GG </code></pre>
 <p>Lots more output</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fit_wl)</code></pre></div>
-<pre><code>## Warning in summary.Anova.mlm(object$Anova, multivariate = FALSE): HF eps &gt;
-## 1 treated as 1</code></pre>
-<pre><code>## 
-## Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
-## 
-##              Sum Sq num Df Error SS den Df F value    Pr(&gt;F)    
-## (Intercept) 1584.35      1  162.314     33 322.115 &lt; 2.2e-16 ***
-## month        173.88      2   71.451     66  80.308 &lt; 2.2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## 
-## Mauchly Tests for Sphericity
-## 
-##       Test statistic p-value
-## month        0.99908 0.98539
-## 
-## 
-## Greenhouse-Geisser and Huynh-Feldt Corrections
-##  for Departure from Sphericity
-## 
-##        GG eps Pr(&gt;F[GG])    
-## month 0.99908  &lt; 2.2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-##         HF eps   Pr(&gt;F[HF])
-## month 1.063446 2.090759e-18</code></pre>
+<pre><code>
+Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
+
+             Sum Sq num Df Error SS den Df F value    Pr(&gt;F)    
+(Intercept) 1584.35      1  162.314     33 322.115 &lt; 2.2e-16 ***
+month        173.88      2   71.451     66  80.308 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+
+Mauchly Tests for Sphericity
+
+      Test statistic p-value
+month        0.99908 0.98539
+
+
+Greenhouse-Geisser and Huynh-Feldt Corrections
+ for Departure from Sphericity
+
+       GG eps Pr(&gt;F[GG])    
+month 0.99908  &lt; 2.2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+        HF eps   Pr(&gt;F[HF])
+month 1.063446 2.090759e-18</code></pre>
 <p>To force no GG correction:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl_noGG &lt;-<span class="st"> </span>WeightLoss_long <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(wl <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(month<span class="op">|</span>id),
@@ -641,13 +582,13 @@ d</code></pre></div>
               <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)) 
 
 fit_wl_noGG</code></pre></div>
-<pre><code>## Anova Table (Type 3 tests)
-## 
-## Response: wl
-##   Effect    df  MSE         F ges p.value
-## 1  month 2, 66 1.08 80.31 *** .43  &lt;.0001
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre><code>Anova Table (Type 3 tests)
+
+Response: wl
+  Effect    df  MSE         F ges p.value
+1  month 2, 66 1.08 80.31 *** .43  &lt;.0001
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>To request BOTH effect sizes: partial eta squared and generalized eta squared</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl_2es &lt;-<span class="st"> </span>WeightLoss_long <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(wl <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(month<span class="op">|</span>id),
@@ -655,15 +596,15 @@ fit_wl_noGG</code></pre></div>
               <span class="dt">anova_table =</span> <span class="kw">list</span>(<span class="dt">es =</span> <span class="kw">c</span>(<span class="st">&quot;ges&quot;</span>, <span class="st">&quot;pes&quot;</span>))) 
 
 fit_wl_2es</code></pre></div>
-<pre><code>## Anova Table (Type 3 tests)
-## 
-## Response: wl
-##   Effect          df  MSE         F ges pes p.value
-## 1  month 2.00, 65.94 1.08 80.31 *** .43 .71  &lt;.0001
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1
-## 
-## Sphericity correction method: GG</code></pre>
+<pre><code>Anova Table (Type 3 tests)
+
+Response: wl
+  Effect          df  MSE         F ges pes p.value
+1  month 2.00, 65.94 1.08 80.31 *** .43 .71  &lt;.0001
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1
+
+Sphericity correction method: GG </code></pre>
 <p>To force no GG correction AND request BOTH effect sizes</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl_noGG &lt;-<span class="st"> </span>WeightLoss_long <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(wl <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(month<span class="op">|</span>id),
@@ -672,34 +613,34 @@ fit_wl_2es</code></pre></div>
                                  <span class="dt">es =</span> <span class="kw">c</span>(<span class="st">&quot;ges&quot;</span>, <span class="st">&quot;pes&quot;</span>))) 
 
 fit_wl_noGG</code></pre></div>
-<pre><code>## Anova Table (Type 3 tests)
-## 
-## Response: wl
-##   Effect    df  MSE         F ges pes p.value
-## 1  month 2, 66 1.08 80.31 *** .43 .71  &lt;.0001
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre><code>Anova Table (Type 3 tests)
+
+Response: wl
+  Effect    df  MSE         F ges pes p.value
+1  month 2, 66 1.08 80.31 *** .43 .71  &lt;.0001
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Estimated marginal means</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmeans</span>(<span class="op">~</span><span class="st"> </span>month)</code></pre></div>
-<pre><code>##  month   emmean        SE   df lower.CL upper.CL
-##  X1    5.294118 0.2635314 62.4 4.767393 5.820842
-##  X2    4.352941 0.2635314 62.4 3.826217 4.879665
-##  X3    2.176471 0.2635314 62.4 1.649746 2.703195
-## 
-## Confidence level used: 0.95</code></pre>
+<pre><code> month   emmean        SE   df lower.CL upper.CL
+ X1    5.294118 0.2635314 62.4 4.767393 5.820842
+ X2    4.352941 0.2635314 62.4 3.826217 4.879665
+ X3    2.176471 0.2635314 62.4 1.649746 2.703195
+
+Confidence level used: 0.95 </code></pre>
 <p>pairwise post hoc</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmeans</span>(<span class="op">~</span><span class="st"> </span>month) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">pairs</span>(<span class="dt">adjust =</span> <span class="st">&quot;none&quot;</span>)</code></pre></div>
-<pre><code>##  contrast  estimate        SE df t.ratio p.value
-##  X1 - X2  0.9411765 0.2523525 66   3.730  0.0004
-##  X1 - X3  3.1176471 0.2523525 66  12.354  &lt;.0001
-##  X2 - X3  2.1764706 0.2523525 66   8.625  &lt;.0001</code></pre>
+<pre><code> contrast  estimate        SE df t.ratio p.value
+ X1 - X2  0.9411765 0.2523525 66   3.730  0.0004
+ X1 - X3  3.1176471 0.2523525 66  12.354  &lt;.0001
+ X2 - X3  2.1764706 0.2523525 66   8.625  &lt;.0001</code></pre>
 <p>means plot</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmip</span>( <span class="op">~</span><span class="st"> </span>month)</code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-93-1.png" width="75%" /></p>
 
 </div>
 </div>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Mixed Design ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
+  <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Mixed Design ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="EQM_v1_cover.png" />
+  <meta property="og:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
+  <meta name="github-repo" content="cehs-research/eBook_wrangle" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Mixed Design ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  
+  <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
+  <meta name="twitter:image" content="EQM_v1_cover.png" />
+
+<meta name="author" content="Sarah Schwartz &amp; Tyson Barrett" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="repeated-measures-anova.html">
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="heading.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Vol. 3: Testing Mean Differences</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-authors"><i class="fa fa-check"></i>The Authors</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html"><i class="fa fa-check"></i><b>1</b> Intro: Ihno’s Experiemnt</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#background-of-data"><i class="fa fa-check"></i><b>1.1</b> Background of Data</a></li>
+<li class="chapter" data-level="1.2" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#import-wrangle-the-data"><i class="fa fa-check"></i><b>1.2</b> Import &amp; Wrangle the Data</a></li>
+<li class="chapter" data-level="1.3" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#overview"><i class="fa fa-check"></i><b>1.3</b> Overview</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#dimentions-size-of-the-dataset"><i class="fa fa-check"></i><b>1.3.1</b> Dimentions (size) of the dataset</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#variable-names"><i class="fa fa-check"></i><b>1.3.2</b> Variable Names</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#quick-glimpse"><i class="fa fa-check"></i><b>1.3.3</b> Quick Glimpse</a></li>
+<li class="chapter" data-level="1.3.4" data-path="intro-ihnos-experiemnt.html"><a href="intro-ihnos-experiemnt.html#top-and-bottom-rows"><i class="fa fa-check"></i><b>1.3.4</b> Top and Bottom Rows</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html"><i class="fa fa-check"></i><b>2</b> Intro: Cancer Experiemnt</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#source-of-data"><i class="fa fa-check"></i><b>2.1</b> Source of Data</a></li>
+<li class="chapter" data-level="2.2" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#description-of-the-study"><i class="fa fa-check"></i><b>2.2</b> Description of the Study</a></li>
+<li class="chapter" data-level="2.3" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#variables"><i class="fa fa-check"></i><b>2.3</b> Variables</a></li>
+<li class="chapter" data-level="2.4" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#import-data"><i class="fa fa-check"></i><b>2.4</b> Import Data</a></li>
+<li class="chapter" data-level="2.5" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#wrangle-data"><i class="fa fa-check"></i><b>2.5</b> Wrangle Data</a></li>
+<li class="chapter" data-level="2.6" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#overview-1"><i class="fa fa-check"></i><b>2.6</b> Overview</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#dimentions-size-of-the-dataset-1"><i class="fa fa-check"></i><b>2.6.1</b> Dimentions (size) of the dataset</a></li>
+<li class="chapter" data-level="2.6.2" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#variable-names-1"><i class="fa fa-check"></i><b>2.6.2</b> Variable Names</a></li>
+<li class="chapter" data-level="2.6.3" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#quick-glimpse-1"><i class="fa fa-check"></i><b>2.6.3</b> Quick Glimpse</a></li>
+<li class="chapter" data-level="2.6.4" data-path="intro-cancer-experiemnt.html"><a href="intro-cancer-experiemnt.html#top-and-bottom-rows-1"><i class="fa fa-check"></i><b>2.6.4</b> Top and Bottom Rows</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html"><i class="fa fa-check"></i><b>3</b> ONE SAMPLE t-TEST: for the MEAN</a><ul>
+<li class="chapter" data-level="3.1" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#exploratory-data-analysis-i.e.the-eyeball-method"><i class="fa fa-check"></i><b>3.1</b> Exploratory Data Analysis: i.e. the eyeball method</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#mean-and-sd"><i class="fa fa-check"></i><b>3.1.1</b> Mean and SD</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#assumptions"><i class="fa fa-check"></i><b>3.2</b> Assumptions</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#random-sampling"><i class="fa fa-check"></i><b>3.2.1</b> Random Sampling</a></li>
+<li class="chapter" data-level="3.2.2" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#normality"><i class="fa fa-check"></i><b>3.2.2</b> Normality</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#inference"><i class="fa fa-check"></i><b>3.3</b> Inference</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#all-defaults"><i class="fa fa-check"></i><b>3.3.1</b> All Defaults</a></li>
+<li class="chapter" data-level="3.3.2" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#confidence-level-other-than-95"><i class="fa fa-check"></i><b>3.3.2</b> Confidence Level other than 95%</a></li>
+<li class="chapter" data-level="3.3.3" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#one-sided-test-instead-of-two"><i class="fa fa-check"></i><b>3.3.3</b> One-Sided Test, instead of Two</a></li>
+<li class="chapter" data-level="3.3.4" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#restrict-to-a-subsample"><i class="fa fa-check"></i><b>3.3.4</b> Restrict to a Subsample</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html"><i class="fa fa-check"></i><b>4</b> TWO INDEPENDENT SAMPLES t-TEST: for the Difference in MEANS</a><ul>
+<li class="chapter" data-level="4.1" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#exploratory-data-analysis-i.e.the-eyeball-method-1"><i class="fa fa-check"></i><b>4.1</b> Exploratory Data Analysis: i.e. the eyeball method</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#means-and-sds"><i class="fa fa-check"></i><b>4.1.1</b> Means and SDs</a></li>
+<li class="chapter" data-level="4.1.2" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#stacked-histograms"><i class="fa fa-check"></i><b>4.1.2</b> Stacked Histograms</a></li>
+<li class="chapter" data-level="4.1.3" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#side-by-side-boxplots"><i class="fa fa-check"></i><b>4.1.3</b> Side-by-Side Boxplots</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#assumptions-1"><i class="fa fa-check"></i><b>4.2</b> Assumptions</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#independence"><i class="fa fa-check"></i><b>4.2.1</b> Independence</a></li>
+<li class="chapter" data-level="4.2.2" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#normality-1"><i class="fa fa-check"></i><b>4.2.2</b> Normality</a></li>
+<li class="chapter" data-level="4.2.3" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#hov"><i class="fa fa-check"></i><b>4.2.3</b> HOV</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#inference-1"><i class="fa fa-check"></i><b>4.3</b> Inference</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#pooled-variance-test"><i class="fa fa-check"></i><b>4.3.1</b> Pooled Variance Test</a></li>
+<li class="chapter" data-level="4.3.2" data-path="two-independent-samples-t-test-for-the-difference-in-means.html"><a href="two-independent-samples-t-test-for-the-difference-in-means.html#seperate-variance-test"><i class="fa fa-check"></i><b>4.3.2</b> Seperate Variance Test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-Way ANOVA</a><ul>
+<li class="chapter" data-level="5.1" data-path="one-way-anova.html"><a href="one-way-anova.html#prepare-for-modeling"><i class="fa fa-check"></i><b>5.1</b> Prepare for Modeling</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="one-way-anova.html"><a href="one-way-anova.html#ensure-the-data-is-in-long-format"><i class="fa fa-check"></i><b>5.1.1</b> Ensure the Data is in “long” Format</a></li>
+<li class="chapter" data-level="5.1.2" data-path="one-way-anova.html"><a href="one-way-anova.html#compute-summary-statistics"><i class="fa fa-check"></i><b>5.1.2</b> Compute Summary Statistics</a></li>
+<li class="chapter" data-level="5.1.3" data-path="one-way-anova.html"><a href="one-way-anova.html#plot-the-raw-data"><i class="fa fa-check"></i><b>5.1.3</b> Plot the Raw Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="one-way-anova.html"><a href="one-way-anova.html#fitting-one-way-anova-model"><i class="fa fa-check"></i><b>5.2</b> Fitting One-way ANOVA Model</a></li>
+<li class="chapter" data-level="5.3" data-path="one-way-anova.html"><a href="one-way-anova.html#anova-output"><i class="fa fa-check"></i><b>5.3</b> ANOVA Output</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>6</b> Repeated Measures ANOVA</a><ul>
+<li class="chapter" data-level="6.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>6.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
+<li class="chapter" data-level="6.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a"><i class="fa fa-check"></i><b>6.2</b> Words Recalled Data Example (Chapter 15, section A)</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#data-prep"><i class="fa fa-check"></i><b>6.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="6.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-independent-anova"><i class="fa fa-check"></i><b>6.2.2</b> One-Way Independent ANOVA</a></li>
+<li class="chapter" data-level="6.2.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-rm-anova"><i class="fa fa-check"></i><b>6.2.3</b> One-Way RM ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#another-example---weight-loss"><i class="fa fa-check"></i><b>6.3</b> Another Example - Weight Loss</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format"><i class="fa fa-check"></i><b>6.3.1</b> Restructure the data from wide to long format</a></li>
+<li class="chapter" data-level="6.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#does-weight-long-change-over-time"><i class="fa fa-check"></i><b>6.3.2</b> Does weight long change over time?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html"><i class="fa fa-check"></i><b>7</b> Mixed Design ANOVA</a><ul>
+<li class="chapter" data-level="7.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>7.1</b> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code></a></li>
+<li class="chapter" data-level="7.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a"><i class="fa fa-check"></i><b>7.2</b> Words Recalled Data Example (Chapter 16, section A)</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#data-prep-1"><i class="fa fa-check"></i><b>7.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="7.2.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#one-way-rm-anova-1"><i class="fa fa-check"></i><b>7.2.2</b> One-Way RM ANOVA</a></li>
+<li class="chapter" data-level="7.2.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#mixed-anova"><i class="fa fa-check"></i><b>7.2.3</b> Mixed ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#conclusion"><i class="fa fa-check"></i><b>7.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mixed-design-anova" class="section level1">
+<h1><span class="header-section-number">7</span> Mixed Design ANOVA</h1>
+<p>Required Packages</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)    <span class="co"># Loads several very helpful &#39;tidy&#39; packages</span>
+<span class="kw">library</span>(furniture)    <span class="co"># Nice tables (by our own Tyson Barrett)</span>
+<span class="kw">library</span>(afex)         <span class="co"># needed for ANOVA, emmeans is loaded automatically.</span>
+<span class="kw">library</span>(multcomp)     <span class="co"># for advanced control for multiple testing/Type 1 error</span></code></pre></div>
+<div id="tutorial---fitting-mixed-design-anova-models-with-afexaov_4" class="section level2">
+<h2><span class="header-section-number">7.1</span> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code></h2>
+<p>The <code>aov_4()</code> function from the <code>afex</code> package fits ANOVA models (oneway, two-way, repeated measures, and mixed design). It needs at least two arguments:</p>
+<ol style="list-style-type: decimal">
+<li><p>formula: <code>continuous_var ~ group_var + (RM_var|id_var)</code> <em>one observation per subject for each level of the <code>RMvar</code>, so each <code>id_var</code> has multiple lines for each subject, each subject can only belong to exactly one group./</em></p></li>
+<li><p>dataset: <code>data = .</code> <em>we use the period to signify that the datset is being piped from above</em></p></li>
+</ol>
+<p>Here is an outline of what your syntax should look like when you <strong>fit and save a Mixed ANOVA</strong>. Of course you will replace the dataset name and the variable names, as well as the name you are saving it as.</p>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> The <code>aov_4()</code> function works on data in LONG format only. Each observation needs to be on its one line or row with seperate variables for the group membership (categorical factor or <code>fct</code>) and the continuous measurement (numberic or <code>dbl</code>).
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># RM ANOVA: fit and save</span>
+aov_name &lt;-<span class="st"> </span>data_name <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(continuous_var <span class="op">~</span><span class="st"> </span>group_var <span class="op">+</span><span class="st"> </span>(RM_var<span class="op">|</span>id_var),
+              <span class="dt">data =</span> .)</code></pre></div>
+</div>
+<div id="words-recalled-data-example-chapter-16-section-a" class="section level2">
+<h2><span class="header-section-number">7.2</span> Words Recalled Data Example (Chapter 16, section A)</h2>
+<div id="data-prep-1" class="section level3">
+<h3><span class="header-section-number">7.2.1</span> Data Prep</h3>
+<p>I input the data as a <code>tribble</code> which saves it as a <code>data.frame</code> and then cleaned up a few of the important variables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tribble</span>(
+  <span class="op">~</span>ID, <span class="op">~</span>depression, <span class="op">~</span>word_type, <span class="op">~</span>words_recalled,
+    <span class="dv">1</span>,           <span class="dv">0</span>,          <span class="dv">1</span>,              <span class="dv">20</span>,
+    <span class="dv">2</span>,           <span class="dv">0</span>,          <span class="dv">1</span>,              <span class="dv">16</span>,
+    <span class="dv">3</span>,           <span class="dv">0</span>,          <span class="dv">1</span>,               <span class="dv">8</span>,
+    <span class="dv">4</span>,           <span class="dv">1</span>,          <span class="dv">1</span>,              <span class="dv">17</span>,
+    <span class="dv">5</span>,           <span class="dv">1</span>,          <span class="dv">1</span>,              <span class="dv">15</span>,
+    <span class="dv">6</span>,           <span class="dv">1</span>,          <span class="dv">1</span>,              <span class="dv">10</span>,
+    <span class="dv">1</span>,           <span class="dv">0</span>,          <span class="dv">2</span>,              <span class="dv">21</span>,
+    <span class="dv">2</span>,           <span class="dv">0</span>,          <span class="dv">2</span>,              <span class="dv">18</span>,
+    <span class="dv">3</span>,           <span class="dv">0</span>,          <span class="dv">2</span>,               <span class="dv">7</span>,
+    <span class="dv">4</span>,           <span class="dv">1</span>,          <span class="dv">2</span>,              <span class="dv">15</span>,
+    <span class="dv">5</span>,           <span class="dv">1</span>,          <span class="dv">2</span>,              <span class="dv">10</span>,
+    <span class="dv">6</span>,           <span class="dv">1</span>,          <span class="dv">2</span>,               <span class="dv">4</span>,
+    <span class="dv">1</span>,           <span class="dv">0</span>,          <span class="dv">3</span>,              <span class="dv">17</span>,
+    <span class="dv">2</span>,           <span class="dv">0</span>,          <span class="dv">3</span>,              <span class="dv">11</span>,
+    <span class="dv">3</span>,           <span class="dv">0</span>,          <span class="dv">3</span>,               <span class="dv">4</span>,
+    <span class="dv">4</span>,           <span class="dv">1</span>,          <span class="dv">3</span>,              <span class="dv">18</span>,
+    <span class="dv">5</span>,           <span class="dv">1</span>,          <span class="dv">3</span>,              <span class="dv">13</span>,
+    <span class="dv">6</span>,           <span class="dv">1</span>,          <span class="dv">3</span>,              <span class="dv">10</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">depression =</span> <span class="kw">factor</span>(depression, 
+                             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Not Depressed&quot;</span>,
+                                        <span class="st">&quot;Depressed&quot;</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">word_type =</span> <span class="kw">factor</span>(word_type,
+                            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Neutral&quot;</span>, <span class="st">&quot;Positive&quot;</span>, <span class="st">&quot;Negative&quot;</span>)))
+d</code></pre></div>
+<pre><code># A tibble: 18 x 4
+      ID depression    word_type words_recalled
+   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt;              &lt;dbl&gt;
+ 1     1 Not Depressed Neutral               20
+ 2     2 Not Depressed Neutral               16
+ 3     3 Not Depressed Neutral                8
+ 4     4 Depressed     Neutral               17
+ 5     5 Depressed     Neutral               15
+ 6     6 Depressed     Neutral               10
+ 7     1 Not Depressed Positive              21
+ 8     2 Not Depressed Positive              18
+ 9     3 Not Depressed Positive               7
+10     4 Depressed     Positive              15
+11     5 Depressed     Positive              10
+12     6 Depressed     Positive               4
+13     1 Not Depressed Negative              17
+14     2 Not Depressed Negative              11
+15     3 Not Depressed Negative               4
+16     4 Depressed     Negative              18
+17     5 Depressed     Negative              13
+18     6 Depressed     Negative              10</code></pre>
+</div>
+<div id="one-way-rm-anova-1" class="section level3">
+<h3><span class="header-section-number">7.2.2</span> One-Way RM ANOVA</h3>
+<p>First, let’s ignore the depression variable and just look at the repeated measures. We do this by using <code>afex::aov_4()</code> and then the <code>summary()</code> functions as shown below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">oneway &lt;-<span class="st"> </span>d <span class="op">%&gt;%</span>
+<span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(words_recalled <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(word_type<span class="op">|</span>ID),
+              <span class="dt">data =</span> .)
+<span class="kw">summary</span>(oneway)</code></pre></div>
+<pre><code>
+Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
+
+             Sum Sq num Df Error SS den Df F value   Pr(&gt;F)   
+(Intercept) 3042.00      1   381.33      5 39.8864 0.001466 **
+word_type     16.33      2    68.33     10  1.1951 0.342453   
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+
+Mauchly Tests for Sphericity
+
+          Test statistic  p-value
+word_type         0.2134 0.045538
+
+
+Greenhouse-Geisser and Huynh-Feldt Corrections
+ for Departure from Sphericity
+
+           GG eps Pr(&gt;F[GG])
+word_type 0.55972     0.3282
+
+             HF eps Pr(&gt;F[HF])
+word_type 0.6077293  0.3309148</code></pre>
+<p>Here, we see a number of pieces of information, including the sums of squares, F-statistic, and p-value. The p-value suggests that there is not an effect of <code>word_type</code> here (p = .342).</p>
+<p>Let’s plot this using a spaghetti plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(word_type, words_recalled, <span class="dt">group =</span> ID)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-98-1.png" width="75%" /></p>
+<p>But we wonder if depression has an effect on the number of words recalled, and it may interact with word_type. Let’s see what that looks like.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(word_type, words_recalled, <span class="dt">group =</span> ID, 
+             <span class="dt">color =</span> depression, 
+             <span class="dt">shape =</span> depression, 
+             <span class="dt">linetype =</span> depression)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>depression)</code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-99-1.png" width="75%" /></p>
+<p>Definitely looks like the effect of word_type depends on whether the individual has depression or not. To add a between subjects factor to a repeated measures ANOVA, we are now doing mixed ANOVA (both between and within subjects factors).</p>
+</div>
+<div id="mixed-anova" class="section level3">
+<h3><span class="header-section-number">7.2.3</span> Mixed ANOVA</h3>
+<p>To run a mixed ANOVA, use <code>afex::aov_4()</code> and then the <code>summary()</code> functions again but this type with the between subjects factor included.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mixed_anova &lt;-<span class="st"> </span>d <span class="op">%&gt;%</span>
+<span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(words_recalled <span class="op">~</span><span class="st"> </span>depression <span class="op">+</span><span class="st"> </span>(word_type<span class="op">|</span>ID),
+              <span class="dt">data =</span> .)
+<span class="kw">summary</span>(mixed_anova)</code></pre></div>
+<pre><code>
+Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
+
+                      Sum Sq num Df Error SS den Df F value    Pr(&gt;F)    
+(Intercept)          3042.00      1   375.78      4 32.3808 0.0047104 ** 
+depression              5.56      1   375.78      4  0.0591 0.8198275    
+word_type              16.33      2    11.56      8  5.6538 0.0294740 *  
+depression:word_type   56.78      2    11.56      8 19.6538 0.0008178 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+
+Mauchly Tests for Sphericity
+
+                     Test statistic p-value
+word_type                   0.81657 0.73788
+depression:word_type        0.81657 0.73788
+
+
+Greenhouse-Geisser and Huynh-Feldt Corrections
+ for Departure from Sphericity
+
+                     GG eps Pr(&gt;F[GG])   
+word_type             0.845    0.03934 * 
+depression:word_type  0.845    0.00183 **
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+                       HF eps   Pr(&gt;F[HF])
+word_type            1.396104 0.0294739587
+depression:word_type 1.396104 0.0008177732</code></pre>
+<p>The output provides us with a clear significant interaction shown in the first table. Our previous plot helps illustrate what this interaction is telling us about the patterns. However, it is often useful to show what the groups are doing, not the individuals (especially if your sample size is larger than 20). To do that, we can use:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mixed_anova <span class="op">%&gt;%</span>
+<span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmip</span>(depression <span class="op">~</span><span class="st"> </span>word_type)</code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-101-1.png" width="75%" /></p>
+<p>From this, we can tell that there is very little difference with neutral words, but large differences for positive and negative words. Specifically, depressed individuals struggle much more at recalling positive words than non-depressed individuals and depressed individuals do better at recalling negative words than non-depressed individuals.</p>
+</div>
+</div>
+<div id="conclusion" class="section level2">
+<h2><span class="header-section-number">7.3</span> Conclusion</h2>
+<p>Overall, this is a good approach to using mixed ANOVA:</p>
+<ol style="list-style-type: decimal">
+<li>Look at the repeated measures first, and then,</li>
+<li>Include any potentially important between-subjects factors.</li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="repeated-measures-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
