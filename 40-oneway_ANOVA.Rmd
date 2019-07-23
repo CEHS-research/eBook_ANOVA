@@ -173,7 +173,7 @@ ihno_clean <- read_excel("Ihno_dataset.xls") %>%
 
 It is important that we test for violations of the assumption of *Homogeneity of variance*.
 
-```{r EX_hov, eval=FALSE}
+```{r EX_hov}
 # Levene's Test of HOV
 data_name %>% 
   car::leveneTest(continuous_var ~ group_var, 
@@ -195,7 +195,7 @@ Here is an outline of what your syntax should look like when you **fit and save 
 **NOTE:** The `aov_4()` function works on data in LONG format only.  Each observation needs to be on its one line or row with seperate variables for the group membership (categorical factor or `fct`) and the continuous measurement (numberic or `dbl`).
 ```
 
-```{r EX_aov_4, eval=FALSE}
+```{r EX_aov_4}
 # One-way ANOVA: fit and save
 aov_name <- data_name %>% 
   afex::aov_4(continuous_var ~ group_var + (1|id_var),
@@ -210,7 +210,7 @@ By running the name you saved you model under, you will get a brief set of outpu
 **NOTE:** The `ges` is the *generalized eta squared*.  In a one-way ANOVA, the eta-squared effect size is the same value, ie. generalized ($\eta_g^2$) and partial $\eta_p^2$) are the same.
 ```
 
-```{r EX_aov_4_brief, eval=FALSE}
+```{r EX_aov_4_brief}
 # Display basic ANOVA results (includes effect size)
 aov_name 
 ```
@@ -223,7 +223,7 @@ To fully fill out a standard ANOVA table and compute other effect sizes, you wil
 **NOTE:** IGNORE the first line that starts with `(Intercept)`!  Also, the 'mean sum of squares' are not included in this table, nor is the **Total** line at the bottom of the standard ANOVA table.  You will need to manually compute these values and add them on the homework page.  Remember that `Sum of Squares (SS)` and `degrees of freedom (df)` add up, but `Mean Sum of Squreas (MS)` do not add up.  Also: `MS = SS/df` for each term.
 ```
 
-```{r EX_aov_4_fuller, eval=FALSE}
+```{r EX_aov_4_fuller}
 # Display fuller ANOVA results (includes sum of squares)
 aov_name$Anova 
 ```
@@ -242,14 +242,14 @@ Within the `pairs()` function there are several options for controling for multi
 * `adjust = "bon"` - Bonferroni
 
 
-```{r EX_tukey, eval=FALSE}
+```{r EX_tukey}
 # Pairwise post hoc: Tukey's HSD adjustment for multiple comparisons
 aov_name %>% 
   emmeans::emmeans(~ group_var) %>%        # Calculate Estimated Marinal Means
   pairs(adjust = "tukey")                  # Is each pair signif different?
 ```
 
-### Contrast Statements with `emmenas::contrast()`
+### Contrast Statements with `emmeans::contrast()`
 
 There are two steps to conduct a contrast comparison:
 
@@ -261,7 +261,7 @@ Inside the contrast statement, list the named sets of linear contrast weights.  
 **NOTE:** You must provide one weight ($c_i$) for each of the $k$ groups.  If you wish to ignore a group, that group's weight is $c_i = 0$.  The sum total of all the weights must be zero ($\sum c_i = 0$), so use positive and negative numbers.
 ```
 
-```{r EX_contrast, eval=FALSE}
+```{r EX_contrast}
 # Contrast statement : Impossible vs. Rest
 aov_name %>% 
   emmeans::emmeans(~ group_var) %>% 

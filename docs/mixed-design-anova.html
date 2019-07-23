@@ -174,6 +174,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="one-way-anova.html"><a href="one-way-anova.html#fitting-one-way-anova-model"><i class="fa fa-check"></i><b>5.2</b> Fitting One-way ANOVA Model</a></li>
 <li class="chapter" data-level="5.3" data-path="one-way-anova.html"><a href="one-way-anova.html#anova-output"><i class="fa fa-check"></i><b>5.3</b> ANOVA Output</a></li>
+<li class="chapter" data-level="5.4" data-path="one-way-anova.html"><a href="one-way-anova.html#inho-data-set-example"><i class="fa fa-check"></i><b>5.4</b> Inho data set example</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="one-way-anova.html"><a href="one-way-anova.html#basic-output---stored-name-of-model"><i class="fa fa-check"></i><b>5.4.1</b> Basic Output - stored name of model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="one-way-anova.html"><a href="one-way-anova.html#fuller-output---add-anova-on-model-name"><i class="fa fa-check"></i><b>5.4.2</b> Fuller Output - add <code>$Anova</code> on model name</a></li>
+<li class="chapter" data-level="5.4.3" data-path="one-way-anova.html"><a href="one-way-anova.html#all-pairwise-comparisons-with-pairs"><i class="fa fa-check"></i><b>5.4.3</b> All Pairwise Comparisons with <code>pairs()</code></a></li>
+<li class="chapter" data-level="5.4.4" data-path="one-way-anova.html"><a href="one-way-anova.html#contrast-statements-with-emmenascontrast"><i class="fa fa-check"></i><b>5.4.4</b> Contrast Statements with <code>emmenas::contrast()</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>6</b> Repeated Measures ANOVA</a><ul>
 <li class="chapter" data-level="6.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>6.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
@@ -332,7 +338,7 @@ word_type 0.6077293  0.3309148</code></pre>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(word_type, words_recalled, <span class="dt">group =</span> ID)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-98-1.png" width="75%" /></p>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-103-1.png" width="75%" /></p>
 <p>But we wonder if depression has an effect on the number of words recalled, and it may interact with word_type. Let’s see what that looks like.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(word_type, words_recalled, <span class="dt">group =</span> ID, 
@@ -342,7 +348,7 @@ word_type 0.6077293  0.3309148</code></pre>
 <span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>depression)</code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-99-1.png" width="75%" /></p>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-104-1.png" width="75%" /></p>
 <p>Definitely looks like the effect of word_type depends on whether the individual has depression or not. To add a between subjects factor to a repeated measures ANOVA, we are now doing mixed ANOVA (both between and within subjects factors).</p>
 </div>
 <div id="mixed-anova" class="section level3">
@@ -386,7 +392,7 @@ depression:word_type 1.396104 0.0008177732</code></pre>
 <p>The output provides us with a clear significant interaction shown in the first table. Our previous plot helps illustrate what this interaction is telling us about the patterns. However, it is often useful to show what the groups are doing, not the individuals (especially if your sample size is larger than 20). To do that, we can use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mixed_anova <span class="op">%&gt;%</span>
 <span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmip</span>(depression <span class="op">~</span><span class="st"> </span>word_type)</code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-101-1.png" width="75%" /></p>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-106-1.png" width="75%" /></p>
 <p>From this, we can tell that there is very little difference with neutral words, but large differences for positive and negative words. Specifically, depressed individuals struggle much more at recalling positive words than non-depressed individuals and depressed individuals do better at recalling negative words than non-depressed individuals.</p>
 </div>
 </div>

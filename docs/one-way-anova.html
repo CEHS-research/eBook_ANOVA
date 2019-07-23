@@ -46,7 +46,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -174,6 +173,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="one-way-anova.html"><a href="one-way-anova.html#fitting-one-way-anova-model"><i class="fa fa-check"></i><b>5.2</b> Fitting One-way ANOVA Model</a></li>
 <li class="chapter" data-level="5.3" data-path="one-way-anova.html"><a href="one-way-anova.html#anova-output"><i class="fa fa-check"></i><b>5.3</b> ANOVA Output</a></li>
+<li class="chapter" data-level="5.4" data-path="one-way-anova.html"><a href="one-way-anova.html#inho-data-set-example"><i class="fa fa-check"></i><b>5.4</b> Inho data set example</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="one-way-anova.html"><a href="one-way-anova.html#basic-output---stored-name-of-model"><i class="fa fa-check"></i><b>5.4.1</b> Basic Output - stored name of model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="one-way-anova.html"><a href="one-way-anova.html#fuller-output---add-anova-on-model-name"><i class="fa fa-check"></i><b>5.4.2</b> Fuller Output - add <code>$Anova</code> on model name</a></li>
+<li class="chapter" data-level="5.4.3" data-path="one-way-anova.html"><a href="one-way-anova.html#all-pairwise-comparisons-with-pairs"><i class="fa fa-check"></i><b>5.4.3</b> All Pairwise Comparisons with <code>pairs()</code></a></li>
+<li class="chapter" data-level="5.4.4" data-path="one-way-anova.html"><a href="one-way-anova.html#contrast-statements-with-emmeanscontrast"><i class="fa fa-check"></i><b>5.4.4</b> Contrast Statements with <code>emmeans::contrast()</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>6</b> Repeated Measures ANOVA</a><ul>
 <li class="chapter" data-level="6.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>6.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
@@ -225,7 +230,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(car)          <span class="co"># Companion for Applied Regression (and ANOVA)</span>
 <span class="kw">library</span>(afex)         <span class="co"># Analysis of Factorial Experiments</span>
 <span class="kw">library</span>(emmeans)      <span class="co"># Estimated marginal means (Least-squares means)</span>
-<span class="kw">library</span>(multcomp)     <span class="co"># Simultaneous Inference in General Parametric Models </span></code></pre></div>
+<span class="kw">library</span>(multcomp)     <span class="co"># Simultaneous Inference in General Parametric Models </span>
+<span class="kw">library</span>(readxl)       <span class="co"># Necessary for reading in an example data set</span></code></pre></div>
 <div id="prepare-for-modeling" class="section level2">
 <h2><span class="header-section-number">5.1</span> Prepare for Modeling</h2>
 <div id="ensure-the-data-is-in-long-format" class="section level3">
@@ -302,7 +308,129 @@ aov_name </code></pre></div>
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Display fuller ANOVA results (includes sum of squares)</span>
 aov_name<span class="op">$</span>Anova </code></pre></div>
+</div>
+<div id="inho-data-set-example" class="section level2">
+<h2><span class="header-section-number">5.4</span> Inho data set example</h2>
+<p>Import Data, Define Factors, and Compute New Variables</p>
+<ul>
+<li>Make sure the <strong>dataset</strong> is saved in the same <em>folder</em> as this file</li>
+<li>Make sure the that <em>folder</em> is the <strong>working directory</strong></li>
+</ul>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> I added the second line to convert all the variables names to lower case. I still kept the <code>F</code> as a capital letter at the end of the five factor variables.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ihno_clean &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;Ihno_dataset.xls&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">rename_all</span>(tolower) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">genderF =</span> <span class="kw">factor</span>(gender, 
+                                 <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),
+                                 <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Female&quot;</span>, 
+                                            <span class="st">&quot;Male&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">majorF =</span> <span class="kw">factor</span>(major, 
+                                <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>,<span class="dv">5</span>),
+                                <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Psychology&quot;</span>,
+                                           <span class="st">&quot;Premed&quot;</span>,
+                                           <span class="st">&quot;Biology&quot;</span>,
+                                           <span class="st">&quot;Sociology&quot;</span>,
+                                           <span class="st">&quot;Economics&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">reasonF =</span> <span class="kw">factor</span>(reason,
+                                 <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),
+                                 <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Program requirement&quot;</span>,
+                                            <span class="st">&quot;Personal interest&quot;</span>,
+                                            <span class="st">&quot;Advisor recommendation&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">exp_condF =</span> <span class="kw">factor</span>(exp_cond,
+                                   <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),
+                                   <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Easy&quot;</span>,
+                                              <span class="st">&quot;Moderate&quot;</span>,
+                                              <span class="st">&quot;Difficult&quot;</span>,
+                                              <span class="st">&quot;Impossible&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">coffeeF =</span> <span class="kw">factor</span>(coffee,
+                                 <span class="dt">levels =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+                                 <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Not a regular coffee drinker&quot;</span>,
+                                            <span class="st">&quot;Regularly drinks coffee&quot;</span>)))  <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">hr_base_bps =</span> hr_base <span class="op">/</span><span class="st"> </span><span class="dv">60</span>) </code></pre></div>
+<p>It is important that we test for violations of the assumption of <em>Homogeneity of variance</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Levene&#39;s Test of HOV</span>
+data_name <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>car<span class="op">::</span><span class="kw">leveneTest</span>(continuous_var <span class="op">~</span><span class="st"> </span>group_var, 
+                  <span class="dt">data =</span> .,            
+                  <span class="dt">center =</span> <span class="st">&quot;mean&quot;</span>)     </code></pre></div>
+<p>The <code>aov_4()</code> function from the <code>afex</code> package fits ANOVA models (oneway, two-way, repeated measures, and mixed design). It needs at least two arguments:</p>
+<ol style="list-style-type: decimal">
+<li><p>formula: <code>continuous_var ~ group_var + (1|id_var)</code> <em>one observation per subject and <code>id_var</code> is <strong>distinct</strong> for each subject</em></p></li>
+<li><p>dataset: <code>data = .</code> <em>we use the period to signify that the datset is being piped from above</em></p></li>
+</ol>
+<p>Here is an outline of what your syntax should look like when you <strong>fit and save a one-way ANOVA</strong>. Of course you will replace the dataset name and the variable names, as well as the name you are saving it as.</p>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> The <code>aov_4()</code> function works on data in LONG format only. Each observation needs to be on its one line or row with seperate variables for the group membership (categorical factor or <code>fct</code>) and the continuous measurement (numberic or <code>dbl</code>).
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># One-way ANOVA: fit and save</span>
+aov_name &lt;-<span class="st"> </span>data_name <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>afex<span class="op">::</span><span class="kw">aov_4</span>(continuous_var <span class="op">~</span><span class="st"> </span>group_var <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>id_var),
+              <span class="dt">data =</span> .)</code></pre></div>
+<div id="basic-output---stored-name-of-model" class="section level3">
+<h3><span class="header-section-number">5.4.1</span> Basic Output - stored name of model</h3>
+<p>By running the name you saved you model under, you will get a brief set of output, including a measure of <strong>Effect Size</strong>.</p>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> The <code>ges</code> is the <em>generalized eta squared</em>. In a one-way ANOVA, the eta-squared effect size is the same value, ie. generalized (<span class="math inline"><span class="math inline">\(\eta_g^2\)</span></span>) and partial <span class="math inline"><span class="math inline">\(\eta_p^2\)</span></span>) are the same.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Display basic ANOVA results (includes effect size)</span>
+aov_name </code></pre></div>
+</div>
+<div id="fuller-output---add-anova-on-model-name" class="section level3">
+<h3><span class="header-section-number">5.4.2</span> Fuller Output - add <code>$Anova</code> on model name</h3>
+<p>To fully fill out a standard ANOVA table and compute other effect sizes, you will need a more complete set of output, including the <strong>Sum of Squares</strong> components, you will need to add <code>$Anova</code> at the end of the model name before running it.</p>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> IGNORE the first line that starts with <code>(Intercept)</code>! Also, the ‘mean sum of squares’ are not included in this table, nor is the <strong>Total</strong> line at the bottom of the standard ANOVA table. You will need to manually compute these values and add them on the homework page. Remember that <code>Sum of Squares (SS)</code> and <code>degrees of freedom (df)</code> add up, but <code>Mean Sum of Squreas (MS)</code> do not add up. Also: <code>MS = SS/df</code> for each term.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Display fuller ANOVA results (includes sum of squares)</span>
+aov_name<span class="op">$</span>Anova </code></pre></div>
+</div>
+<div id="all-pairwise-comparisons-with-pairs" class="section level3">
+<h3><span class="header-section-number">5.4.3</span> All Pairwise Comparisons with <code>pairs()</code></h3>
+<p>There are two steps to conduct all possible pairwise comparisons:</p>
+<ol style="list-style-type: decimal">
+<li><code>emmeans(~ group_var)</code> - Calculate the <em>Estimated Marinal Means</em></li>
+<li><code>pairs()</code> - Determine if each pair is <em>significantly different</em></li>
+</ol>
+<p>Within the <code>pairs()</code> function there are several options for controling for multiple comparisons, including:</p>
+<ul>
+<li><code>adjust = &quot;none&quot;</code> - Fisher’s LSD</li>
+<li><code>adjust = &quot;tukey&quot;</code> - Tukey’s HSD</li>
+<li><code>adjust = &quot;bon&quot;</code> - Bonferroni</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Pairwise post hoc: Tukey&#39;s HSD adjustment for multiple comparisons</span>
+aov_name <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmeans</span>(<span class="op">~</span><span class="st"> </span>group_var) <span class="op">%&gt;%</span><span class="st">        </span><span class="co"># Calculate Estimated Marinal Means</span>
+<span class="st">  </span><span class="kw">pairs</span>(<span class="dt">adjust =</span> <span class="st">&quot;tukey&quot;</span>)                  <span class="co"># Is each pair signif different?</span></code></pre></div>
+</div>
+<div id="contrast-statements-with-emmeanscontrast" class="section level3">
+<h3><span class="header-section-number">5.4.4</span> Contrast Statements with <code>emmeans::contrast()</code></h3>
+<p>There are two steps to conduct a contrast comparison:</p>
+<ol style="list-style-type: decimal">
+<li><code>emmeans(~ group_var)</code> - Calculate the <em>Estimated Marinal Means</em></li>
+<li><code>contrast()</code> - Determine if each pair is <em>significantly different</em></li>
+</ol>
+Inside the contrast statement, list the named sets of linear contrast weights. We will only be doing one-at-a-time, but we must still use a nested <code>list</code>.<br />
 
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> You must provide one weight (<span class="math inline"><span class="math inline">\(c_i\)</span></span>) for each of the <span class="math inline"><span class="math inline">\(k\)</span></span> groups. If you wish to ignore a group, that group’s weight is <span class="math inline"><span class="math inline">\(c_i = 0\)</span></span>. The sum total of all the weights must be zero (<span class="math inline"><span class="math inline">\(\sum c_i = 0\)</span></span>), so use positive and negative numbers.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Contrast statement : Impossible vs. Rest</span>
+aov_name <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmeans</span>(<span class="op">~</span><span class="st"> </span>group_var) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>emmeans<span class="op">::</span><span class="kw">contrast</span>(<span class="kw">list</span>(<span class="st">&quot;your contrast name&quot;</span> =<span class="st"> </span><span class="kw">c</span>(c_<span class="dv">1</span>, c_<span class="dv">2</span>, ... , c_k)))</code></pre></div>
+
+</div>
 </div>
 </div>
             </section>

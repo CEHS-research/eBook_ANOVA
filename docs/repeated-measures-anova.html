@@ -174,6 +174,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="one-way-anova.html"><a href="one-way-anova.html#fitting-one-way-anova-model"><i class="fa fa-check"></i><b>5.2</b> Fitting One-way ANOVA Model</a></li>
 <li class="chapter" data-level="5.3" data-path="one-way-anova.html"><a href="one-way-anova.html#anova-output"><i class="fa fa-check"></i><b>5.3</b> ANOVA Output</a></li>
+<li class="chapter" data-level="5.4" data-path="one-way-anova.html"><a href="one-way-anova.html#inho-data-set-example"><i class="fa fa-check"></i><b>5.4</b> Inho data set example</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="one-way-anova.html"><a href="one-way-anova.html#basic-output---stored-name-of-model"><i class="fa fa-check"></i><b>5.4.1</b> Basic Output - stored name of model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="one-way-anova.html"><a href="one-way-anova.html#fuller-output---add-anova-on-model-name"><i class="fa fa-check"></i><b>5.4.2</b> Fuller Output - add <code>$Anova</code> on model name</a></li>
+<li class="chapter" data-level="5.4.3" data-path="one-way-anova.html"><a href="one-way-anova.html#all-pairwise-comparisons-with-pairs"><i class="fa fa-check"></i><b>5.4.3</b> All Pairwise Comparisons with <code>pairs()</code></a></li>
+<li class="chapter" data-level="5.4.4" data-path="one-way-anova.html"><a href="one-way-anova.html#contrast-statements-with-emmenascontrast"><i class="fa fa-check"></i><b>5.4.4</b> Contrast Statements with <code>emmenas::contrast()</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>6</b> Repeated Measures ANOVA</a><ul>
 <li class="chapter" data-level="6.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>6.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
@@ -407,11 +413,11 @@ word_type 0.6077293  0.3309148</code></pre>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(word_type, words_recalled, <span class="dt">group =</span> ID)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-77-1.png" width="75%" /></p>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-82-1.png" width="75%" /></p>
 <p>The output provides us with a bit of an understanding of why there is not a significant effect of <code>word_type</code>. In addition to a spaghetti plot, it is often useful to show what the overall repeated measure factor is doing, not the individuals (especially if your sample size is larger than 20). To do that, we can use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">oneway <span class="op">%&gt;%</span>
 <span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmip</span>(<span class="op">~</span><span class="st"> </span>word_type)</code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-78-1.png" width="75%" /></p>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-83-1.png" width="75%" /></p>
 <p>Although there is a pattern here, we need to consider the scale. Looking at the spaghetti plot, we have individuals that range from 5 to 20 so a difference of 2 or 3 is not large. However, it is clear that a pattern may exist and so we should probably investigate this further, possibly with a larger sample size.</p>
 </div>
 </div>
@@ -528,7 +534,7 @@ word_type 0.6077293  0.3309148</code></pre>
        <span class="dt">y =</span> <span class="st">&quot;Measurement Value&quot;</span>,
        <span class="dt">title =</span> <span class="st">&quot;Person Profile Plot&quot;</span>,
        <span class="dt">subtitle =</span> <span class="st">&quot;Raw Data&quot;</span>)</code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-84-1.png" width="75%" /></p>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-89-1.png" width="75%" /></p>
 </div>
 <div id="does-weight-long-change-over-time" class="section level3">
 <h3><span class="header-section-number">6.3.2</span> Does weight long change over time?</h3>
@@ -640,7 +646,7 @@ Confidence level used: 0.95 </code></pre>
 <p>means plot</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit_wl <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>emmeans<span class="op">::</span><span class="kw">emmip</span>( <span class="op">~</span><span class="st"> </span>month)</code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-93-1.png" width="75%" /></p>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-98-1.png" width="75%" /></p>
 
 </div>
 </div>

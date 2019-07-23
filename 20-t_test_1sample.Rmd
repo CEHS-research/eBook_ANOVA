@@ -212,3 +212,26 @@ cancer_clean %>%
 
 > There is NO evidence that stage three and four cancer (n = 6, M = 178.25) patients weight more now than the historic average of 165 pound, $t(24) = 0.826, p = .446$.  
 
+## Inho example
+
+> From Baron H. Cohen's *Explaining Psychological Statistics*, page 196.
+
+To review, we can easily run a one-sample *t*-test with a few simple lines of code. 
+
+```{r}
+data_ihno %>%
+  dplyr::pull(hr_base) %>%
+  t.test(mu = 72.5)
+```
+
+We can repeat this process to test any number of variables against a specified population parameter:
+
+```{r}
+data_ihno %>%
+  dplyr::pull(hr_pre) %>%
+  t.test(mu = 72.5) 
+
+data_ihno %>%
+  dplyr::pull(hr_post) %>%
+  t.test(mu = 72.5)
+```
