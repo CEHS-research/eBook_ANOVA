@@ -1,0 +1,586 @@
+# Poison Example: 1 & 2-way ANOVA
+
+
+Required Packages 
+
+```{r}
+library(tidyverse)    # Loads several very helpful 'tidy' packages
+library(furniture)    # Nice tables (by our own Tyson Barrett)
+library(afex)         # Analysis of Factorial Experiments
+library(emmeans)      # Estimated marginal means (Least-squares means)
+library(readxl)       # Necessary for reading in an example data set
+```
+
+## Prepare for Modeling
+
+### Ensure the Data is in "long" Format 
+
+
+https://www.guru99.com/r-anova-tutorial.html 
+
+The "poison" dataset contains 48 rows and 4 variables:
+
+* ID: Guinea pig identification number
+* Time: Survival time of the animal
+* poison: Type of poison used: factor level: 1,2 and 3
+* treat: Type of treatment used: factor level: 1,2 and 3
+
+
+
+Before you start to compute the ANOVA test, you need to prepare the data as follow:
+
+1. Import the data from online
+2. Rename the "id" variable
+3. Declare factors: poison type & treatment
+
+
+```{r}
+PATH <- "https://raw.githubusercontent.com/guru99-edu/R-Programming/master/poisons.csv"
+
+df_survival <- read.csv(PATH) %>%
+  dplyr::rename(id = X) %>% 
+  dplyr::mutate(poison = factor(poison)) %>% 
+  dplyr::mutate(treat = factor(treat))
+```
+
+
+```{r}
+tibble::glimpse(df_survival)
+```
+
+```{r}
+str(df_survival)
+```
+
+
+
+## Example 1) Survival Time by Poison Type
+
+### Parepare for Analysis
+
+Our objective is to test the following assumption:
+
+H_0: There is no difference in survival time average between group
+H_a: The survival time average is different for at least one group.
+
+
+In other words, you want to know if there is a statistical difference between the mean of the survival time according to the type of poison given to the Guinea pig.
+
+Variables:
+
+* `id` (`id_var`) Name of the variable that is qunique for each unit of study (i.e. person)
+* `poison` (`group_IV`) Name of the categorical variable (`factor`) with at least 2 levels
+* `time` (`continuous_DV`) Name of the continuous varaible (`dbl`) that we want to compare the averages of
+
+> Note: ignore `treat` for now
+
+
+
+#### Compute Summary Statistics
+
+Second, check the summary statistics for each of the $k$ groups.
+
+```{r}
+# Raw data: summary table
+df_survival %>% 
+  dplyr::group_by(poison) %>%   # divide into groups
+  furniture::table1("Survival Time" = time,
+                    digits = 2,      # gives M(SD)
+                    na.rm = FALSE,
+                    total = TRUE,
+                    output = "markdown",
+                    caption = "Summary of Survival Time by Type of Poisson Used")       
+```
+
+
+
+
+
+#### Plot the Raw Data
+
+Third, plot the data to eyeball the potential effect.  Remember the center line in each box represents the median, not the mean.  I have added a red diamond on the mean survival time for each type of poison.
+
+```{r}
+df_survival %>% 
+  ggplot(aes(x = poison,
+             y = time)) + 
+  geom_violin(fill = "gray") +
+  geom_boxplot(width = .07,
+               fill = "white") +
+  geom_jitter(position = position_jitter(0.21)) +
+  stat_summary(fun = mean,
+               geom = "point",
+               shape = 18,
+               color = "red",
+               size = 5) +
+  theme_bw() +
+  labs(x = "Type of Treatment",
+       y = "Observed Survival Time") 
+```
+
+
+
+
+
+
+#### Assumption Check: Normality
+
+
+```{r}
+df_survival %>% 
+  ggplot(aes(time)) + 
+  geom_density(fill = "gray",
+               alpha = .5) +
+  facet_grid(poison ~ .,
+             labeller = label_both) +
+  theme_bw() +
+  labs(x = "Observed Survival Time")
+```
+
+
+
+#### Assumption Check: HOV
+
+Levene's Test of HOV
+
+```{r}
+df_survival %>% 
+  car::leveneTest(time ~ poison, 
+                  data = .,            
+                  center = "mean")     
+```
+
+
+
+
+
+
+### Fitting One-way ANOVA Model
+
+
+
+```{r}
+aov_poison <- df_survival %>% 
+  afex::aov_4(time ~ poison + (1|id),
+              data = .)
+```
+
+
+
+#### Basic Output - stored name of model
+
+```{r}
+aov_poison
+```
+
+
+
+#### Fuller Output - add $Anova on model name
+
+
+```{r}
+aov_poison$Anova
+```
+
+
+
+
+### Followup-tests
+
+#### Estimated Marginal Means with `emmeans::emmeans()`
+
+```{r}
+aov_poison %>% 
+  emmeans::emmeans(~ poison)         # Calculate Estimated Marginal Means
+```
+
+```{r}
+aov_poison %>% 
+  emmeans::emmip(~ poison,
+                 CIs = TRUE) +
+  theme_bw() +
+  labs(x = "Type of Poison",
+       y = "Estmated Marginal Mean: Survival Time")
+```
+
+
+
+#### All Pairwise Comparisons with `pairs()`
+
+Pairwise post hoc: Fisher's LSD adjustment for multiple comparisons
+
+```{r}
+aov_poison %>% 
+  emmeans::emmeans(~ poison) %>%        # Calculate Estimated Marginal Means
+  pairs(adjust = "none")                  # Is each pair signif different?
+```
+
+
+#### Contrast Statements with `emmeans::contrast()`
+
+
+```{r}
+aov_poison %>% 
+  emmeans::emmeans(~ poison) %>% 
+  emmeans::contrast(list("1 & 2 vs. 3" = c(1, 1, -2)))
+```
+
+
+
+
+
+
+
+
+
+
+## Example 2) Survival Time by Treatment Type
+
+### Parepare for Analysis
+
+Our objective is to test the following assumption:
+
+H_0: There is no difference in survival time average between group
+H_a: The survival time average is different for at least one group.
+
+
+In other words, you want to know if there is a statistical difference between the mean of the survival time according to the type of treatment given to the Guinea pig.
+
+Variables:
+
+* `id` (`id_var`) Name of the variable that is qunique for each unit of study (i.e. person)
+* `treat` (`group_IV`) Name of the categorical variable (`factor`) with at least 2 levels
+* `time` (`continuous_DV`) Name of the continuous varaible (`dbl`) that we want to compare the averages of
+
+> Note: ignore `poison` for now
+
+
+
+#### Compute Summary Statistics
+
+Second, check the summary statistics for each of the $k$ groups.
+
+```{r}
+# Raw data: summary table
+df_survival %>% 
+  dplyr::group_by(treat) %>%   # divide into groups
+  furniture::table1("Survival Time" = time,
+                    digits = 2,      # gives M(SD)
+                    na.rm = FALSE,
+                    total = TRUE,
+                    output = "markdown",
+                    caption = "Summary of Survival Time by Type of Treatment Used")       
+```
+
+
+
+
+#### Plot the Raw Data
+
+Third, plot the data to eyeball the potential effect.  Remember the center line in each box represents the median, not the mean.  I have added a red diamond on the mean survival time for each type of poison.
+
+```{r}
+df_survival %>% 
+  ggplot(aes(x = treat,
+             y = time)) + 
+  geom_violin(fill = "gray") +
+  geom_boxplot(width = .07,
+               fill = "white") +
+  geom_jitter(position = position_jitter(0.21)) +
+  stat_summary(fun = mean,
+               geom = "point",
+               shape = 18,
+               color = "red",
+               size = 5) +
+  theme_bw() +
+  labs(x = "Type of Treatment",
+       y = "Observed Survival Time")
+```
+
+
+#### Assumption Check: Normality
+
+
+```{r}
+df_survival %>% 
+  ggplot(aes(time)) + 
+  geom_density(fill = "gray",
+               alpha = .5) +
+  facet_grid(treat ~ .,
+             labeller = label_both) +
+  theme_bw() +
+  labs(x = "Observed Survival Time")
+```
+
+
+
+#### Assumption Check: HOV
+
+Levene's Test of HOV
+
+```{r}
+df_survival %>% 
+  car::leveneTest(time ~ treat, 
+                  data = .,            
+                  center = "mean")     
+```
+
+
+
+
+
+### Fitting One-way ANOVA Model
+
+
+
+```{r}
+aov_treat <- df_survival %>% 
+  afex::aov_4(time ~ treat + (1|id),
+              data = .)
+```
+
+
+
+#### Basic Output - stored name of model
+
+```{r}
+aov_treat
+```
+
+
+
+#### Fuller Output - add $Anova on model name
+
+
+```{r}
+aov_treat$Anova
+```
+
+
+
+
+### Followup-tests
+
+#### Estimated Marginal Means with `emmeans::emmeans()`
+
+```{r}
+aov_treat %>% 
+  emmeans::emmeans(~ treat)         # Calculate Estimated Marginal Means
+```
+
+```{r}
+aov_treat %>% 
+  emmeans::emmip(~ treat,
+                 CIs = TRUE) +
+  theme_bw() +
+  labs(x = "Type of Treatment",
+       y = "Estmated Marginal Mean: Survival Time")
+```
+
+
+
+#### All Pairwise Comparisons with `pairs()`
+
+Pairwise post hoc: Fisher's LSD adjustment for multiple comparisons
+
+```{r}
+aov_treat %>% 
+  emmeans::emmeans(~ treat) %>%        # Calculate Estimated Marginal Means
+  pairs(adjust = "none")                  # Is each pair signif different?
+```
+
+
+#### Contrast Statements with `emmeans::contrast()`
+
+
+```{r}
+aov_treat %>% 
+  emmeans::emmeans(~ treat) %>% 
+  emmeans::contrast(list("B vs. Rest" = c(1, -3, 1, 1)))
+```
+
+
+
+
+## Example 3) Survival Time by Both Poisson & Treatment Type
+
+
+### Parepare for Analysis
+
+Our objective is to test the following assumption:
+
+H_0: There is no difference in survival time average between group
+H_a: The survival time average is different for at least one group.
+
+
+In other words, you want to know if there is a statistical difference between the mean of the survival time according to the type of treatment given to the Guinea pig.
+
+Variables:
+
+* `id` (`id_var`) Name of the variable that is qunique for each unit of study (i.e. person)
+* `treat` & `poison` (`group_IV`) Name of the categorical variable (`factor`) with at least 2 levels
+* `time` (`continuous_DV`) Name of the continuous varaible (`dbl`) that we want to compare the averages of
+
+> Note: ignore `poison` for now
+
+
+
+#### Compute Summary Statistics
+
+Second, check the summary statistics for each of the $k$ groups.
+
+```{r}
+df_survival %>% 
+  dplyr::group_by(treat, poison) %>%   # divide into groups
+  dplyr::summarise(n = n(),
+                   mean = mean(time),
+                   sd = sd(time)) %>% 
+  gt::gt(caption = "Summary of Survival Time by Type of Treatment Used")
+```
+
+
+
+
+#### Plot the Raw Data
+
+Third, plot the data to eyeball the potential effect.  Remember the center line in each box represents the median, not the mean.  I have added a red diamond on the mean survival time for each type of poison.
+
+```{r}
+df_survival %>% 
+  ggplot(aes(x = treat,
+             y = time)) + 
+  geom_violin(fill = "gray") +
+  geom_boxplot(width = .07,
+               fill = "white") +
+  geom_jitter(position = position_jitter(0.21)) +
+  stat_summary(fun = mean,
+               geom = "point",
+               shape = 18,
+               color = "red",
+               size = 5) +
+  theme_bw() +
+  labs(x = "Type of Treatment",
+       y = "Observed Survival Time") +
+  facet_wrap(~ poison, labeller = label_both)
+```
+
+
+#### Assumption Check: Normality
+
+
+```{r}
+df_survival %>% 
+  ggplot(aes(time)) + 
+  geom_density(fill = "gray",
+               alpha = .5) +
+  facet_grid(treat ~ poison,
+             labeller = label_both) +
+  theme_bw() +
+  labs(x = "Observed Survival Time")
+```
+
+
+
+#### Assumption Check: HOV
+
+Levene's Test of HOV
+
+```{r}
+df_survival %>% 
+  car::leveneTest(time ~ treat*poison, 
+                  data = .,            
+                  center = "mean")     
+```
+
+
+
+
+
+
+
+### Fitting Two-way ANOVA Model
+
+
+
+```{r}
+aov_survival2 <- df_survival %>% 
+  afex::aov_4(time ~ poison*treat + (1|id),
+              data = .)
+```
+
+
+
+#### Basic Output - stored name of model
+
+```{r}
+aov_survival2
+```
+
+
+
+#### Fuller Output - add $Anova on model name
+
+
+```{r}
+aov_survival2$Anova
+```
+
+
+
+
+### Followup-tests
+
+#### Estimated Marginal Means with `emmeans::emmeans()`
+
+
+
+
+
+#### All Pairwise Comparisons for Main Effects of Poison
+
+```{r}
+aov_survival2 %>% 
+  emmeans::emmeans(~ poison) %>%        # Calculate Estimated Marginal Means
+  pairs(adjust = "none")                  # Is each pair signif different?
+```
+
+
+
+```{r}
+aov_survival2 %>% 
+  emmeans::emmip( ~ poison,
+                 CIs = TRUE) +
+  theme_bw() +
+  labs(x = "Type of Poison",
+       y = "Estmated Marginal Mean: Survival Time")
+```
+
+
+
+#### All Pairwise Comparisons for Main Effects of Treatment
+
+```{r}
+aov_survival2 %>% 
+  emmeans::emmeans(~ treat) %>%        # Calculate Estimated Marginal Means
+  pairs(adjust = "tukey")                  # Is each pair signif different?
+```
+
+
+
+
+```{r}
+aov_survival2 %>% 
+  emmeans::emmip( ~ treat,
+                 CIs = TRUE) +
+  theme_bw() +
+  labs(x = "Type of 
+       Treatment",
+       y = "Estmated Marginal Mean: Survival Time")
+```
+
+
+
+
+
+
+

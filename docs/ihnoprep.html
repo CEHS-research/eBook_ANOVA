@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 ONE SAMPLE t-TEST: for the MEAN | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
+  <title>1 Intro: Ihno’s Experiemnt | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
   <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 ONE SAMPLE t-TEST: for the MEAN | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta property="og:title" content="1 Intro: Ihno’s Experiemnt | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/EQM_v1_cover.png" />
   <meta property="og:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="github-repo" content="cehs-research/eBook_wrangle" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 ONE SAMPLE t-TEST: for the MEAN | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta name="twitter:title" content="1 Intro: Ihno’s Experiemnt | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   
   <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="twitter:image" content="/EQM_v1_cover.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="cancerprep.html"/>
-<link rel="next" href="two-independent-samples-t-test-for-the-difference-in-means.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="cancerprep.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -331,320 +331,147 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="one-sample-t-test-for-the-mean" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">3</span> ONE SAMPLE t-TEST: for the MEAN<a href="one-sample-t-test-for-the-mean.html#one-sample-t-test-for-the-mean" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Using the <code>t.test()</code> function</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="one-sample-t-test-for-the-mean.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)  <span class="co"># lots of nice tidbits </span></span>
-<span id="cb26-2"><a href="one-sample-t-test-for-the-mean.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)    <span class="co"># Compantion</span></span></code></pre></div>
-<div id="exploratory-data-analysis-i.e.-the-eyeball-method" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Exploratory Data Analysis: i.e. the eyeball method<a href="one-sample-t-test-for-the-mean.html#exploratory-data-analysis-i.e.-the-eyeball-method" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Is the baseline weight more than 165 pounds?</strong></p>
-<div id="mean-and-sd" class="section level3 hasAnchor" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Mean and SD<a href="one-sample-t-test-for-the-mean.html#mean-and-sd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="one-sample-t-test-for-the-mean.html#cb27-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb27-2"><a href="one-sample-t-test-for-the-mean.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(weighin,</span>
-<span id="cb27-3"><a href="one-sample-t-test-for-the-mean.html#cb27-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">na.rm =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>
-───────────────────────────
-         Mean/Count (SD/%)
-         n = 25           
- weighin                  
-         178.3 (32.0)     
-───────────────────────────</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="one-sample-t-test-for-the-mean.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dv">32</span> <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">25</span>)</span></code></pre></div>
-<pre><code>[1] 6.4</code></pre>
-<blockquote>
-<p>Since the stadard deviation (<span class="math inline">\(s_X\)</span>) is 32.0, the standard error for the mean (SEM = SE = <span class="math inline">\(s_{\overline{X}}\)</span>) is 6.4. So even though the observed average of 178.3 is a higher number than 165, it may or may not we statistically significant.</p>
-</blockquote>
+<div id="ihnoprep" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Intro: Ihno’s Experiemnt<a href="ihnoprep.html#ihnoprep" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><img src="images/common/Ihno_header.PNG" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="ihnoprep.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)       <span class="co"># super helpful everything!</span></span>
+<span id="cb3-2"><a href="ihnoprep.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)           <span class="co"># inporting SPSS, SAS, &amp; Stata data files</span></span>
+<span id="cb3-3"><a href="ihnoprep.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)           <span class="co"># lots of nice tidbits </span></span></code></pre></div>
+<div id="background-of-data" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Background of Data<a href="ihnoprep.html#background-of-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="rmdlink">
+<p>
+<span class="citation"><span class="citation">(<a href="#ref-epse4" role="doc-biblioref"><strong>epse4?</strong></a>)</span></span>: has made the data from his
+textbook “Explaining Spychological Statistics, 4th edition” available on
+his <a href="http://www.psych.nyu.edu/cohen/EPS4e.html">website</a>
+</p>
 </div>
-</div>
-<div id="assumptions" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Assumptions<a href="one-sample-t-test-for-the-mean.html#assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="random-sampling" class="section level3 hasAnchor" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Random Sampling<a href="one-sample-t-test-for-the-mean.html#random-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The Sample was drawn at random (at least as representative as possible)</p>
-<ul>
-<li>Nothing can be done to fix NON-representative samples!<br />
-</li>
-<li>Can not for with any statistically test</li>
-</ul>
-</div>
-<div id="normality" class="section level3 hasAnchor" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Normality<a href="one-sample-t-test-for-the-mean.html#normality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<blockquote>
-<p>A variable is said to follow the normal distribution if it resembles the normal curve. Specifically it is symetrical, unimodal, and bell shaped.</p>
-</blockquote>
-<p>The continuous variable has a <strong>NORMAL</strong> distribution in BOTH populations</p>
-<ul>
-<li>Not as important if the sample is large <em>(Central Limit Theorem)</em></li>
-<li>IF the sample is far from normal &amp;/or small, might want to use a different method</li>
-</ul>
-<p><strong>Options to judging normality:</strong></p>
-<ol style="list-style-type: decimal">
-<li>Visualization of each sample’s distribution
-<ul>
-<li>Stacked <strong>histograms</strong>, but is sensitive to binning choices <em>(number or width)</em></li>
-<li>Side-by-side <strong>boxplots</strong>, shows <em>median</em> instead of <em>mean</em> as central line</li>
-<li>Seperate <strong>QQ plots</strong> (straight <span class="math inline">\(45^\circ\)</span> line), but is sensitive to outliers!</li>
-</ul></li>
-<li>Calculate <strong>Skewness</strong> and <strong>Kurtosis</strong>
-<ul>
-<li>Divided each value by its standard error (SE)<br />
-</li>
-<li>A result <span class="math inline">\(\gt \pm 2\)</span> indicates issues</li>
-</ul></li>
-<li>Formal Inferencial Tests for Normality
-<ul>
-<li>Null-hypothesis: population is normally distributed</li>
-<li>A <span class="math inline">\(p \lt .05\)</span> ???indicate snon-normality</li>
-<li>For smaller samples, use <strong>Shapiro-Wilk’s Test</strong></li>
-<li>For larger samples, use <strong>Kolmogorov-Smirnov’s Test</strong></li>
-</ul></li>
-</ol>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="one-sample-t-test-for-the-mean.html#cb31-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb31-2"><a href="one-sample-t-test-for-the-mean.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(weighin)) <span class="sc">+</span></span>
-<span id="cb31-3"><a href="one-sample-t-test-for-the-mean.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb31-4"><a href="one-sample-t-test-for-the-mean.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">165</span>,       <span class="co"># Add a thick red line at the grand mean of 165 pounds</span></span>
-<span id="cb31-5"><a href="one-sample-t-test-for-the-mean.html#cb31-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, </span>
-<span id="cb31-6"><a href="one-sample-t-test-for-the-mean.html#cb31-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">1</span>) </span></code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-31-1.png" width="75%" /></p>
-<blockquote>
-<p>The <strong>histogram</strong> is not truely normal, but it is fairly unimodal and somewhat bell shaped. There are mild concerns regarding the values above the mean.</p>
-</blockquote>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="one-sample-t-test-for-the-mean.html#cb32-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb32-2"><a href="one-sample-t-test-for-the-mean.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> weighin)) <span class="sc">+</span>    <span class="co"># make sure to include &quot;sample = &quot;</span></span>
-<span id="cb32-3"><a href="one-sample-t-test-for-the-mean.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span>                        <span class="co"># layer on the dots</span></span>
-<span id="cb32-4"><a href="one-sample-t-test-for-the-mean.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>()                     <span class="co"># layer on the line</span></span></code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-32-1.png" width="75%" /></p>
-<blockquote>
-<p>The <strong>Q-Q Plot</strong> displays a fairly linear pattern, but there are mild concerns at the highter values.</p>
-</blockquote>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="one-sample-t-test-for-the-mean.html#cb33-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a href="one-sample-t-test-for-the-mean.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(age, weighin) <span class="sc">%&gt;%</span>   <span class="co"># we have to select MORE than one variable</span></span>
-<span id="cb33-3"><a href="one-sample-t-test-for-the-mean.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">describe</span>()</span></code></pre></div>
-<pre><code>        vars  n   mean    sd median trimmed   mad min   max range  skew
-age        1 25  59.64 12.93   60.0   59.95 11.86  27  86.0  59.0 -0.31
-weighin    2 25 178.28 31.98  172.8  176.57 21.05 124 261.4 137.4  0.73
-        kurtosis   se
-age        -0.01 2.59
-weighin     0.07 6.40</code></pre>
-<blockquote>
-<p>The <strong>skew</strong> is <span class="math inline">\(0.73\)</span> which is close to <span class="math inline">\(1\)</span>, but the <strong>kurtosis</strong> is <span class="math inline">\(0.07\)</span> which is NOT close to <span class="math inline">\(1\)</span>. This reflects that the distribution is fairly symetrical, but more spread out and not as peaked as a truely normal distribution.</p>
-</blockquote>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="one-sample-t-test-for-the-mean.html#cb35-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb35-2"><a href="one-sample-t-test-for-the-mean.html#cb35-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(weighin) <span class="sc">%&gt;%</span>                 <span class="co"># extract the continuous variable</span></span>
-<span id="cb35-3"><a href="one-sample-t-test-for-the-mean.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro.test</span>()                           <span class="co"># test for normality (from base R)</span></span></code></pre></div>
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  .
-W = 0.93899, p-value = 0.1403</code></pre>
-<blockquote>
-<p>The <strong>Shapiro-Wilk’s test</strong> yielded NO evidence that weight is not normaly distributed at baseline, <span class="math inline">\(W = .939, p = .140\)</span>,.</p>
-</blockquote>
-</div>
-</div>
-<div id="inference" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Inference<a href="one-sample-t-test-for-the-mean.html#inference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Formal Statistical Test: t-Test for Difference in Independent Group Means</strong></p>
+<p>The data come from a <em>hypothetical</em> study performed by <strong>Ihno</strong> <em>(pronounced “Eee-know”)</em>, an advanced doctoral student, who was the teaching assistant (TA) for several sections of a statistics course. The <strong>100 participants</strong> in the data set are the students who were enrolled in Ihno’s sections, and voluntarily consented to be in her study, which was approved by the appropriate review board at her hypothetical school. Her data were collected on two different days. On the ﬁrst day of classes, the students who came to one of Ihno’s sections ﬁlled in a brief <strong>background questionnaire</strong> on which they provided contact information, some qualitative data (<code>gender</code>, undergrad <code>major</code>, why they had enrolled in statistics (<code>reason</code>), and whether they have a habit of drinking <code>coffee</code>), and some quantitative data (number of math courses already completed (<code>prevmath</code>), the score they received on a diagnostic math background quiz they were all required to take before registering for statistics <code>mathquiz</code>, and a rating of their math <code>phobia</code> on a scale from 0 to 10). You will see that, due to late registration and other factors, not all of Ihno’s students took the diagnostic math background quiz.</p>
+<p>The rest of Ihno’s data were collected as part of an <strong>experiment</strong> that she conducted during her recitation sessions on one day in the middle of the semester. (The one exception is that her students took a regular 10 question quiz the week before her experiment (<code>statquiz</code>), and she decided to add those scores to her data set.) At the beginning of the experiment, Ihno explained how each student could take his or her own pulse. She then provided a half-minute interval during which they counted the number of beats, and then wrote down twice that number as their heart rate (<code>hr_base</code>) in beats per minute (bpm). Then, each student reported how many cups of coffee they had consumed since waking up that morning (<code>num_cups</code>), and ﬁlled out an anxiety questionnaire consisting of 10 items, each rated (0 to 4) on a 5-point Likertscale. Total scores could range from 0 to 40, and provided a measure of baseline anxiety (<code>anx_base</code>).</p>
+<p>Next, Ihno announced a pop quiz. She handed out a page containing 11 multiple-choice statistics questions on material covered during the preceding two weeks, and asked the students to keep this page face down while taking and recording their pulse (<code>hr_pre</code>) and ﬁlling out a anxiety questionnaire (<code>anx_pre</code>). Then Ihno told the students they had 15 minutes to take the fairly difﬁcult quiz. She also told them that the ﬁrst 10 questions were worth 1 point each but that the 11th question was worth 3 points of extra credit. Ihno’s experimental manipulation consisted of varying the difﬁculty of the 11th question. Twenty-ﬁve quizzes were distributed at each level of difﬁculty of the ﬁnal question: easy, moderate, difﬁcult, and impossible to solve (<code>exp_cond</code>). After the quizzes were collected, Ihno asked the students to provide heart rate and anxiety data one more time (<code>hr_post</code>, <code>anx_post</code>). Finally, Ihno explained the experiment, adding that the 11th quiz question would not be scored and that, although the students would get back their quizzes with their score for the ﬁrst 10 items (<code>statquiz</code>), that score would not inﬂuence their grade for the statistics course.</p>
 <div class="rmdlightbulb">
 <p>
-Use the <code>t.test()</code> funtion for a single sample.
+You can use a file’s <strong>link</strong> to read data directly off
+a website
 </p>
-<p>
-<strong>Before you can run the t Test, you must seperate out or
-‘PULL’ your variable out of the dataset.</strong>
-</p>
-<p>
-Use the <code>dplyr::pull(continuous_variable)</code>step befor
-running the t Test
-</p>
-<p>
-<strong>Inside the funtion you need to specify one
-option:</strong>
-</p>
+</div>
+</div>
+<div id="import-wrangle-the-data" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Import &amp; Wrangle the Data<a href="ihnoprep.html#import-wrangle-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <code>Cancer</code> dataset is saved in SPSS format, which is evident from the <code>.sav</code> ending on the file name.</p>
+<p>The <code>haven</code> package is downloaded as part of the <code>tidyverse</code> set of packages, but is not automatically loaded. It must have its own <code>library()</code> function call <em>(see above)</em>. The <code>haven::read_spss()</code> function works very simarly to the <code>readxl::read_excel()</code> function we used last chapter <span class="citation">(<a href="references.html#ref-R-haven" role="doc-biblioref">Wickham, Miller, and Smith 2022</a>)</span>.</p>
 <ul>
-<li>
-the null-hypothesis value: <code>mu = ##</code> (replace with your
-number)
-</li>
+<li>Make sure the <strong>dataset</strong> is saved in the same <em>folder</em> as this file</li>
+<li>Make sure the that <em>folder</em> is the <strong>working directory</strong></li>
 </ul>
-<p>
-<strong>You MAY need/want to specify some or all of the following
-options you may way to leave as the default or override:</strong>
-</p>
-<ul>
-<li>
-Number of tails:
-<ul>
-<li>
-<code>alternative = “two.sided”</code> <strong>Default</strong>
-Allows for a 2-sided alternative
-</li>
-<li>
-<code>alternative = “less”</code> Only Allows: group 1 &lt; group
-2
-</li>
-<li>
-<code>alternative = “greater”</code> Only Allows: group 1 &gt; group
-2
-</li>
-</ul>
-</li>
-<li>
-Confidence level:
-<ul>
-<li>
-<code>conf.level = 0.95</code> <strong>Default</strong> Computes the
-95% confidence inverval<br />
-</li>
-<li>
-<code>conf.level = 0.90</code> Changes to a 90% confidence
-interval
-</li>
-</ul>
-</li>
-</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="ihnoprep.html#cb4-1" aria-hidden="true" tabindex="-1"></a>data_ihno <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_spss</span>(<span class="st">&quot;https://github.com/CEHS-research/PSY-6600_students/raw/master/Data/Ihno_dataset.sav&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="ihnoprep.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename_all</span>(tolower) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="ihnoprep.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">genderF =</span> <span class="fu">factor</span>(gender, </span>
+<span id="cb4-4"><a href="ihnoprep.html#cb4-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb4-5"><a href="ihnoprep.html#cb4-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>, </span>
+<span id="cb4-6"><a href="ihnoprep.html#cb4-6" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">&quot;Male&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-7"><a href="ihnoprep.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">majorF =</span> <span class="fu">factor</span>(major, </span>
+<span id="cb4-8"><a href="ihnoprep.html#cb4-8" aria-hidden="true" tabindex="-1"></a>                                <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>,<span class="dv">5</span>),</span>
+<span id="cb4-9"><a href="ihnoprep.html#cb4-9" aria-hidden="true" tabindex="-1"></a>                                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Psychology&quot;</span>,</span>
+<span id="cb4-10"><a href="ihnoprep.html#cb4-10" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;Premed&quot;</span>,</span>
+<span id="cb4-11"><a href="ihnoprep.html#cb4-11" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;Biology&quot;</span>,</span>
+<span id="cb4-12"><a href="ihnoprep.html#cb4-12" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;Sociology&quot;</span>,</span>
+<span id="cb4-13"><a href="ihnoprep.html#cb4-13" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;Economics&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-14"><a href="ihnoprep.html#cb4-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">reasonF =</span> <span class="fu">factor</span>(reason,</span>
+<span id="cb4-15"><a href="ihnoprep.html#cb4-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb4-16"><a href="ihnoprep.html#cb4-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Program requirement&quot;</span>,</span>
+<span id="cb4-17"><a href="ihnoprep.html#cb4-17" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">&quot;Personal interest&quot;</span>,</span>
+<span id="cb4-18"><a href="ihnoprep.html#cb4-18" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">&quot;Advisor recommendation&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-19"><a href="ihnoprep.html#cb4-19" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">exp_condF =</span> <span class="fu">factor</span>(exp_cond,</span>
+<span id="cb4-20"><a href="ihnoprep.html#cb4-20" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb4-21"><a href="ihnoprep.html#cb4-21" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Easy&quot;</span>,</span>
+<span id="cb4-22"><a href="ihnoprep.html#cb4-22" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;Moderate&quot;</span>,</span>
+<span id="cb4-23"><a href="ihnoprep.html#cb4-23" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;Difficult&quot;</span>,</span>
+<span id="cb4-24"><a href="ihnoprep.html#cb4-24" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;Impossible&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-25"><a href="ihnoprep.html#cb4-25" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">coffeeF =</span> <span class="fu">factor</span>(coffee,</span>
+<span id="cb4-26"><a href="ihnoprep.html#cb4-26" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb4-27"><a href="ihnoprep.html#cb4-27" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Not a regular coffee drinker&quot;</span>,</span>
+<span id="cb4-28"><a href="ihnoprep.html#cb4-28" aria-hidden="true" tabindex="-1"></a>                                            <span class="st">&quot;Regularly drinks coffee&quot;</span>))) </span></code></pre></div>
 </div>
-<div id="all-defaults" class="section level3 hasAnchor" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> All Defaults<a href="one-sample-t-test-for-the-mean.html#all-defaults" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Is there evidence the population mean weight is DIFFERENT than 165?</strong></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="one-sample-t-test-for-the-mean.html#cb37-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb37-2"><a href="one-sample-t-test-for-the-mean.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(weighin) <span class="sc">%&gt;%</span>    <span class="co"># pull the continuous varaible out</span></span>
-<span id="cb37-3"><a href="one-sample-t-test-for-the-mean.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="dv">165</span>)            <span class="co"># specify the null hypothesis value</span></span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  .
-t = 2.0765, df = 24, p-value = 0.04872
-alternative hypothesis: true mean is not equal to 165
-95 percent confidence interval:
- 165.0807 191.4793
-sample estimates:
-mean of x 
-   178.28 </code></pre>
-<blockquote>
-<p>There is evidence that cancer patients weight more (<em>N</em> = 25, <em>M</em> = 178.28) now than the historic average of 165 pound, <span class="math inline">\(t(24) = 2.077, p = .049, 95% CI: 165.08, 191.48\)</span>.</p>
-</blockquote>
+<div id="overview" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Overview<a href="ihnoprep.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="dimentions-size-of-the-dataset" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Dimentions (size) of the dataset<a href="ihnoprep.html#dimentions-size-of-the-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="ihnoprep.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(data_ihno)</span></code></pre></div>
+<pre><code>[1] 100  23</code></pre>
 </div>
-<div id="confidence-level-other-than-95" class="section level3 hasAnchor" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> Confidence Level other than 95%<a href="one-sample-t-test-for-the-mean.html#confidence-level-other-than-95" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Find a 99% confience level for the population mean weight.</strong></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="one-sample-t-test-for-the-mean.html#cb39-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb39-2"><a href="one-sample-t-test-for-the-mean.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(weighin) <span class="sc">%&gt;%</span>    <span class="co"># pull the continuous varaible out</span></span>
-<span id="cb39-3"><a href="one-sample-t-test-for-the-mean.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="dv">165</span>,            <span class="co"># specify the null hypothesis value</span></span>
-<span id="cb39-4"><a href="one-sample-t-test-for-the-mean.html#cb39-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">conf.level =</span> <span class="fl">0.99</span>)   <span class="co"># over-ride the default of 95% CI</span></span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  .
-t = 2.0765, df = 24, p-value = 0.04872
-alternative hypothesis: true mean is not equal to 165
-99 percent confidence interval:
- 160.3927 196.1673
-sample estimates:
-mean of x 
-   178.28 </code></pre>
-<blockquote>
-<p>There is evidence that cancer patients weight more (<em>N</em> = 25, <em>M</em> = 178.28) now than the historic average of 165 pound, <span class="math inline">\(t(24) = 2.077, p = .049, 99% CI: 160.39, 196.17\)</span>.</p>
-</blockquote>
+<div id="variable-names" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Variable Names<a href="ihnoprep.html#variable-names" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="ihnoprep.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data_ihno)</span></code></pre></div>
+<pre><code> [1] &quot;sub_num&quot;   &quot;gender&quot;    &quot;major&quot;     &quot;reason&quot;    &quot;exp_cond&quot;  &quot;coffee&quot;   
+ [7] &quot;num_cups&quot;  &quot;phobia&quot;    &quot;prevmath&quot;  &quot;mathquiz&quot;  &quot;statquiz&quot;  &quot;exp_sqz&quot;  
+[13] &quot;hr_base&quot;   &quot;hr_pre&quot;    &quot;hr_post&quot;   &quot;anx_base&quot;  &quot;anx_pre&quot;   &quot;anx_post&quot; 
+[19] &quot;genderF&quot;   &quot;majorF&quot;    &quot;reasonF&quot;   &quot;exp_condF&quot; &quot;coffeeF&quot;  </code></pre>
 </div>
-<div id="one-sided-test-instead-of-two" class="section level3 hasAnchor" number="3.3.3">
-<h3><span class="header-section-number">3.3.3</span> One-Sided Test, instead of Two<a href="one-sample-t-test-for-the-mean.html#one-sided-test-instead-of-two" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Is there evidence the population mean weight is GREATER than 165?</strong></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="one-sample-t-test-for-the-mean.html#cb41-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb41-2"><a href="one-sample-t-test-for-the-mean.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(weighin) <span class="sc">%&gt;%</span>          <span class="co"># pull the continuous varaible out</span></span>
-<span id="cb41-3"><a href="one-sample-t-test-for-the-mean.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="dv">165</span>,                  <span class="co"># specify the null hypothesis value</span></span>
-<span id="cb41-4"><a href="one-sample-t-test-for-the-mean.html#cb41-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)   <span class="co"># over-ride the default of 95% CI</span></span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  .
-t = 2.0765, df = 24, p-value = 0.02436
-alternative hypothesis: true mean is greater than 165
-95 percent confidence interval:
- 167.3384      Inf
-sample estimates:
-mean of x 
-   178.28 </code></pre>
-<p>Notice than one end of the confidence interval is <code>Inf</code> for infinity. This always happens when you specify a one-tail test, so you should IGNORE the conficence interval reported when you specify <code>alternative =</code>.</p>
-<blockquote>
-<p>There is evidence that cancer patients weight more (<em>N</em> = 25, <em>M</em> = 178.28) now than the historic average of 165 pound, <span class="math inline">\(t(24) = 2.077, p = .024\)</span>.</p>
-</blockquote>
+<div id="quick-glimpse" class="section level3 hasAnchor" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Quick Glimpse<a href="ihnoprep.html#quick-glimpse" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="ihnoprep.html#cb9-1" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">glimpse</span>(data_ihno)</span></code></pre></div>
+<pre><code>Rows: 100
+Columns: 23
+$ sub_num   &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 1…
+$ gender    &lt;dbl+lbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ major     &lt;dbl+lbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ reason    &lt;dbl+lbl&gt; 3, 2, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 3,…
+$ exp_cond  &lt;dbl+lbl&gt; 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 4,…
+$ coffee    &lt;dbl+lbl&gt; 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1,…
+$ num_cups  &lt;dbl&gt; 0, 0, 0, 0, 1, 1, 0, 2, 0, 2, 1, 0, 1, 2, 3, 0, 0, 3, 2, 1, …
+$ phobia    &lt;dbl&gt; 1, 1, 4, 4, 10, 4, 4, 4, 4, 5, 5, 4, 7, 4, 3, 8, 4, 5, 0, 4,…
+$ prevmath  &lt;dbl&gt; 3, 4, 1, 0, 1, 1, 2, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 3, 1, …
+$ mathquiz  &lt;dbl+lbl&gt; 43, 49, 26, 29, 31, 20, 13, 23, 38, NA, 29, 32, 18, NA, …
+$ statquiz  &lt;dbl&gt; 6, 9, 8, 7, 6, 7, 3, 7, 8, 7, 8, 8, 1, 5, 8, 3, 8, 7, 10, 7,…
+$ exp_sqz   &lt;dbl&gt; 7, 11, 8, 8, 6, 6, 4, 7, 7, 6, 10, 7, 3, 4, 6, 1, 7, 4, 9, 7…
+$ hr_base   &lt;dbl&gt; 71, 73, 69, 72, 71, 70, 71, 77, 73, 78, 74, 73, 73, 72, 72, …
+$ hr_pre    &lt;dbl&gt; 68, 75, 76, 73, 83, 71, 70, 87, 72, 76, 72, 74, 76, 83, 74, …
+$ hr_post   &lt;dbl&gt; 65, 68, 72, 78, 74, 76, 66, 84, 67, 74, 73, 74, 78, 77, 68, …
+$ anx_base  &lt;dbl&gt; 17, 17, 19, 19, 26, 12, 12, 17, 20, 20, 21, 32, 19, 18, 21, …
+$ anx_pre   &lt;dbl&gt; 22, 19, 14, 13, 30, 15, 16, 19, 14, 24, 25, 35, 23, 27, 27, …
+$ anx_post  &lt;dbl&gt; 20, 16, 15, 16, 25, 19, 17, 22, 17, 19, 22, 33, 20, 28, 22, …
+$ genderF   &lt;fct&gt; Female, Female, Female, Female, Female, Female, Female, Fema…
+$ majorF    &lt;fct&gt; Psychology, Psychology, Psychology, Psychology, Psychology, …
+$ reasonF   &lt;fct&gt; Advisor recommendation, Personal interest, Program requireme…
+$ exp_condF &lt;fct&gt; Easy, Easy, Easy, Easy, Easy, Moderate, Moderate, Moderate, …
+$ coffeeF   &lt;fct&gt; Regularly drinks coffee, Not a regular coffee drinker, Not a…</code></pre>
 </div>
-<div id="restrict-to-a-subsample" class="section level3 hasAnchor" number="3.3.4">
-<h3><span class="header-section-number">3.3.4</span> Restrict to a Subsample<a href="one-sample-t-test-for-the-mean.html#restrict-to-a-subsample" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Do the patients with <em>stage 3 and 4</em> cancer weigh more than 165 pounds at intake, on average?</strong></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="one-sample-t-test-for-the-mean.html#cb43-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb43-2"><a href="one-sample-t-test-for-the-mean.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(stage <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>)) <span class="sc">%&gt;%</span>    <span class="co"># select a sub-sample </span></span>
-<span id="cb43-3"><a href="one-sample-t-test-for-the-mean.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(weighin) <span class="sc">%&gt;%</span>                     <span class="co"># pull the continuous varaible out</span></span>
-<span id="cb43-4"><a href="one-sample-t-test-for-the-mean.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="dv">165</span>)                             <span class="co"># specify the null hypothesis value</span></span></code></pre></div>
-<pre><code>
-    One Sample t-test
+<div id="top-and-bottom-rows" class="section level3 hasAnchor" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Top and Bottom Rows<a href="ihnoprep.html#top-and-bottom-rows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ihnoprep.html#cb11-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(data_ihno)</span></code></pre></div>
+<pre><code>  sub_num gender major reason exp_cond coffee num_cups phobia prevmath mathquiz
+1       1      1     1      3        1      1        0      1        3       43
+2       2      1     1      2        1      0        0      1        4       49
+3       3      1     1      1        1      0        0      4        1       26
+4       4      1     1      1        1      0        0      4        0       29
+5     ...    ...   ...    ...      ...    ...      ...    ...      ...      ...
+6      97      2     5      2        3      0        0      0        2       28
+7      98      2     5      2        3      0        0      2        2       38
+8      99      2     5      2        4      1        1      1        4       41
+9     100      2     5      1        2      0        0      2        2       39
+  statquiz exp_sqz hr_base hr_pre hr_post anx_base anx_pre anx_post genderF
+1        6       7      71     68      65       17      22       20  Female
+2        9      11      73     75      68       17      19       16  Female
+3        8       8      69     76      72       19      14       15  Female
+4        7       8      72     73      78       19      13       16  Female
+5      ...     ...     ...    ...     ...      ...     ...      ...    &lt;NA&gt;
+6        8       9      70     66      65       17      12       13    Male
+7        9      10      65     65      69       18      14       19    Male
+8        8       8      72     68      73       17      11       18    Male
+9        7       7      70     70      64       17      11       14    Male
+      majorF                reasonF  exp_condF                      coffeeF
+1 Psychology Advisor recommendation       Easy      Regularly drinks coffee
+2 Psychology      Personal interest       Easy Not a regular coffee drinker
+3 Psychology    Program requirement       Easy Not a regular coffee drinker
+4 Psychology    Program requirement       Easy Not a regular coffee drinker
+5       &lt;NA&gt;                   &lt;NA&gt;       &lt;NA&gt;                         &lt;NA&gt;
+6  Economics      Personal interest  Difficult Not a regular coffee drinker
+7  Economics      Personal interest  Difficult Not a regular coffee drinker
+8  Economics      Personal interest Impossible      Regularly drinks coffee
+9  Economics    Program requirement   Moderate Not a regular coffee drinker</code></pre>
 
-data:  .
-t = 0.82627, df = 5, p-value = 0.4463
-alternative hypothesis: true mean is not equal to 165
-95 percent confidence interval:
- 137.0283 219.4717
-sample estimates:
-mean of x 
-   178.25 </code></pre>
-<blockquote>
-<p>There is NO evidence that stage three and four cancer (n = 6, M = 178.25) patients weight more now than the historic average of 165 pound, <span class="math inline">\(t(24) = 0.826, p = .446\)</span>.</p>
-</blockquote>
 </div>
-</div>
-<div id="inho-example" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Inho example<a href="one-sample-t-test-for-the-mean.html#inho-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<blockquote>
-<p>From Baron H. Cohen’s <em>Explaining Psychological Statistics</em>, page 196.</p>
-</blockquote>
-<p>To review, we can easily run a one-sample <em>t</em>-test with a few simple lines of code.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="one-sample-t-test-for-the-mean.html#cb45-1" aria-hidden="true" tabindex="-1"></a>data_ihno <span class="sc">%&gt;%</span></span>
-<span id="cb45-2"><a href="one-sample-t-test-for-the-mean.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(hr_base) <span class="sc">%&gt;%</span></span>
-<span id="cb45-3"><a href="one-sample-t-test-for-the-mean.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="fl">72.5</span>)</span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  .
-t = -0.71525, df = 99, p-value = 0.4761
-alternative hypothesis: true mean is not equal to 72.5
-95 percent confidence interval:
- 71.63194 72.90806
-sample estimates:
-mean of x 
-    72.27 </code></pre>
-<p>We can repeat this process to test any number of variables against a specified population parameter:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="one-sample-t-test-for-the-mean.html#cb47-1" aria-hidden="true" tabindex="-1"></a>data_ihno <span class="sc">%&gt;%</span></span>
-<span id="cb47-2"><a href="one-sample-t-test-for-the-mean.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(hr_pre) <span class="sc">%&gt;%</span></span>
-<span id="cb47-3"><a href="one-sample-t-test-for-the-mean.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="fl">72.5</span>) </span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  .
-t = 2.6309, df = 99, p-value = 0.009878
-alternative hypothesis: true mean is not equal to 72.5
-95 percent confidence interval:
- 72.83183 74.86817
-sample estimates:
-mean of x 
-    73.85 </code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="one-sample-t-test-for-the-mean.html#cb49-1" aria-hidden="true" tabindex="-1"></a>data_ihno <span class="sc">%&gt;%</span></span>
-<span id="cb49-2"><a href="one-sample-t-test-for-the-mean.html#cb49-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(hr_post) <span class="sc">%&gt;%</span></span>
-<span id="cb49-3"><a href="one-sample-t-test-for-the-mean.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="fl">72.5</span>)</span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  .
-t = 0.63295, df = 99, p-value = 0.5282
-alternative hypothesis: true mean is not equal to 72.5
-95 percent confidence interval:
- 71.85954 73.74046
-sample estimates:
-mean of x 
-     72.8 </code></pre>
-
 </div>
 </div>
             </section>
@@ -652,8 +479,8 @@ mean of x
           </div>
         </div>
       </div>
-<a href="cancerprep.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-independent-samples-t-test-for-the-difference-in-means.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cancerprep.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,4 +1,4 @@
-# Intro: Ihno's Experiemnt
+# Intro: Ihno's Experiemnt {#ihnoprep}
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(comment     = "",
@@ -22,7 +22,7 @@ library(psych)           # lots of nice tidbits
 
 
 
-## Background of Data
+## Background of Data 
 
 ```{block type='rmdlink', echo=TRUE}
 @epse4: has made the data from his textbook "Explaining Spychological Statistics, 4th edition" available on his [website](http://www.psych.nyu.edu/cohen/EPS4e.html )
@@ -50,8 +50,8 @@ The `haven` package is downloaded as part of the `tidyverse` set of packages, bu
 * Make sure the **dataset** is saved in the same *folder* as this file
 * Make sure the that *folder* is the **working directory**
 
-```{r}
-data_ihno <- read_spss("http://www.psych.nyu.edu/cohen/Ihno_dataset.sav") %>% 
+```{r }
+data_ihno <- haven::read_spss("https://github.com/CEHS-research/PSY-6600_students/raw/master/Data/Ihno_dataset.sav") %>% 
   dplyr::rename_all(tolower) %>% 
   dplyr::mutate(genderF = factor(gender, 
                                  levels = c(1, 2),

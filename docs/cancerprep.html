@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 ONE SAMPLE t-TEST: for the MEAN | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
+  <title>2 Intro: Cancer Experiemnt | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
   <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 ONE SAMPLE t-TEST: for the MEAN | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta property="og:title" content="2 Intro: Cancer Experiemnt | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/EQM_v1_cover.png" />
   <meta property="og:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="github-repo" content="cehs-research/eBook_wrangle" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 ONE SAMPLE t-TEST: for the MEAN | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta name="twitter:title" content="2 Intro: Cancer Experiemnt | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   
   <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="twitter:image" content="/EQM_v1_cover.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="cancerprep.html"/>
-<link rel="next" href="two-independent-samples-t-test-for-the-difference-in-means.html"/>
+<link rel="prev" href="ihnoprep.html"/>
+<link rel="next" href="one-sample-t-test-for-the-mean.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -331,320 +331,119 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="one-sample-t-test-for-the-mean" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">3</span> ONE SAMPLE t-TEST: for the MEAN<a href="one-sample-t-test-for-the-mean.html#one-sample-t-test-for-the-mean" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Using the <code>t.test()</code> function</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="one-sample-t-test-for-the-mean.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)  <span class="co"># lots of nice tidbits </span></span>
-<span id="cb26-2"><a href="one-sample-t-test-for-the-mean.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)    <span class="co"># Compantion</span></span></code></pre></div>
-<div id="exploratory-data-analysis-i.e.-the-eyeball-method" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Exploratory Data Analysis: i.e. the eyeball method<a href="one-sample-t-test-for-the-mean.html#exploratory-data-analysis-i.e.-the-eyeball-method" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Is the baseline weight more than 165 pounds?</strong></p>
-<div id="mean-and-sd" class="section level3 hasAnchor" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Mean and SD<a href="one-sample-t-test-for-the-mean.html#mean-and-sd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="one-sample-t-test-for-the-mean.html#cb27-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb27-2"><a href="one-sample-t-test-for-the-mean.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(weighin,</span>
-<span id="cb27-3"><a href="one-sample-t-test-for-the-mean.html#cb27-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">na.rm =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>
-───────────────────────────
-         Mean/Count (SD/%)
-         n = 25           
- weighin                  
-         178.3 (32.0)     
-───────────────────────────</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="one-sample-t-test-for-the-mean.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dv">32</span> <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">25</span>)</span></code></pre></div>
-<pre><code>[1] 6.4</code></pre>
+<div id="cancerprep" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Intro: Cancer Experiemnt<a href="cancerprep.html#cancerprep" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="cancerprep.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)       <span class="co"># super helpful everything!</span></span>
+<span id="cb13-2"><a href="cancerprep.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)           <span class="co"># inporting SPSS, SAS, &amp; Stata data files</span></span>
+<span id="cb13-3"><a href="cancerprep.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)           <span class="co"># lots of nice tidbits </span></span></code></pre></div>
+<div id="source-of-data" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Source of Data<a href="cancerprep.html#source-of-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Mid-Michigan Medical Center, Midland, Michigan, 1999: A study of oral condition of cancer patients.</p>
+</div>
+<div id="description-of-the-study" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Description of the Study<a href="cancerprep.html#description-of-the-study" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The data set contains part of the data for a study of <strong>oral condition</strong> of cancer patients conducted at the Mid-Michigan Medical Center. The oral conditions of the patients were measured and recorded at the <em>initial</em> stage, at the end of the <em>second week</em>, at the end of the <em>fourth week</em>, and at the end of the <em>sixth week</em>. The variables age, initial weight and initial cancer stage of the patients were recorded. Patients were divided into two groups <strong>at random</strong>: One group received a placebo and the other group received aloe juice treatment.</p>
 <blockquote>
-<p>Since the stadard deviation (<span class="math inline">\(s_X\)</span>) is 32.0, the standard error for the mean (SEM = SE = <span class="math inline">\(s_{\overline{X}}\)</span>) is 6.4. So even though the observed average of 178.3 is a higher number than 165, it may or may not we statistically significant.</p>
+<p>Sample size n = 25 patients with neck cancer.</p>
+<p>The treatment is Aloe Juice.</p>
 </blockquote>
 </div>
-</div>
-<div id="assumptions" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Assumptions<a href="one-sample-t-test-for-the-mean.html#assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="random-sampling" class="section level3 hasAnchor" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Random Sampling<a href="one-sample-t-test-for-the-mean.html#random-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The Sample was drawn at random (at least as representative as possible)</p>
+<div id="variables" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Variables<a href="cancerprep.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>Nothing can be done to fix NON-representative samples!<br />
-</li>
-<li>Can not for with any statistically test</li>
-</ul>
-</div>
-<div id="normality" class="section level3 hasAnchor" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Normality<a href="one-sample-t-test-for-the-mean.html#normality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<blockquote>
-<p>A variable is said to follow the normal distribution if it resembles the normal curve. Specifically it is symetrical, unimodal, and bell shaped.</p>
-</blockquote>
-<p>The continuous variable has a <strong>NORMAL</strong> distribution in BOTH populations</p>
+<li><p><code>ID</code> patient identification number</p></li>
+<li><p><code>trt</code> treatment group</p>
 <ul>
-<li>Not as important if the sample is large <em>(Central Limit Theorem)</em></li>
-<li>IF the sample is far from normal &amp;/or small, might want to use a different method</li>
-</ul>
-<p><strong>Options to judging normality:</strong></p>
-<ol style="list-style-type: decimal">
-<li>Visualization of each sample’s distribution
-<ul>
-<li>Stacked <strong>histograms</strong>, but is sensitive to binning choices <em>(number or width)</em></li>
-<li>Side-by-side <strong>boxplots</strong>, shows <em>median</em> instead of <em>mean</em> as central line</li>
-<li>Seperate <strong>QQ plots</strong> (straight <span class="math inline">\(45^\circ\)</span> line), but is sensitive to outliers!</li>
+<li><code>0</code> <em>placebo</em></li>
+<li><code>1</code> <em>aloe juice</em></li>
 </ul></li>
-<li>Calculate <strong>Skewness</strong> and <strong>Kurtosis</strong>
+<li><p><code>age</code> patient’s age, <em>in years</em></p></li>
+<li><p><code>weightin</code> patient’s weight <em>(pounds)</em> at the initial stage</p></li>
+<li><p><code>stage</code> initial cancer stage</p>
 <ul>
-<li>Divided each value by its standard error (SE)<br />
-</li>
-<li>A result <span class="math inline">\(\gt \pm 2\)</span> indicates issues</li>
+<li>coded <code>1</code> through <code>4</code></li>
 </ul></li>
-<li>Formal Inferencial Tests for Normality
-<ul>
-<li>Null-hypothesis: population is normally distributed</li>
-<li>A <span class="math inline">\(p \lt .05\)</span> ???indicate snon-normality</li>
-<li>For smaller samples, use <strong>Shapiro-Wilk’s Test</strong></li>
-<li>For larger samples, use <strong>Kolmogorov-Smirnov’s Test</strong></li>
-</ul></li>
-</ol>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="one-sample-t-test-for-the-mean.html#cb31-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb31-2"><a href="one-sample-t-test-for-the-mean.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(weighin)) <span class="sc">+</span></span>
-<span id="cb31-3"><a href="one-sample-t-test-for-the-mean.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb31-4"><a href="one-sample-t-test-for-the-mean.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">165</span>,       <span class="co"># Add a thick red line at the grand mean of 165 pounds</span></span>
-<span id="cb31-5"><a href="one-sample-t-test-for-the-mean.html#cb31-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, </span>
-<span id="cb31-6"><a href="one-sample-t-test-for-the-mean.html#cb31-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">1</span>) </span></code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-31-1.png" width="75%" /></p>
-<blockquote>
-<p>The <strong>histogram</strong> is not truely normal, but it is fairly unimodal and somewhat bell shaped. There are mild concerns regarding the values above the mean.</p>
-</blockquote>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="one-sample-t-test-for-the-mean.html#cb32-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb32-2"><a href="one-sample-t-test-for-the-mean.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> weighin)) <span class="sc">+</span>    <span class="co"># make sure to include &quot;sample = &quot;</span></span>
-<span id="cb32-3"><a href="one-sample-t-test-for-the-mean.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span>                        <span class="co"># layer on the dots</span></span>
-<span id="cb32-4"><a href="one-sample-t-test-for-the-mean.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>()                     <span class="co"># layer on the line</span></span></code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-32-1.png" width="75%" /></p>
-<blockquote>
-<p>The <strong>Q-Q Plot</strong> displays a fairly linear pattern, but there are mild concerns at the highter values.</p>
-</blockquote>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="one-sample-t-test-for-the-mean.html#cb33-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a href="one-sample-t-test-for-the-mean.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(age, weighin) <span class="sc">%&gt;%</span>   <span class="co"># we have to select MORE than one variable</span></span>
-<span id="cb33-3"><a href="one-sample-t-test-for-the-mean.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">describe</span>()</span></code></pre></div>
-<pre><code>        vars  n   mean    sd median trimmed   mad min   max range  skew
-age        1 25  59.64 12.93   60.0   59.95 11.86  27  86.0  59.0 -0.31
-weighin    2 25 178.28 31.98  172.8  176.57 21.05 124 261.4 137.4  0.73
-        kurtosis   se
-age        -0.01 2.59
-weighin     0.07 6.40</code></pre>
-<blockquote>
-<p>The <strong>skew</strong> is <span class="math inline">\(0.73\)</span> which is close to <span class="math inline">\(1\)</span>, but the <strong>kurtosis</strong> is <span class="math inline">\(0.07\)</span> which is NOT close to <span class="math inline">\(1\)</span>. This reflects that the distribution is fairly symetrical, but more spread out and not as peaked as a truely normal distribution.</p>
-</blockquote>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="one-sample-t-test-for-the-mean.html#cb35-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb35-2"><a href="one-sample-t-test-for-the-mean.html#cb35-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(weighin) <span class="sc">%&gt;%</span>                 <span class="co"># extract the continuous variable</span></span>
-<span id="cb35-3"><a href="one-sample-t-test-for-the-mean.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro.test</span>()                           <span class="co"># test for normality (from base R)</span></span></code></pre></div>
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  .
-W = 0.93899, p-value = 0.1403</code></pre>
-<blockquote>
-<p>The <strong>Shapiro-Wilk’s test</strong> yielded NO evidence that weight is not normaly distributed at baseline, <span class="math inline">\(W = .939, p = .140\)</span>,.</p>
-</blockquote>
-</div>
-</div>
-<div id="inference" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Inference<a href="one-sample-t-test-for-the-mean.html#inference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Formal Statistical Test: t-Test for Difference in Independent Group Means</strong></p>
-<div class="rmdlightbulb">
-<p>
-Use the <code>t.test()</code> funtion for a single sample.
-</p>
-<p>
-<strong>Before you can run the t Test, you must seperate out or
-‘PULL’ your variable out of the dataset.</strong>
-</p>
-<p>
-Use the <code>dplyr::pull(continuous_variable)</code>step befor
-running the t Test
-</p>
-<p>
-<strong>Inside the funtion you need to specify one
-option:</strong>
-</p>
-<ul>
-<li>
-the null-hypothesis value: <code>mu = ##</code> (replace with your
-number)
-</li>
-</ul>
-<p>
-<strong>You MAY need/want to specify some or all of the following
-options you may way to leave as the default or override:</strong>
-</p>
-<ul>
-<li>
-Number of tails:
-<ul>
-<li>
-<code>alternative = “two.sided”</code> <strong>Default</strong>
-Allows for a 2-sided alternative
-</li>
-<li>
-<code>alternative = “less”</code> Only Allows: group 1 &lt; group
-2
-</li>
-<li>
-<code>alternative = “greater”</code> Only Allows: group 1 &gt; group
-2
-</li>
-</ul>
-</li>
-<li>
-Confidence level:
-<ul>
-<li>
-<code>conf.level = 0.95</code> <strong>Default</strong> Computes the
-95% confidence inverval<br />
-</li>
-<li>
-<code>conf.level = 0.90</code> Changes to a 90% confidence
-interval
-</li>
-</ul>
-</li>
+<li><p><code>totalcin</code> oral condition at the <em>initial stage</em></p></li>
+<li><p><code>totalcw2</code> oral condition at the end of <em>week 2</em></p></li>
+<li><p><code>totalcw4</code> oral condition at the end of <em>week 4</em></p></li>
+<li><p><code>totalcw6</code> oral condition at the end of <em>week 6</em></p></li>
 </ul>
 </div>
-<div id="all-defaults" class="section level3 hasAnchor" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> All Defaults<a href="one-sample-t-test-for-the-mean.html#all-defaults" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Is there evidence the population mean weight is DIFFERENT than 165?</strong></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="one-sample-t-test-for-the-mean.html#cb37-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb37-2"><a href="one-sample-t-test-for-the-mean.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(weighin) <span class="sc">%&gt;%</span>    <span class="co"># pull the continuous varaible out</span></span>
-<span id="cb37-3"><a href="one-sample-t-test-for-the-mean.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="dv">165</span>)            <span class="co"># specify the null hypothesis value</span></span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  .
-t = 2.0765, df = 24, p-value = 0.04872
-alternative hypothesis: true mean is not equal to 165
-95 percent confidence interval:
- 165.0807 191.4793
-sample estimates:
-mean of x 
-   178.28 </code></pre>
-<blockquote>
-<p>There is evidence that cancer patients weight more (<em>N</em> = 25, <em>M</em> = 178.28) now than the historic average of 165 pound, <span class="math inline">\(t(24) = 2.077, p = .049, 95% CI: 165.08, 191.48\)</span>.</p>
-</blockquote>
+<div id="import-data" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Import Data<a href="cancerprep.html#import-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <code>Cancer</code> dataset is saved in SPSS format, which is evident from the <code>.sav</code> ending on the file name.</p>
+<p>The <code>haven</code> package is downloaded as part of the <code>tidyverse</code> set of packages, but is not automatically loaded. It must have its own <code>library()</code> function call <em>(see above)</em>. The <code>haven::read_spss()</code> function works very simarly to the <code>readxl::read_excel()</code> function we used last chapter <span class="citation">(<a href="references.html#ref-R-haven" role="doc-biblioref">Wickham, Miller, and Smith 2022</a>)</span>.</p>
+<ul>
+<li>Make sure the <strong>dataset</strong> is saved in the same <em>folder</em> as this file</li>
+<li>Make sure the that <em>folder</em> is the <strong>working directory</strong></li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="cancerprep.html#cb14-1" aria-hidden="true" tabindex="-1"></a>cancer_raw <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_spss</span>(<span class="st">&quot;https://github.com/CEHS-research/PSY-6600_students/raw/master/Data/Cancer.sav&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="cancerprep.html#cb15-1" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">glimpse</span>(cancer_raw)</span></code></pre></div>
+<pre><code>Rows: 25
+Columns: 9
+$ ID       &lt;dbl&gt; 1, 5, 6, 9, 11, 15, 21, 26, 31, 35, 39, 41, 45, 2, 12, 14, 16…
+$ TRT      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1…
+$ AGE      &lt;dbl&gt; 52, 77, 60, 61, 59, 69, 67, 56, 61, 51, 46, 65, 67, 46, 56, 4…
+$ WEIGHIN  &lt;dbl&gt; 124.0, 160.0, 136.5, 179.6, 175.8, 167.6, 186.0, 158.0, 212.8…
+$ STAGE    &lt;dbl&gt; 2, 1, 4, 1, 2, 1, 1, 3, 1, 1, 4, 1, 1, 2, 4, 1, 2, 1, 4, 2, 1…
+$ TOTALCIN &lt;dbl&gt; 6, 9, 7, 6, 6, 6, 6, 6, 6, 6, 7, 6, 8, 7, 6, 4, 6, 6, 12, 5, …
+$ TOTALCW2 &lt;dbl&gt; 6, 6, 9, 7, 7, 6, 11, 11, 9, 4, 8, 6, 8, 16, 10, 6, 11, 7, 11…
+$ TOTALCW4 &lt;dbl&gt; 6, 10, 17, 9, 16, 6, 11, 15, 6, 8, 11, 9, 9, 9, 11, 8, 11, 6,…
+$ TOTALCW6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, 7, 14, 6…</code></pre>
 </div>
-<div id="confidence-level-other-than-95" class="section level3 hasAnchor" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> Confidence Level other than 95%<a href="one-sample-t-test-for-the-mean.html#confidence-level-other-than-95" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Find a 99% confience level for the population mean weight.</strong></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="one-sample-t-test-for-the-mean.html#cb39-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb39-2"><a href="one-sample-t-test-for-the-mean.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(weighin) <span class="sc">%&gt;%</span>    <span class="co"># pull the continuous varaible out</span></span>
-<span id="cb39-3"><a href="one-sample-t-test-for-the-mean.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="dv">165</span>,            <span class="co"># specify the null hypothesis value</span></span>
-<span id="cb39-4"><a href="one-sample-t-test-for-the-mean.html#cb39-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">conf.level =</span> <span class="fl">0.99</span>)   <span class="co"># over-ride the default of 95% CI</span></span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  .
-t = 2.0765, df = 24, p-value = 0.04872
-alternative hypothesis: true mean is not equal to 165
-99 percent confidence interval:
- 160.3927 196.1673
-sample estimates:
-mean of x 
-   178.28 </code></pre>
-<blockquote>
-<p>There is evidence that cancer patients weight more (<em>N</em> = 25, <em>M</em> = 178.28) now than the historic average of 165 pound, <span class="math inline">\(t(24) = 2.077, p = .049, 99% CI: 160.39, 196.17\)</span>.</p>
-</blockquote>
+<div id="wrangle-data" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Wrangle Data<a href="cancerprep.html#wrangle-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="cancerprep.html#cb17-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="ot">&lt;-</span> cancer_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="cancerprep.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename_all</span>(tolower) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="cancerprep.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">factor</span>(id)) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="cancerprep.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">trt =</span> <span class="fu">factor</span>(trt,</span>
+<span id="cb17-5"><a href="cancerprep.html#cb17-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, </span>
+<span id="cb17-6"><a href="cancerprep.html#cb17-6" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Aloe Juice&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-7"><a href="cancerprep.html#cb17-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">stage =</span> <span class="fu">factor</span>(stage))</span></code></pre></div>
 </div>
-<div id="one-sided-test-instead-of-two" class="section level3 hasAnchor" number="3.3.3">
-<h3><span class="header-section-number">3.3.3</span> One-Sided Test, instead of Two<a href="one-sample-t-test-for-the-mean.html#one-sided-test-instead-of-two" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Is there evidence the population mean weight is GREATER than 165?</strong></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="one-sample-t-test-for-the-mean.html#cb41-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb41-2"><a href="one-sample-t-test-for-the-mean.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(weighin) <span class="sc">%&gt;%</span>          <span class="co"># pull the continuous varaible out</span></span>
-<span id="cb41-3"><a href="one-sample-t-test-for-the-mean.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="dv">165</span>,                  <span class="co"># specify the null hypothesis value</span></span>
-<span id="cb41-4"><a href="one-sample-t-test-for-the-mean.html#cb41-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)   <span class="co"># over-ride the default of 95% CI</span></span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  .
-t = 2.0765, df = 24, p-value = 0.02436
-alternative hypothesis: true mean is greater than 165
-95 percent confidence interval:
- 167.3384      Inf
-sample estimates:
-mean of x 
-   178.28 </code></pre>
-<p>Notice than one end of the confidence interval is <code>Inf</code> for infinity. This always happens when you specify a one-tail test, so you should IGNORE the conficence interval reported when you specify <code>alternative =</code>.</p>
-<blockquote>
-<p>There is evidence that cancer patients weight more (<em>N</em> = 25, <em>M</em> = 178.28) now than the historic average of 165 pound, <span class="math inline">\(t(24) = 2.077, p = .024\)</span>.</p>
-</blockquote>
+<div id="overview-1" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Overview<a href="cancerprep.html#overview-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="dimentions-size-of-the-dataset-1" class="section level3 hasAnchor" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> Dimentions (size) of the dataset<a href="cancerprep.html#dimentions-size-of-the-dataset-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="cancerprep.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(cancer_clean)</span></code></pre></div>
+<pre><code>[1] 25  9</code></pre>
 </div>
-<div id="restrict-to-a-subsample" class="section level3 hasAnchor" number="3.3.4">
-<h3><span class="header-section-number">3.3.4</span> Restrict to a Subsample<a href="one-sample-t-test-for-the-mean.html#restrict-to-a-subsample" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Do the patients with <em>stage 3 and 4</em> cancer weigh more than 165 pounds at intake, on average?</strong></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="one-sample-t-test-for-the-mean.html#cb43-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb43-2"><a href="one-sample-t-test-for-the-mean.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(stage <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;3&quot;</span>, <span class="st">&quot;4&quot;</span>)) <span class="sc">%&gt;%</span>    <span class="co"># select a sub-sample </span></span>
-<span id="cb43-3"><a href="one-sample-t-test-for-the-mean.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(weighin) <span class="sc">%&gt;%</span>                     <span class="co"># pull the continuous varaible out</span></span>
-<span id="cb43-4"><a href="one-sample-t-test-for-the-mean.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="dv">165</span>)                             <span class="co"># specify the null hypothesis value</span></span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  .
-t = 0.82627, df = 5, p-value = 0.4463
-alternative hypothesis: true mean is not equal to 165
-95 percent confidence interval:
- 137.0283 219.4717
-sample estimates:
-mean of x 
-   178.25 </code></pre>
-<blockquote>
-<p>There is NO evidence that stage three and four cancer (n = 6, M = 178.25) patients weight more now than the historic average of 165 pound, <span class="math inline">\(t(24) = 0.826, p = .446\)</span>.</p>
-</blockquote>
+<div id="variable-names-1" class="section level3 hasAnchor" number="2.6.2">
+<h3><span class="header-section-number">2.6.2</span> Variable Names<a href="cancerprep.html#variable-names-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="cancerprep.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(cancer_clean)</span></code></pre></div>
+<pre><code>[1] &quot;id&quot;       &quot;trt&quot;      &quot;age&quot;      &quot;weighin&quot;  &quot;stage&quot;    &quot;totalcin&quot; &quot;totalcw2&quot;
+[8] &quot;totalcw4&quot; &quot;totalcw6&quot;</code></pre>
 </div>
+<div id="quick-glimpse-1" class="section level3 hasAnchor" number="2.6.3">
+<h3><span class="header-section-number">2.6.3</span> Quick Glimpse<a href="cancerprep.html#quick-glimpse-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="cancerprep.html#cb22-1" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">glimpse</span>(cancer_clean)</span></code></pre></div>
+<pre><code>Rows: 25
+Columns: 9
+$ id       &lt;fct&gt; 1, 5, 6, 9, 11, 15, 21, 26, 31, 35, 39, 41, 45, 2, 12, 14, 16…
+$ trt      &lt;fct&gt; Placebo, Placebo, Placebo, Placebo, Placebo, Placebo, Placebo…
+$ age      &lt;dbl&gt; 52, 77, 60, 61, 59, 69, 67, 56, 61, 51, 46, 65, 67, 46, 56, 4…
+$ weighin  &lt;dbl&gt; 124.0, 160.0, 136.5, 179.6, 175.8, 167.6, 186.0, 158.0, 212.8…
+$ stage    &lt;fct&gt; 2, 1, 4, 1, 2, 1, 1, 3, 1, 1, 4, 1, 1, 2, 4, 1, 2, 1, 4, 2, 1…
+$ totalcin &lt;dbl&gt; 6, 9, 7, 6, 6, 6, 6, 6, 6, 6, 7, 6, 8, 7, 6, 4, 6, 6, 12, 5, …
+$ totalcw2 &lt;dbl&gt; 6, 6, 9, 7, 7, 6, 11, 11, 9, 4, 8, 6, 8, 16, 10, 6, 11, 7, 11…
+$ totalcw4 &lt;dbl&gt; 6, 10, 17, 9, 16, 6, 11, 15, 6, 8, 11, 9, 9, 9, 11, 8, 11, 6,…
+$ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, 7, 14, 6…</code></pre>
 </div>
-<div id="inho-example" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Inho example<a href="one-sample-t-test-for-the-mean.html#inho-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<blockquote>
-<p>From Baron H. Cohen’s <em>Explaining Psychological Statistics</em>, page 196.</p>
-</blockquote>
-<p>To review, we can easily run a one-sample <em>t</em>-test with a few simple lines of code.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="one-sample-t-test-for-the-mean.html#cb45-1" aria-hidden="true" tabindex="-1"></a>data_ihno <span class="sc">%&gt;%</span></span>
-<span id="cb45-2"><a href="one-sample-t-test-for-the-mean.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(hr_base) <span class="sc">%&gt;%</span></span>
-<span id="cb45-3"><a href="one-sample-t-test-for-the-mean.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="fl">72.5</span>)</span></code></pre></div>
-<pre><code>
-    One Sample t-test
+<div id="top-and-bottom-rows-1" class="section level3 hasAnchor" number="2.6.4">
+<h3><span class="header-section-number">2.6.4</span> Top and Bottom Rows<a href="cancerprep.html#top-and-bottom-rows-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="cancerprep.html#cb24-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(cancer_clean)</span></code></pre></div>
+<pre><code>    id        trt age weighin stage totalcin totalcw2 totalcw4 totalcw6
+1    1    Placebo  52     124     2        6        6        6        7
+2    5    Placebo  77     160     1        9        6       10        9
+3    6    Placebo  60   136.5     4        7        9       17       19
+4    9    Placebo  61   179.6     1        6        7        9        3
+5 &lt;NA&gt;       &lt;NA&gt; ...     ...  &lt;NA&gt;      ...      ...      ...      ...
+6   42 Aloe Juice  73   181.5     0        8       11       16     &lt;NA&gt;
+7   44 Aloe Juice  67     187     1        5        7        7        7
+8   50 Aloe Juice  60     164     2        6        8       16     &lt;NA&gt;
+9   58 Aloe Juice  54   172.8     4        7        8       10        8</code></pre>
 
-data:  .
-t = -0.71525, df = 99, p-value = 0.4761
-alternative hypothesis: true mean is not equal to 72.5
-95 percent confidence interval:
- 71.63194 72.90806
-sample estimates:
-mean of x 
-    72.27 </code></pre>
-<p>We can repeat this process to test any number of variables against a specified population parameter:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="one-sample-t-test-for-the-mean.html#cb47-1" aria-hidden="true" tabindex="-1"></a>data_ihno <span class="sc">%&gt;%</span></span>
-<span id="cb47-2"><a href="one-sample-t-test-for-the-mean.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(hr_pre) <span class="sc">%&gt;%</span></span>
-<span id="cb47-3"><a href="one-sample-t-test-for-the-mean.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="fl">72.5</span>) </span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  .
-t = 2.6309, df = 99, p-value = 0.009878
-alternative hypothesis: true mean is not equal to 72.5
-95 percent confidence interval:
- 72.83183 74.86817
-sample estimates:
-mean of x 
-    73.85 </code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="one-sample-t-test-for-the-mean.html#cb49-1" aria-hidden="true" tabindex="-1"></a>data_ihno <span class="sc">%&gt;%</span></span>
-<span id="cb49-2"><a href="one-sample-t-test-for-the-mean.html#cb49-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(hr_post) <span class="sc">%&gt;%</span></span>
-<span id="cb49-3"><a href="one-sample-t-test-for-the-mean.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">mu =</span> <span class="fl">72.5</span>)</span></code></pre></div>
-<pre><code>
-    One Sample t-test
-
-data:  .
-t = 0.63295, df = 99, p-value = 0.5282
-alternative hypothesis: true mean is not equal to 72.5
-95 percent confidence interval:
- 71.85954 73.74046
-sample estimates:
-mean of x 
-     72.8 </code></pre>
-
+</div>
 </div>
 </div>
             </section>
@@ -652,8 +451,8 @@ mean of x
           </div>
         </div>
       </div>
-<a href="cancerprep.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="two-independent-samples-t-test-for-the-difference-in-means.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ihnoprep.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="one-sample-t-test-for-the-mean.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

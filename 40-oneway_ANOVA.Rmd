@@ -1,4 +1,4 @@
-# One-Way ANOVA
+# One-Way ANOVA: Code
 
 
 Required Packages 
@@ -6,10 +6,8 @@ Required Packages
 ```{r}
 library(tidyverse)    # Loads several very helpful 'tidy' packages
 library(furniture)    # Nice tables (by our own Tyson Barrett)
-library(car)          # Companion for Applied Regression (and ANOVA)
 library(afex)         # Analysis of Factorial Experiments
 library(emmeans)      # Estimated marginal means (Least-squares means)
-library(multcomp)     # Simultaneous Inference in General Parametric Models 
 library(readxl)       # Necessary for reading in an example data set
 ```
 
@@ -19,22 +17,15 @@ library(readxl)       # Necessary for reading in an example data set
 
 ### Ensure the Data is in "long" Format 
 
-First, the data must be restructured from **wide** to **long** format, so that each observation is on its own line.  All categorical variables must be declared as fators.  We also must add an distinct indicator variable.  
+First, the data must be restructured from **wide** to **long** format, so that each observation is on its own line.  All categorical variables must be declared as factors.  We also must add an distinct indicator variable.  
 
-```{r, eval=FALSE}
-# convert the dataset: wide --> long
-data_long <- data_wide %>% 
-  tidyr::gather(key   = group_IV,                      # new var name = groups
-                value = continuous_DV,                 # new var name = measurements
-                var_1, var_2, var_3, ... , var_k) %>%  # all old variable names
-  dplyr::mutate(id_var = row_number()) %>%             # create a sequential id variable
-  dplyr::select(id_var, group_IV, continuous_DV) %>%   # reorder the variables
-  dplyr::mutate_at(vars(id_var, group_IV), factor)     # declare factors
+Name of the dataset: `data_long` 
 
-data_long %>% head(n = 10)                             # display the top 10 rows only
-```
-
-
+Variables:  
+ 
+* `id_var` Name of the variable that is qunique for each unit of study (i.e. person)
+* `group_IV` Name of the categorical variable (`factor`) with at least 2 levels
+* `continuous_DV` Name of the continuous varaible (`dbl`) that we want to compare the averages of
 
 
 
@@ -46,7 +37,11 @@ Second, check the summary statistics for each of the $k$ groups.
 # Raw data: summary table
 data_long %>% 
   dplyr::group_by(group_IV) %>%          # divide into groups
-  furniture::table1(continuous_DV)       # gives M(SD)
+  furniture::table1(continuous_DV        # gives M(SD)
+                    digits = 2,     
+                    na.rm = FALSE,
+                    total = TRUE,
+                    output = "markdown") 
 ```
 
 
@@ -78,6 +73,21 @@ data_long %>%
 
 
 
+
+### Assumption Check: HOV
+
+It is important that we test for violations of the assumption of *Homogeneity of variance*.
+
+```{r EX_hov, eval=FALSE}
+# Levene's Test of HOV
+data_name %>% 
+  car::leveneTest(continuous_var ~ group_var, 
+                  data = .,            
+                  center = "mean")     
+```
+
+
+
 ## Fitting One-way ANOVA Model
 
 
@@ -102,7 +112,10 @@ aov_name <- data_long %>%
 ```
 
 
-## ANOVA Output
+
+
+
+### Basic Output - stored name of model
 
 By running the name you saved you model under, you will get a brief set of output, including a measure of **Effect Size**.
 
@@ -110,10 +123,15 @@ By running the name you saved you model under, you will get a brief set of outpu
 **NOTE:** The `ges` is the *generalized eta squared*.  In a one-way ANOVA, the eta-squared effect size is only one value, ie. generalized $\eta_g$ and partial $\eta_p$ are the same.
 ```
 
+
+
 ```{r, eval=FALSE}
 # Display basic ANOVA results (includes effect size)
 aov_name 
 ```
+
+
+### Fuller Output - add $Anova on model name
 
 To fully fill out a standard ANOVA table and compute other effect sizes, you will need a more complete set of output, including the **Sum of Squares** components, you will need to add `$Anova` at the end of the model name before running it.
 
@@ -127,112 +145,26 @@ aov_name$Anova
 ```
 
 
-##Inho data set example
+## Followup-tests
 
-Import Data, Define Factors, and Compute New Variables
 
-* Make sure the **dataset** is saved in the same *folder* as this file
-* Make sure the that *folder* is the **working directory**
+### Estimated Marginal Means with `emmeans::emmeans(~ group_var)`
 
-```{block type='rmdlightbulb', echo=TRUE}
-**NOTE:** I added the second line to convert all the variables names to lower case.  I still kept the `F` as a capital letter at the end of the five factor variables.
-```
 
-```{r ihno}
-ihno_clean <- read_excel("Ihno_dataset.xls") %>% 
-  dplyr::rename_all(tolower) %>% 
-  dplyr::mutate(genderF = factor(gender, 
-                                 levels = c(1, 2),
-                                 labels = c("Female", 
-                                            "Male"))) %>% 
-  dplyr::mutate(majorF = factor(major, 
-                                levels = c(1, 2, 3, 4,5),
-                                labels = c("Psychology",
-                                           "Premed",
-                                           "Biology",
-                                           "Sociology",
-                                           "Economics"))) %>% 
-  dplyr::mutate(reasonF = factor(reason,
-                                 levels = c(1, 2, 3),
-                                 labels = c("Program requirement",
-                                            "Personal interest",
-                                            "Advisor recommendation"))) %>% 
-  dplyr::mutate(exp_condF = factor(exp_cond,
-                                   levels = c(1, 2, 3, 4),
-                                   labels = c("Easy",
-                                              "Moderate",
-                                              "Difficult",
-                                              "Impossible"))) %>% 
-  dplyr::mutate(coffeeF = factor(coffee,
-                                 levels = c(0, 1),
-                                 labels = c("Not a regular coffee drinker",
-                                            "Regularly drinks coffee")))  %>% 
-  dplyr::mutate(hr_base_bps = hr_base / 60) 
+```{r EX_emm, eval=FALSE}
+aov_name %>% 
+  emmeans::emmeans(~ group_var)        # Calculate Estimated Marinal Means
 ```
 
 
-It is important that we test for violations of the assumption of *Homogeneity of variance*.
-
-```{r EX_hov}
-# Levene's Test of HOV
-data_name %>% 
-  car::leveneTest(continuous_var ~ group_var, 
-                  data = .,            
-                  center = "mean")     
-```
 
 
-The `aov_4()` function from the `afex` package fits ANOVA models (oneway, two-way, repeated measures, and mixed design). It needs at least two arguments:
-
-1. formula:  `continuous_var ~ group_var + (1|id_var)`  *one observation per subject and `id_var` is **distinct** for each subject*
-
-2. dataset: `data = .` *we use the period to signify that the datset is being piped from above*
-
-
-Here is an outline of what your syntax should look like when you **fit and save a one-way ANOVA**.  Of course you will replace the dataset name and the variable names, as well as the name you are saving it as.
-
-```{block type='rmdlightbulb', echo=TRUE}
-**NOTE:** The `aov_4()` function works on data in LONG format only.  Each observation needs to be on its one line or row with seperate variables for the group membership (categorical factor or `fct`) and the continuous measurement (numberic or `dbl`).
-```
-
-```{r EX_aov_4}
-# One-way ANOVA: fit and save
-aov_name <- data_name %>% 
-  afex::aov_4(continuous_var ~ group_var + (1|id_var),
-              data = .)
-```
-
-### Basic Output - stored name of model
-
-By running the name you saved you model under, you will get a brief set of output, including a measure of **Effect Size**.
-
-```{block type='rmdlightbulb', echo=TRUE}
-**NOTE:** The `ges` is the *generalized eta squared*.  In a one-way ANOVA, the eta-squared effect size is the same value, ie. generalized ($\eta_g^2$) and partial $\eta_p^2$) are the same.
-```
-
-```{r EX_aov_4_brief}
-# Display basic ANOVA results (includes effect size)
-aov_name 
-```
-
-### Fuller Output - add `$Anova` on model name
-
-To fully fill out a standard ANOVA table and compute other effect sizes, you will need a more complete set of output, including the **Sum of Squares** components, you will need to add `$Anova` at the end of the model name before running it.
-
-```{block type='rmdlightbulb', echo=TRUE}
-**NOTE:** IGNORE the first line that starts with `(Intercept)`!  Also, the 'mean sum of squares' are not included in this table, nor is the **Total** line at the bottom of the standard ANOVA table.  You will need to manually compute these values and add them on the homework page.  Remember that `Sum of Squares (SS)` and `degrees of freedom (df)` add up, but `Mean Sum of Squreas (MS)` do not add up.  Also: `MS = SS/df` for each term.
-```
-
-```{r EX_aov_4_fuller}
-# Display fuller ANOVA results (includes sum of squares)
-aov_name$Anova 
-```
 
 ### All Pairwise Comparisons with `pairs()`
 
 There are two steps to conduct all possible pairwise comparisons:
 
-1. `emmeans(~ group_var)` - Calculate the *Estimated Marinal Means*
+1. `emmeans::emmeans(~ group_var)` - Calculate the *Estimated Marinal Means*
 2. `pairs()` - Determine if each pair is *significantly different*
 
 Within the `pairs()` function there are several options for controling for multiple comparisons, including:
@@ -242,12 +174,27 @@ Within the `pairs()` function there are several options for controling for multi
 * `adjust = "bon"` - Bonferroni
 
 
-```{r EX_tukey}
+```{r EX_tukey, eval=FALSE}
 # Pairwise post hoc: Tukey's HSD adjustment for multiple comparisons
 aov_name %>% 
-  emmeans::emmeans(~ group_var) %>%        # Calculate Estimated Marinal Means
+  emmeans::emmeans(~ group_var) %>%        # Calculate Estimated Marginal Means
   pairs(adjust = "tukey")                  # Is each pair signif different?
 ```
+
+
+
+### Plot Marginal Means with `emmeans::emmip(~ group_var)`
+
+
+```{r EX_emmip, eval=FALSE}
+aov_name %>% 
+  emmeans::emmip(~ group_var,        # Calculate Estimated Marginal Means
+                 CIs = TRUE)         # Include Confidence Intervals
+```
+
+
+
+
 
 ### Contrast Statements with `emmeans::contrast()`
 
@@ -261,7 +208,7 @@ Inside the contrast statement, list the named sets of linear contrast weights.  
 **NOTE:** You must provide one weight ($c_i$) for each of the $k$ groups.  If you wish to ignore a group, that group's weight is $c_i = 0$.  The sum total of all the weights must be zero ($\sum c_i = 0$), so use positive and negative numbers.
 ```
 
-```{r EX_contrast}
+```{r EX_contrast, eval=FALSE}
 # Contrast statement : Impossible vs. Rest
 aov_name %>% 
   emmeans::emmeans(~ group_var) %>% 
