@@ -1,4 +1,4 @@
-# TWO INDEPENDENT SAMPLES t-TEST: for the Difference in MEANS
+# t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES 
 
 
 Using the `t.test()` function
@@ -76,7 +76,7 @@ cancer_clean %>%
 
 ## Assumptions
 
-### Independence
+### 1. Independence
 
 BOTH Samples were drawn **INDEPENDENTLY** at random (at least as representative as possible)
 
@@ -86,7 +86,7 @@ BOTH Samples were drawn **INDEPENDENTLY** at random (at least as representative 
 
 
 
-### Normality
+### 2. Normality
 
 > A variable is said to follow the normal distribution if it resembles the normal curve.  Specifically it is symetrical, unimodal, and bell shaped.
 
@@ -176,7 +176,7 @@ cancer_clean %>%
 > Shapiro-Wilk's tests yielded no evidence that oral condition is NOT normally distributed four weeks after baseline in the placebo group, $W = .883, p = .064$, and the treatment group, $W = .929, p = .401$.  
 
 
-### HOV
+### 2. HOV
 
 > Two Populations exhibit Homogeneity of Variance (HOV), i.e. have about the same amount of spread
 
@@ -245,7 +245,7 @@ Use the same `t.test()` funtion we have used for a single sample, but speficy a 
 * Number of tails:    
     + `alternative = "two.sided"` **Default** Allows for a 2-sided alternative 
     + `alternative = "less"` Only Allows: group 1 < group 2
-    + `alternative = "greater"` Only Allows: group 1 > group 2
+    + `alternative = "more"` Only Allows: group 1 > group 2
     
     
 * Independent vs. paired:    
