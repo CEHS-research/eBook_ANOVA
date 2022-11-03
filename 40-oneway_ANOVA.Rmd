@@ -13,13 +13,25 @@ library(readxl)       # Necessary for reading in an example data set
 
 
 
-## Prepare for Modeling
+## Prepare Work
+
+#### Hypotheses
+
+> H_0: There is no difference in the DV average between IV group  
+
+> H_a: The DV average is different for at least one IV group 
+
+
 
 ### Ensure the Data is in "long" Format 
 
-First, the data must be restructured from **wide** to **long** format, so that each observation is on its own line.  All categorical variables must be declared as factors.  We also must add an distinct indicator variable.  
+The data must be restructured from **wide** to **long** format, so that each observation is on its own line.  All categorical variables must be declared as factors.  We also must add an distinct indicator variable.  
 
-Name of the dataset: `data_long` 
+Name of the dataset: `data_long`
+
+
+### Check the Variables
+
 
 Variables:  
  
@@ -28,10 +40,11 @@ Variables:
 * `continuous_DV` Name of the continuous varaible (`dbl`) that we want to compare the averages of
 
 
+## Exploratory Data Analysis
 
 ### Compute Summary Statistics
 
-Second, check the summary statistics for each of the $k$ groups.
+Calculate summary statistics of the DV by the groups to the data to eyeball the potential effect or differences in the means.  Also check if the standard deviations and samples sizes are somewhat similar in each group.
 
 ```{r, eval=FALSE}
 # Raw data: summary table
@@ -48,9 +61,9 @@ data_long %>%
 
 
 
-### Plot the Raw Data
+### Plot the Observed Data
 
-Third, plot the data to eyeball the potential effect.  Remember the center line in each box represents the median, not the mean.
+Plot the data to eyeball the potential effect.  Remember the center line in each box represents the median, not the mean.  I have added a red diamond on the mean survival time for each type of poison.
 
 ```{r, eval=FALSE}
 # Raw data: boxplots
@@ -73,23 +86,133 @@ data_long %>%
 
 
 
+```{r, eval=FALSE}
+data_long %>% 
+  ggplot(aes(x = continuous_DV,
+             y = group_IV)) + 
+  geom_violin(fill = "gray") +
+  geom_boxplot(width = .07,
+               fill = "white") +
+  geom_jitter(position = position_jitter(0.21)) +
+  stat_summary(fun = mean,
+               geom = "point",
+               shape = 18,
+               color = "red",
+               size = 5) +
+  theme_bw()
+```
 
-### Assumption Check: HOV
+
+## Assumption Checks
+
+
+### Independent, Random Samples
+
+The Sample(s) was drawn at random (at least as representative as possible)
+
+* Nothing can be done to fix NON-representative samples!
+* Can not for with any statistically test
+
+
+
+### Normality
+
+> A variable is said to follow the normal distribution if it resembles the normal curve.  Specifically it is symetrical, unimodal, and bell shaped.
+
+The continuous variable has a **NORMAL** distribution in ALL relevant populations
+
+* Not as important if the sample is large *(Central Limit Theorem)*
+* IF the sample is far from normal &/or small, might want to use a different method  
+
+
+
+Options to judging normality:
+
+**Options to judging normality:**
+
+1. Visualization of each sample's distribution    
+    + Stacked **histograms**, but is sensitive to binning choices *(number or width)*
+    + Side-by-side **boxplots**, shows *median* instead of *mean* as central line
+    + Seperate **QQ plots** (straight $45^\circ$ line), but is sensitive to outliers! 
+    
+    
+```{r, eval=FALSE}
+data_long %>% 
+  ggplot(aes(continuous_var)) + 
+  geom_histogram(fill = "gray",
+                 color = "black",
+                 alpha = .5) +
+  facet_grid(group_var ~ .,
+             labeller = label_both) +
+  theme_bw()
+```
+
+
+```{r, eval=FALSE}
+data_long %>% 
+  ggplot(aes(sample = continuous_var)) +    # make sure to include "sample = "
+  geom_qq() +                               # layer on the dots
+  stat_qq_line() +                          # layer on the line
+  facet_wrap(~ group_var,                   # seperate panels for each group
+             labeller = label_both) +    
+  theme_bw()
+```
+
+    
+2. Calculate **Skewness** and **Kurtosis** 
+    + Divided each value by its standard error (SE)    
+    + A result $\gt \pm 2$ indicates issues  
+    
+```{r, eval=FALSE}
+data_long %>% 
+  psych::describeBy(continuous_var ~ group_var,
+                    data = .,
+                    mat = TRUE,
+                    digits = 2) 
+```
+    
+    
+
+3. Formal Inferential Tests for Normality  
+    + Null-hypothesis: population is normally distributed
+    + A $p \lt .05$ ???indicate snon-normality
+    + For smaller samples, use **Shapiro-Wilk's Test** 
+    + For larger samples, use **Kolmogorov-Smirnov's Test**
+
+```{r, eval=FALSE}
+data_long %>% 
+  dplyr::group_by(group_var) %>% 
+  dplyr::summarise(W.stat  = shapiro.test(continuous_var)$statistic,
+                   p.value = shapiro.test(continuous_var)$p.value)
+```
+    
+    
 
 It is important that we test for violations of the assumption of *Homogeneity of variance*.
 
 ```{r EX_hov, eval=FALSE}
 # Levene's Test of HOV
-data_name %>% 
+data_long %>% 
   car::leveneTest(continuous_var ~ group_var, 
                   data = .,            
                   center = "mean")     
 ```
 
 
+```{r. eval=FALSE}
+# Bartlett's Test of HOV
+df_long %>% 
+  bartlett.test(continuous_var ~ group_var, 
+                data = .)
+```
 
-## Fitting One-way ANOVA Model
 
+
+## One-way ANOVA Model
+
+
+
+### Fit & Save the Model
 
 The `aov_4()` function from the `afex` package fits ANOVA models *(oneway, two-way, repeated measures, and mixed design)*. It needs at least two arguments:
 

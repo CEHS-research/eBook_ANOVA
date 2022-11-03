@@ -1,45 +1,45 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>2 t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
-  <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
+  <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta property="og:title" content="4 t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   <meta property="og:type" content="book" />
-  
-  <meta property="og:image" content="EQM_v1_cover.png" />
+  <meta property="og:image" content="/EQM_v1_cover.png" />
   <meta property="og:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="github-repo" content="cehs-research/eBook_wrangle" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta name="twitter:title" content="4 t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   
   <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
-  <meta name="twitter:image" content="EQM_v1_cover.png" />
+  <meta name="twitter:image" content="/EQM_v1_cover.png" />
 
-<meta name="author" content="Sarah Schwartz &amp; Tyson Barrett">
+<meta name="author" content="Sarah Schwartz &amp; Tyson Barrett" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="t-test-for-the-mean-of-1-sample.html">
-<link rel="next" href="ex-obese.html">
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link rel="prev" href="one-sample-t-test-for-the-mean.html"/>
+<link rel="next" href="one-way-anova-code.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,45 +47,100 @@
 
 
 
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -105,58 +160,167 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">Vol. 3: Testing Mean Differences</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#blocked-notes"><i class="fa fa-check"></i>Blocked Notes</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#code-and-output"><i class="fa fa-check"></i>Code and Output</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-authors"><i class="fa fa-check"></i>The Authors</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-authors"><i class="fa fa-check"></i>The Authors</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-choose-r"><i class="fa fa-check"></i>Why choose R ?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#fyi"><i class="fa fa-check"></i>FYI</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="t-test-for-the-mean-of-1-sample.html"><a href="t-test-for-the-mean-of-1-sample.html"><i class="fa fa-check"></i><b>1</b> t TEST FOR THE MEAN OF 1 SAMPLE</a><ul>
-<li class="chapter" data-level="1.1" data-path="t-test-for-the-mean-of-1-sample.html"><a href="t-test-for-the-mean-of-1-sample.html#required-packages"><i class="fa fa-check"></i><b>1.1</b> Required Packages</a></li>
-<li class="chapter" data-level="1.2" data-path="t-test-for-the-mean-of-1-sample.html"><a href="t-test-for-the-mean-of-1-sample.html#example-dataset---cancer-experiment"><i class="fa fa-check"></i><b>1.2</b> Example Dataset - Cancer Experiment</a></li>
-<li class="chapter" data-level="1.3" data-path="t-test-for-the-mean-of-1-sample.html"><a href="t-test-for-the-mean-of-1-sample.html#sample-mean-vs.historic-control"><i class="fa fa-check"></i><b>1.3</b> 1 Sample Mean vs. historic control</a></li>
-<li class="chapter" data-level="1.4" data-path="t-test-for-the-mean-of-1-sample.html"><a href="t-test-for-the-mean-of-1-sample.html#change-the-confidence-level"><i class="fa fa-check"></i><b>1.4</b> Change the Confidence Level</a></li>
-<li class="chapter" data-level="1.5" data-path="t-test-for-the-mean-of-1-sample.html"><a href="t-test-for-the-mean-of-1-sample.html#restrict-to-a-subsample"><i class="fa fa-check"></i><b>1.5</b> Restrict to a Subsample</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html"><i class="fa fa-check"></i><b>2</b> t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES</a><ul>
-<li class="chapter" data-level="2.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#background"><i class="fa fa-check"></i><b>2.1</b> Background</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#required-packages-1"><i class="fa fa-check"></i><b>2.1.1</b> Required Packages</a></li>
-<li class="chapter" data-level="2.1.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#example-dataset---cancer-experiment-1"><i class="fa fa-check"></i><b>2.1.2</b> Example Dataset - Cancer Experiment</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#exploratory-data-analysis-i.e.the-eyeball-method"><i class="fa fa-check"></i><b>2.2</b> Exploratory Data Analysis: i.e. the eyeball method</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#means-and-sds"><i class="fa fa-check"></i><b>2.2.1</b> Means and SDs</a></li>
-<li class="chapter" data-level="2.2.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#stacked-histograms"><i class="fa fa-check"></i><b>2.2.2</b> Stacked Histograms</a></li>
-<li class="chapter" data-level="2.2.3" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#side-by-side-boxplots"><i class="fa fa-check"></i><b>2.2.3</b> Side-by-Side Boxplots</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#assumptions"><i class="fa fa-check"></i><b>2.3</b> Assumptions</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#independence"><i class="fa fa-check"></i><b>2.3.1</b> 1. Independence</a></li>
-<li class="chapter" data-level="2.3.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#normality"><i class="fa fa-check"></i><b>2.3.2</b> 2. Normality</a></li>
-<li class="chapter" data-level="2.3.3" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#hov"><i class="fa fa-check"></i><b>2.3.3</b> 2. HOV</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#inference"><i class="fa fa-check"></i><b>2.4</b> Inference</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#pooled-variance-test"><i class="fa fa-check"></i><b>2.4.1</b> Pooled Variance Test</a></li>
-<li class="chapter" data-level="2.4.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#seperate-variance-test"><i class="fa fa-check"></i><b>2.4.2</b> Seperate Variance Test</a></li>
+<li class="chapter" data-level="1" data-path="ihnoprep.html"><a href="ihnoprep.html"><i class="fa fa-check"></i><b>1</b> Intro: Ihno’s Experiemnt</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="ihnoprep.html"><a href="ihnoprep.html#background-of-data"><i class="fa fa-check"></i><b>1.1</b> Background of Data</a></li>
+<li class="chapter" data-level="1.2" data-path="ihnoprep.html"><a href="ihnoprep.html#import-wrangle-the-data"><i class="fa fa-check"></i><b>1.2</b> Import &amp; Wrangle the Data</a></li>
+<li class="chapter" data-level="1.3" data-path="ihnoprep.html"><a href="ihnoprep.html#overview"><i class="fa fa-check"></i><b>1.3</b> Overview</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="ihnoprep.html"><a href="ihnoprep.html#dimentions-size-of-the-dataset"><i class="fa fa-check"></i><b>1.3.1</b> Dimentions (size) of the dataset</a></li>
+<li class="chapter" data-level="1.3.2" data-path="ihnoprep.html"><a href="ihnoprep.html#variable-names"><i class="fa fa-check"></i><b>1.3.2</b> Variable Names</a></li>
+<li class="chapter" data-level="1.3.3" data-path="ihnoprep.html"><a href="ihnoprep.html#quick-glimpse"><i class="fa fa-check"></i><b>1.3.3</b> Quick Glimpse</a></li>
+<li class="chapter" data-level="1.3.4" data-path="ihnoprep.html"><a href="ihnoprep.html#top-and-bottom-rows"><i class="fa fa-check"></i><b>1.3.4</b> Top and Bottom Rows</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="ex-obese.html"><a href="ex-obese.html"><i class="fa fa-check"></i><b>3</b> Ex: Obese</a><ul>
-<li class="chapter" data-level="3.1" data-path="ex-obese.html"><a href="ex-obese.html#dataset-background"><i class="fa fa-check"></i><b>3.1</b> Dataset Background</a></li>
-<li class="chapter" data-level="3.2" data-path="ex-obese.html"><a href="ex-obese.html#data-wrangling-preparation"><i class="fa fa-check"></i><b>3.2</b> Data Wrangling &amp; Preparation</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="ex-obese.html"><a href="ex-obese.html#read-in-raw-data"><i class="fa fa-check"></i><b>3.2.1</b> Read in Raw Data</a></li>
-<li class="chapter" data-level="3.2.2" data-path="ex-obese.html"><a href="ex-obese.html#format-variables"><i class="fa fa-check"></i><b>3.2.2</b> Format Variables</a></li>
-<li class="chapter" data-level="3.2.3" data-path="ex-obese.html"><a href="ex-obese.html#create-new-variables"><i class="fa fa-check"></i><b>3.2.3</b> Create New VAriables</a></li>
-<li class="chapter" data-level="3.2.4" data-path="ex-obese.html"><a href="ex-obese.html#restructure"><i class="fa fa-check"></i><b>3.2.4</b> Restructure</a></li>
+<li class="chapter" data-level="2" data-path="cancerprep.html"><a href="cancerprep.html"><i class="fa fa-check"></i><b>2</b> Intro: Cancer Experiemnt</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="cancerprep.html"><a href="cancerprep.html#source-of-data"><i class="fa fa-check"></i><b>2.1</b> Source of Data</a></li>
+<li class="chapter" data-level="2.2" data-path="cancerprep.html"><a href="cancerprep.html#description-of-the-study"><i class="fa fa-check"></i><b>2.2</b> Description of the Study</a></li>
+<li class="chapter" data-level="2.3" data-path="cancerprep.html"><a href="cancerprep.html#variables"><i class="fa fa-check"></i><b>2.3</b> Variables</a></li>
+<li class="chapter" data-level="2.4" data-path="cancerprep.html"><a href="cancerprep.html#import-data"><i class="fa fa-check"></i><b>2.4</b> Import Data</a></li>
+<li class="chapter" data-level="2.5" data-path="cancerprep.html"><a href="cancerprep.html#wrangle-data"><i class="fa fa-check"></i><b>2.5</b> Wrangle Data</a></li>
+<li class="chapter" data-level="2.6" data-path="cancerprep.html"><a href="cancerprep.html#overview-1"><i class="fa fa-check"></i><b>2.6</b> Overview</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="cancerprep.html"><a href="cancerprep.html#dimentions-size-of-the-dataset-1"><i class="fa fa-check"></i><b>2.6.1</b> Dimentions (size) of the dataset</a></li>
+<li class="chapter" data-level="2.6.2" data-path="cancerprep.html"><a href="cancerprep.html#variable-names-1"><i class="fa fa-check"></i><b>2.6.2</b> Variable Names</a></li>
+<li class="chapter" data-level="2.6.3" data-path="cancerprep.html"><a href="cancerprep.html#quick-glimpse-1"><i class="fa fa-check"></i><b>2.6.3</b> Quick Glimpse</a></li>
+<li class="chapter" data-level="2.6.4" data-path="cancerprep.html"><a href="cancerprep.html#top-and-bottom-rows-1"><i class="fa fa-check"></i><b>2.6.4</b> Top and Bottom Rows</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="ex-obese.html"><a href="ex-obese.html#exploratory-analysis-of-raw-data"><i class="fa fa-check"></i><b>3.3</b> Exploratory Analysis of Raw Data</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="ex-obese.html"><a href="ex-obese.html#tabulate"><i class="fa fa-check"></i><b>3.3.1</b> Tabulate</a></li>
-<li class="chapter" data-level="3.3.2" data-path="ex-obese.html"><a href="ex-obese.html#visualize"><i class="fa fa-check"></i><b>3.3.2</b> Visualize</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="ex-obese.html"><a href="ex-obese.html#inferncial-analysis-with-modeling"><i class="fa fa-check"></i><b>3.4</b> Inferncial Analysis with Modeling</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="ex-obese.html"><a href="ex-obese.html#anova"><i class="fa fa-check"></i><b>3.4.1</b> ANOVA</a></li>
-<li class="chapter" data-level="3.4.2" data-path="ex-obese.html"><a href="ex-obese.html#regression"><i class="fa fa-check"></i><b>3.4.2</b> Regression</a></li>
+<li class="chapter" data-level="3" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html"><i class="fa fa-check"></i><b>3</b> ONE SAMPLE t-TEST: for the MEAN</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#exploratory-data-analysis-i.e.-the-eyeball-method"><i class="fa fa-check"></i><b>3.1</b> Exploratory Data Analysis: i.e. the eyeball method</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#mean-and-sd"><i class="fa fa-check"></i><b>3.1.1</b> Mean and SD</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="ex-obese.html"><a href="ex-obese.html#results-discussion"><i class="fa fa-check"></i><b>3.5</b> Results &amp; Discussion</a></li>
+<li class="chapter" data-level="3.2" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#assumptions"><i class="fa fa-check"></i><b>3.2</b> Assumptions</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#random-sampling"><i class="fa fa-check"></i><b>3.2.1</b> Random Sampling</a></li>
+<li class="chapter" data-level="3.2.2" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#normality"><i class="fa fa-check"></i><b>3.2.2</b> Normality</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#inference"><i class="fa fa-check"></i><b>3.3</b> Inference</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#all-defaults"><i class="fa fa-check"></i><b>3.3.1</b> All Defaults</a></li>
+<li class="chapter" data-level="3.3.2" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#confidence-level-other-than-95"><i class="fa fa-check"></i><b>3.3.2</b> Confidence Level other than 95%</a></li>
+<li class="chapter" data-level="3.3.3" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#one-sided-test-instead-of-two"><i class="fa fa-check"></i><b>3.3.3</b> One-Sided Test, instead of Two</a></li>
+<li class="chapter" data-level="3.3.4" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#restrict-to-a-subsample"><i class="fa fa-check"></i><b>3.3.4</b> Restrict to a Subsample</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="one-sample-t-test-for-the-mean.html"><a href="one-sample-t-test-for-the-mean.html#inho-example"><i class="fa fa-check"></i><b>3.4</b> Inho example</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html"><i class="fa fa-check"></i><b>4</b> t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#exploratory-data-analysis-i.e.-the-eyeball-method-1"><i class="fa fa-check"></i><b>4.1</b> Exploratory Data Analysis: i.e. the eyeball method</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#means-and-sds"><i class="fa fa-check"></i><b>4.1.1</b> Means and SDs</a></li>
+<li class="chapter" data-level="4.1.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#stacked-histograms"><i class="fa fa-check"></i><b>4.1.2</b> Stacked Histograms</a></li>
+<li class="chapter" data-level="4.1.3" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#side-by-side-boxplots"><i class="fa fa-check"></i><b>4.1.3</b> Side-by-Side Boxplots</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#assumptions-1"><i class="fa fa-check"></i><b>4.2</b> Assumptions</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#independence"><i class="fa fa-check"></i><b>4.2.1</b> 1. Independence</a></li>
+<li class="chapter" data-level="4.2.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#normality-1"><i class="fa fa-check"></i><b>4.2.2</b> 2. Normality</a></li>
+<li class="chapter" data-level="4.2.3" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#hov"><i class="fa fa-check"></i><b>4.2.3</b> 2. HOV</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#inference-1"><i class="fa fa-check"></i><b>4.3</b> Inference</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#pooled-variance-test"><i class="fa fa-check"></i><b>4.3.1</b> Pooled Variance Test</a></li>
+<li class="chapter" data-level="4.3.2" data-path="t-test-for-the-difference-in-2-means-independent-samples.html"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#seperate-variance-test"><i class="fa fa-check"></i><b>4.3.2</b> Seperate Variance Test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html"><i class="fa fa-check"></i><b>5</b> One-Way ANOVA: Code</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#prepare-work"><i class="fa fa-check"></i><b>5.1</b> Prepare Work</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#ensure-the-data-is-in-long-format"><i class="fa fa-check"></i><b>5.1.1</b> Ensure the Data is in “long” Format</a></li>
+<li class="chapter" data-level="5.1.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#check-the-variables"><i class="fa fa-check"></i><b>5.1.2</b> Check the Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>5.2</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#compute-summary-statistics"><i class="fa fa-check"></i><b>5.2.1</b> Compute Summary Statistics</a></li>
+<li class="chapter" data-level="5.2.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#plot-the-observed-data"><i class="fa fa-check"></i><b>5.2.2</b> Plot the Observed Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#assumption-checks"><i class="fa fa-check"></i><b>5.3</b> Assumption Checks</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#independent-random-samples"><i class="fa fa-check"></i><b>5.3.1</b> Independent, Random Samples</a></li>
+<li class="chapter" data-level="5.3.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#normality-2"><i class="fa fa-check"></i><b>5.3.2</b> Normality</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#one-way-anova-model"><i class="fa fa-check"></i><b>5.4</b> One-way ANOVA Model</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#fit-save-the-model"><i class="fa fa-check"></i><b>5.4.1</b> Fit &amp; Save the Model</a></li>
+<li class="chapter" data-level="5.4.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#basic-output---stored-name-of-model"><i class="fa fa-check"></i><b>5.4.2</b> Basic Output - stored name of model</a></li>
+<li class="chapter" data-level="5.4.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#fuller-output---add-anova-on-model-name"><i class="fa fa-check"></i><b>5.4.3</b> Fuller Output - add $Anova on model name</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#followup-tests"><i class="fa fa-check"></i><b>5.5</b> Followup-tests</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#estimated-marginal-means-with-emmeansemmeans-group_var"><i class="fa fa-check"></i><b>5.5.1</b> Estimated Marginal Means with <code>emmeans::emmeans(~ group_var)</code></a></li>
+<li class="chapter" data-level="5.5.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#all-pairwise-comparisons-with-pairs"><i class="fa fa-check"></i><b>5.5.2</b> All Pairwise Comparisons with <code>pairs()</code></a></li>
+<li class="chapter" data-level="5.5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#plot-marginal-means-with-emmeansemmip-group_var"><i class="fa fa-check"></i><b>5.5.3</b> Plot Marginal Means with <code>emmeans::emmip(~ group_var)</code></a></li>
+<li class="chapter" data-level="5.5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#contrast-statements-with-emmeanscontrast"><i class="fa fa-check"></i><b>5.5.4</b> Contrast Statements with <code>emmeans::contrast()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html"><i class="fa fa-check"></i><b>6</b> Poison Example: 1 &amp; 2-way ANOVA</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#prepare-for-modeling"><i class="fa fa-check"></i><b>6.1</b> Prepare for Modeling</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#ensure-the-data-is-in-long-format-1"><i class="fa fa-check"></i><b>6.1.1</b> Ensure the Data is in “long” Format</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#example-1-survival-time-by-poison-type"><i class="fa fa-check"></i><b>6.2</b> Example 1) Survival Time by Poison Type</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#research-question"><i class="fa fa-check"></i><b>6.2.1</b> Research Question</a></li>
+<li class="chapter" data-level="6.2.2" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#exploratory-data-analysis-1"><i class="fa fa-check"></i><b>6.2.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="6.2.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#assumption-checks-1"><i class="fa fa-check"></i><b>6.2.3</b> Assumption Checks</a></li>
+<li class="chapter" data-level="6.2.4" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#fitting-one-way-anova-model"><i class="fa fa-check"></i><b>6.2.4</b> Fitting One-way ANOVA Model</a></li>
+<li class="chapter" data-level="6.2.5" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#followup-tests-1"><i class="fa fa-check"></i><b>6.2.5</b> Followup-tests</a></li>
+<li class="chapter" data-level="6.2.6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#apa-write-up"><i class="fa fa-check"></i><b>6.2.6</b> APA Write Up</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#example-2-survival-time-by-treatment-type"><i class="fa fa-check"></i><b>6.3</b> Example 2) Survival Time by Treatment Type</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#parepare-for-analysis"><i class="fa fa-check"></i><b>6.3.1</b> Parepare for Analysis</a></li>
+<li class="chapter" data-level="6.3.2" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#fitting-one-way-anova-model-1"><i class="fa fa-check"></i><b>6.3.2</b> Fitting One-way ANOVA Model</a></li>
+<li class="chapter" data-level="6.3.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#followup-tests-2"><i class="fa fa-check"></i><b>6.3.3</b> Followup-tests</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#example-3-survival-time-by-both-poisson-treatment-type"><i class="fa fa-check"></i><b>6.4</b> Example 3) Survival Time by Both Poisson &amp; Treatment Type</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#parepare-for-analysis-1"><i class="fa fa-check"></i><b>6.4.1</b> Parepare for Analysis</a></li>
+<li class="chapter" data-level="6.4.2" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#fitting-two-way-anova-model"><i class="fa fa-check"></i><b>6.4.2</b> Fitting Two-way ANOVA Model</a></li>
+<li class="chapter" data-level="6.4.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#followup-tests-3"><i class="fa fa-check"></i><b>6.4.3</b> Followup-tests</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>7</b> Repeated Measures ANOVA</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>7.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
+<li class="chapter" data-level="7.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a"><i class="fa fa-check"></i><b>7.2</b> Words Recalled Data Example (Chapter 15, section A)</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#data-prep"><i class="fa fa-check"></i><b>7.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="7.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-independent-anova"><i class="fa fa-check"></i><b>7.2.2</b> One-Way Independent ANOVA</a></li>
+<li class="chapter" data-level="7.2.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-rm-anova"><i class="fa fa-check"></i><b>7.2.3</b> One-Way RM ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#another-example---weight-loss"><i class="fa fa-check"></i><b>7.3</b> Another Example - Weight Loss</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format"><i class="fa fa-check"></i><b>7.3.1</b> Restructure the data from wide to long format</a></li>
+<li class="chapter" data-level="7.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#does-weight-long-change-over-time"><i class="fa fa-check"></i><b>7.3.2</b> Does weight long change over time?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html"><i class="fa fa-check"></i><b>8</b> Mixed Design ANOVA</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>8.1</b> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code></a></li>
+<li class="chapter" data-level="8.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a"><i class="fa fa-check"></i><b>8.2</b> Words Recalled Data Example (Chapter 16, section A)</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#data-prep-1"><i class="fa fa-check"></i><b>8.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="8.2.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#one-way-rm-anova-1"><i class="fa fa-check"></i><b>8.2.2</b> One-Way RM ANOVA</a></li>
+<li class="chapter" data-level="8.2.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#mixed-anova"><i class="fa fa-check"></i><b>8.2.3</b> Mixed ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#conclusion"><i class="fa fa-check"></i><b>8.3</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -179,78 +343,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="t-test-for-the-difference-in-2-means-independent-samples" class="section level1">
-<h1><span class="header-section-number">2</span> t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES</h1>
-<div id="background" class="section level2">
-<h2><span class="header-section-number">2.1</span> Background</h2>
-<div id="required-packages-1" class="section level3">
-<h3><span class="header-section-number">2.1.1</span> Required Packages</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)    <span class="co"># Loads several very helpful &#39;tidy&#39; packages</span>
-<span class="kw">library</span>(haven)        <span class="co"># Read in SPSS datasets</span>
-<span class="kw">library</span>(car)          <span class="co"># Companion for Applied Regression (and ANOVA)</span></code></pre></div>
-</div>
-<div id="example-dataset---cancer-experiment-1" class="section level3">
-<h3><span class="header-section-number">2.1.2</span> Example Dataset - Cancer Experiment</h3>
-<p>The <code>Cancer</code> dataset was introduced in “t TEST FOR THE MEAN OF 1 SAMPLE”.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_raw &lt;-<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_spss</span>(<span class="st">&quot;https://raw.githubusercontent.com/CEHS-research/eBook_ANOVA/master/data/Cancer.sav&quot;</span>)
-
-tibble<span class="op">::</span><span class="kw">glimpse</span>(cancer_raw)</code></pre></div>
-<pre><code>Observations: 25
-Variables: 9
-$ ID       &lt;dbl&gt; 1, 5, 6, 9, 11, 15, 21, 26, 31, 35, 39, 41, 45, 2, 12...
-$ TRT      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,...
-$ AGE      &lt;dbl&gt; 52, 77, 60, 61, 59, 69, 67, 56, 61, 51, 46, 65, 67, 4...
-$ WEIGHIN  &lt;dbl&gt; 124.0, 160.0, 136.5, 179.6, 175.8, 167.6, 186.0, 158....
-$ STAGE    &lt;dbl&gt; 2, 1, 4, 1, 2, 1, 1, 3, 1, 1, 4, 1, 1, 2, 4, 1, 2, 1,...
-$ TOTALCIN &lt;dbl&gt; 6, 9, 7, 6, 6, 6, 6, 6, 6, 6, 7, 6, 8, 7, 6, 4, 6, 6,...
-$ TOTALCW2 &lt;dbl&gt; 6, 6, 9, 7, 7, 6, 11, 11, 9, 4, 8, 6, 8, 16, 10, 6, 1...
-$ TOTALCW4 &lt;dbl&gt; 6, 10, 17, 9, 16, 6, 11, 15, 6, 8, 11, 9, 9, 9, 11, 8...
-$ TOTALCW6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean &lt;-<span class="st"> </span>cancer_raw <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">rename_all</span>(tolower) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="kw">factor</span>(id)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">trt =</span> <span class="kw">factor</span>(trt,
-                             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo&quot;</span>, 
-                                        <span class="st">&quot;Aloe Juice&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">stage =</span> <span class="kw">factor</span>(stage))
-
-tibble<span class="op">::</span><span class="kw">glimpse</span>(cancer_clean)</code></pre></div>
-<pre><code>Observations: 25
-Variables: 9
-$ id       &lt;fct&gt; 1, 5, 6, 9, 11, 15, 21, 26, 31, 35, 39, 41, 45, 2, 12...
-$ trt      &lt;fct&gt; Placebo, Placebo, Placebo, Placebo, Placebo, Placebo,...
-$ age      &lt;dbl&gt; 52, 77, 60, 61, 59, 69, 67, 56, 61, 51, 46, 65, 67, 4...
-$ weighin  &lt;dbl&gt; 124.0, 160.0, 136.5, 179.6, 175.8, 167.6, 186.0, 158....
-$ stage    &lt;fct&gt; 2, 1, 4, 1, 2, 1, 1, 3, 1, 1, 4, 1, 1, 2, 4, 1, 2, 1,...
-$ totalcin &lt;dbl&gt; 6, 9, 7, 6, 6, 6, 6, 6, 6, 6, 7, 6, 8, 7, 6, 4, 6, 6,...
-$ totalcw2 &lt;dbl&gt; 6, 6, 9, 7, 7, 6, 11, 11, 9, 4, 8, 6, 8, 16, 10, 6, 1...
-$ totalcw4 &lt;dbl&gt; 6, 10, 17, 9, 16, 6, 11, 15, 6, 8, 11, 9, 9, 9, 11, 8...
-$ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">headTail</span>(cancer_clean)</code></pre></div>
-<pre><code>    id        trt age weighin stage totalcin totalcw2 totalcw4 totalcw6
-1    1    Placebo  52     124     2        6        6        6        7
-2    5    Placebo  77     160     1        9        6       10        9
-3    6    Placebo  60   136.5     4        7        9       17       19
-4    9    Placebo  61   179.6     1        6        7        9        3
-5 &lt;NA&gt;       &lt;NA&gt; ...     ...  &lt;NA&gt;      ...      ...      ...      ...
-6   42 Aloe Juice  73   181.5     0        8       11       16     &lt;NA&gt;
-7   44 Aloe Juice  67     187     1        5        7        7        7
-8   50 Aloe Juice  60     164     2        6        8       16     &lt;NA&gt;
-9   58 Aloe Juice  54   172.8     4        7        8       10        8</code></pre>
-</div>
-</div>
-<div id="exploratory-data-analysis-i.e.the-eyeball-method" class="section level2">
-<h2><span class="header-section-number">2.2</span> Exploratory Data Analysis: i.e. the eyeball method</h2>
+<div id="t-test-for-the-difference-in-2-means-independent-samples" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> t TEST FOR THE DIFFERENCE IN 2 MEANS, INDEPENDENT SAMPLES<a href="t-test-for-the-difference-in-2-means-independent-samples.html#t-test-for-the-difference-in-2-means-independent-samples" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Using the <code>t.test()</code> function</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)          <span class="co"># Companion for Applied Regression (and ANOVA)</span></span></code></pre></div>
+<div id="exploratory-data-analysis-i.e.-the-eyeball-method-1" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Exploratory Data Analysis: i.e. the eyeball method<a href="t-test-for-the-difference-in-2-means-independent-samples.html#exploratory-data-analysis-i.e.-the-eyeball-method-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Do the two groups, treatment and control, have different oral conditions at initial observation? What about four weeks later?</strong></p>
 <p>Judge any difference in centers (means) within the context of the within group spread (stadard deviation/variance)</p>
-<div id="means-and-sds" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Means and SDs</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(trt) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>furniture<span class="op">::</span><span class="kw">table1</span>(totalcin, totalcw4,
-                    <span class="dt">na.rm =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div id="means-and-sds" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Means and SDs<a href="t-test-for-the-difference-in-2-means-independent-samples.html#means-and-sds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb52-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb52-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb52-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(trt) <span class="sc">%&gt;%</span> </span>
+<span id="cb52-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb52-3" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(totalcin, totalcw4,</span>
+<span id="cb52-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb52-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">na.rm =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>
---------------------------------
+────────────────────────────────
                  trt 
           Placebo    Aloe Juice
           n = 14     n = 11    
@@ -258,51 +366,51 @@ $ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, ...<
           6.6 (0.9)  6.5 (2.1) 
  totalcw4                      
           10.1 (3.6) 10.6 (3.5)
---------------------------------</code></pre>
+────────────────────────────────</code></pre>
 </div>
-<div id="stacked-histograms" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Stacked Histograms</h3>
-<div id="baseline-oral-condition" class="section level4">
-<h4><span class="header-section-number">2.2.2.1</span> Baseline Oral Condition</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(totalcin)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">10</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_grid</span>(trt <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
-<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-5-1.png" width="75%" /></p>
+<div id="stacked-histograms" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Stacked Histograms<a href="t-test-for-the-difference-in-2-means-independent-samples.html#stacked-histograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="baseline-oral-condition" class="section level4 hasAnchor" number="4.1.2.1">
+<h4><span class="header-section-number">4.1.2.1</span> Baseline Oral Condition<a href="t-test-for-the-difference-in-2-means-independent-samples.html#baseline-oral-condition" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb54-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(totalcin)) <span class="sc">+</span></span>
+<span id="cb54-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb54-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(trt <span class="sc">~</span> .)</span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-44-1.png" width="75%" /></p>
 </div>
-<div id="four-weeks-oral-condition" class="section level4">
-<h4><span class="header-section-number">2.2.2.2</span> Four Weeks Oral Condition</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(totalcw4)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">10</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_grid</span>(trt <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
-<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-6-1.png" width="75%" /></p>
-</div>
-</div>
-<div id="side-by-side-boxplots" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> Side-by-Side Boxplots</h3>
-<div id="baseline-oral-condition-1" class="section level4">
-<h4><span class="header-section-number">2.2.3.1</span> Baseline Oral Condition</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> trt,
-             <span class="dt">y =</span> totalcin)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-7-1.png" width="75%" /></p>
-</div>
-<div id="four-weeks-oral-condition-1" class="section level4">
-<h4><span class="header-section-number">2.2.3.2</span> Four Weeks Oral Condition</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> trt,
-             <span class="dt">y =</span> totalcw4)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-8-1.png" width="75%" /></p>
+<div id="four-weeks-oral-condition" class="section level4 hasAnchor" number="4.1.2.2">
+<h4><span class="header-section-number">4.1.2.2</span> Four Weeks Oral Condition<a href="t-test-for-the-difference-in-2-means-independent-samples.html#four-weeks-oral-condition" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb55-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb55-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(totalcw4)) <span class="sc">+</span></span>
+<span id="cb55-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb55-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(trt <span class="sc">~</span> .)</span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-45-1.png" width="75%" /></p>
 </div>
 </div>
+<div id="side-by-side-boxplots" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Side-by-Side Boxplots<a href="t-test-for-the-difference-in-2-means-independent-samples.html#side-by-side-boxplots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="baseline-oral-condition-1" class="section level4 hasAnchor" number="4.1.3.1">
+<h4><span class="header-section-number">4.1.3.1</span> Baseline Oral Condition<a href="t-test-for-the-difference-in-2-means-independent-samples.html#baseline-oral-condition-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb56-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> trt,</span>
+<span id="cb56-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb56-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> totalcin)) <span class="sc">+</span></span>
+<span id="cb56-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-46-1.png" width="75%" /></p>
 </div>
-<div id="assumptions" class="section level2">
-<h2><span class="header-section-number">2.3</span> Assumptions</h2>
-<div id="independence" class="section level3">
-<h3><span class="header-section-number">2.3.1</span> 1. Independence</h3>
+<div id="four-weeks-oral-condition-1" class="section level4 hasAnchor" number="4.1.3.2">
+<h4><span class="header-section-number">4.1.3.2</span> Four Weeks Oral Condition<a href="t-test-for-the-difference-in-2-means-independent-samples.html#four-weeks-oral-condition-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb57-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb57-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> trt,</span>
+<span id="cb57-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb57-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> totalcw4)) <span class="sc">+</span></span>
+<span id="cb57-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-47-1.png" width="75%" /></p>
+</div>
+</div>
+</div>
+<div id="assumptions-1" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Assumptions<a href="t-test-for-the-difference-in-2-means-independent-samples.html#assumptions-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="independence" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> 1. Independence<a href="t-test-for-the-difference-in-2-means-independent-samples.html#independence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>BOTH Samples were drawn <strong>INDEPENDENTLY</strong> at random (at least as representative as possible)</p>
 <ul>
 <li>Nothing can be done to fix NON-representative samples!<br />
@@ -311,8 +419,8 @@ $ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, ...<
 <li>If idenpendence is violated, you may want to use a paired-samples t-test</li>
 </ul>
 </div>
-<div id="normality" class="section level3">
-<h3><span class="header-section-number">2.3.2</span> 2. Normality</h3>
+<div id="normality-1" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> 2. Normality<a href="t-test-for-the-difference-in-2-means-independent-samples.html#normality-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>A variable is said to follow the normal distribution if it resembles the normal curve. Specifically it is symetrical, unimodal, and bell shaped.</p>
 </blockquote>
@@ -343,27 +451,27 @@ $ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, ...<
 <li>For larger samples, use <strong>Kolmogorov-Smirnov’s Test</strong></li>
 </ul></li>
 </ol>
-<div id="baseline-oral-condition-2" class="section level4">
-<h4><span class="header-section-number">2.3.2.1</span> Baseline Oral Condition</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">sample =</span> totalcin)) <span class="op">+</span><span class="st">   </span><span class="co"># make sure to include &quot;sample = &quot;</span>
-<span class="st">  </span><span class="kw">geom_qq</span>() <span class="op">+</span><span class="st">                        </span><span class="co"># layer on the dots</span>
-<span class="st">  </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st">                   </span><span class="co"># layer on the line</span>
-<span class="st">  </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>trt)                <span class="co"># panel by group</span></code></pre></div>
-<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-9-1.png" width="75%" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(trt <span class="op">==</span><span class="st"> &quot;Placebo&quot;</span>) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># select one group</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">pull</span>(totalcin) <span class="op">%&gt;%</span><span class="st">             </span><span class="co"># extract the continuous variable</span>
-<span class="st">  </span><span class="kw">shapiro.test</span>()                        <span class="co"># test for normality</span></code></pre></div>
+<div id="baseline-oral-condition-2" class="section level4 hasAnchor" number="4.2.2.1">
+<h4><span class="header-section-number">4.2.2.1</span> Baseline Oral Condition<a href="t-test-for-the-difference-in-2-means-independent-samples.html#baseline-oral-condition-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb58-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb58-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> totalcin)) <span class="sc">+</span>   <span class="co"># make sure to include &quot;sample = &quot;</span></span>
+<span id="cb58-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span>                        <span class="co"># layer on the dots</span></span>
+<span id="cb58-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>() <span class="sc">+</span>                   <span class="co"># layer on the line</span></span>
+<span id="cb58-5"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> trt)                <span class="co"># panel by group</span></span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-48-1.png" width="75%" /></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb59-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(trt <span class="sc">==</span> <span class="st">&quot;Placebo&quot;</span>) <span class="sc">%&gt;%</span>   <span class="co"># select one group</span></span>
+<span id="cb59-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(totalcin) <span class="sc">%&gt;%</span>             <span class="co"># extract the continuous variable</span></span>
+<span id="cb59-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro.test</span>()                        <span class="co"># test for normality</span></span></code></pre></div>
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  .
 W = 0.6807, p-value = 0.0002349</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(trt <span class="op">==</span><span class="st"> &quot;Aloe Juice&quot;</span>) <span class="op">%&gt;%</span><span class="st">    </span><span class="co"># select one group</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">pull</span>(totalcin) <span class="op">%&gt;%</span><span class="st">                 </span><span class="co"># extract the continuous variable</span>
-<span class="st">  </span><span class="kw">shapiro.test</span>()                            <span class="co"># test for normality</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb61-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb61-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb61-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(trt <span class="sc">==</span> <span class="st">&quot;Aloe Juice&quot;</span>) <span class="sc">%&gt;%</span>    <span class="co"># select one group</span></span>
+<span id="cb61-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb61-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(totalcin) <span class="sc">%&gt;%</span>                 <span class="co"># extract the continuous variable</span></span>
+<span id="cb61-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro.test</span>()                            <span class="co"># test for normality</span></span></code></pre></div>
 <pre><code>
     Shapiro-Wilk normality test
 
@@ -373,27 +481,27 @@ W = 0.78534, p-value = 0.006034</code></pre>
 <p>Shapiro-Wilk’s tests yield evidence that baseline oral condition is NOT normally distributed in the placebo group, W = .681, p &lt;.001, nor the treatment group, W = .785, p = .006. Visual inspection suggests that violatioins may by more extreme in the placebo group.</p>
 </blockquote>
 </div>
-<div id="four-weeks-oral-condition-2" class="section level4">
-<h4><span class="header-section-number">2.3.2.2</span> Four Weeks Oral Condition</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">sample =</span> totalcw4)) <span class="op">+</span><span class="st">   </span><span class="co"># make sure to include &quot;sample = &quot;</span>
-<span class="st">  </span><span class="kw">geom_qq</span>() <span class="op">+</span><span class="st">                        </span><span class="co"># layer on the dots</span>
-<span class="st">  </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st">                   </span><span class="co"># layer on the line</span>
-<span class="st">  </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>trt)                <span class="co"># panel by group</span></code></pre></div>
-<p><img src="02-t_test_2samples_files/figure-html/unnamed-chunk-12-1.png" width="75%" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(trt <span class="op">==</span><span class="st"> &quot;Placebo&quot;</span>) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># select one group</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">pull</span>(totalcw4) <span class="op">%&gt;%</span><span class="st">             </span><span class="co"># extract the continuous variable</span>
-<span class="st">  </span><span class="kw">shapiro.test</span>()                        <span class="co"># test for normality</span></code></pre></div>
+<div id="four-weeks-oral-condition-2" class="section level4 hasAnchor" number="4.2.2.2">
+<h4><span class="header-section-number">4.2.2.2</span> Four Weeks Oral Condition<a href="t-test-for-the-difference-in-2-means-independent-samples.html#four-weeks-oral-condition-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb63-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb63-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> totalcw4)) <span class="sc">+</span>   <span class="co"># make sure to include &quot;sample = &quot;</span></span>
+<span id="cb63-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span>                        <span class="co"># layer on the dots</span></span>
+<span id="cb63-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>() <span class="sc">+</span>                   <span class="co"># layer on the line</span></span>
+<span id="cb63-5"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> trt)                <span class="co"># panel by group</span></span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-51-1.png" width="75%" /></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb64-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb64-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(trt <span class="sc">==</span> <span class="st">&quot;Placebo&quot;</span>) <span class="sc">%&gt;%</span>   <span class="co"># select one group</span></span>
+<span id="cb64-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb64-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(totalcw4) <span class="sc">%&gt;%</span>             <span class="co"># extract the continuous variable</span></span>
+<span id="cb64-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro.test</span>()                        <span class="co"># test for normality</span></span></code></pre></div>
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  .
 W = 0.88272, p-value = 0.06356</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(trt <span class="op">==</span><span class="st"> &quot;Aloe Juice&quot;</span>) <span class="op">%&gt;%</span><span class="st">    </span><span class="co"># select one group</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">pull</span>(totalcw4) <span class="op">%&gt;%</span><span class="st">                 </span><span class="co"># extract the continuous variable</span>
-<span class="st">  </span><span class="kw">shapiro.test</span>()                            <span class="co"># test for normality</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb66-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb66-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(trt <span class="sc">==</span> <span class="st">&quot;Aloe Juice&quot;</span>) <span class="sc">%&gt;%</span>    <span class="co"># select one group</span></span>
+<span id="cb66-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb66-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(totalcw4) <span class="sc">%&gt;%</span>                 <span class="co"># extract the continuous variable</span></span>
+<span id="cb66-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro.test</span>()                            <span class="co"># test for normality</span></span></code></pre></div>
 <pre><code>
     Shapiro-Wilk normality test
 
@@ -404,38 +512,42 @@ W = 0.92906, p-value = 0.4014</code></pre>
 </blockquote>
 </div>
 </div>
-<div id="hov" class="section level3">
-<h3><span class="header-section-number">2.3.3</span> 2. HOV</h3>
+<div id="hov" class="section level3 hasAnchor" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> 2. HOV<a href="t-test-for-the-difference-in-2-means-independent-samples.html#hov" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Two Populations exhibit Homogeneity of Variance (HOV), i.e. have about the same amount of spread</p>
 </blockquote>
 <p>Before performing the <span class="math inline">\(t\)</span> test, check to see if the assumption of homogeneity of variance is met using <strong>Levene’s Test</strong>. For a independent samples <code>t</code>-test for means, the groups need to have the same amount of spread (SD) in the measure of interest.</p>
 <div class="rmdlightbulb">
 <p>
-Use the <code>car:leveneTest()</code> function tests the HOV assumtion.
+Use the <code>car:leveneTest()</code> function tests the HOV
+assumtion.
 </p>
 <p>
-Inside the funtion you need to specify at least three options (sepearated by commas):
+Inside the funtion you need to specify at least three options
+(sepearated by commas):
 </p>
 <ul>
 <li>
-the formula: <code>continuous_var ~ grouping_var</code> (replace with your variable names)
+the formula: <code>continuous_var ~ grouping_var</code> (replace
+with your variable names)
 </li>
 <li>
 the dataset: <code>data = .</code> to pipe it from above
 </li>
 <li>
-the center: <code>center = “mean”</code> since we are comparing means
+the center: <code>center = “mean”</code> since we are comparing
+means
 </li>
 </ul>
 </div>
-<div id="baseline-oral-condition-3" class="section level4">
-<h4><span class="header-section-number">2.3.3.1</span> Baseline Oral Condition</h4>
+<div id="baseline-oral-condition-3" class="section level4 hasAnchor" number="4.2.3.1">
+<h4><span class="header-section-number">4.2.3.1</span> Baseline Oral Condition<a href="t-test-for-the-difference-in-2-means-independent-samples.html#baseline-oral-condition-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Do the participants in the treatment and control groups have the same spread in oral condition at BASELINE?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>car<span class="op">::</span><span class="kw">leveneTest</span>(totalcin <span class="op">~</span><span class="st"> </span>trt,    <span class="co"># formula: continuous_var ~ grouping_var</span>
-                  <span class="dt">data =</span> .,          <span class="co"># pipe in the dataset</span>
-                  <span class="dt">center =</span> <span class="st">&quot;mean&quot;</span>)   <span class="co"># The default is &quot;median&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb68-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb68-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb68-2" aria-hidden="true" tabindex="-1"></a>  car<span class="sc">::</span><span class="fu">leveneTest</span>(totalcin <span class="sc">~</span> trt,    <span class="co"># formula: continuous_var ~ grouping_var</span></span>
+<span id="cb68-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb68-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> .,          <span class="co"># pipe in the dataset</span></span>
+<span id="cb68-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb68-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">center =</span> <span class="st">&quot;mean&quot;</span>)   <span class="co"># The default is &quot;median&quot;</span></span></code></pre></div>
 <pre><code>Levene&#39;s Test for Homogeneity of Variance (center = &quot;mean&quot;)
       Df F value Pr(&gt;F)
 group  1  2.2103 0.1507
@@ -444,13 +556,13 @@ group  1  2.2103 0.1507
 <p>No violations of homogeneity were detected, <span class="math inline">\(F(1, 23) = 2.210, p = .151\)</span>.</p>
 </blockquote>
 </div>
-<div id="four-weeks-oral-condition-3" class="section level4">
-<h4><span class="header-section-number">2.3.3.2</span> Four Weeks Oral Condition</h4>
+<div id="four-weeks-oral-condition-3" class="section level4 hasAnchor" number="4.2.3.2">
+<h4><span class="header-section-number">4.2.3.2</span> Four Weeks Oral Condition<a href="t-test-for-the-difference-in-2-means-independent-samples.html#four-weeks-oral-condition-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Do the participants in the treatment and control groups have the same spread in oral condition at the FOURTH WEEK?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>car<span class="op">::</span><span class="kw">leveneTest</span>(totalcw4 <span class="op">~</span><span class="st"> </span>trt,    <span class="co"># formula: continuous_var ~ grouping_var</span>
-                  <span class="dt">data =</span> .,          <span class="co"># pipe in the dataset</span>
-                  <span class="dt">center =</span> <span class="st">&quot;mean&quot;</span>)   <span class="co"># The default is &quot;median&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb70-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb70-2" aria-hidden="true" tabindex="-1"></a>  car<span class="sc">::</span><span class="fu">leveneTest</span>(totalcw4 <span class="sc">~</span> trt,    <span class="co"># formula: continuous_var ~ grouping_var</span></span>
+<span id="cb70-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb70-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> .,          <span class="co"># pipe in the dataset</span></span>
+<span id="cb70-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb70-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">center =</span> <span class="st">&quot;mean&quot;</span>)   <span class="co"># The default is &quot;median&quot;</span></span></code></pre></div>
 <pre><code>Levene&#39;s Test for Homogeneity of Variance (center = &quot;mean&quot;)
       Df F value Pr(&gt;F)
 group  1       0  0.995
@@ -461,36 +573,42 @@ group  1       0  0.995
 </div>
 </div>
 </div>
-<div id="inference" class="section level2">
-<h2><span class="header-section-number">2.4</span> Inference</h2>
+<div id="inference-1" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Inference<a href="t-test-for-the-difference-in-2-means-independent-samples.html#inference-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Formal Statistical Test: t-Test for Difference in Independent Group Means</strong></p>
 <div class="rmdlightbulb">
 <p>
-Use the same <code>t.test()</code> funtion we have used for a single sample, but speficy a few more options.
+Use the same <code>t.test()</code> funtion we have used for a single
+sample, but speficy a few more options.
 </p>
 <p>
-<strong>Inside the funtion you need to specify at least three options (sepearated by commas):</strong>
+<strong>Inside the funtion you need to specify at least three options
+(sepearated by commas):</strong>
 </p>
 <ul>
 <li>
-the formula: <code>continuous_var ~ grouping_var</code> (replace with your variable names)<br />
+the formula: <code>continuous_var ~ grouping_var</code> (replace
+with your variable names)<br />
 </li>
 <li>
 the dataset: <code>data = .</code> to pipe it from above
 </li>
 </ul>
 <p>
-<strong>You MAY need/want to specify some or all of the following options you may way to leave as the default or override:</strong>
+<strong>You MAY need/want to specify some or all of the following
+options you may way to leave as the default or override:</strong>
 </p>
 <ul>
 <li>
 HOV assumed:
 <ul>
 <li>
-<code>var.equal = FALSE</code> <strong>Default</strong> Seperate-Variance test using Welch’s df<br />
+<code>var.equal = FALSE</code> <strong>Default</strong>
+Seperate-Variance test using Welch’s df<br />
 </li>
 <li>
-<code>var.equal = TRUE</code> Pooled-Variance test <em>(if HOV is NOT violated)</em>
+<code>var.equal = TRUE</code> Pooled-Variance test <em>(if HOV is
+NOT violated)</em>
 </li>
 </ul>
 </li>
@@ -498,13 +616,16 @@ HOV assumed:
 Number of tails:
 <ul>
 <li>
-<code>alternative = “two.sided”</code> <strong>Default</strong> Allows for a 2-sided alternative
+<code>alternative = “two.sided”</code> <strong>Default</strong>
+Allows for a 2-sided alternative
 </li>
 <li>
-<code>alternative = “less”</code> Only Allows: group 1 &lt; group 2
+<code>alternative = “less”</code> Only Allows: group 1 &lt; group
+2
 </li>
 <li>
-<code>alternative = “more”</code> Only Allows: group 1 &gt; group 2
+<code>alternative = “more”</code> Only Allows: group 1 &gt; group
+2
 </li>
 </ul>
 </li>
@@ -512,7 +633,8 @@ Number of tails:
 Independent vs. paired:
 <ul>
 <li>
-<code>paired = FALSE</code> <strong>Default</strong> Conducts an INDEOENDENT groups t-Test<br />
+<code>paired = FALSE</code> <strong>Default</strong> Conducts an
+INDEOENDENT groups t-Test<br />
 </li>
 <li>
 <code>paired = TRUE</code> Conducts a PAIRED meausres t-Test
@@ -523,32 +645,34 @@ Independent vs. paired:
 Confidence level:
 <ul>
 <li>
-<code>conf.level = 0.95</code> <strong>Default</strong> Computes the 95% confidence inverval<br />
+<code>conf.level = 0.95</code> <strong>Default</strong> Computes the
+95% confidence inverval<br />
 </li>
 <li>
-<code>conf.level = 0.90</code> Changes to a 90% confidence interval
+<code>conf.level = 0.90</code> Changes to a 90% confidence
+interval
 </li>
 </ul>
 </li>
 </ul>
 </div>
-<div id="pooled-variance-test" class="section level3">
-<h3><span class="header-section-number">2.4.1</span> Pooled Variance Test</h3>
+<div id="pooled-variance-test" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Pooled Variance Test<a href="t-test-for-the-difference-in-2-means-independent-samples.html#pooled-variance-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Use when there are no violations of HOV</p>
-<div id="baseline-oral-condition-4" class="section level4">
-<h4><span class="header-section-number">2.4.1.1</span> Baseline Oral Condition</h4>
+<div id="baseline-oral-condition-4" class="section level4 hasAnchor" number="4.3.1.1">
+<h4><span class="header-section-number">4.3.1.1</span> Baseline Oral Condition<a href="t-test-for-the-difference-in-2-means-independent-samples.html#baseline-oral-condition-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Do the participants in the treatment group have a different average oral condition at BASELINE, compared to the control group?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Minimal syntax</span>
-cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">t.test</span>(totalcin <span class="op">~</span><span class="st"> </span>trt,   <span class="co"># formula: continuous_var ~ grouping_var</span>
-         <span class="dt">data =</span> .,         <span class="co"># pipe in the dataset</span>
-         <span class="dt">var.equal =</span> <span class="ot">TRUE</span>) <span class="co"># HOV was violated (option = TRUE)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Minimal syntax</span></span>
+<span id="cb72-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb72-2" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb72-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(totalcin <span class="sc">~</span> trt,   <span class="co"># formula: continuous_var ~ grouping_var</span></span>
+<span id="cb72-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb72-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> .,         <span class="co"># pipe in the dataset</span></span>
+<span id="cb72-5"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb72-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">var.equal =</span> <span class="cn">TRUE</span>) <span class="co"># HOV was violated (option = TRUE)</span></span></code></pre></div>
 <pre><code>
     Two Sample t-test
 
 data:  totalcin by trt
 t = 0.18566, df = 23, p-value = 0.8543
-alternative hypothesis: true difference in means is not equal to 0
+alternative hypothesis: true difference in means between group Placebo and group Aloe Juice is not equal to 0
 95 percent confidence interval:
  -1.185479  1.419245
 sample estimates:
@@ -558,23 +682,23 @@ sample estimates:
 <p>No evidence of a differnece in mean oral condition at baseline, <span class="math inline">\(t(23) = 0.186, p = .854\)</span>. Note: this test may be unreliable due to the non-normality of the samll samples.</p>
 </blockquote>
 </div>
-<div id="four-weeks-oral-condition-4" class="section level4">
-<h4><span class="header-section-number">2.4.1.2</span> Four Weeks Oral Condition</h4>
+<div id="four-weeks-oral-condition-4" class="section level4 hasAnchor" number="4.3.1.2">
+<h4><span class="header-section-number">4.3.1.2</span> Four Weeks Oral Condition<a href="t-test-for-the-difference-in-2-means-independent-samples.html#four-weeks-oral-condition-4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Do the participants in the treatment group have a different average oral condition at the FOURTH WEEK, compared to the control group?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fully specified function</span>
-cancer_clean <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">t.test</span>(totalcw4 <span class="op">~</span><span class="st"> </span>trt,             <span class="co"># formula: continuous_var ~ grouping_var</span>
-         <span class="dt">data =</span> .,                   <span class="co"># pipe in the dataset</span>
-         <span class="dt">var.equal =</span> <span class="ot">TRUE</span>,           <span class="co"># default: HOV was violated (option = TRUE)</span>
-         <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,  <span class="co"># default: 2 sided (options = &quot;less&quot;, &quot;greater&quot;)</span>
-         <span class="dt">paired =</span> <span class="ot">FALSE</span>,             <span class="co"># default: independent (option = TRUE)</span>
-         <span class="dt">conf.level =</span> .<span class="dv">95</span>)           <span class="co"># default: 95% (option = .9, .90, ect.)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fully specified function</span></span>
+<span id="cb74-2"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb74-2" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="sc">%&gt;%</span> </span>
+<span id="cb74-3"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t.test</span>(totalcw4 <span class="sc">~</span> trt,             <span class="co"># formula: continuous_var ~ grouping_var</span></span>
+<span id="cb74-4"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb74-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> .,                   <span class="co"># pipe in the dataset</span></span>
+<span id="cb74-5"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb74-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">var.equal =</span> <span class="cn">TRUE</span>,           <span class="co"># default: HOV was violated (option = TRUE)</span></span>
+<span id="cb74-6"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb74-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,  <span class="co"># default: 2 sided (options = &quot;less&quot;, &quot;greater&quot;)</span></span>
+<span id="cb74-7"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb74-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">paired =</span> <span class="cn">FALSE</span>,             <span class="co"># default: independent (option = TRUE)</span></span>
+<span id="cb74-8"><a href="t-test-for-the-difference-in-2-means-independent-samples.html#cb74-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">conf.level =</span> .<span class="dv">95</span>)           <span class="co"># default: 95% (option = .9, .90, ect.)</span></span></code></pre></div>
 <pre><code>
     Two Sample t-test
 
 data:  totalcw4 by trt
 t = -0.34598, df = 23, p-value = 0.7325
-alternative hypothesis: true difference in means is not equal to 0
+alternative hypothesis: true difference in means between group Placebo and group Aloe Juice is not equal to 0
 95 percent confidence interval:
  -3.444215  2.457202
 sample estimates:
@@ -585,8 +709,8 @@ sample estimates:
 </blockquote>
 </div>
 </div>
-<div id="seperate-variance-test" class="section level3">
-<h3><span class="header-section-number">2.4.2</span> Seperate Variance Test</h3>
+<div id="seperate-variance-test" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Seperate Variance Test<a href="t-test-for-the-difference-in-2-means-independent-samples.html#seperate-variance-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Use if there are violations of HOV or the samples are difference sizes</p>
 
 </div>
@@ -597,17 +721,18 @@ sample estimates:
           </div>
         </div>
       </div>
-<a href="t-test-for-the-mean-of-1-sample.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ex-obese.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="one-sample-t-test-for-the-mean.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="one-way-anova-code.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -615,12 +740,12 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -635,7 +760,15 @@ gitbook.start({
 "link": null,
 "text": null
 },
+"view": {
+"link": null,
+"text": null
+},
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }
@@ -648,10 +781,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
