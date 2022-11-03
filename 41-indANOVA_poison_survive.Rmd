@@ -60,28 +60,26 @@ str(df_survival)
 
 Our objective is to test the following assumption:
 
-H_0: There is no difference in survival time average between group
-H_a: The survival time average is different for at least one group.
+> H_0: There is no difference in survival time average between group  
+> H_a: The survival time average is different for at least one group 
 
 
 In other words, you want to know if there is a statistical difference between the mean of the survival time according to the type of poison given to the Guinea pig.
 
-Variables:
+**Variables:**
 
-* `id` (`id_var`) Name of the variable that is qunique for each unit of study (i.e. person)
-* `poison` (`group_IV`) Name of the categorical variable (`factor`) with at least 2 levels
-* `time` (`continuous_DV`) Name of the continuous varaible (`dbl`) that we want to compare the averages of
+* `id` Guinea pig identification number
+* `poison` poison type, 3-level IV (independent groups)
+* `time` survival time, continuous DV (Y, outcome)
+
 
 > Note: ignore `treat` for now
 
-
-
 #### Compute Summary Statistics
 
-Second, check the summary statistics for each of the $k$ groups.
+Second, check the summary statistics for each of the $k=3$ groups.
 
 ```{r}
-# Raw data: summary table
 df_survival %>% 
   dplyr::group_by(poison) %>%   # divide into groups
   furniture::table1("Survival Time" = time,
@@ -91,10 +89,6 @@ df_survival %>%
                     output = "markdown",
                     caption = "Summary of Survival Time by Type of Poisson Used")       
 ```
-
-
-
-
 
 #### Plot the Raw Data
 
@@ -117,6 +111,21 @@ df_survival %>%
   labs(x = "Type of Treatment",
        y = "Observed Survival Time") 
 ```
+
+
+#### Interpretation
+
+Things you should notice now, but not a firm conclusion yet!
+
+_SAMPLE_
+The sample of 48 guinea pigs is balanced between the three poisons.  There are the sample number of animals in each group (*n* = 16).
+
+_MEANS_
+Guinea pigs given type 3 poison had shorter survival times (*M* = 0.28), on average, compared to type 1 (*M* = 0.48) and type 2 (*M* = 0.54).
+
+_STANDARD DEVIATIONS_
+There was much less variation in survival times among the 16 guinea pics given type 3 poison (*SD* = 0.06) compared to the other types (type 1, *SD* = 0.21; type 2, *SD* = 0.29).
+
 
 
 
@@ -240,17 +249,20 @@ aov_poison %>%
 
 Our objective is to test the following assumption:
 
-H_0: There is no difference in survival time average between group
-H_a: The survival time average is different for at least one group.
+> H_0: There is no difference in survival time average between group  
+
+> H_a: The survival time average is different for at least one group.
 
 
 In other words, you want to know if there is a statistical difference between the mean of the survival time according to the type of treatment given to the Guinea pig.
 
-Variables:
+**Variables:**
 
-* `id` (`id_var`) Name of the variable that is qunique for each unit of study (i.e. person)
-* `treat` (`group_IV`) Name of the categorical variable (`factor`) with at least 2 levels
-* `time` (`continuous_DV`) Name of the continuous varaible (`dbl`) that we want to compare the averages of
+* `id` Guinea pig identification number
+* `treat` treatment type, 4-level IV (independent groups)
+* `time` survival time, continuous DV (Y, outcome)
+
+
 
 > Note: ignore `poison` for now
 
@@ -258,7 +270,7 @@ Variables:
 
 #### Compute Summary Statistics
 
-Second, check the summary statistics for each of the $k$ groups.
+Second, check the summary statistics for each of the $k=4$ groups.
 
 ```{r}
 # Raw data: summary table
@@ -271,6 +283,9 @@ df_survival %>%
                     output = "markdown",
                     caption = "Summary of Survival Time by Type of Treatment Used")       
 ```
+
+
+**Interpretion:**
 
 
 
@@ -409,19 +424,22 @@ aov_treat %>%
 
 Our objective is to test the following assumption:
 
-H_0: There is no difference in survival time average between group
-H_a: The survival time average is different for at least one group.
+> H_0: There is no difference in survival time average between group  
+> H_a: The survival time average is different for at least one group
 
 
-In other words, you want to know if there is a statistical difference between the mean of the survival time according to the type of treatment given to the Guinea pig.
+In other words, you want to know if there is a statistical difference between the mean of the survival time according to BOTH  type of poisons and treatment given to the Guinea pig.
 
-Variables:
 
-* `id` (`id_var`) Name of the variable that is qunique for each unit of study (i.e. person)
-* `treat` & `poison` (`group_IV`) Name of the categorical variable (`factor`) with at least 2 levels
-* `time` (`continuous_DV`) Name of the continuous varaible (`dbl`) that we want to compare the averages of
 
-> Note: ignore `poison` for now
+**Variables:**
+
+* `id` Guinea pig identification number
+* `poison` poison type, 3-level IV (independent groups)
+* `treat` treatment type, 4-level IV (independent groups)
+* `time` survival time, continuous DV (Y, outcome)
+
+
 
 
 
