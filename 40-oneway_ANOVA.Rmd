@@ -47,7 +47,7 @@ Variables:
 Calculate summary statistics of the DV by the groups to the data to eyeball the potential effect or differences in the means.  Also check if the standard deviations and samples sizes are somewhat similar in each group.
 
 ```{r, eval=FALSE}
-# Raw data: summary table
+# Observed DV by group: summary table
 data_long %>% 
   dplyr::group_by(group_IV) %>%          # divide into groups
   furniture::table1(continuous_DV        # gives M(SD)
@@ -63,30 +63,33 @@ data_long %>%
 
 ### Plot the Observed Data
 
-Plot the data to eyeball the potential effect.  Remember the center line in each box represents the median, not the mean.  I have added a red diamond on the mean survival time for each type of poison.
+Plot the data to eyeball the potential effect.  Remember the center line in each box represents the median, not the mean. 
 
 ```{r, eval=FALSE}
-# Raw data: boxplots
+# Observed DV by group: boxplots
 data_long %>% 
   ggplot(aes(x = group_IV,
              y = continuous_DV)) + 
   geom_boxplot() +
-  geom_point() 
+  geom_point() +
+  theme_bw()
 ```
 
 
 ```{r, eval=FALSE}
-# Raw data: Mean-SD plots
+# Observed DV by group: Mean-SD plots
 data_long %>% 
   ggplot(aes(x = group_IV,
              y = continuous_DV)) + 
-  stat_summary() 
+  stat_summary() +
+  theme_bw()
 ```
 
 
 
 
 ```{r, eval=FALSE}
+# Observed DV by group: violin-boxplot w/means
 data_long %>% 
   ggplot(aes(x = continuous_DV,
              y = group_IV)) + 

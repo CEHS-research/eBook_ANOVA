@@ -20,18 +20,18 @@ https://www.guru99.com/r-anova-tutorial.html
 
 The "poison" dataset contains 48 rows and 4 variables:
 
-* ID: Guinea pig identification number
-* Time: Survival time of the animal
-* poison: Type of poison used: factor level: 1,2 and 3
-* treat: Type of treatment used: factor level: 1,2 and 3
+* **ID**: Guinea pig identification number
+* **Time**: Survival time of the animal
+* **poison**: Type of poison used: factor level: 1,2 and 3
+* **treat**: Type of treatment used: factor level: 1,2 and 3
 
 
 
 Before you start to compute the ANOVA test, you need to prepare the data as follow:
 
-1. Import the data from online
-2. Rename the "id" variable
-3. Declare factors: poison type & treatment
+1. **Import** the data from online
+2. **Rename** the `id` variable
+3. **Declare factors** label categories of poison type & treatment
 
 
 ```{r}
@@ -66,7 +66,6 @@ We want to know if there is a difference between the mean of the **survival time
 #### Hypotheses
 
 > H_0: There is no difference in survival time average between group  
-
 > H_a: The survival time average is different for at least one group 
 
 
@@ -86,15 +85,11 @@ We want to know if there is a difference between the mean of the **survival time
 
 #### Summary Statistics
 
-
-
-
-
 ```{r}
 df_survival %>% 
-  dplyr::group_by(poison) %>%   # divide into groups
+  dplyr::group_by(poison) %>%   
   furniture::table1("Survival Time" = time,
-                    digits = 2,      # gives M(SD)
+                    digits = 2,     
                     na.rm = FALSE,
                     total = TRUE,
                     output = "markdown",
@@ -105,7 +100,7 @@ df_survival %>%
 
 
 
-```{r}
+```{r, fig.cap = "Distribution of Survival Time by Poison Type: Violin and Box plots used to Compare Means and Standard Deviations"}
 df_survival %>% 
   ggplot(aes(x = poison,
              y = time)) + 
@@ -119,22 +114,25 @@ df_survival %>%
                color = "red",
                size = 5) +
   theme_bw() +
-  labs(x = "Type of Treatment",
+  labs(x = "Type of Poison",
        y = "Observed Survival Time") 
 ```
 
 
-#### Interpretation
+#### Summary
 
 Things you should notice, but not a firm conclusion yet!
 
-_1. SAMPLE BALANCE_
+**SAMPLE BALANCE**
+
 The sample of 48 guinea pigs is balanced between the three poisons.  There are the sample number of animals in each group (*n* = 16).
 
-_2. CENTER = MEANS_
+**CENTER = MEANS**  
+
 Guinea pigs given Type 3 poison had shorter survival times (*M* = 0.28), on average, compared to Type 1 (*M* = 0.48) and Type 2 (*M* = 0.54).
 
-_3. STREAD = STANDARD DEVIATIONS_
+**SPREAD = STANDARD DEVIATIONS**  
+
 There was much less variation in survival times among the 16 guinea pics given Type 3 poison (*SD* = 0.06) compared to the other types (Type 1, *SD* = 0.21; Type 2, *SD* = 0.29).
 
 
@@ -148,10 +146,11 @@ There was much less variation in survival times among the 16 guinea pics given T
 
 #### Independent, Random Samples
 
-The Sample(s) was drawn at random (at least as representative as possible)
+The Sample(s) was drawn at **random** (at least as representative as possible) and the groups are **independent** of each other.
 
 * Nothing can be done to fix NON-representative samples!
 * Can not for with any statistically test
+* Lack of independence requires a different model
 
 
 #### Normality of the DV in each Group
@@ -159,10 +158,11 @@ The Sample(s) was drawn at random (at least as representative as possible)
 
 
 
-```{r}
+```{r, fig.cap = "Distribution of Survival Time by Poison Type: Histograms used to Judge Normality"}
 df_survival %>% 
   ggplot(aes(time)) + 
-  geom_histogram(fill = "gray",
+  geom_histogram(binwidth = .10,
+                 fill = "gray",
                  color = "black",
                  alpha = .5) +
   facet_grid(poison ~ .,
@@ -173,12 +173,12 @@ df_survival %>%
 
 
 
-```{r}
+```{r, fig.cap = "Distribution of Survival Time by Poison Type: QQ Plots used to Judge Normality"}
 df_survival %>% 
-  ggplot(aes(sample = time)) +    # make sure to include "sample = "
-  geom_qq() +                     # layer on the dots
-  stat_qq_line() +                # layer on the line
-  facet_wrap(~ poison,            # seperate panels for each group
+  ggplot(aes(sample = time)) +    
+  geom_qq() +                     
+  stat_qq_line() +                
+  facet_wrap(~ poison,            
              labeller = label_both) +          
   theme_bw()
 ```
@@ -206,17 +206,46 @@ df_survival %>%
                    p.value = shapiro.test(time)$p.value)
 ```
 
+
 ```{r}
-# df_survival %>% 
-#   dplyr::group_by(poison) %>% 
-#   dplyr::summarise(D.stat  = ks.test(time)$statistic,
-#                    p.value = ks.test(time)$p.value)
+x<- df_survival %>% 
+  dplyr::group_by(poison) %>% 
+  tidyr::nest() %>% 
+  dplyr::mutate(ks = purrr::map(data, ~ ks.test))
+  
+
+df_survival %>% ks.test(time, subset = (poision == "1"))
+
+```
+
+
+
+
+```{r}
+x <- df_survival %>% 
+  dplyr::filter(poison == 1) %>% 
+  dplyr::nest_by(poison) %>% 
+  dplyr::mutate(ks = map(data, 
+                         ~ funciton(x) x %>% dplyr::pull(time) %>% ks.test()))
+
+x$data[1]
+
+
+df_survival %>% 
+  dplyr::group_by(poison) %>% 
+  tidyr::nest() %>% 
+  dplyr::mutate(ks = purrr::map.df(data, ks.test(time, data = .)))
+
+
+%>% dplyr::select(data)
+  dplyr::mutate(W.stat  = ks.test(data$time)$statistic,
+                p.value = ks.test(data$time)$p.value)
 ```
 
 ```{r}
 df_survival %>% 
   dplyr::filter(poison == 1) %>% 
-  ks.test(time) 
+  ks.test(y = time)
 ```
 
 ```{r}
@@ -256,7 +285,7 @@ df_survival %>%
 
 
 
-#### Interpretation
+#### Summary
 
 Very skewed and violate HOV
 
@@ -390,7 +419,6 @@ In other words, you want to know if there is a statistical difference between th
 Second, check the summary statistics for each of the $k=4$ groups.
 
 ```{r}
-# Raw data: summary table
 df_survival %>% 
   dplyr::group_by(treat) %>%   # divide into groups
   furniture::table1("Survival Time" = time,
@@ -409,7 +437,7 @@ df_survival %>%
 
 #### Plot the Raw Data
 
-Third, plot the data to eyeball the potential effect.  Remember the center line in each box represents the median, not the mean.  I have added a red diamond on the mean survival time for each type of poison.
+Plot the data to eyeball the potential effect.  Remember the center line in each box represents the median, not the mean.  I have added a red diamond on the mean survival time for each type of poison.
 
 ```{r}
 df_survival %>% 
@@ -433,11 +461,15 @@ df_survival %>%
 #### Assumption Check: Normality
 
 
+
+
 ```{r}
 df_survival %>% 
   ggplot(aes(time)) + 
-  geom_density(fill = "gray",
-               alpha = .5) +
+  geom_histogram(binwidth = .10,
+                 color = "black",
+                 fill = "gray",
+                 alpha = .5) +
   facet_grid(treat ~ .,
              labeller = label_both) +
   theme_bw() +
