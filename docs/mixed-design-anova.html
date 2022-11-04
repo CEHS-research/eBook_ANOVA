@@ -4,23 +4,23 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8 Mixed Design ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
+  <title>9 Mixed Design ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
   <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8 Mixed Design ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta property="og:title" content="9 Mixed Design ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/EQM_v1_cover.png" />
   <meta property="og:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="github-repo" content="cehs-research/eBook_wrangle" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 Mixed Design ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta name="twitter:title" content="9 Mixed Design ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   
   <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="twitter:image" content="/EQM_v1_cover.png" />
 
-<meta name="author" content="Sarah Schwartz &amp; Tyson Barrett" />
+<meta name="author" content="Sarah Schwartz" />
 
 
 
@@ -252,7 +252,8 @@ div.csl-indent {
 <li class="chapter" data-level="5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#assumption-checks"><i class="fa fa-check"></i><b>5.3</b> Assumption Checks</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#independent-random-samples"><i class="fa fa-check"></i><b>5.3.1</b> Independent, Random Samples</a></li>
-<li class="chapter" data-level="5.3.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#normality-2"><i class="fa fa-check"></i><b>5.3.2</b> Normality</a></li>
+<li class="chapter" data-level="5.3.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#normality-of-the-dv-in-each-group"><i class="fa fa-check"></i><b>5.3.2</b> Normality of the DV in each Group</a></li>
+<li class="chapter" data-level="5.3.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#homogeneity-of-variance-hov-in-the-dv-between-groups"><i class="fa fa-check"></i><b>5.3.3</b> Homogeneity of Variance (HOV) in the DV between groups</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#one-way-anova-model"><i class="fa fa-check"></i><b>5.4</b> One-way ANOVA Model</a>
 <ul>
@@ -262,10 +263,16 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#followup-tests"><i class="fa fa-check"></i><b>5.5</b> Followup-tests</a>
 <ul>
-<li class="chapter" data-level="5.5.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#estimated-marginal-means-with-emmeansemmeans-group_var"><i class="fa fa-check"></i><b>5.5.1</b> Estimated Marginal Means with <code>emmeans::emmeans(~ group_var)</code></a></li>
-<li class="chapter" data-level="5.5.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#all-pairwise-comparisons-with-pairs"><i class="fa fa-check"></i><b>5.5.2</b> All Pairwise Comparisons with <code>pairs()</code></a></li>
-<li class="chapter" data-level="5.5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#plot-marginal-means-with-emmeansemmip-group_var"><i class="fa fa-check"></i><b>5.5.3</b> Plot Marginal Means with <code>emmeans::emmip(~ group_var)</code></a></li>
-<li class="chapter" data-level="5.5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#contrast-statements-with-emmeanscontrast"><i class="fa fa-check"></i><b>5.5.4</b> Contrast Statements with <code>emmeans::contrast()</code></a></li>
+<li class="chapter" data-level="5.5.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#calculate-estimated-marginal-means"><i class="fa fa-check"></i><b>5.5.1</b> Calculate Estimated Marginal Means</a></li>
+<li class="chapter" data-level="5.5.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#plot-estimated-marginal-means"><i class="fa fa-check"></i><b>5.5.2</b> Plot Estimated Marginal Means</a></li>
+<li class="chapter" data-level="5.5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#all-pairwise-comparisons"><i class="fa fa-check"></i><b>5.5.3</b> All Pairwise Comparisons</a></li>
+<li class="chapter" data-level="5.5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#effect-size-for-pairwise-comparisons"><i class="fa fa-check"></i><b>5.5.4</b> Effect Size for Pairwise Comparisons</a></li>
+<li class="chapter" data-level="5.5.5" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#contrast-statements"><i class="fa fa-check"></i><b>5.5.5</b> Contrast Statements</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#apa-write-up"><i class="fa fa-check"></i><b>5.6</b> APA Write-up</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#methods-section"><i class="fa fa-check"></i><b>5.6.1</b> Methods Section</a></li>
+<li class="chapter" data-level="5.6.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#results-section"><i class="fa fa-check"></i><b>5.6.2</b> Results Section</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html"><i class="fa fa-check"></i><b>6</b> Poison Example: 1 &amp; 2-way ANOVA</a>
@@ -281,7 +288,7 @@ div.csl-indent {
 <li class="chapter" data-level="6.2.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#assumption-checks-1"><i class="fa fa-check"></i><b>6.2.3</b> Assumption Checks</a></li>
 <li class="chapter" data-level="6.2.4" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#fitting-one-way-anova-model"><i class="fa fa-check"></i><b>6.2.4</b> Fitting One-way ANOVA Model</a></li>
 <li class="chapter" data-level="6.2.5" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#followup-tests-1"><i class="fa fa-check"></i><b>6.2.5</b> Followup-tests</a></li>
-<li class="chapter" data-level="6.2.6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#apa-write-up"><i class="fa fa-check"></i><b>6.2.6</b> APA Write Up</a></li>
+<li class="chapter" data-level="6.2.6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#apa-write-up-1"><i class="fa fa-check"></i><b>6.2.6</b> APA Write Up</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#example-2-survival-time-by-treatment-type"><i class="fa fa-check"></i><b>6.3</b> Example 2) Survival Time by Treatment Type</a>
 <ul>
@@ -296,31 +303,36 @@ div.csl-indent {
 <li class="chapter" data-level="6.4.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#followup-tests-3"><i class="fa fa-check"></i><b>6.4.3</b> Followup-tests</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>7</b> Repeated Measures ANOVA</a>
+<li class="chapter" data-level="7" data-path="helpful-functions.html"><a href="helpful-functions.html"><i class="fa fa-check"></i><b>7</b> Helpful Functions</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>7.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
-<li class="chapter" data-level="7.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a"><i class="fa fa-check"></i><b>7.2</b> Words Recalled Data Example (Chapter 15, section A)</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#data-prep"><i class="fa fa-check"></i><b>7.2.1</b> Data Prep</a></li>
-<li class="chapter" data-level="7.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-independent-anova"><i class="fa fa-check"></i><b>7.2.2</b> One-Way Independent ANOVA</a></li>
-<li class="chapter" data-level="7.2.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-rm-anova"><i class="fa fa-check"></i><b>7.2.3</b> One-Way RM ANOVA</a></li>
+<li class="chapter" data-level="7.1" data-path="helpful-functions.html"><a href="helpful-functions.html#p-value-formatting"><i class="fa fa-check"></i><b>7.1</b> P-value Formatting</a></li>
+<li class="chapter" data-level="7.2" data-path="helpful-functions.html"><a href="helpful-functions.html#apa-table-formatting"><i class="fa fa-check"></i><b>7.2</b> APA Table Formatting</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#another-example---weight-loss"><i class="fa fa-check"></i><b>7.3</b> Another Example - Weight Loss</a>
+<li class="chapter" data-level="8" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>8</b> Repeated Measures ANOVA</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format"><i class="fa fa-check"></i><b>7.3.1</b> Restructure the data from wide to long format</a></li>
-<li class="chapter" data-level="7.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#does-weight-long-change-over-time"><i class="fa fa-check"></i><b>7.3.2</b> Does weight long change over time?</a></li>
+<li class="chapter" data-level="8.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>8.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
+<li class="chapter" data-level="8.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a"><i class="fa fa-check"></i><b>8.2</b> Words Recalled Data Example (Chapter 15, section A)</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#data-prep"><i class="fa fa-check"></i><b>8.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="8.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-independent-anova"><i class="fa fa-check"></i><b>8.2.2</b> One-Way Independent ANOVA</a></li>
+<li class="chapter" data-level="8.2.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-rm-anova"><i class="fa fa-check"></i><b>8.2.3</b> One-Way RM ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#another-example---weight-loss"><i class="fa fa-check"></i><b>8.3</b> Another Example - Weight Loss</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format"><i class="fa fa-check"></i><b>8.3.1</b> Restructure the data from wide to long format</a></li>
+<li class="chapter" data-level="8.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#does-weight-long-change-over-time"><i class="fa fa-check"></i><b>8.3.2</b> Does weight long change over time?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html"><i class="fa fa-check"></i><b>8</b> Mixed Design ANOVA</a>
+<li class="chapter" data-level="9" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html"><i class="fa fa-check"></i><b>9</b> Mixed Design ANOVA</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>8.1</b> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code></a></li>
-<li class="chapter" data-level="8.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a"><i class="fa fa-check"></i><b>8.2</b> Words Recalled Data Example (Chapter 16, section A)</a>
+<li class="chapter" data-level="9.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>9.1</b> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code></a></li>
+<li class="chapter" data-level="9.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a"><i class="fa fa-check"></i><b>9.2</b> Words Recalled Data Example (Chapter 16, section A)</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#data-prep-1"><i class="fa fa-check"></i><b>8.2.1</b> Data Prep</a></li>
-<li class="chapter" data-level="8.2.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#one-way-rm-anova-1"><i class="fa fa-check"></i><b>8.2.2</b> One-Way RM ANOVA</a></li>
-<li class="chapter" data-level="8.2.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#mixed-anova"><i class="fa fa-check"></i><b>8.2.3</b> Mixed ANOVA</a></li>
+<li class="chapter" data-level="9.2.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#data-prep-1"><i class="fa fa-check"></i><b>9.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="9.2.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#one-way-rm-anova-1"><i class="fa fa-check"></i><b>9.2.2</b> One-Way RM ANOVA</a></li>
+<li class="chapter" data-level="9.2.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#mixed-anova"><i class="fa fa-check"></i><b>9.2.3</b> Mixed ANOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#conclusion"><i class="fa fa-check"></i><b>8.3</b> Conclusion</a></li>
+<li class="chapter" data-level="9.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#conclusion"><i class="fa fa-check"></i><b>9.3</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -343,15 +355,15 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mixed-design-anova" class="section level1 hasAnchor" number="8">
-<h1><span class="header-section-number">8</span> Mixed Design ANOVA<a href="mixed-design-anova.html#mixed-design-anova" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="mixed-design-anova" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> Mixed Design ANOVA<a href="mixed-design-anova.html#mixed-design-anova" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Required Packages</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="mixed-design-anova.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    <span class="co"># Loads several very helpful &#39;tidy&#39; packages</span></span>
-<span id="cb209-2"><a href="mixed-design-anova.html#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furniture)    <span class="co"># Nice tables (by our own Tyson Barrett)</span></span>
-<span id="cb209-3"><a href="mixed-design-anova.html#cb209-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(afex)         <span class="co"># needed for ANOVA, emmeans is loaded automatically.</span></span>
-<span id="cb209-4"><a href="mixed-design-anova.html#cb209-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)     <span class="co"># for advanced control for multiple testing/Type 1 error</span></span></code></pre></div>
-<div id="tutorial---fitting-mixed-design-anova-models-with-afexaov_4" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="mixed-design-anova.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    <span class="co"># Loads several very helpful &#39;tidy&#39; packages</span></span>
+<span id="cb219-2"><a href="mixed-design-anova.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furniture)    <span class="co"># Nice tables (by our own Tyson Barrett)</span></span>
+<span id="cb219-3"><a href="mixed-design-anova.html#cb219-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(afex)         <span class="co"># needed for ANOVA, emmeans is loaded automatically.</span></span>
+<span id="cb219-4"><a href="mixed-design-anova.html#cb219-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)     <span class="co"># for advanced control for multiple testing/Type 1 error</span></span></code></pre></div>
+<div id="tutorial---fitting-mixed-design-anova-models-with-afexaov_4" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>aov_4()</code> function from the <code>afex</code> package fits ANOVA models (oneway, two-way, repeated measures, and mixed design). It needs at least two arguments:</p>
 <ol style="list-style-type: decimal">
 <li><p>formula: <code>continuous_var ~ group_var + (RM_var|id_var)</code> <em>one observation per subject for each level of the <code>RMvar</code>, so each <code>id_var</code> has multiple lines for each subject, each subject can only belong to exactly one group./</em></p></li>
@@ -367,42 +379,42 @@ factor or <code>fct</code>) and the continuous measurement (numberic or
 <code>dbl</code>).
 </p>
 </div>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="mixed-design-anova.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RM ANOVA: fit and save</span></span>
-<span id="cb210-2"><a href="mixed-design-anova.html#cb210-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="ot">&lt;-</span> data_name <span class="sc">%&gt;%</span> </span>
-<span id="cb210-3"><a href="mixed-design-anova.html#cb210-3" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(continuous_var <span class="sc">~</span> group_var <span class="sc">+</span> (RM_var<span class="sc">|</span>id_var),</span>
-<span id="cb210-4"><a href="mixed-design-anova.html#cb210-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="mixed-design-anova.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RM ANOVA: fit and save</span></span>
+<span id="cb220-2"><a href="mixed-design-anova.html#cb220-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="ot">&lt;-</span> data_name <span class="sc">%&gt;%</span> </span>
+<span id="cb220-3"><a href="mixed-design-anova.html#cb220-3" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(continuous_var <span class="sc">~</span> group_var <span class="sc">+</span> (RM_var<span class="sc">|</span>id_var),</span>
+<span id="cb220-4"><a href="mixed-design-anova.html#cb220-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span></code></pre></div>
 </div>
-<div id="words-recalled-data-example-chapter-16-section-a" class="section level2 hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> Words Recalled Data Example (Chapter 16, section A)<a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="data-prep-1" class="section level3 hasAnchor" number="8.2.1">
-<h3><span class="header-section-number">8.2.1</span> Data Prep<a href="mixed-design-anova.html#data-prep-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="words-recalled-data-example-chapter-16-section-a" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Words Recalled Data Example (Chapter 16, section A)<a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="data-prep-1" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Data Prep<a href="mixed-design-anova.html#data-prep-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>I input the data as a <code>tribble</code> which saves it as a <code>data.frame</code> and then cleaned up a few of the important variables.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="mixed-design-anova.html#cb211-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
-<span id="cb211-2"><a href="mixed-design-anova.html#cb211-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>ID, <span class="sc">~</span>depression, <span class="sc">~</span>word_type, <span class="sc">~</span>words_recalled,</span>
-<span id="cb211-3"><a href="mixed-design-anova.html#cb211-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,           <span class="dv">0</span>,          <span class="dv">1</span>,              <span class="dv">20</span>,</span>
-<span id="cb211-4"><a href="mixed-design-anova.html#cb211-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,           <span class="dv">0</span>,          <span class="dv">1</span>,              <span class="dv">16</span>,</span>
-<span id="cb211-5"><a href="mixed-design-anova.html#cb211-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,           <span class="dv">0</span>,          <span class="dv">1</span>,               <span class="dv">8</span>,</span>
-<span id="cb211-6"><a href="mixed-design-anova.html#cb211-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,           <span class="dv">1</span>,          <span class="dv">1</span>,              <span class="dv">17</span>,</span>
-<span id="cb211-7"><a href="mixed-design-anova.html#cb211-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,           <span class="dv">1</span>,          <span class="dv">1</span>,              <span class="dv">15</span>,</span>
-<span id="cb211-8"><a href="mixed-design-anova.html#cb211-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,           <span class="dv">1</span>,          <span class="dv">1</span>,              <span class="dv">10</span>,</span>
-<span id="cb211-9"><a href="mixed-design-anova.html#cb211-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,           <span class="dv">0</span>,          <span class="dv">2</span>,              <span class="dv">21</span>,</span>
-<span id="cb211-10"><a href="mixed-design-anova.html#cb211-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,           <span class="dv">0</span>,          <span class="dv">2</span>,              <span class="dv">18</span>,</span>
-<span id="cb211-11"><a href="mixed-design-anova.html#cb211-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,           <span class="dv">0</span>,          <span class="dv">2</span>,               <span class="dv">7</span>,</span>
-<span id="cb211-12"><a href="mixed-design-anova.html#cb211-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,           <span class="dv">1</span>,          <span class="dv">2</span>,              <span class="dv">15</span>,</span>
-<span id="cb211-13"><a href="mixed-design-anova.html#cb211-13" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,           <span class="dv">1</span>,          <span class="dv">2</span>,              <span class="dv">10</span>,</span>
-<span id="cb211-14"><a href="mixed-design-anova.html#cb211-14" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,           <span class="dv">1</span>,          <span class="dv">2</span>,               <span class="dv">4</span>,</span>
-<span id="cb211-15"><a href="mixed-design-anova.html#cb211-15" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,           <span class="dv">0</span>,          <span class="dv">3</span>,              <span class="dv">17</span>,</span>
-<span id="cb211-16"><a href="mixed-design-anova.html#cb211-16" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,           <span class="dv">0</span>,          <span class="dv">3</span>,              <span class="dv">11</span>,</span>
-<span id="cb211-17"><a href="mixed-design-anova.html#cb211-17" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,           <span class="dv">0</span>,          <span class="dv">3</span>,               <span class="dv">4</span>,</span>
-<span id="cb211-18"><a href="mixed-design-anova.html#cb211-18" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,           <span class="dv">1</span>,          <span class="dv">3</span>,              <span class="dv">18</span>,</span>
-<span id="cb211-19"><a href="mixed-design-anova.html#cb211-19" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,           <span class="dv">1</span>,          <span class="dv">3</span>,              <span class="dv">13</span>,</span>
-<span id="cb211-20"><a href="mixed-design-anova.html#cb211-20" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,           <span class="dv">1</span>,          <span class="dv">3</span>,              <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb211-21"><a href="mixed-design-anova.html#cb211-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">depression =</span> <span class="fu">factor</span>(depression, </span>
-<span id="cb211-22"><a href="mixed-design-anova.html#cb211-22" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Not Depressed&quot;</span>,</span>
-<span id="cb211-23"><a href="mixed-design-anova.html#cb211-23" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Depressed&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb211-24"><a href="mixed-design-anova.html#cb211-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word_type =</span> <span class="fu">factor</span>(word_type,</span>
-<span id="cb211-25"><a href="mixed-design-anova.html#cb211-25" aria-hidden="true" tabindex="-1"></a>                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Neutral&quot;</span>, <span class="st">&quot;Positive&quot;</span>, <span class="st">&quot;Negative&quot;</span>)))</span>
-<span id="cb211-26"><a href="mixed-design-anova.html#cb211-26" aria-hidden="true" tabindex="-1"></a>d</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="mixed-design-anova.html#cb221-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb221-2"><a href="mixed-design-anova.html#cb221-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>ID, <span class="sc">~</span>depression, <span class="sc">~</span>word_type, <span class="sc">~</span>words_recalled,</span>
+<span id="cb221-3"><a href="mixed-design-anova.html#cb221-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,           <span class="dv">0</span>,          <span class="dv">1</span>,              <span class="dv">20</span>,</span>
+<span id="cb221-4"><a href="mixed-design-anova.html#cb221-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,           <span class="dv">0</span>,          <span class="dv">1</span>,              <span class="dv">16</span>,</span>
+<span id="cb221-5"><a href="mixed-design-anova.html#cb221-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,           <span class="dv">0</span>,          <span class="dv">1</span>,               <span class="dv">8</span>,</span>
+<span id="cb221-6"><a href="mixed-design-anova.html#cb221-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,           <span class="dv">1</span>,          <span class="dv">1</span>,              <span class="dv">17</span>,</span>
+<span id="cb221-7"><a href="mixed-design-anova.html#cb221-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,           <span class="dv">1</span>,          <span class="dv">1</span>,              <span class="dv">15</span>,</span>
+<span id="cb221-8"><a href="mixed-design-anova.html#cb221-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,           <span class="dv">1</span>,          <span class="dv">1</span>,              <span class="dv">10</span>,</span>
+<span id="cb221-9"><a href="mixed-design-anova.html#cb221-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,           <span class="dv">0</span>,          <span class="dv">2</span>,              <span class="dv">21</span>,</span>
+<span id="cb221-10"><a href="mixed-design-anova.html#cb221-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,           <span class="dv">0</span>,          <span class="dv">2</span>,              <span class="dv">18</span>,</span>
+<span id="cb221-11"><a href="mixed-design-anova.html#cb221-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,           <span class="dv">0</span>,          <span class="dv">2</span>,               <span class="dv">7</span>,</span>
+<span id="cb221-12"><a href="mixed-design-anova.html#cb221-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,           <span class="dv">1</span>,          <span class="dv">2</span>,              <span class="dv">15</span>,</span>
+<span id="cb221-13"><a href="mixed-design-anova.html#cb221-13" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,           <span class="dv">1</span>,          <span class="dv">2</span>,              <span class="dv">10</span>,</span>
+<span id="cb221-14"><a href="mixed-design-anova.html#cb221-14" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,           <span class="dv">1</span>,          <span class="dv">2</span>,               <span class="dv">4</span>,</span>
+<span id="cb221-15"><a href="mixed-design-anova.html#cb221-15" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,           <span class="dv">0</span>,          <span class="dv">3</span>,              <span class="dv">17</span>,</span>
+<span id="cb221-16"><a href="mixed-design-anova.html#cb221-16" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,           <span class="dv">0</span>,          <span class="dv">3</span>,              <span class="dv">11</span>,</span>
+<span id="cb221-17"><a href="mixed-design-anova.html#cb221-17" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,           <span class="dv">0</span>,          <span class="dv">3</span>,               <span class="dv">4</span>,</span>
+<span id="cb221-18"><a href="mixed-design-anova.html#cb221-18" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,           <span class="dv">1</span>,          <span class="dv">3</span>,              <span class="dv">18</span>,</span>
+<span id="cb221-19"><a href="mixed-design-anova.html#cb221-19" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,           <span class="dv">1</span>,          <span class="dv">3</span>,              <span class="dv">13</span>,</span>
+<span id="cb221-20"><a href="mixed-design-anova.html#cb221-20" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,           <span class="dv">1</span>,          <span class="dv">3</span>,              <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb221-21"><a href="mixed-design-anova.html#cb221-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">depression =</span> <span class="fu">factor</span>(depression, </span>
+<span id="cb221-22"><a href="mixed-design-anova.html#cb221-22" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Not Depressed&quot;</span>,</span>
+<span id="cb221-23"><a href="mixed-design-anova.html#cb221-23" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Depressed&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb221-24"><a href="mixed-design-anova.html#cb221-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word_type =</span> <span class="fu">factor</span>(word_type,</span>
+<span id="cb221-25"><a href="mixed-design-anova.html#cb221-25" aria-hidden="true" tabindex="-1"></a>                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Neutral&quot;</span>, <span class="st">&quot;Positive&quot;</span>, <span class="st">&quot;Negative&quot;</span>)))</span>
+<span id="cb221-26"><a href="mixed-design-anova.html#cb221-26" aria-hidden="true" tabindex="-1"></a>d</span></code></pre></div>
 <pre><code># A tibble: 18 × 4
       ID depression    word_type words_recalled
    &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt;              &lt;dbl&gt;
@@ -425,13 +437,13 @@ factor or <code>fct</code>) and the continuous measurement (numberic or
 17     5 Depressed     Negative              13
 18     6 Depressed     Negative              10</code></pre>
 </div>
-<div id="one-way-rm-anova-1" class="section level3 hasAnchor" number="8.2.2">
-<h3><span class="header-section-number">8.2.2</span> One-Way RM ANOVA<a href="mixed-design-anova.html#one-way-rm-anova-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="one-way-rm-anova-1" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> One-Way RM ANOVA<a href="mixed-design-anova.html#one-way-rm-anova-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First, let’s ignore the depression variable and just look at the repeated measures. We do this by using <code>afex::aov_4()</code> and then the <code>summary()</code> functions as shown below.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="mixed-design-anova.html#cb213-1" aria-hidden="true" tabindex="-1"></a>oneway <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb213-2"><a href="mixed-design-anova.html#cb213-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(words_recalled <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (word_type<span class="sc">|</span>ID),</span>
-<span id="cb213-3"><a href="mixed-design-anova.html#cb213-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span>
-<span id="cb213-4"><a href="mixed-design-anova.html#cb213-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(oneway)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="mixed-design-anova.html#cb223-1" aria-hidden="true" tabindex="-1"></a>oneway <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb223-2"><a href="mixed-design-anova.html#cb223-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(words_recalled <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (word_type<span class="sc">|</span>ID),</span>
+<span id="cb223-3"><a href="mixed-design-anova.html#cb223-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span>
+<span id="cb223-4"><a href="mixed-design-anova.html#cb223-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(oneway)</span></code></pre></div>
 <pre><code>
 Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
 
@@ -458,30 +470,30 @@ word_type 0.55972     0.3282
 word_type 0.6077293  0.3309148</code></pre>
 <p>Here, we see a number of pieces of information, including the sums of squares, F-statistic, and p-value. The p-value suggests that there is not an effect of <code>word_type</code> here (p = .342).</p>
 <p>Let’s plot this using a spaghetti plot.</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="mixed-design-anova.html#cb215-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb215-2"><a href="mixed-design-anova.html#cb215-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word_type, words_recalled, <span class="at">group =</span> ID)) <span class="sc">+</span></span>
-<span id="cb215-3"><a href="mixed-design-anova.html#cb215-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb215-4"><a href="mixed-design-anova.html#cb215-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-151-1.png" width="75%" /></p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="mixed-design-anova.html#cb225-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb225-2"><a href="mixed-design-anova.html#cb225-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word_type, words_recalled, <span class="at">group =</span> ID)) <span class="sc">+</span></span>
+<span id="cb225-3"><a href="mixed-design-anova.html#cb225-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb225-4"><a href="mixed-design-anova.html#cb225-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-166-1.png" width="75%" /></p>
 <p>But we wonder if depression has an effect on the number of words recalled, and it may interact with word_type. Let’s see what that looks like.</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="mixed-design-anova.html#cb216-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb216-2"><a href="mixed-design-anova.html#cb216-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word_type, words_recalled, <span class="at">group =</span> ID, </span>
-<span id="cb216-3"><a href="mixed-design-anova.html#cb216-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> depression, </span>
-<span id="cb216-4"><a href="mixed-design-anova.html#cb216-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> depression, </span>
-<span id="cb216-5"><a href="mixed-design-anova.html#cb216-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> depression)) <span class="sc">+</span></span>
-<span id="cb216-6"><a href="mixed-design-anova.html#cb216-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb216-7"><a href="mixed-design-anova.html#cb216-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb216-8"><a href="mixed-design-anova.html#cb216-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>depression)</span></code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-152-1.png" width="75%" /></p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="mixed-design-anova.html#cb226-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb226-2"><a href="mixed-design-anova.html#cb226-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word_type, words_recalled, <span class="at">group =</span> ID, </span>
+<span id="cb226-3"><a href="mixed-design-anova.html#cb226-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> depression, </span>
+<span id="cb226-4"><a href="mixed-design-anova.html#cb226-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> depression, </span>
+<span id="cb226-5"><a href="mixed-design-anova.html#cb226-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> depression)) <span class="sc">+</span></span>
+<span id="cb226-6"><a href="mixed-design-anova.html#cb226-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb226-7"><a href="mixed-design-anova.html#cb226-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb226-8"><a href="mixed-design-anova.html#cb226-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>depression)</span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-167-1.png" width="75%" /></p>
 <p>Definitely looks like the effect of word_type depends on whether the individual has depression or not. To add a between subjects factor to a repeated measures ANOVA, we are now doing mixed ANOVA (both between and within subjects factors).</p>
 </div>
-<div id="mixed-anova" class="section level3 hasAnchor" number="8.2.3">
-<h3><span class="header-section-number">8.2.3</span> Mixed ANOVA<a href="mixed-design-anova.html#mixed-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="mixed-anova" class="section level3 hasAnchor" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> Mixed ANOVA<a href="mixed-design-anova.html#mixed-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To run a mixed ANOVA, use <code>afex::aov_4()</code> and then the <code>summary()</code> functions again but this type with the between subjects factor included.</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="mixed-design-anova.html#cb217-1" aria-hidden="true" tabindex="-1"></a>mixed_anova <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb217-2"><a href="mixed-design-anova.html#cb217-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(words_recalled <span class="sc">~</span> depression <span class="sc">+</span> (word_type<span class="sc">|</span>ID),</span>
-<span id="cb217-3"><a href="mixed-design-anova.html#cb217-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span>
-<span id="cb217-4"><a href="mixed-design-anova.html#cb217-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mixed_anova)</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="mixed-design-anova.html#cb227-1" aria-hidden="true" tabindex="-1"></a>mixed_anova <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb227-2"><a href="mixed-design-anova.html#cb227-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(words_recalled <span class="sc">~</span> depression <span class="sc">+</span> (word_type<span class="sc">|</span>ID),</span>
+<span id="cb227-3"><a href="mixed-design-anova.html#cb227-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span>
+<span id="cb227-4"><a href="mixed-design-anova.html#cb227-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mixed_anova)</span></code></pre></div>
 <pre><code>
 Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
 
@@ -514,14 +526,14 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 word_type            1.396104 0.0294739587
 depression:word_type 1.396104 0.0008177732</code></pre>
 <p>The output provides us with a clear significant interaction shown in the first table. Our previous plot helps illustrate what this interaction is telling us about the patterns. However, it is often useful to show what the groups are doing, not the individuals (especially if your sample size is larger than 20). To do that, we can use:</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="mixed-design-anova.html#cb219-1" aria-hidden="true" tabindex="-1"></a>mixed_anova <span class="sc">%&gt;%</span></span>
-<span id="cb219-2"><a href="mixed-design-anova.html#cb219-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmip</span>(depression <span class="sc">~</span> word_type)</span></code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-154-1.png" width="75%" /></p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="mixed-design-anova.html#cb229-1" aria-hidden="true" tabindex="-1"></a>mixed_anova <span class="sc">%&gt;%</span></span>
+<span id="cb229-2"><a href="mixed-design-anova.html#cb229-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmip</span>(depression <span class="sc">~</span> word_type)</span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-169-1.png" width="75%" /></p>
 <p>From this, we can tell that there is very little difference with neutral words, but large differences for positive and negative words. Specifically, depressed individuals struggle much more at recalling positive words than non-depressed individuals and depressed individuals do better at recalling negative words than non-depressed individuals.</p>
 </div>
 </div>
-<div id="conclusion" class="section level2 hasAnchor" number="8.3">
-<h2><span class="header-section-number">8.3</span> Conclusion<a href="mixed-design-anova.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="conclusion" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Conclusion<a href="mixed-design-anova.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Overall, this is a good approach to using mixed ANOVA:</p>
 <ol style="list-style-type: decimal">
 <li>Look at the repeated measures first, and then,</li>

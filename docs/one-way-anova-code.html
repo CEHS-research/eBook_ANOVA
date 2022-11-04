@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="twitter:image" content="/EQM_v1_cover.png" />
 
-<meta name="author" content="Sarah Schwartz &amp; Tyson Barrett" />
+<meta name="author" content="Sarah Schwartz" />
 
 
 
@@ -252,7 +252,8 @@ div.csl-indent {
 <li class="chapter" data-level="5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#assumption-checks"><i class="fa fa-check"></i><b>5.3</b> Assumption Checks</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#independent-random-samples"><i class="fa fa-check"></i><b>5.3.1</b> Independent, Random Samples</a></li>
-<li class="chapter" data-level="5.3.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#normality-2"><i class="fa fa-check"></i><b>5.3.2</b> Normality</a></li>
+<li class="chapter" data-level="5.3.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#normality-of-the-dv-in-each-group"><i class="fa fa-check"></i><b>5.3.2</b> Normality of the DV in each Group</a></li>
+<li class="chapter" data-level="5.3.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#homogeneity-of-variance-hov-in-the-dv-between-groups"><i class="fa fa-check"></i><b>5.3.3</b> Homogeneity of Variance (HOV) in the DV between groups</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#one-way-anova-model"><i class="fa fa-check"></i><b>5.4</b> One-way ANOVA Model</a>
 <ul>
@@ -262,10 +263,16 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#followup-tests"><i class="fa fa-check"></i><b>5.5</b> Followup-tests</a>
 <ul>
-<li class="chapter" data-level="5.5.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#estimated-marginal-means-with-emmeansemmeans-group_var"><i class="fa fa-check"></i><b>5.5.1</b> Estimated Marginal Means with <code>emmeans::emmeans(~ group_var)</code></a></li>
-<li class="chapter" data-level="5.5.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#all-pairwise-comparisons-with-pairs"><i class="fa fa-check"></i><b>5.5.2</b> All Pairwise Comparisons with <code>pairs()</code></a></li>
-<li class="chapter" data-level="5.5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#plot-marginal-means-with-emmeansemmip-group_var"><i class="fa fa-check"></i><b>5.5.3</b> Plot Marginal Means with <code>emmeans::emmip(~ group_var)</code></a></li>
-<li class="chapter" data-level="5.5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#contrast-statements-with-emmeanscontrast"><i class="fa fa-check"></i><b>5.5.4</b> Contrast Statements with <code>emmeans::contrast()</code></a></li>
+<li class="chapter" data-level="5.5.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#calculate-estimated-marginal-means"><i class="fa fa-check"></i><b>5.5.1</b> Calculate Estimated Marginal Means</a></li>
+<li class="chapter" data-level="5.5.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#plot-estimated-marginal-means"><i class="fa fa-check"></i><b>5.5.2</b> Plot Estimated Marginal Means</a></li>
+<li class="chapter" data-level="5.5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#all-pairwise-comparisons"><i class="fa fa-check"></i><b>5.5.3</b> All Pairwise Comparisons</a></li>
+<li class="chapter" data-level="5.5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#effect-size-for-pairwise-comparisons"><i class="fa fa-check"></i><b>5.5.4</b> Effect Size for Pairwise Comparisons</a></li>
+<li class="chapter" data-level="5.5.5" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#contrast-statements"><i class="fa fa-check"></i><b>5.5.5</b> Contrast Statements</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#apa-write-up"><i class="fa fa-check"></i><b>5.6</b> APA Write-up</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#methods-section"><i class="fa fa-check"></i><b>5.6.1</b> Methods Section</a></li>
+<li class="chapter" data-level="5.6.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#results-section"><i class="fa fa-check"></i><b>5.6.2</b> Results Section</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html"><i class="fa fa-check"></i><b>6</b> Poison Example: 1 &amp; 2-way ANOVA</a>
@@ -281,7 +288,7 @@ div.csl-indent {
 <li class="chapter" data-level="6.2.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#assumption-checks-1"><i class="fa fa-check"></i><b>6.2.3</b> Assumption Checks</a></li>
 <li class="chapter" data-level="6.2.4" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#fitting-one-way-anova-model"><i class="fa fa-check"></i><b>6.2.4</b> Fitting One-way ANOVA Model</a></li>
 <li class="chapter" data-level="6.2.5" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#followup-tests-1"><i class="fa fa-check"></i><b>6.2.5</b> Followup-tests</a></li>
-<li class="chapter" data-level="6.2.6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#apa-write-up"><i class="fa fa-check"></i><b>6.2.6</b> APA Write Up</a></li>
+<li class="chapter" data-level="6.2.6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#apa-write-up-1"><i class="fa fa-check"></i><b>6.2.6</b> APA Write Up</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#example-2-survival-time-by-treatment-type"><i class="fa fa-check"></i><b>6.3</b> Example 2) Survival Time by Treatment Type</a>
 <ul>
@@ -296,31 +303,36 @@ div.csl-indent {
 <li class="chapter" data-level="6.4.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#followup-tests-3"><i class="fa fa-check"></i><b>6.4.3</b> Followup-tests</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>7</b> Repeated Measures ANOVA</a>
+<li class="chapter" data-level="7" data-path="helpful-functions.html"><a href="helpful-functions.html"><i class="fa fa-check"></i><b>7</b> Helpful Functions</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>7.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
-<li class="chapter" data-level="7.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a"><i class="fa fa-check"></i><b>7.2</b> Words Recalled Data Example (Chapter 15, section A)</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#data-prep"><i class="fa fa-check"></i><b>7.2.1</b> Data Prep</a></li>
-<li class="chapter" data-level="7.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-independent-anova"><i class="fa fa-check"></i><b>7.2.2</b> One-Way Independent ANOVA</a></li>
-<li class="chapter" data-level="7.2.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-rm-anova"><i class="fa fa-check"></i><b>7.2.3</b> One-Way RM ANOVA</a></li>
+<li class="chapter" data-level="7.1" data-path="helpful-functions.html"><a href="helpful-functions.html#p-value-formatting"><i class="fa fa-check"></i><b>7.1</b> P-value Formatting</a></li>
+<li class="chapter" data-level="7.2" data-path="helpful-functions.html"><a href="helpful-functions.html#apa-table-formatting"><i class="fa fa-check"></i><b>7.2</b> APA Table Formatting</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#another-example---weight-loss"><i class="fa fa-check"></i><b>7.3</b> Another Example - Weight Loss</a>
+<li class="chapter" data-level="8" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>8</b> Repeated Measures ANOVA</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format"><i class="fa fa-check"></i><b>7.3.1</b> Restructure the data from wide to long format</a></li>
-<li class="chapter" data-level="7.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#does-weight-long-change-over-time"><i class="fa fa-check"></i><b>7.3.2</b> Does weight long change over time?</a></li>
+<li class="chapter" data-level="8.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>8.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
+<li class="chapter" data-level="8.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a"><i class="fa fa-check"></i><b>8.2</b> Words Recalled Data Example (Chapter 15, section A)</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#data-prep"><i class="fa fa-check"></i><b>8.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="8.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-independent-anova"><i class="fa fa-check"></i><b>8.2.2</b> One-Way Independent ANOVA</a></li>
+<li class="chapter" data-level="8.2.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-rm-anova"><i class="fa fa-check"></i><b>8.2.3</b> One-Way RM ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#another-example---weight-loss"><i class="fa fa-check"></i><b>8.3</b> Another Example - Weight Loss</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format"><i class="fa fa-check"></i><b>8.3.1</b> Restructure the data from wide to long format</a></li>
+<li class="chapter" data-level="8.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#does-weight-long-change-over-time"><i class="fa fa-check"></i><b>8.3.2</b> Does weight long change over time?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html"><i class="fa fa-check"></i><b>8</b> Mixed Design ANOVA</a>
+<li class="chapter" data-level="9" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html"><i class="fa fa-check"></i><b>9</b> Mixed Design ANOVA</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>8.1</b> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code></a></li>
-<li class="chapter" data-level="8.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a"><i class="fa fa-check"></i><b>8.2</b> Words Recalled Data Example (Chapter 16, section A)</a>
+<li class="chapter" data-level="9.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>9.1</b> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code></a></li>
+<li class="chapter" data-level="9.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a"><i class="fa fa-check"></i><b>9.2</b> Words Recalled Data Example (Chapter 16, section A)</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#data-prep-1"><i class="fa fa-check"></i><b>8.2.1</b> Data Prep</a></li>
-<li class="chapter" data-level="8.2.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#one-way-rm-anova-1"><i class="fa fa-check"></i><b>8.2.2</b> One-Way RM ANOVA</a></li>
-<li class="chapter" data-level="8.2.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#mixed-anova"><i class="fa fa-check"></i><b>8.2.3</b> Mixed ANOVA</a></li>
+<li class="chapter" data-level="9.2.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#data-prep-1"><i class="fa fa-check"></i><b>9.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="9.2.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#one-way-rm-anova-1"><i class="fa fa-check"></i><b>9.2.2</b> One-Way RM ANOVA</a></li>
+<li class="chapter" data-level="9.2.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#mixed-anova"><i class="fa fa-check"></i><b>9.2.3</b> Mixed ANOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#conclusion"><i class="fa fa-check"></i><b>8.3</b> Conclusion</a></li>
+<li class="chapter" data-level="9.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#conclusion"><i class="fa fa-check"></i><b>9.3</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -381,33 +393,53 @@ div.csl-indent {
 <h2><span class="header-section-number">5.2</span> Exploratory Data Analysis<a href="one-way-anova-code.html#exploratory-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="compute-summary-statistics" class="section level3 hasAnchor" number="5.2.1">
 <h3><span class="header-section-number">5.2.1</span> Compute Summary Statistics<a href="one-way-anova-code.html#compute-summary-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Calculate summary statistics of the DV by the groups to the data to eyeball the potential effect or differences in the means. Also check if the standard deviations and samples sizes are somewhat similar in each group.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="one-way-anova-code.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw data: summary table</span></span>
-<span id="cb77-2"><a href="one-way-anova-code.html#cb77-2" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb77-3"><a href="one-way-anova-code.html#cb77-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group_IV) <span class="sc">%&gt;%</span>          <span class="co"># divide into groups</span></span>
-<span id="cb77-4"><a href="one-way-anova-code.html#cb77-4" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(continuous_DV        <span class="co"># gives M(SD)</span></span>
-<span id="cb77-5"><a href="one-way-anova-code.html#cb77-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">digits =</span> <span class="dv">2</span>,     </span>
-<span id="cb77-6"><a href="one-way-anova-code.html#cb77-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">na.rm =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb77-7"><a href="one-way-anova-code.html#cb77-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">total =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb77-8"><a href="one-way-anova-code.html#cb77-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">output =</span> <span class="st">&quot;markdown&quot;</span>) </span></code></pre></div>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> Calculate summary statistics of the DV by the
+groups to the data to eyeball the potential effect or differences in the
+means. Also check if the standard deviations and samples sizes are
+somewhat similar in each group.
+</p>
+</div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="one-way-anova-code.html#cb77-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb77-2"><a href="one-way-anova-code.html#cb77-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group_IV) <span class="sc">%&gt;%</span>          <span class="co"># divide into groups</span></span>
+<span id="cb77-3"><a href="one-way-anova-code.html#cb77-3" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(continuous_DV        <span class="co"># gives M(SD)</span></span>
+<span id="cb77-4"><a href="one-way-anova-code.html#cb77-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">digits =</span> <span class="dv">2</span>,     </span>
+<span id="cb77-5"><a href="one-way-anova-code.html#cb77-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">na.rm =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb77-6"><a href="one-way-anova-code.html#cb77-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">total =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb77-7"><a href="one-way-anova-code.html#cb77-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">output =</span> <span class="st">&quot;markdown&quot;</span>) </span></code></pre></div>
 </div>
 <div id="plot-the-observed-data" class="section level3 hasAnchor" number="5.2.2">
 <h3><span class="header-section-number">5.2.2</span> Plot the Observed Data<a href="one-way-anova-code.html#plot-the-observed-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Plot the data to eyeball the potential effect. Remember the center line in each box represents the median, not the mean. I have added a red diamond on the mean survival time for each type of poison.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="one-way-anova-code.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw data: boxplots</span></span>
-<span id="cb78-2"><a href="one-way-anova-code.html#cb78-2" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb78-3"><a href="one-way-anova-code.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> group_IV,</span>
-<span id="cb78-4"><a href="one-way-anova-code.html#cb78-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> continuous_DV)) <span class="sc">+</span> </span>
-<span id="cb78-5"><a href="one-way-anova-code.html#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb78-6"><a href="one-way-anova-code.html#cb78-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() </span></code></pre></div>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="one-way-anova-code.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw data: Mean-SD plots</span></span>
-<span id="cb79-2"><a href="one-way-anova-code.html#cb79-2" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb79-3"><a href="one-way-anova-code.html#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> group_IV,</span>
-<span id="cb79-4"><a href="one-way-anova-code.html#cb79-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> continuous_DV)) <span class="sc">+</span> </span>
-<span id="cb79-5"><a href="one-way-anova-code.html#cb79-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>() </span></code></pre></div>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> Plot the data to eyeball the potential effect.
+Remember the center line in each box represents the median, not the
+mean.
+</p>
+</div>
+<div id="side-by-side-boxplots-1" class="section level4 hasAnchor" number="5.2.2.1">
+<h4><span class="header-section-number">5.2.2.1</span> Side-by-Side Boxplots<a href="one-way-anova-code.html#side-by-side-boxplots-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="one-way-anova-code.html#cb78-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb78-2"><a href="one-way-anova-code.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> group_IV,           <span class="co"># groups along the x-axis</span></span>
+<span id="cb78-3"><a href="one-way-anova-code.html#cb78-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> continuous_DV)) <span class="sc">+</span>   <span class="co"># DV on the y-axis</span></span>
+<span id="cb78-4"><a href="one-way-anova-code.html#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb78-5"><a href="one-way-anova-code.html#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb78-6"><a href="one-way-anova-code.html#cb78-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+</div>
+<div id="mean-by-group-dot-plot" class="section level4 hasAnchor" number="5.2.2.2">
+<h4><span class="header-section-number">5.2.2.2</span> Mean by Group Dot-Plot<a href="one-way-anova-code.html#mean-by-group-dot-plot" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="one-way-anova-code.html#cb79-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb79-2"><a href="one-way-anova-code.html#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> group_IV,           <span class="co"># groups along the x-axis</span></span>
+<span id="cb79-3"><a href="one-way-anova-code.html#cb79-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> continuous_DV)) <span class="sc">+</span>   <span class="co"># DV on the y-axis </span></span>
+<span id="cb79-4"><a href="one-way-anova-code.html#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>() <span class="sc">+</span></span>
+<span id="cb79-5"><a href="one-way-anova-code.html#cb79-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+</div>
+<div id="violin--boxplots" class="section level4 hasAnchor" number="5.2.2.3">
+<h4><span class="header-section-number">5.2.2.3</span> Violin-&amp;-Boxplots<a href="one-way-anova-code.html#violin--boxplots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="one-way-anova-code.html#cb80-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb80-2"><a href="one-way-anova-code.html#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> continuous_DV,</span>
-<span id="cb80-3"><a href="one-way-anova-code.html#cb80-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> group_IV)) <span class="sc">+</span> </span>
+<span id="cb80-2"><a href="one-way-anova-code.html#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> group_IV,           <span class="co"># groups along the x-axis</span></span>
+<span id="cb80-3"><a href="one-way-anova-code.html#cb80-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> continuous_DV)) <span class="sc">+</span>   <span class="co"># DV on the y-axis</span></span>
 <span id="cb80-4"><a href="one-way-anova-code.html#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
 <span id="cb80-5"><a href="one-way-anova-code.html#cb80-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">07</span>,</span>
 <span id="cb80-6"><a href="one-way-anova-code.html#cb80-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
@@ -420,18 +452,21 @@ div.csl-indent {
 <span id="cb80-13"><a href="one-way-anova-code.html#cb80-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 </div>
 </div>
+</div>
 <div id="assumption-checks" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Assumption Checks<a href="one-way-anova-code.html#assumption-checks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="independent-random-samples" class="section level3 hasAnchor" number="5.3.1">
 <h3><span class="header-section-number">5.3.1</span> Independent, Random Samples<a href="one-way-anova-code.html#independent-random-samples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The Sample(s) was drawn at random (at least as representative as possible)</p>
-<ul>
-<li>Nothing can be done to fix NON-representative samples!</li>
-<li>Can not for with any statistically test</li>
-</ul>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> Nothing can be done to fix NON-representative
+samples and there is no statistically test to test this.
+</p>
 </div>
-<div id="normality-2" class="section level3 hasAnchor" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> Normality<a href="one-way-anova-code.html#normality-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="normality-of-the-dv-in-each-group" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Normality of the DV in each Group<a href="one-way-anova-code.html#normality-of-the-dv-in-each-group" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>A variable is said to follow the normal distribution if it resembles the normal curve. Specifically it is symetrical, unimodal, and bell shaped.</p>
 </blockquote>
@@ -440,64 +475,167 @@ div.csl-indent {
 <li>Not as important if the sample is large <em>(Central Limit Theorem)</em></li>
 <li>IF the sample is far from normal &amp;/or small, might want to use a different method</li>
 </ul>
-<p>Options to judging normality:</p>
-<p><strong>Options to judging normality:</strong></p>
+<div class="rmdlightbulb">
+<p>
+<strong>Options to judging normality:</strong>
+</p>
 <ol style="list-style-type: decimal">
-<li>Visualization of each sample’s distribution
+<li>
+Visualization of each sample’s distribution
 <ul>
-<li>Stacked <strong>histograms</strong>, but is sensitive to binning choices <em>(number or width)</em></li>
-<li>Side-by-side <strong>boxplots</strong>, shows <em>median</em> instead of <em>mean</em> as central line</li>
-<li>Seperate <strong>QQ plots</strong> (straight <span class="math inline">\(45^\circ\)</span> line), but is sensitive to outliers!</li>
-</ul></li>
+<li>
+Stacked <strong>histograms</strong>, but is sensitive to binning
+choices <em>(number or width)</em>
+</li>
+<li>
+Side-by-side <strong>boxplots</strong>, shows <em>median</em>
+instead of <em>mean</em> as central line
+</li>
+<li>
+Seperate <strong>QQ plots</strong> (straight <span class="math inline"><span class="math inline">\(45^\circ\)</span></span> line), but is sensitive to
+outliers!
+</li>
+</ul>
+</li>
+<li>
+Calculate <strong>Skewness</strong> and <strong>Kurtosis</strong>
+<ul>
+<li>
+Divided each value by its standard error (SE)<br />
+</li>
+<li>
+A result <span class="math inline"><span class="math inline">\(\gt \pm 2\)</span></span> indicates
+issues<br />
+</li>
+<li>
+Best used when sample is small, <em>n</em> &lt; 30’ish
+</li>
+</ul>
+</li>
+<li>
+Formal Inferential Tests for Normality
+<ul>
+<li>
+Null-hypothesis: population is normally distributed
+</li>
+<li>
+A <span class="math inline"><span class="math inline">\(p \lt .05\)</span></span> ???indicate
+snon-normality
+</li>
+<li>
+For smaller samples, use <strong>Shapiro-Wilk’s Test</strong>
+</li>
+<li>
+For larger samples, use <strong>Kolmogorov-Smirnov’s
+Test</strong>
+</li>
+</ul>
+</li>
 </ol>
+</div>
+<div id="histogram-by-groups" class="section level4 hasAnchor" number="5.3.2.1">
+<h4><span class="header-section-number">5.3.2.1</span> Histogram by Groups<a href="one-way-anova-code.html#histogram-by-groups" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="one-way-anova-code.html#cb81-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb81-2"><a href="one-way-anova-code.html#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(continuous_var)) <span class="sc">+</span> </span>
+<span id="cb81-2"><a href="one-way-anova-code.html#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(continuous_var)) <span class="sc">+</span>           <span class="co"># DV along the x-axis</span></span>
 <span id="cb81-3"><a href="one-way-anova-code.html#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;gray&quot;</span>,</span>
 <span id="cb81-4"><a href="one-way-anova-code.html#cb81-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
 <span id="cb81-5"><a href="one-way-anova-code.html#cb81-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb81-6"><a href="one-way-anova-code.html#cb81-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(group_var <span class="sc">~</span> .,</span>
+<span id="cb81-6"><a href="one-way-anova-code.html#cb81-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(group_var <span class="sc">~</span> .,               <span class="co"># Panel by group</span></span>
 <span id="cb81-7"><a href="one-way-anova-code.html#cb81-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">labeller =</span> label_both) <span class="sc">+</span></span>
 <span id="cb81-8"><a href="one-way-anova-code.html#cb81-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+</div>
+<div id="qq-plot-by-group" class="section level4 hasAnchor" number="5.3.2.2">
+<h4><span class="header-section-number">5.3.2.2</span> QQ Plot by Group<a href="one-way-anova-code.html#qq-plot-by-group" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="one-way-anova-code.html#cb82-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb82-2"><a href="one-way-anova-code.html#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> continuous_var)) <span class="sc">+</span>    <span class="co"># make sure to include &quot;sample = &quot;</span></span>
-<span id="cb82-3"><a href="one-way-anova-code.html#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span>                               <span class="co"># layer on the dots</span></span>
-<span id="cb82-4"><a href="one-way-anova-code.html#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>() <span class="sc">+</span>                          <span class="co"># layer on the line</span></span>
-<span id="cb82-5"><a href="one-way-anova-code.html#cb82-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> group_var,                   <span class="co"># seperate panels for each group</span></span>
+<span id="cb82-2"><a href="one-way-anova-code.html#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> continuous_var)) <span class="sc">+</span>    <span class="co"># make sure to include &quot;sample = DV&quot;</span></span>
+<span id="cb82-3"><a href="one-way-anova-code.html#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span>                               </span>
+<span id="cb82-4"><a href="one-way-anova-code.html#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>() <span class="sc">+</span>                          </span>
+<span id="cb82-5"><a href="one-way-anova-code.html#cb82-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> group_var,                   <span class="co"># Panel by group</span></span>
 <span id="cb82-6"><a href="one-way-anova-code.html#cb82-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">labeller =</span> label_both) <span class="sc">+</span>    </span>
 <span id="cb82-7"><a href="one-way-anova-code.html#cb82-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<ol start="2" style="list-style-type: decimal">
-<li>Calculate <strong>Skewness</strong> and <strong>Kurtosis</strong>
-<ul>
-<li>Divided each value by its standard error (SE)<br />
-</li>
-<li>A result <span class="math inline">\(\gt \pm 2\)</span> indicates issues</li>
-</ul></li>
-</ol>
+</div>
+<div id="skewness-and-kurtosis-values" class="section level4 hasAnchor" number="5.3.2.3">
+<h4><span class="header-section-number">5.3.2.3</span> Skewness and Kurtosis Values<a href="one-way-anova-code.html#skewness-and-kurtosis-values" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="one-way-anova-code.html#cb83-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb83-2"><a href="one-way-anova-code.html#cb83-2" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">describeBy</span>(continuous_var <span class="sc">~</span> group_var,</span>
+<span id="cb83-2"><a href="one-way-anova-code.html#cb83-2" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">describeBy</span>(continuous_var <span class="sc">~</span> group_var,    <span class="co"># Formula: DV ~ groups</span></span>
 <span id="cb83-3"><a href="one-way-anova-code.html#cb83-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> .,</span>
 <span id="cb83-4"><a href="one-way-anova-code.html#cb83-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">mat =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb83-5"><a href="one-way-anova-code.html#cb83-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">digits =</span> <span class="dv">2</span>) </span></code></pre></div>
-<ol start="3" style="list-style-type: decimal">
-<li>Formal Inferential Tests for Normality
-<ul>
-<li>Null-hypothesis: population is normally distributed</li>
-<li>A <span class="math inline">\(p \lt .05\)</span> ???indicate snon-normality</li>
-<li>For smaller samples, use <strong>Shapiro-Wilk’s Test</strong></li>
-<li>For larger samples, use <strong>Kolmogorov-Smirnov’s Test</strong></li>
-</ul></li>
-</ol>
+</div>
+<div id="skapiro-wilks-test" class="section level4 hasAnchor" number="5.3.2.4">
+<h4><span class="header-section-number">5.3.2.4</span> Skapiro-Wilk’s Test<a href="one-way-anova-code.html#skapiro-wilks-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="one-way-anova-code.html#cb84-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb84-2"><a href="one-way-anova-code.html#cb84-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group_var) <span class="sc">%&gt;%</span> </span>
-<span id="cb84-3"><a href="one-way-anova-code.html#cb84-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">W.stat  =</span> <span class="fu">shapiro.test</span>(continuous_var)<span class="sc">$</span>statistic,</span>
-<span id="cb84-4"><a href="one-way-anova-code.html#cb84-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">p.value =</span> <span class="fu">shapiro.test</span>(continuous_var)<span class="sc">$</span>p.value)</span></code></pre></div>
-<p>It is important that we test for violations of the assumption of <em>Homogeneity of variance</em>.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="one-way-anova-code.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Levene&#39;s Test of HOV</span></span>
-<span id="cb85-2"><a href="one-way-anova-code.html#cb85-2" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb85-3"><a href="one-way-anova-code.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  car<span class="sc">::</span><span class="fu">leveneTest</span>(continuous_var <span class="sc">~</span> group_var, </span>
-<span id="cb85-4"><a href="one-way-anova-code.html#cb85-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> .,            </span>
-<span id="cb85-5"><a href="one-way-anova-code.html#cb85-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">center =</span> <span class="st">&quot;mean&quot;</span>)     </span></code></pre></div>
-<p><code>{r. eval=FALSE} # Bartlett's Test of HOV df_long %&gt;%    bartlett.test(continuous_var ~ group_var,                  data = .)</code></p>
+<span id="cb84-2"><a href="one-way-anova-code.html#cb84-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group_var) <span class="sc">%&gt;%</span>                                      <span class="co"># By group</span></span>
+<span id="cb84-3"><a href="one-way-anova-code.html#cb84-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">W.stat  =</span> <span class="fu">shapiro.test</span>(continuous_var)<span class="sc">$</span>statistic,  <span class="co"># For the DV</span></span>
+<span id="cb84-4"><a href="one-way-anova-code.html#cb84-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">p.value =</span> <span class="fu">shapiro.test</span>(continuous_var)<span class="sc">$</span>p.value)    <span class="co"># For the DV</span></span></code></pre></div>
+</div>
+<div id="skewness-kurtosis-shapiro-wilks-test" class="section level4 hasAnchor" number="5.3.2.5">
+<h4><span class="header-section-number">5.3.2.5</span> Skewness, Kurtosis, &amp; Shapiro-Wilk’s Test<a href="one-way-anova-code.html#skewness-kurtosis-shapiro-wilks-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="one-way-anova-code.html#cb85-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb85-2"><a href="one-way-anova-code.html#cb85-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">nest_by</span>(group_var) <span class="sc">%&gt;%</span>                                        <span class="co"># By group</span></span>
+<span id="cb85-3"><a href="one-way-anova-code.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">summ =</span> <span class="fu">list</span>(pastecs<span class="sc">::</span><span class="fu">stat.desc</span>(data<span class="sc">$</span>continuous_var, <span class="co"># For the DV</span></span>
+<span id="cb85-4"><a href="one-way-anova-code.html#cb85-4" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">norm =</span> <span class="cn">TRUE</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-5"><a href="one-way-anova-code.html#cb85-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">summ =</span> <span class="fu">list</span>(summ <span class="sc">%&gt;%</span> </span>
+<span id="cb85-6"><a href="one-way-anova-code.html#cb85-6" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">unlist</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb85-7"><a href="one-way-anova-code.html#cb85-7" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb85-8"><a href="one-way-anova-code.html#cb85-8" aria-hidden="true" tabindex="-1"></a>                              dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="st">&quot;value&quot;</span> <span class="ot">=</span> <span class="st">&quot;.&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-9"><a href="one-way-anova-code.html#cb85-9" aria-hidden="true" tabindex="-1"></a>                              tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">&quot;stat&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-10"><a href="one-way-anova-code.html#cb85-10" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">unnest</span>(summ) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-11"><a href="one-way-anova-code.html#cb85-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(stat <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;skewness&quot;</span>, <span class="st">&quot;skew.2SE&quot;</span>,</span>
+<span id="cb85-12"><a href="one-way-anova-code.html#cb85-12" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;kurtosis&quot;</span>, <span class="st">&quot;kurt.2SE&quot;</span>,</span>
+<span id="cb85-13"><a href="one-way-anova-code.html#cb85-13" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;normtest.W&quot;</span>, <span class="st">&quot;normtest.p&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-14"><a href="one-way-anova-code.html#cb85-14" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> stat,</span>
+<span id="cb85-15"><a href="one-way-anova-code.html#cb85-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_from =</span> value)</span></code></pre></div>
+<ul>
+<li><code>skew.2SE</code>
+<ul>
+<li>Calculateed as <code>skew</code> divided by 2 times the SE of skewness</li>
+<li>If &gt; 1, then we can conclude violations to normality</li>
+</ul></li>
+<li><code>kurt.2SE</code>
+<ul>
+<li>Calculateed as <code>kurt</code> divided by 2 times the SE of skewness</li>
+<li>If &gt; 1, then we can conclude violations to normality</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="homogeneity-of-variance-hov-in-the-dv-between-groups" class="section level3 hasAnchor" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> Homogeneity of Variance (HOV) in the DV between groups<a href="one-way-anova-code.html#homogeneity-of-variance-hov-in-the-dv-between-groups" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>All three of the Tests below have:</p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: all populations’ variances are equal</li>
+<li><span class="math inline">\(H_1\)</span> At least two of the populations have different variances</li>
+</ul>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> When using <strong>Bartlett’s test</strong>
+one of the main assumptions data should be normally distributed. In the
+case of non-normal data, the <strong>Levene’s test</strong> is an
+alternative to the Bartlett test. The <strong>Fligner-Killeen
+test</strong> is one of the many tests for homogeneity of variances
+which is most robust against departures from normality.
+</p>
+</div>
+<div id="bartletts-test" class="section level4 hasAnchor" number="5.3.3.1">
+<h4><span class="header-section-number">5.3.3.1</span> Bartlett’s Test<a href="one-way-anova-code.html#bartletts-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="one-way-anova-code.html#cb86-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">%&gt;%</span> </span>
+<span id="cb86-2"><a href="one-way-anova-code.html#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bartlett.test</span>(continuous_var <span class="sc">~</span> group_var,     <span class="co"># Formula: DV ~ groups</span></span>
+<span id="cb86-3"><a href="one-way-anova-code.html#cb86-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> .)</span></code></pre></div>
+</div>
+<div id="levens-test" class="section level4 hasAnchor" number="5.3.3.2">
+<h4><span class="header-section-number">5.3.3.2</span> Leven’s Test<a href="one-way-anova-code.html#levens-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="one-way-anova-code.html#cb87-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb87-2"><a href="one-way-anova-code.html#cb87-2" aria-hidden="true" tabindex="-1"></a>  car<span class="sc">::</span><span class="fu">leveneTest</span>(continuous_var <span class="sc">~</span> group_var,     <span class="co"># Formula: DV ~ groups</span></span>
+<span id="cb87-3"><a href="one-way-anova-code.html#cb87-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> .,            </span>
+<span id="cb87-4"><a href="one-way-anova-code.html#cb87-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">center =</span> <span class="st">&quot;mean&quot;</span>)     </span></code></pre></div>
+</div>
+<div id="filgner-killeens-test" class="section level4 hasAnchor" number="5.3.3.3">
+<h4><span class="header-section-number">5.3.3.3</span> Filgner-Killeen’s Test<a href="one-way-anova-code.html#filgner-killeens-test" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="one-way-anova-code.html#cb88-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">%&gt;%</span> </span>
+<span id="cb88-2"><a href="one-way-anova-code.html#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fligner.test</span>(continuous_var <span class="sc">~</span> group_var,     <span class="co"># Formula: DV ~ groups</span></span>
+<span id="cb88-3"><a href="one-way-anova-code.html#cb88-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> .)</span></code></pre></div>
+</div>
 </div>
 </div>
 <div id="one-way-anova-model" class="section level2 hasAnchor" number="5.4">
@@ -516,13 +654,14 @@ div.csl-indent {
 data in LONG format only. Each observation needs to be on its one line
 or row with seperate variables for the group membership (categorical
 factor or <code>fct</code>) and the continuous measurement (numberic or
-<code>dbl</code>).
+<code>dbl</code>). The <code>(1|id_var)</code> indicates there is only
+ONE observation PER individual.
 </p>
 </div>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="one-way-anova-code.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One-way ANOVA: fit and save</span></span>
-<span id="cb86-2"><a href="one-way-anova-code.html#cb86-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="ot">&lt;-</span> data_long <span class="sc">%&gt;%</span> </span>
-<span id="cb86-3"><a href="one-way-anova-code.html#cb86-3" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(continuous_DV <span class="sc">~</span> group_IV <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id_var),</span>
-<span id="cb86-4"><a href="one-way-anova-code.html#cb86-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="one-way-anova-code.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One-way ANOVA: fit and save</span></span>
+<span id="cb89-2"><a href="one-way-anova-code.html#cb89-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="ot">&lt;-</span> data_long <span class="sc">%&gt;%</span> </span>
+<span id="cb89-3"><a href="one-way-anova-code.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(continuous_DV <span class="sc">~</span> group_IV <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id_var),       <span class="co"># Formula: DV ~ groups + (1| id_var)</span></span>
+<span id="cb89-4"><a href="one-way-anova-code.html#cb89-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span></code></pre></div>
 </div>
 <div id="basic-output---stored-name-of-model" class="section level3 hasAnchor" number="5.4.2">
 <h3><span class="header-section-number">5.4.2</span> Basic Output - stored name of model<a href="one-way-anova-code.html#basic-output---stored-name-of-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -534,8 +673,8 @@ eta squared</em>. In a one-way ANOVA, the eta-squared effect size is
 only one value, ie. generalized <span class="math inline"><span class="math inline">\(\eta_g\)</span></span> and partial <span class="math inline"><span class="math inline">\(\eta_p\)</span></span> are the same.
 </p>
 </div>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="one-way-anova-code.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display basic ANOVA results (includes effect size)</span></span>
-<span id="cb87-2"><a href="one-way-anova-code.html#cb87-2" aria-hidden="true" tabindex="-1"></a>aov_name </span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="one-way-anova-code.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display basic ANOVA results (includes effect size)</span></span>
+<span id="cb90-2"><a href="one-way-anova-code.html#cb90-2" aria-hidden="true" tabindex="-1"></a>aov_name </span></code></pre></div>
 </div>
 <div id="fuller-output---add-anova-on-model-name" class="section level3 hasAnchor" number="5.4.3">
 <h3><span class="header-section-number">5.4.3</span> Fuller Output - add $Anova on model name<a href="one-way-anova-code.html#fuller-output---add-anova-on-model-name" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -553,19 +692,32 @@ these values and add them on the homework page. Remember that
 <code>MS = SS/df</code> for each term.
 </p>
 </div>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="one-way-anova-code.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display fuller ANOVA results (includes sum of squares)</span></span>
-<span id="cb88-2"><a href="one-way-anova-code.html#cb88-2" aria-hidden="true" tabindex="-1"></a>aov_name<span class="sc">$</span>Anova </span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="one-way-anova-code.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display fuller ANOVA results (includes sum of squares)</span></span>
+<span id="cb91-2"><a href="one-way-anova-code.html#cb91-2" aria-hidden="true" tabindex="-1"></a>aov_name<span class="sc">$</span>Anova </span></code></pre></div>
 </div>
 </div>
 <div id="followup-tests" class="section level2 hasAnchor" number="5.5">
 <h2><span class="header-section-number">5.5</span> Followup-tests<a href="one-way-anova-code.html#followup-tests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="estimated-marginal-means-with-emmeansemmeans-group_var" class="section level3 hasAnchor" number="5.5.1">
-<h3><span class="header-section-number">5.5.1</span> Estimated Marginal Means with <code>emmeans::emmeans(~ group_var)</code><a href="one-way-anova-code.html#estimated-marginal-means-with-emmeansemmeans-group_var" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="one-way-anova-code.html#cb89-1" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
-<span id="cb89-2"><a href="one-way-anova-code.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> group_var)        <span class="co"># Calculate Estimated Marinal Means</span></span></code></pre></div>
+<div id="calculate-estimated-marginal-means" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Calculate Estimated Marginal Means<a href="one-way-anova-code.html#calculate-estimated-marginal-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> Estimated Marginal Means (EMM) will we
+identical WHEN the groups are exactly the same size AND there is only
+ONE grouping variable.
+</p>
 </div>
-<div id="all-pairwise-comparisons-with-pairs" class="section level3 hasAnchor" number="5.5.2">
-<h3><span class="header-section-number">5.5.2</span> All Pairwise Comparisons with <code>pairs()</code><a href="one-way-anova-code.html#all-pairwise-comparisons-with-pairs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="one-way-anova-code.html#cb92-1" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
+<span id="cb92-2"><a href="one-way-anova-code.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> group_var)        <span class="co"># by groups</span></span></code></pre></div>
+</div>
+<div id="plot-estimated-marginal-means" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Plot Estimated Marginal Means<a href="one-way-anova-code.html#plot-estimated-marginal-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="one-way-anova-code.html#cb93-1" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
+<span id="cb93-2"><a href="one-way-anova-code.html#cb93-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmip</span>(<span class="sc">~</span> group_var,        <span class="co"># Calculate Estimated Marginal Means</span></span>
+<span id="cb93-3"><a href="one-way-anova-code.html#cb93-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">CIs =</span> <span class="cn">TRUE</span>)         <span class="co"># Include Confidence Intervals</span></span></code></pre></div>
+</div>
+<div id="all-pairwise-comparisons" class="section level3 hasAnchor" number="5.5.3">
+<h3><span class="header-section-number">5.5.3</span> All Pairwise Comparisons<a href="one-way-anova-code.html#all-pairwise-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are two steps to conduct all possible pairwise comparisons:</p>
 <ol style="list-style-type: decimal">
 <li><code>emmeans::emmeans(~ group_var)</code> - Calculate the <em>Estimated Marinal Means</em></li>
@@ -577,26 +729,34 @@ these values and add them on the homework page. Remember that
 <li><code>adjust = "tukey"</code> - Tukey’s HSD</li>
 <li><code>adjust = "bon"</code> - Bonferroni</li>
 </ul>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="one-way-anova-code.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise post hoc: Tukey&#39;s HSD adjustment for multiple comparisons</span></span>
-<span id="cb90-2"><a href="one-way-anova-code.html#cb90-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
-<span id="cb90-3"><a href="one-way-anova-code.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> group_var) <span class="sc">%&gt;%</span>        <span class="co"># Calculate Estimated Marginal Means</span></span>
-<span id="cb90-4"><a href="one-way-anova-code.html#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(<span class="at">adjust =</span> <span class="st">&quot;tukey&quot;</span>)                  <span class="co"># Is each pair signif different?</span></span></code></pre></div>
+<div class="rmdlightbulb">
+<p>
+<strong>NOTE:</strong> Fisher’s LSD approach is valid if you have 2-3
+groups. If there are 4 or more groups, Tukey’s HSD adjustment is more
+appropriate, provided the groups are the same size. Bonferroni’s
+adjustment is most conservative.
+</p>
 </div>
-<div id="plot-marginal-means-with-emmeansemmip-group_var" class="section level3 hasAnchor" number="5.5.3">
-<h3><span class="header-section-number">5.5.3</span> Plot Marginal Means with <code>emmeans::emmip(~ group_var)</code><a href="one-way-anova-code.html#plot-marginal-means-with-emmeansemmip-group_var" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="one-way-anova-code.html#cb91-1" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
-<span id="cb91-2"><a href="one-way-anova-code.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmip</span>(<span class="sc">~</span> group_var,        <span class="co"># Calculate Estimated Marginal Means</span></span>
-<span id="cb91-3"><a href="one-way-anova-code.html#cb91-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">CIs =</span> <span class="cn">TRUE</span>)         <span class="co"># Include Confidence Intervals</span></span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="one-way-anova-code.html#cb94-1" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
+<span id="cb94-2"><a href="one-way-anova-code.html#cb94-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> group_var) <span class="sc">%&gt;%</span>        <span class="co"># Calculate Estimated Marginal Means</span></span>
+<span id="cb94-3"><a href="one-way-anova-code.html#cb94-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(<span class="at">adjust =</span> <span class="st">&quot;tukey&quot;</span>)                  <span class="co"># Is each pair signif different?</span></span></code></pre></div>
 </div>
-<div id="contrast-statements-with-emmeanscontrast" class="section level3 hasAnchor" number="5.5.4">
-<h3><span class="header-section-number">5.5.4</span> Contrast Statements with <code>emmeans::contrast()</code><a href="one-way-anova-code.html#contrast-statements-with-emmeanscontrast" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="effect-size-for-pairwise-comparisons" class="section level3 hasAnchor" number="5.5.4">
+<h3><span class="header-section-number">5.5.4</span> Effect Size for Pairwise Comparisons<a href="one-way-anova-code.html#effect-size-for-pairwise-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cohen’s d like “Standardized Mean Differences”</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="one-way-anova-code.html#cb95-1" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
+<span id="cb95-2"><a href="one-way-anova-code.html#cb95-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> group_var) <span class="sc">%&gt;%</span> </span>
+<span id="cb95-3"><a href="one-way-anova-code.html#cb95-3" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">eff_size</span>(<span class="at">sigma =</span> <span class="fu">sigma</span>(aov_name<span class="sc">$</span>lm),</span>
+<span id="cb95-4"><a href="one-way-anova-code.html#cb95-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">edf =</span> <span class="fu">df.residual</span>(aov_name<span class="sc">$</span>lm))</span></code></pre></div>
+</div>
+<div id="contrast-statements" class="section level3 hasAnchor" number="5.5.5">
+<h3><span class="header-section-number">5.5.5</span> Contrast Statements<a href="one-way-anova-code.html#contrast-statements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are two steps to conduct a contrast comparison:</p>
 <ol style="list-style-type: decimal">
 <li><code>emmeans(~ group_var)</code> - Calculate the <em>Estimated Marinal Means</em></li>
 <li><code>contrast()</code> - Determine if each pair is <em>significantly different</em></li>
 </ol>
-Inside the contrast statement, list the named sets of linear contrast weights. We will only be doing one-at-a-time, but we must still use a nested <code>list</code>.<br />
-
+<p>Inside the contrast statement, list the named sets of linear contrast weights. We will only be doing one-at-a-time, but we must still use a nested <code>list</code>.</p>
 <div class="rmdlightbulb">
 <p>
 <strong>NOTE:</strong> You must provide one weight (<span class="math inline"><span class="math inline">\(c_i\)</span></span>) for each of the <span class="math inline"><span class="math inline">\(k\)</span></span> groups. If you wish to ignore a group,
@@ -605,10 +765,67 @@ sum total of all the weights must be zero (<span class="math inline"><span class
 negative numbers.
 </p>
 </div>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="one-way-anova-code.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contrast statement : Impossible vs. Rest</span></span>
-<span id="cb92-2"><a href="one-way-anova-code.html#cb92-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
-<span id="cb92-3"><a href="one-way-anova-code.html#cb92-3" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> group_var) <span class="sc">%&gt;%</span> </span>
-<span id="cb92-4"><a href="one-way-anova-code.html#cb92-4" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">contrast</span>(<span class="fu">list</span>(<span class="st">&quot;your contrast name&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(c_1, c_2, ... , c_k)))</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="one-way-anova-code.html#cb96-1" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
+<span id="cb96-2"><a href="one-way-anova-code.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> group_var) <span class="sc">%&gt;%</span> </span>
+<span id="cb96-3"><a href="one-way-anova-code.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">contrast</span>(<span class="fu">list</span>(<span class="st">&quot;your contrast name&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(c_1, c_2, ... , c_k)))</span></code></pre></div>
+</div>
+</div>
+<div id="apa-write-up" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> APA Write-up<a href="one-way-anova-code.html#apa-write-up" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="methods-section" class="section level3 hasAnchor" number="5.6.1">
+<h3><span class="header-section-number">5.6.1</span> Methods Section<a href="one-way-anova-code.html#methods-section" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Research Question(s)
+<ul>
+<li>Specific testable hypotheses</li>
+</ul></li>
+<li>Sample
+<ul>
+<li>participants</li>
+<li>inclusion &amp; exclusion criteria</li>
+</ul></li>
+<li>Procedure
+<ul>
+<li>setting</li>
+<li>timeline</li>
+<li>intervention &amp; placebo (if applicable)</li>
+</ul></li>
+<li>Variables
+<ul>
+<li>Measures used</li>
+<li>DV &amp; IV(s)</li>
+</ul></li>
+<li>Analytic Plan
+<ul>
+<li>Main Method Used, options</li>
+<li>Assumptions &amp; How Tested</li>
+<li>Follow-up tests</li>
+<li>Effect Size</li>
+</ul></li>
+</ul>
+</div>
+<div id="results-section" class="section level3 hasAnchor" number="5.6.2">
+<h3><span class="header-section-number">5.6.2</span> Results Section<a href="one-way-anova-code.html#results-section" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Descriptive Summary
+<ul>
+<li>Table 1 with sample and variables</li>
+<li>Eyeball treands seen</li>
+</ul></li>
+<li>Main Test Results
+<ul>
+<li>Assumptions of interest</li>
+<li>May need a table(s) and/or plot(s)</li>
+</ul></li>
+<li>Follow-up Tests
+<ul>
+<li>final conclusion</li>
+</ul></li>
+</ul>
+<p>Make sure to include:
+* Effect Sizes
+* Direction of any Significant relationship
+* Contex (not “reject the null”)</p>
 
 </div>
 </div>

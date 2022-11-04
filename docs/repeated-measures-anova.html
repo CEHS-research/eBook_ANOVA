@@ -4,23 +4,23 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Repeated Measures ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
+  <title>8 Repeated Measures ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
   <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Repeated Measures ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta property="og:title" content="8 Repeated Measures ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/EQM_v1_cover.png" />
   <meta property="og:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="github-repo" content="cehs-research/eBook_wrangle" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Repeated Measures ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta name="twitter:title" content="8 Repeated Measures ANOVA | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   
   <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="twitter:image" content="/EQM_v1_cover.png" />
 
-<meta name="author" content="Sarah Schwartz &amp; Tyson Barrett" />
+<meta name="author" content="Sarah Schwartz" />
 
 
 
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="poison-example-1-2-way-anova.html"/>
+<link rel="prev" href="helpful-functions.html"/>
 <link rel="next" href="mixed-design-anova.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -252,7 +252,8 @@ div.csl-indent {
 <li class="chapter" data-level="5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#assumption-checks"><i class="fa fa-check"></i><b>5.3</b> Assumption Checks</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#independent-random-samples"><i class="fa fa-check"></i><b>5.3.1</b> Independent, Random Samples</a></li>
-<li class="chapter" data-level="5.3.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#normality-2"><i class="fa fa-check"></i><b>5.3.2</b> Normality</a></li>
+<li class="chapter" data-level="5.3.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#normality-of-the-dv-in-each-group"><i class="fa fa-check"></i><b>5.3.2</b> Normality of the DV in each Group</a></li>
+<li class="chapter" data-level="5.3.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#homogeneity-of-variance-hov-in-the-dv-between-groups"><i class="fa fa-check"></i><b>5.3.3</b> Homogeneity of Variance (HOV) in the DV between groups</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#one-way-anova-model"><i class="fa fa-check"></i><b>5.4</b> One-way ANOVA Model</a>
 <ul>
@@ -262,10 +263,16 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#followup-tests"><i class="fa fa-check"></i><b>5.5</b> Followup-tests</a>
 <ul>
-<li class="chapter" data-level="5.5.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#estimated-marginal-means-with-emmeansemmeans-group_var"><i class="fa fa-check"></i><b>5.5.1</b> Estimated Marginal Means with <code>emmeans::emmeans(~ group_var)</code></a></li>
-<li class="chapter" data-level="5.5.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#all-pairwise-comparisons-with-pairs"><i class="fa fa-check"></i><b>5.5.2</b> All Pairwise Comparisons with <code>pairs()</code></a></li>
-<li class="chapter" data-level="5.5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#plot-marginal-means-with-emmeansemmip-group_var"><i class="fa fa-check"></i><b>5.5.3</b> Plot Marginal Means with <code>emmeans::emmip(~ group_var)</code></a></li>
-<li class="chapter" data-level="5.5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#contrast-statements-with-emmeanscontrast"><i class="fa fa-check"></i><b>5.5.4</b> Contrast Statements with <code>emmeans::contrast()</code></a></li>
+<li class="chapter" data-level="5.5.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#calculate-estimated-marginal-means"><i class="fa fa-check"></i><b>5.5.1</b> Calculate Estimated Marginal Means</a></li>
+<li class="chapter" data-level="5.5.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#plot-estimated-marginal-means"><i class="fa fa-check"></i><b>5.5.2</b> Plot Estimated Marginal Means</a></li>
+<li class="chapter" data-level="5.5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#all-pairwise-comparisons"><i class="fa fa-check"></i><b>5.5.3</b> All Pairwise Comparisons</a></li>
+<li class="chapter" data-level="5.5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#effect-size-for-pairwise-comparisons"><i class="fa fa-check"></i><b>5.5.4</b> Effect Size for Pairwise Comparisons</a></li>
+<li class="chapter" data-level="5.5.5" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#contrast-statements"><i class="fa fa-check"></i><b>5.5.5</b> Contrast Statements</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#apa-write-up"><i class="fa fa-check"></i><b>5.6</b> APA Write-up</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#methods-section"><i class="fa fa-check"></i><b>5.6.1</b> Methods Section</a></li>
+<li class="chapter" data-level="5.6.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#results-section"><i class="fa fa-check"></i><b>5.6.2</b> Results Section</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html"><i class="fa fa-check"></i><b>6</b> Poison Example: 1 &amp; 2-way ANOVA</a>
@@ -281,7 +288,7 @@ div.csl-indent {
 <li class="chapter" data-level="6.2.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#assumption-checks-1"><i class="fa fa-check"></i><b>6.2.3</b> Assumption Checks</a></li>
 <li class="chapter" data-level="6.2.4" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#fitting-one-way-anova-model"><i class="fa fa-check"></i><b>6.2.4</b> Fitting One-way ANOVA Model</a></li>
 <li class="chapter" data-level="6.2.5" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#followup-tests-1"><i class="fa fa-check"></i><b>6.2.5</b> Followup-tests</a></li>
-<li class="chapter" data-level="6.2.6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#apa-write-up"><i class="fa fa-check"></i><b>6.2.6</b> APA Write Up</a></li>
+<li class="chapter" data-level="6.2.6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#apa-write-up-1"><i class="fa fa-check"></i><b>6.2.6</b> APA Write Up</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#example-2-survival-time-by-treatment-type"><i class="fa fa-check"></i><b>6.3</b> Example 2) Survival Time by Treatment Type</a>
 <ul>
@@ -296,31 +303,36 @@ div.csl-indent {
 <li class="chapter" data-level="6.4.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#followup-tests-3"><i class="fa fa-check"></i><b>6.4.3</b> Followup-tests</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>7</b> Repeated Measures ANOVA</a>
+<li class="chapter" data-level="7" data-path="helpful-functions.html"><a href="helpful-functions.html"><i class="fa fa-check"></i><b>7</b> Helpful Functions</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>7.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
-<li class="chapter" data-level="7.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a"><i class="fa fa-check"></i><b>7.2</b> Words Recalled Data Example (Chapter 15, section A)</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#data-prep"><i class="fa fa-check"></i><b>7.2.1</b> Data Prep</a></li>
-<li class="chapter" data-level="7.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-independent-anova"><i class="fa fa-check"></i><b>7.2.2</b> One-Way Independent ANOVA</a></li>
-<li class="chapter" data-level="7.2.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-rm-anova"><i class="fa fa-check"></i><b>7.2.3</b> One-Way RM ANOVA</a></li>
+<li class="chapter" data-level="7.1" data-path="helpful-functions.html"><a href="helpful-functions.html#p-value-formatting"><i class="fa fa-check"></i><b>7.1</b> P-value Formatting</a></li>
+<li class="chapter" data-level="7.2" data-path="helpful-functions.html"><a href="helpful-functions.html#apa-table-formatting"><i class="fa fa-check"></i><b>7.2</b> APA Table Formatting</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#another-example---weight-loss"><i class="fa fa-check"></i><b>7.3</b> Another Example - Weight Loss</a>
+<li class="chapter" data-level="8" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>8</b> Repeated Measures ANOVA</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format"><i class="fa fa-check"></i><b>7.3.1</b> Restructure the data from wide to long format</a></li>
-<li class="chapter" data-level="7.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#does-weight-long-change-over-time"><i class="fa fa-check"></i><b>7.3.2</b> Does weight long change over time?</a></li>
+<li class="chapter" data-level="8.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>8.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
+<li class="chapter" data-level="8.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a"><i class="fa fa-check"></i><b>8.2</b> Words Recalled Data Example (Chapter 15, section A)</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#data-prep"><i class="fa fa-check"></i><b>8.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="8.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-independent-anova"><i class="fa fa-check"></i><b>8.2.2</b> One-Way Independent ANOVA</a></li>
+<li class="chapter" data-level="8.2.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-rm-anova"><i class="fa fa-check"></i><b>8.2.3</b> One-Way RM ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#another-example---weight-loss"><i class="fa fa-check"></i><b>8.3</b> Another Example - Weight Loss</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format"><i class="fa fa-check"></i><b>8.3.1</b> Restructure the data from wide to long format</a></li>
+<li class="chapter" data-level="8.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#does-weight-long-change-over-time"><i class="fa fa-check"></i><b>8.3.2</b> Does weight long change over time?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html"><i class="fa fa-check"></i><b>8</b> Mixed Design ANOVA</a>
+<li class="chapter" data-level="9" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html"><i class="fa fa-check"></i><b>9</b> Mixed Design ANOVA</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>8.1</b> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code></a></li>
-<li class="chapter" data-level="8.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a"><i class="fa fa-check"></i><b>8.2</b> Words Recalled Data Example (Chapter 16, section A)</a>
+<li class="chapter" data-level="9.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>9.1</b> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code></a></li>
+<li class="chapter" data-level="9.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a"><i class="fa fa-check"></i><b>9.2</b> Words Recalled Data Example (Chapter 16, section A)</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#data-prep-1"><i class="fa fa-check"></i><b>8.2.1</b> Data Prep</a></li>
-<li class="chapter" data-level="8.2.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#one-way-rm-anova-1"><i class="fa fa-check"></i><b>8.2.2</b> One-Way RM ANOVA</a></li>
-<li class="chapter" data-level="8.2.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#mixed-anova"><i class="fa fa-check"></i><b>8.2.3</b> Mixed ANOVA</a></li>
+<li class="chapter" data-level="9.2.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#data-prep-1"><i class="fa fa-check"></i><b>9.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="9.2.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#one-way-rm-anova-1"><i class="fa fa-check"></i><b>9.2.2</b> One-Way RM ANOVA</a></li>
+<li class="chapter" data-level="9.2.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#mixed-anova"><i class="fa fa-check"></i><b>9.2.3</b> Mixed ANOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#conclusion"><i class="fa fa-check"></i><b>8.3</b> Conclusion</a></li>
+<li class="chapter" data-level="9.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#conclusion"><i class="fa fa-check"></i><b>9.3</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -343,15 +355,15 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="repeated-measures-anova" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">7</span> Repeated Measures ANOVA<a href="repeated-measures-anova.html#repeated-measures-anova" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="repeated-measures-anova" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> Repeated Measures ANOVA<a href="repeated-measures-anova.html#repeated-measures-anova" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Required Packages</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="repeated-measures-anova.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    <span class="co"># Loads several very helpful &#39;tidy&#39; packages</span></span>
-<span id="cb165-2"><a href="repeated-measures-anova.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furniture)    <span class="co"># Nice tables (by our own Tyson Barrett)</span></span>
-<span id="cb165-3"><a href="repeated-measures-anova.html#cb165-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(afex)         <span class="co"># needed for ANOVA, emmeans is loaded automatically.</span></span>
-<span id="cb165-4"><a href="repeated-measures-anova.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)     <span class="co"># for advanced control for multiple testing/Type 1 error</span></span></code></pre></div>
-<div id="tutorial---fitting-rm-anova-models-with-afexaov_4" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Tutorial - Fitting RM ANOVA Models with afex::aov_4()<a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="repeated-measures-anova.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    <span class="co"># Loads several very helpful &#39;tidy&#39; packages</span></span>
+<span id="cb175-2"><a href="repeated-measures-anova.html#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furniture)    <span class="co"># Nice tables (by our own Tyson Barrett)</span></span>
+<span id="cb175-3"><a href="repeated-measures-anova.html#cb175-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(afex)         <span class="co"># needed for ANOVA, emmeans is loaded automatically.</span></span>
+<span id="cb175-4"><a href="repeated-measures-anova.html#cb175-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)     <span class="co"># for advanced control for multiple testing/Type 1 error</span></span></code></pre></div>
+<div id="tutorial---fitting-rm-anova-models-with-afexaov_4" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Tutorial - Fitting RM ANOVA Models with afex::aov_4()<a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <code>aov_4()</code> function from the <code>afex</code> package fits ANOVA models (oneway, two-way, repeated measures, and mixed design). It needs at least two arguments:</p>
 <ol style="list-style-type: decimal">
 <li><p>formula: <code>continuous_var ~ 1 + (RM_var|id_var)</code> <em>one observation per subject for each level of the <code>RMvar</code>, so each <code>id_var</code> has multiple lines for each subject</em></p></li>
@@ -367,10 +379,10 @@ factor or <code>fct</code>) and the continuous measurement (numberic or
 <code>dbl</code>).
 </p>
 </div>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="repeated-measures-anova.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RM ANOVA: fit and save</span></span>
-<span id="cb166-2"><a href="repeated-measures-anova.html#cb166-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="ot">&lt;-</span> data_name <span class="sc">%&gt;%</span> </span>
-<span id="cb166-3"><a href="repeated-measures-anova.html#cb166-3" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(continuous_var <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (RM_var<span class="sc">|</span>id_var),</span>
-<span id="cb166-4"><a href="repeated-measures-anova.html#cb166-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="repeated-measures-anova.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RM ANOVA: fit and save</span></span>
+<span id="cb176-2"><a href="repeated-measures-anova.html#cb176-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="ot">&lt;-</span> data_name <span class="sc">%&gt;%</span> </span>
+<span id="cb176-3"><a href="repeated-measures-anova.html#cb176-3" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(continuous_var <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (RM_var<span class="sc">|</span>id_var),</span>
+<span id="cb176-4"><a href="repeated-measures-anova.html#cb176-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span></code></pre></div>
 <p>By running the name you saved you model under, you will get a brief set of output, including a measure of <strong>Effect Size</strong>.</p>
 <div class="rmdlightbulb">
 <p>
@@ -381,8 +393,8 @@ and partial <span class="math inline"><span class="math inline">\(\eta_p\)</span
 same.
 </p>
 </div>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="repeated-measures-anova.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display basic ANOVA results (includes effect size)</span></span>
-<span id="cb167-2"><a href="repeated-measures-anova.html#cb167-2" aria-hidden="true" tabindex="-1"></a>aov_name </span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="repeated-measures-anova.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display basic ANOVA results (includes effect size)</span></span>
+<span id="cb177-2"><a href="repeated-measures-anova.html#cb177-2" aria-hidden="true" tabindex="-1"></a>aov_name </span></code></pre></div>
 <p>To fully fill out a standard ANOVA table and compute other effect sizes, you will need a more complete set of output, including the <strong>Sum of Squares</strong> components, you will need to add <code>summary()</code> piped at the end of the model name before running it or after the model with a pipe.</p>
 <div class="rmdlightbulb">
 <p>
@@ -398,21 +410,21 @@ these values and add them on the homework page. Remember that
 </p>
 </div>
 <p>This also runs and displays the results of Mauchly Tests for Sphericity, as well as the Greenhouse-Geisser (GG) and Huynh-Feldt (HF) Corrections to the p-value. If the Mauchly’s p-value is bigger than .05, do not use the corrections. If Mauchly’s p-value is less than .05, then apply the epsilon (<code>eps</code> or <span class="math inline">\(\epsilon\)</span>) to multiply the degree’s of freedom. Yes, the df will be decimal numbers.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="repeated-measures-anova.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display fuller ANOVA results (sphericity tests)</span></span>
-<span id="cb168-2"><a href="repeated-measures-anova.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_name)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="repeated-measures-anova.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display fuller ANOVA results (sphericity tests)</span></span>
+<span id="cb178-2"><a href="repeated-measures-anova.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_name)</span></code></pre></div>
 <p>To see all the Sumes-of-Squared residuals for ALL of the model comoponents, you add <code>$aov</code> at the end of the model name.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="repeated-measures-anova.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display all the sum of squares</span></span>
-<span id="cb169-2"><a href="repeated-measures-anova.html#cb169-2" aria-hidden="true" tabindex="-1"></a>aov_name<span class="sc">$</span>aov</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="repeated-measures-anova.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display all the sum of squares</span></span>
+<span id="cb179-2"><a href="repeated-measures-anova.html#cb179-2" aria-hidden="true" tabindex="-1"></a>aov_name<span class="sc">$</span>aov</span></code></pre></div>
 <p>Repeated Measures MANOVA Tests (Pillai test statistic) is computed is you add <code>$Anova</code> at the end of the model name. This is a so called ‘Multivariate Test’. <strong>This is NOT what you want to do!</strong></p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="repeated-measures-anova.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display fuller ANOVA results (includes sum of squares)</span></span>
-<span id="cb170-2"><a href="repeated-measures-anova.html#cb170-2" aria-hidden="true" tabindex="-1"></a>aov_name<span class="sc">$</span>Anova</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="repeated-measures-anova.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display fuller ANOVA results (includes sum of squares)</span></span>
+<span id="cb180-2"><a href="repeated-measures-anova.html#cb180-2" aria-hidden="true" tabindex="-1"></a>aov_name<span class="sc">$</span>Anova</span></code></pre></div>
 <p>If you only need to obtain the omnibus (overall) F-test without a correction for violation of sphericity, you can add an option for <code>correction = "none"</code>. You can also request both the generalized and partial <span class="math inline">\(\eta^2\)</span> effect sizes with <code>es = c("ges", "pes")</code>.</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="repeated-measures-anova.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RM ANOVA: no correction, both effect sizes</span></span>
-<span id="cb171-2"><a href="repeated-measures-anova.html#cb171-2" aria-hidden="true" tabindex="-1"></a>data_name <span class="sc">%&gt;%</span> </span>
-<span id="cb171-3"><a href="repeated-measures-anova.html#cb171-3" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(continuous_var <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (RM_var<span class="sc">|</span>id_var),</span>
-<span id="cb171-4"><a href="repeated-measures-anova.html#cb171-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .,</span>
-<span id="cb171-5"><a href="repeated-measures-anova.html#cb171-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">correction =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb171-6"><a href="repeated-measures-anova.html#cb171-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">es =</span> <span class="fu">c</span>(<span class="st">&quot;ges&quot;</span>, <span class="st">&quot;pes&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="repeated-measures-anova.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RM ANOVA: no correction, both effect sizes</span></span>
+<span id="cb181-2"><a href="repeated-measures-anova.html#cb181-2" aria-hidden="true" tabindex="-1"></a>data_name <span class="sc">%&gt;%</span> </span>
+<span id="cb181-3"><a href="repeated-measures-anova.html#cb181-3" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(continuous_var <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (RM_var<span class="sc">|</span>id_var),</span>
+<span id="cb181-4"><a href="repeated-measures-anova.html#cb181-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .,</span>
+<span id="cb181-5"><a href="repeated-measures-anova.html#cb181-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">correction =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb181-6"><a href="repeated-measures-anova.html#cb181-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">es =</span> <span class="fu">c</span>(<span class="st">&quot;ges&quot;</span>, <span class="st">&quot;pes&quot;</span>)))</span></code></pre></div>
 <p>Post Hoc tests may be ran the same way as the 1 and 2-way ANOVAs from the last unit.</p>
 <div class="rmdlightbulb">
 <p>
@@ -423,49 +435,49 @@ there are THREE measurements per subject or block. Tukey’s HSD
 significant or if there are four or more repeated measures.
 </p>
 </div>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="repeated-measures-anova.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RM ANOVA: post hoc all pairwise tests with Fisher&#39;s LSD correction</span></span>
-<span id="cb172-2"><a href="repeated-measures-anova.html#cb172-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
-<span id="cb172-3"><a href="repeated-measures-anova.html#cb172-3" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> RM_var) <span class="sc">%&gt;%</span> </span>
-<span id="cb172-4"><a href="repeated-measures-anova.html#cb172-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(<span class="at">adjust =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="repeated-measures-anova.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RM ANOVA: post hoc all pairwise tests with Tukey&#39;s HSD correction</span></span>
-<span id="cb173-2"><a href="repeated-measures-anova.html#cb173-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
-<span id="cb173-3"><a href="repeated-measures-anova.html#cb173-3" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> RM_var) <span class="sc">%&gt;%</span> </span>
-<span id="cb173-4"><a href="repeated-measures-anova.html#cb173-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(<span class="at">adjust =</span> <span class="st">&quot;tukey&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="repeated-measures-anova.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RM ANOVA: post hoc all pairwise tests with Fisher&#39;s LSD correction</span></span>
+<span id="cb182-2"><a href="repeated-measures-anova.html#cb182-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
+<span id="cb182-3"><a href="repeated-measures-anova.html#cb182-3" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> RM_var) <span class="sc">%&gt;%</span> </span>
+<span id="cb182-4"><a href="repeated-measures-anova.html#cb182-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(<span class="at">adjust =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="repeated-measures-anova.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RM ANOVA: post hoc all pairwise tests with Tukey&#39;s HSD correction</span></span>
+<span id="cb183-2"><a href="repeated-measures-anova.html#cb183-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
+<span id="cb183-3"><a href="repeated-measures-anova.html#cb183-3" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> RM_var) <span class="sc">%&gt;%</span> </span>
+<span id="cb183-4"><a href="repeated-measures-anova.html#cb183-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(<span class="at">adjust =</span> <span class="st">&quot;tukey&quot;</span>)</span></code></pre></div>
 <p>A means plot (model based) can help you write up your results. This zooms in on just the means and will make all differences seem significant, so make sure to interpret it in conjunction with the ANOVA and post hoc tests.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="repeated-measures-anova.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RM ANOVA: means plot</span></span>
-<span id="cb174-2"><a href="repeated-measures-anova.html#cb174-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
-<span id="cb174-3"><a href="repeated-measures-anova.html#cb174-3" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmip</span>(<span class="sc">~</span> RM_var)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="repeated-measures-anova.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RM ANOVA: means plot</span></span>
+<span id="cb184-2"><a href="repeated-measures-anova.html#cb184-2" aria-hidden="true" tabindex="-1"></a>aov_name <span class="sc">%&gt;%</span> </span>
+<span id="cb184-3"><a href="repeated-measures-anova.html#cb184-3" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmip</span>(<span class="sc">~</span> RM_var)</span></code></pre></div>
 </div>
-<div id="words-recalled-data-example-chapter-15-section-a" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Words Recalled Data Example (Chapter 15, section A)<a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="data-prep" class="section level3 hasAnchor" number="7.2.1">
-<h3><span class="header-section-number">7.2.1</span> Data Prep<a href="repeated-measures-anova.html#data-prep" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="words-recalled-data-example-chapter-15-section-a" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Words Recalled Data Example (Chapter 15, section A)<a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="data-prep" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Data Prep<a href="repeated-measures-anova.html#data-prep" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>I input the data as a <code>tribble</code> which saves it as a <code>data.frame</code> and then cleaned up a few of the important variables.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="repeated-measures-anova.html#cb175-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
-<span id="cb175-2"><a href="repeated-measures-anova.html#cb175-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>ID, <span class="sc">~</span>word_type, <span class="sc">~</span>words_recalled,</span>
-<span id="cb175-3"><a href="repeated-measures-anova.html#cb175-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,          <span class="dv">1</span>,              <span class="dv">20</span>,</span>
-<span id="cb175-4"><a href="repeated-measures-anova.html#cb175-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,          <span class="dv">1</span>,              <span class="dv">16</span>,</span>
-<span id="cb175-5"><a href="repeated-measures-anova.html#cb175-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,          <span class="dv">1</span>,               <span class="dv">8</span>,</span>
-<span id="cb175-6"><a href="repeated-measures-anova.html#cb175-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,          <span class="dv">1</span>,              <span class="dv">17</span>,</span>
-<span id="cb175-7"><a href="repeated-measures-anova.html#cb175-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,          <span class="dv">1</span>,              <span class="dv">15</span>,</span>
-<span id="cb175-8"><a href="repeated-measures-anova.html#cb175-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,          <span class="dv">1</span>,              <span class="dv">10</span>,</span>
-<span id="cb175-9"><a href="repeated-measures-anova.html#cb175-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,          <span class="dv">2</span>,              <span class="dv">21</span>,</span>
-<span id="cb175-10"><a href="repeated-measures-anova.html#cb175-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,          <span class="dv">2</span>,              <span class="dv">18</span>,</span>
-<span id="cb175-11"><a href="repeated-measures-anova.html#cb175-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,          <span class="dv">2</span>,               <span class="dv">7</span>,</span>
-<span id="cb175-12"><a href="repeated-measures-anova.html#cb175-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,          <span class="dv">2</span>,              <span class="dv">15</span>,</span>
-<span id="cb175-13"><a href="repeated-measures-anova.html#cb175-13" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,          <span class="dv">2</span>,              <span class="dv">10</span>,</span>
-<span id="cb175-14"><a href="repeated-measures-anova.html#cb175-14" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,          <span class="dv">2</span>,               <span class="dv">4</span>,</span>
-<span id="cb175-15"><a href="repeated-measures-anova.html#cb175-15" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,          <span class="dv">3</span>,              <span class="dv">17</span>,</span>
-<span id="cb175-16"><a href="repeated-measures-anova.html#cb175-16" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,          <span class="dv">3</span>,              <span class="dv">11</span>,</span>
-<span id="cb175-17"><a href="repeated-measures-anova.html#cb175-17" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,          <span class="dv">3</span>,               <span class="dv">4</span>,</span>
-<span id="cb175-18"><a href="repeated-measures-anova.html#cb175-18" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,          <span class="dv">3</span>,              <span class="dv">18</span>,</span>
-<span id="cb175-19"><a href="repeated-measures-anova.html#cb175-19" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,          <span class="dv">3</span>,              <span class="dv">13</span>,</span>
-<span id="cb175-20"><a href="repeated-measures-anova.html#cb175-20" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,          <span class="dv">3</span>,              <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb175-21"><a href="repeated-measures-anova.html#cb175-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word_type =</span> <span class="fu">factor</span>(word_type,</span>
-<span id="cb175-22"><a href="repeated-measures-anova.html#cb175-22" aria-hidden="true" tabindex="-1"></a>                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Neutral&quot;</span>, <span class="st">&quot;Positive&quot;</span>, <span class="st">&quot;Negative&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb175-23"><a href="repeated-measures-anova.html#cb175-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fake_id =</span> <span class="fu">row_number</span>())</span>
-<span id="cb175-24"><a href="repeated-measures-anova.html#cb175-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb175-25"><a href="repeated-measures-anova.html#cb175-25" aria-hidden="true" tabindex="-1"></a>d</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="repeated-measures-anova.html#cb185-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb185-2"><a href="repeated-measures-anova.html#cb185-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>ID, <span class="sc">~</span>word_type, <span class="sc">~</span>words_recalled,</span>
+<span id="cb185-3"><a href="repeated-measures-anova.html#cb185-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,          <span class="dv">1</span>,              <span class="dv">20</span>,</span>
+<span id="cb185-4"><a href="repeated-measures-anova.html#cb185-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,          <span class="dv">1</span>,              <span class="dv">16</span>,</span>
+<span id="cb185-5"><a href="repeated-measures-anova.html#cb185-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,          <span class="dv">1</span>,               <span class="dv">8</span>,</span>
+<span id="cb185-6"><a href="repeated-measures-anova.html#cb185-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,          <span class="dv">1</span>,              <span class="dv">17</span>,</span>
+<span id="cb185-7"><a href="repeated-measures-anova.html#cb185-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,          <span class="dv">1</span>,              <span class="dv">15</span>,</span>
+<span id="cb185-8"><a href="repeated-measures-anova.html#cb185-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,          <span class="dv">1</span>,              <span class="dv">10</span>,</span>
+<span id="cb185-9"><a href="repeated-measures-anova.html#cb185-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,          <span class="dv">2</span>,              <span class="dv">21</span>,</span>
+<span id="cb185-10"><a href="repeated-measures-anova.html#cb185-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,          <span class="dv">2</span>,              <span class="dv">18</span>,</span>
+<span id="cb185-11"><a href="repeated-measures-anova.html#cb185-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,          <span class="dv">2</span>,               <span class="dv">7</span>,</span>
+<span id="cb185-12"><a href="repeated-measures-anova.html#cb185-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,          <span class="dv">2</span>,              <span class="dv">15</span>,</span>
+<span id="cb185-13"><a href="repeated-measures-anova.html#cb185-13" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,          <span class="dv">2</span>,              <span class="dv">10</span>,</span>
+<span id="cb185-14"><a href="repeated-measures-anova.html#cb185-14" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,          <span class="dv">2</span>,               <span class="dv">4</span>,</span>
+<span id="cb185-15"><a href="repeated-measures-anova.html#cb185-15" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>,          <span class="dv">3</span>,              <span class="dv">17</span>,</span>
+<span id="cb185-16"><a href="repeated-measures-anova.html#cb185-16" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>,          <span class="dv">3</span>,              <span class="dv">11</span>,</span>
+<span id="cb185-17"><a href="repeated-measures-anova.html#cb185-17" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>,          <span class="dv">3</span>,               <span class="dv">4</span>,</span>
+<span id="cb185-18"><a href="repeated-measures-anova.html#cb185-18" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>,          <span class="dv">3</span>,              <span class="dv">18</span>,</span>
+<span id="cb185-19"><a href="repeated-measures-anova.html#cb185-19" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>,          <span class="dv">3</span>,              <span class="dv">13</span>,</span>
+<span id="cb185-20"><a href="repeated-measures-anova.html#cb185-20" aria-hidden="true" tabindex="-1"></a>    <span class="dv">6</span>,          <span class="dv">3</span>,              <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb185-21"><a href="repeated-measures-anova.html#cb185-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word_type =</span> <span class="fu">factor</span>(word_type,</span>
+<span id="cb185-22"><a href="repeated-measures-anova.html#cb185-22" aria-hidden="true" tabindex="-1"></a>                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Neutral&quot;</span>, <span class="st">&quot;Positive&quot;</span>, <span class="st">&quot;Negative&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb185-23"><a href="repeated-measures-anova.html#cb185-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fake_id =</span> <span class="fu">row_number</span>())</span>
+<span id="cb185-24"><a href="repeated-measures-anova.html#cb185-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-25"><a href="repeated-measures-anova.html#cb185-25" aria-hidden="true" tabindex="-1"></a>d</span></code></pre></div>
 <pre><code># A tibble: 18 × 4
       ID word_type words_recalled fake_id
    &lt;dbl&gt; &lt;fct&gt;              &lt;dbl&gt;   &lt;int&gt;
@@ -488,13 +500,13 @@ significant or if there are four or more repeated measures.
 17     5 Negative              13      17
 18     6 Negative              10      18</code></pre>
 </div>
-<div id="one-way-independent-anova" class="section level3 hasAnchor" number="7.2.2">
-<h3><span class="header-section-number">7.2.2</span> One-Way Independent ANOVA<a href="repeated-measures-anova.html#one-way-independent-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="one-way-independent-anova" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> One-Way Independent ANOVA<a href="repeated-measures-anova.html#one-way-independent-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First, let’s ignore the fact that we know this has repeated measures. As such, we will assume that each word type group is independent. Let’s look at what happens:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="repeated-measures-anova.html#cb177-1" aria-hidden="true" tabindex="-1"></a>ind_anova <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb177-2"><a href="repeated-measures-anova.html#cb177-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(words_recalled <span class="sc">~</span> word_type <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>fake_id),</span>
-<span id="cb177-3"><a href="repeated-measures-anova.html#cb177-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span>
-<span id="cb177-4"><a href="repeated-measures-anova.html#cb177-4" aria-hidden="true" tabindex="-1"></a>ind_anova<span class="sc">$</span>Anova</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="repeated-measures-anova.html#cb187-1" aria-hidden="true" tabindex="-1"></a>ind_anova <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb187-2"><a href="repeated-measures-anova.html#cb187-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(words_recalled <span class="sc">~</span> word_type <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>fake_id),</span>
+<span id="cb187-3"><a href="repeated-measures-anova.html#cb187-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span>
+<span id="cb187-4"><a href="repeated-measures-anova.html#cb187-4" aria-hidden="true" tabindex="-1"></a>ind_anova<span class="sc">$</span>Anova</span></code></pre></div>
 <pre><code>Anova Table (Type III tests)
 
 Response: dv
@@ -507,13 +519,13 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>If we ignored that the <code>word_type</code> groups are not independent, we get an F-statistic = 0.272 and p = 0.765.</p>
 <p>What do you think will happen if we account for the repeated measures? Will the F-statistic increase or decrease?</p>
 </div>
-<div id="one-way-rm-anova" class="section level3 hasAnchor" number="7.2.3">
-<h3><span class="header-section-number">7.2.3</span> One-Way RM ANOVA<a href="repeated-measures-anova.html#one-way-rm-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="one-way-rm-anova" class="section level3 hasAnchor" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> One-Way RM ANOVA<a href="repeated-measures-anova.html#one-way-rm-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now, let’s look at the repeated measures. We do this by using <code>afex::aov_4()</code> and then the <code>summary()</code> functions as shown below.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="repeated-measures-anova.html#cb179-1" aria-hidden="true" tabindex="-1"></a>oneway <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb179-2"><a href="repeated-measures-anova.html#cb179-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(words_recalled <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (word_type<span class="sc">|</span>ID),</span>
-<span id="cb179-3"><a href="repeated-measures-anova.html#cb179-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span>
-<span id="cb179-4"><a href="repeated-measures-anova.html#cb179-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(oneway)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="repeated-measures-anova.html#cb189-1" aria-hidden="true" tabindex="-1"></a>oneway <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb189-2"><a href="repeated-measures-anova.html#cb189-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(words_recalled <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (word_type<span class="sc">|</span>ID),</span>
+<span id="cb189-3"><a href="repeated-measures-anova.html#cb189-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> .)</span>
+<span id="cb189-4"><a href="repeated-measures-anova.html#cb189-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(oneway)</span></code></pre></div>
 <pre><code>
 Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
 
@@ -549,25 +561,25 @@ word_type 0.6077293  0.3309148</code></pre>
 <p><span class="math inline">\(SS_{total}\)</span> is the same in both and <span class="math inline">\(SS_{RM} = SS_{RM}\)</span> so what we are doing is splitting up the <span class="math inline">\(SS_w\)</span> into <span class="math inline">\(SS_{sub} + SS_{inter}\)</span> where only the <span class="math inline">\(SS_{inter}\)</span> is the error term now.</p>
 <p>This means we have more power with the same amount of data.</p>
 <p>Let’s now plot this using a spaghetti plot.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="repeated-measures-anova.html#cb181-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb181-2"><a href="repeated-measures-anova.html#cb181-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word_type, words_recalled, <span class="at">group =</span> ID)) <span class="sc">+</span></span>
-<span id="cb181-3"><a href="repeated-measures-anova.html#cb181-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb181-4"><a href="repeated-measures-anova.html#cb181-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-130-1.png" width="75%" /></p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="repeated-measures-anova.html#cb191-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb191-2"><a href="repeated-measures-anova.html#cb191-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word_type, words_recalled, <span class="at">group =</span> ID)) <span class="sc">+</span></span>
+<span id="cb191-3"><a href="repeated-measures-anova.html#cb191-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb191-4"><a href="repeated-measures-anova.html#cb191-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-145-1.png" width="75%" /></p>
 <p>The output provides us with a bit of an understanding of why there is not a significant effect of <code>word_type</code>. In addition to a spaghetti plot, it is often useful to show what the overall repeated measure factor is doing, not the individuals (especially if your sample size is larger than 20). To do that, we can use:</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="repeated-measures-anova.html#cb182-1" aria-hidden="true" tabindex="-1"></a>oneway <span class="sc">%&gt;%</span></span>
-<span id="cb182-2"><a href="repeated-measures-anova.html#cb182-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmip</span>(<span class="sc">~</span> word_type)</span></code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-131-1.png" width="75%" /></p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="repeated-measures-anova.html#cb192-1" aria-hidden="true" tabindex="-1"></a>oneway <span class="sc">%&gt;%</span></span>
+<span id="cb192-2"><a href="repeated-measures-anova.html#cb192-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmip</span>(<span class="sc">~</span> word_type)</span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-146-1.png" width="75%" /></p>
 <p>Although there is a pattern here, we need to consider the scale. Looking at the spaghetti plot, we have individuals that range from 5 to 20 so a difference of 2 or 3 is not large. However, it is clear that a pattern may exist and so we should probably investigate this further, possibly with a larger sample size.</p>
 </div>
 </div>
-<div id="another-example---weight-loss" class="section level2 hasAnchor" number="7.3">
-<h2><span class="header-section-number">7.3</span> Another Example - Weight Loss<a href="repeated-measures-anova.html#another-example---weight-loss" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="another-example---weight-loss" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Another Example - Weight Loss<a href="repeated-measures-anova.html#another-example---weight-loss" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Contrived data on weight loss and self esteem over three months, for three groups of individuals: Control, Diet and Diet + Exercise. The data constitute a double-multivariate design.</p>
-<div id="restructure-the-data-from-wide-to-long-format" class="section level3 hasAnchor" number="7.3.1">
-<h3><span class="header-section-number">7.3.1</span> Restructure the data from wide to long format<a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="restructure-the-data-from-wide-to-long-format" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> Restructure the data from wide to long format<a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Wide format</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="repeated-measures-anova.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(carData<span class="sc">::</span>WeightLoss, <span class="at">n =</span> <span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="repeated-measures-anova.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(carData<span class="sc">::</span>WeightLoss, <span class="at">n =</span> <span class="dv">6</span>)</span></code></pre></div>
 <pre><code>    group wl1 wl2 wl3 se1 se2 se3
 1 Control   4   3   3  14  13  15
 2 Control   4   4   3  13  14  17
@@ -576,21 +588,21 @@ word_type 0.6077293  0.3309148</code></pre>
 5 Control   5   3   2  16  15  14
 6 Control   6   5   4  17  18  18</code></pre>
 <p>Restructure</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="repeated-measures-anova.html#cb185-1" aria-hidden="true" tabindex="-1"></a>WeightLoss_long <span class="ot">&lt;-</span> carData<span class="sc">::</span>WeightLoss <span class="sc">%&gt;%</span> </span>
-<span id="cb185-2"><a href="repeated-measures-anova.html#cb185-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>() <span class="sc">%&gt;%</span> <span class="fu">factor</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb185-3"><a href="repeated-measures-anova.html#cb185-3" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">gather</span>(<span class="at">key =</span> var,</span>
-<span id="cb185-4"><a href="repeated-measures-anova.html#cb185-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">value =</span> value,</span>
-<span id="cb185-5"><a href="repeated-measures-anova.html#cb185-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">starts_with</span>(<span class="st">&quot;wl&quot;</span>), <span class="fu">starts_with</span>(<span class="st">&quot;se&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb185-6"><a href="repeated-measures-anova.html#cb185-6" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">separate</span>(var,</span>
-<span id="cb185-7"><a href="repeated-measures-anova.html#cb185-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep =</span> <span class="dv">2</span>,</span>
-<span id="cb185-8"><a href="repeated-measures-anova.html#cb185-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;measure&quot;</span>, <span class="st">&quot;month&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb185-9"><a href="repeated-measures-anova.html#cb185-9" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">spread</span>(<span class="at">key =</span> measure,</span>
-<span id="cb185-10"><a href="repeated-measures-anova.html#cb185-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">value =</span> value) <span class="sc">%&gt;%</span> </span>
-<span id="cb185-11"><a href="repeated-measures-anova.html#cb185-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, group, month, wl, se) <span class="sc">%&gt;%</span> </span>
-<span id="cb185-12"><a href="repeated-measures-anova.html#cb185-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate_at</span>(<span class="fu">vars</span>(id, month), factor) <span class="sc">%&gt;%</span> </span>
-<span id="cb185-13"><a href="repeated-measures-anova.html#cb185-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(id, month) </span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="repeated-measures-anova.html#cb195-1" aria-hidden="true" tabindex="-1"></a>WeightLoss_long <span class="ot">&lt;-</span> carData<span class="sc">::</span>WeightLoss <span class="sc">%&gt;%</span> </span>
+<span id="cb195-2"><a href="repeated-measures-anova.html#cb195-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>() <span class="sc">%&gt;%</span> <span class="fu">factor</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb195-3"><a href="repeated-measures-anova.html#cb195-3" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">gather</span>(<span class="at">key =</span> var,</span>
+<span id="cb195-4"><a href="repeated-measures-anova.html#cb195-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">value =</span> value,</span>
+<span id="cb195-5"><a href="repeated-measures-anova.html#cb195-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">starts_with</span>(<span class="st">&quot;wl&quot;</span>), <span class="fu">starts_with</span>(<span class="st">&quot;se&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb195-6"><a href="repeated-measures-anova.html#cb195-6" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">separate</span>(var,</span>
+<span id="cb195-7"><a href="repeated-measures-anova.html#cb195-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep =</span> <span class="dv">2</span>,</span>
+<span id="cb195-8"><a href="repeated-measures-anova.html#cb195-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;measure&quot;</span>, <span class="st">&quot;month&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb195-9"><a href="repeated-measures-anova.html#cb195-9" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">spread</span>(<span class="at">key =</span> measure,</span>
+<span id="cb195-10"><a href="repeated-measures-anova.html#cb195-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">value =</span> value) <span class="sc">%&gt;%</span> </span>
+<span id="cb195-11"><a href="repeated-measures-anova.html#cb195-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, group, month, wl, se) <span class="sc">%&gt;%</span> </span>
+<span id="cb195-12"><a href="repeated-measures-anova.html#cb195-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate_at</span>(<span class="fu">vars</span>(id, month), factor) <span class="sc">%&gt;%</span> </span>
+<span id="cb195-13"><a href="repeated-measures-anova.html#cb195-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(id, month) </span></code></pre></div>
 <p>Long format</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="repeated-measures-anova.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(WeightLoss_long, <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="repeated-measures-anova.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(WeightLoss_long, <span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div>
 <pre><code>   id   group month wl se
 1   1 Control     1  4 14
 2   1 Control     2  3 13
@@ -613,9 +625,9 @@ word_type 0.6077293  0.3309148</code></pre>
 19  7 Control     1  6 17
 20  7 Control     2  5 16</code></pre>
 <p>Summary table</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="repeated-measures-anova.html#cb188-1" aria-hidden="true" tabindex="-1"></a>WeightLoss_long <span class="sc">%&gt;%</span> </span>
-<span id="cb188-2"><a href="repeated-measures-anova.html#cb188-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group, month) <span class="sc">%&gt;%</span> </span>
-<span id="cb188-3"><a href="repeated-measures-anova.html#cb188-3" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(wl, se)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="repeated-measures-anova.html#cb198-1" aria-hidden="true" tabindex="-1"></a>WeightLoss_long <span class="sc">%&gt;%</span> </span>
+<span id="cb198-2"><a href="repeated-measures-anova.html#cb198-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group, month) <span class="sc">%&gt;%</span> </span>
+<span id="cb198-3"><a href="repeated-measures-anova.html#cb198-3" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(wl, se)</span></code></pre></div>
 <pre><code>
 ───────────────────────────────────────────────────────────────────────────────────────────────────────
                                              group, month 
@@ -632,10 +644,10 @@ word_type 0.6077293  0.3309148</code></pre>
                                  
  15.1 (2.4) 16.2 (2.5) 17.6 (1.0)
 ───────────────────────────────────────────────────────────────────────────────────────────────────────</code></pre>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="repeated-measures-anova.html#cb190-1" aria-hidden="true" tabindex="-1"></a>carData<span class="sc">::</span>WeightLoss <span class="sc">%&gt;%</span> </span>
-<span id="cb190-2"><a href="repeated-measures-anova.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
-<span id="cb190-3"><a href="repeated-measures-anova.html#cb190-3" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(wl1, wl2, wl3,</span>
-<span id="cb190-4"><a href="repeated-measures-anova.html#cb190-4" aria-hidden="true" tabindex="-1"></a>                    se1, se2, se3)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="repeated-measures-anova.html#cb200-1" aria-hidden="true" tabindex="-1"></a>carData<span class="sc">::</span>WeightLoss <span class="sc">%&gt;%</span> </span>
+<span id="cb200-2"><a href="repeated-measures-anova.html#cb200-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
+<span id="cb200-3"><a href="repeated-measures-anova.html#cb200-3" aria-hidden="true" tabindex="-1"></a>  furniture<span class="sc">::</span><span class="fu">table1</span>(wl1, wl2, wl3,</span>
+<span id="cb200-4"><a href="repeated-measures-anova.html#cb200-4" aria-hidden="true" tabindex="-1"></a>                    se1, se2, se3)</span></code></pre></div>
 <pre><code>
 ──────────────────────────────────────
                 group 
@@ -655,35 +667,35 @@ word_type 0.6077293  0.3309148</code></pre>
      15.1 (2.4) 16.2 (2.5) 17.6 (1.0)
 ──────────────────────────────────────</code></pre>
 <p>Raw data plot (exploratory)</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="repeated-measures-anova.html#cb192-1" aria-hidden="true" tabindex="-1"></a>WeightLoss_long <span class="sc">%&gt;%</span> </span>
-<span id="cb192-2"><a href="repeated-measures-anova.html#cb192-2" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">gather</span>(<span class="at">key =</span> measure,</span>
-<span id="cb192-3"><a href="repeated-measures-anova.html#cb192-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">value =</span> value,</span>
-<span id="cb192-4"><a href="repeated-measures-anova.html#cb192-4" aria-hidden="true" tabindex="-1"></a>                wl, se) <span class="sc">%&gt;%</span> </span>
-<span id="cb192-5"><a href="repeated-measures-anova.html#cb192-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">measure =</span> <span class="fu">fct_recode</span>(measure,</span>
-<span id="cb192-6"><a href="repeated-measures-anova.html#cb192-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">&quot;Weight Loss, lb&quot;</span> <span class="ot">=</span> <span class="st">&quot;wl&quot;</span>,</span>
-<span id="cb192-7"><a href="repeated-measures-anova.html#cb192-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">&quot;Self Esteem Rating&quot;</span> <span class="ot">=</span> <span class="st">&quot;se&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb192-8"><a href="repeated-measures-anova.html#cb192-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> month,</span>
-<span id="cb192-9"><a href="repeated-measures-anova.html#cb192-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> value <span class="sc">%&gt;%</span> as.numeric <span class="sc">%&gt;%</span> jitter,</span>
-<span id="cb192-10"><a href="repeated-measures-anova.html#cb192-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb192-11"><a href="repeated-measures-anova.html#cb192-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(measure <span class="sc">~</span> group, </span>
-<span id="cb192-12"><a href="repeated-measures-anova.html#cb192-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">scale =</span> <span class="st">&quot;free_y&quot;</span>,</span>
-<span id="cb192-13"><a href="repeated-measures-anova.html#cb192-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">switch =</span> <span class="st">&quot;y&quot;</span>) <span class="sc">+</span></span>
-<span id="cb192-14"><a href="repeated-measures-anova.html#cb192-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb192-15"><a href="repeated-measures-anova.html#cb192-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb192-16"><a href="repeated-measures-anova.html#cb192-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time, months&quot;</span>,</span>
-<span id="cb192-17"><a href="repeated-measures-anova.html#cb192-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Measurement Value&quot;</span>,</span>
-<span id="cb192-18"><a href="repeated-measures-anova.html#cb192-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Person Profile Plot&quot;</span>,</span>
-<span id="cb192-19"><a href="repeated-measures-anova.html#cb192-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw Data&quot;</span>)</span></code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-137-1.png" width="75%" /></p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="repeated-measures-anova.html#cb202-1" aria-hidden="true" tabindex="-1"></a>WeightLoss_long <span class="sc">%&gt;%</span> </span>
+<span id="cb202-2"><a href="repeated-measures-anova.html#cb202-2" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">gather</span>(<span class="at">key =</span> measure,</span>
+<span id="cb202-3"><a href="repeated-measures-anova.html#cb202-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">value =</span> value,</span>
+<span id="cb202-4"><a href="repeated-measures-anova.html#cb202-4" aria-hidden="true" tabindex="-1"></a>                wl, se) <span class="sc">%&gt;%</span> </span>
+<span id="cb202-5"><a href="repeated-measures-anova.html#cb202-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">measure =</span> <span class="fu">fct_recode</span>(measure,</span>
+<span id="cb202-6"><a href="repeated-measures-anova.html#cb202-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">&quot;Weight Loss, lb&quot;</span> <span class="ot">=</span> <span class="st">&quot;wl&quot;</span>,</span>
+<span id="cb202-7"><a href="repeated-measures-anova.html#cb202-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">&quot;Self Esteem Rating&quot;</span> <span class="ot">=</span> <span class="st">&quot;se&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb202-8"><a href="repeated-measures-anova.html#cb202-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> month,</span>
+<span id="cb202-9"><a href="repeated-measures-anova.html#cb202-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> value <span class="sc">%&gt;%</span> as.numeric <span class="sc">%&gt;%</span> jitter,</span>
+<span id="cb202-10"><a href="repeated-measures-anova.html#cb202-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb202-11"><a href="repeated-measures-anova.html#cb202-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(measure <span class="sc">~</span> group, </span>
+<span id="cb202-12"><a href="repeated-measures-anova.html#cb202-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">scale =</span> <span class="st">&quot;free_y&quot;</span>,</span>
+<span id="cb202-13"><a href="repeated-measures-anova.html#cb202-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">switch =</span> <span class="st">&quot;y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb202-14"><a href="repeated-measures-anova.html#cb202-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb202-15"><a href="repeated-measures-anova.html#cb202-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb202-16"><a href="repeated-measures-anova.html#cb202-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time, months&quot;</span>,</span>
+<span id="cb202-17"><a href="repeated-measures-anova.html#cb202-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Measurement Value&quot;</span>,</span>
+<span id="cb202-18"><a href="repeated-measures-anova.html#cb202-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Person Profile Plot&quot;</span>,</span>
+<span id="cb202-19"><a href="repeated-measures-anova.html#cb202-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw Data&quot;</span>)</span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-152-1.png" width="75%" /></p>
 </div>
-<div id="does-weight-long-change-over-time" class="section level3 hasAnchor" number="7.3.2">
-<h3><span class="header-section-number">7.3.2</span> Does weight long change over time?<a href="repeated-measures-anova.html#does-weight-long-change-over-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="does-weight-long-change-over-time" class="section level3 hasAnchor" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> Does weight long change over time?<a href="repeated-measures-anova.html#does-weight-long-change-over-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Fit the model</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="repeated-measures-anova.html#cb193-1" aria-hidden="true" tabindex="-1"></a>fit_wl <span class="ot">&lt;-</span> WeightLoss_long <span class="sc">%&gt;%</span> </span>
-<span id="cb193-2"><a href="repeated-measures-anova.html#cb193-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(wl <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (month<span class="sc">|</span>id),</span>
-<span id="cb193-3"><a href="repeated-measures-anova.html#cb193-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> .)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="repeated-measures-anova.html#cb203-1" aria-hidden="true" tabindex="-1"></a>fit_wl <span class="ot">&lt;-</span> WeightLoss_long <span class="sc">%&gt;%</span> </span>
+<span id="cb203-2"><a href="repeated-measures-anova.html#cb203-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(wl <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (month<span class="sc">|</span>id),</span>
+<span id="cb203-3"><a href="repeated-measures-anova.html#cb203-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> .)</span></code></pre></div>
 <p>Brief output - uses the Greenhouse-Geisser correction for violations of sphericity (by default)</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="repeated-measures-anova.html#cb194-1" aria-hidden="true" tabindex="-1"></a>fit_wl</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="repeated-measures-anova.html#cb204-1" aria-hidden="true" tabindex="-1"></a>fit_wl</span></code></pre></div>
 <pre><code>Anova Table (Type 3 tests)
 
 Response: wl
@@ -694,7 +706,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&
 
 Sphericity correction method: GG </code></pre>
 <p>Lots more output</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="repeated-measures-anova.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_wl)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="repeated-measures-anova.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_wl)</span></code></pre></div>
 <pre><code>
 Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
 
@@ -722,12 +734,12 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
         HF eps   Pr(&gt;F[HF])
 month 1.063446 2.090759e-18</code></pre>
 <p>To force no GG correction:</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="repeated-measures-anova.html#cb198-1" aria-hidden="true" tabindex="-1"></a>fit_wl_noGG <span class="ot">&lt;-</span> WeightLoss_long <span class="sc">%&gt;%</span> </span>
-<span id="cb198-2"><a href="repeated-measures-anova.html#cb198-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(wl <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (month<span class="sc">|</span>id),</span>
-<span id="cb198-3"><a href="repeated-measures-anova.html#cb198-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> .,</span>
-<span id="cb198-4"><a href="repeated-measures-anova.html#cb198-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">correction =</span> <span class="st">&quot;none&quot;</span>)) </span>
-<span id="cb198-5"><a href="repeated-measures-anova.html#cb198-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb198-6"><a href="repeated-measures-anova.html#cb198-6" aria-hidden="true" tabindex="-1"></a>fit_wl_noGG</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="repeated-measures-anova.html#cb208-1" aria-hidden="true" tabindex="-1"></a>fit_wl_noGG <span class="ot">&lt;-</span> WeightLoss_long <span class="sc">%&gt;%</span> </span>
+<span id="cb208-2"><a href="repeated-measures-anova.html#cb208-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(wl <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (month<span class="sc">|</span>id),</span>
+<span id="cb208-3"><a href="repeated-measures-anova.html#cb208-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> .,</span>
+<span id="cb208-4"><a href="repeated-measures-anova.html#cb208-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">correction =</span> <span class="st">&quot;none&quot;</span>)) </span>
+<span id="cb208-5"><a href="repeated-measures-anova.html#cb208-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb208-6"><a href="repeated-measures-anova.html#cb208-6" aria-hidden="true" tabindex="-1"></a>fit_wl_noGG</span></code></pre></div>
 <pre><code>Anova Table (Type 3 tests)
 
 Response: wl
@@ -736,12 +748,12 @@ Response: wl
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>To request BOTH effect sizes: partial eta squared and generalized eta squared</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="repeated-measures-anova.html#cb200-1" aria-hidden="true" tabindex="-1"></a>fit_wl_2es <span class="ot">&lt;-</span> WeightLoss_long <span class="sc">%&gt;%</span> </span>
-<span id="cb200-2"><a href="repeated-measures-anova.html#cb200-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(wl <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (month<span class="sc">|</span>id),</span>
-<span id="cb200-3"><a href="repeated-measures-anova.html#cb200-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> .,</span>
-<span id="cb200-4"><a href="repeated-measures-anova.html#cb200-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">es =</span> <span class="fu">c</span>(<span class="st">&quot;ges&quot;</span>, <span class="st">&quot;pes&quot;</span>))) </span>
-<span id="cb200-5"><a href="repeated-measures-anova.html#cb200-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-6"><a href="repeated-measures-anova.html#cb200-6" aria-hidden="true" tabindex="-1"></a>fit_wl_2es</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="repeated-measures-anova.html#cb210-1" aria-hidden="true" tabindex="-1"></a>fit_wl_2es <span class="ot">&lt;-</span> WeightLoss_long <span class="sc">%&gt;%</span> </span>
+<span id="cb210-2"><a href="repeated-measures-anova.html#cb210-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(wl <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (month<span class="sc">|</span>id),</span>
+<span id="cb210-3"><a href="repeated-measures-anova.html#cb210-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> .,</span>
+<span id="cb210-4"><a href="repeated-measures-anova.html#cb210-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">es =</span> <span class="fu">c</span>(<span class="st">&quot;ges&quot;</span>, <span class="st">&quot;pes&quot;</span>))) </span>
+<span id="cb210-5"><a href="repeated-measures-anova.html#cb210-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-6"><a href="repeated-measures-anova.html#cb210-6" aria-hidden="true" tabindex="-1"></a>fit_wl_2es</span></code></pre></div>
 <pre><code>Anova Table (Type 3 tests)
 
 Response: wl
@@ -752,13 +764,13 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&
 
 Sphericity correction method: GG </code></pre>
 <p>To force no GG correction AND request BOTH effect sizes</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="repeated-measures-anova.html#cb202-1" aria-hidden="true" tabindex="-1"></a>fit_wl_noGG <span class="ot">&lt;-</span> WeightLoss_long <span class="sc">%&gt;%</span> </span>
-<span id="cb202-2"><a href="repeated-measures-anova.html#cb202-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(wl <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (month<span class="sc">|</span>id),</span>
-<span id="cb202-3"><a href="repeated-measures-anova.html#cb202-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> .,</span>
-<span id="cb202-4"><a href="repeated-measures-anova.html#cb202-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">correction =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb202-5"><a href="repeated-measures-anova.html#cb202-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">es =</span> <span class="fu">c</span>(<span class="st">&quot;ges&quot;</span>, <span class="st">&quot;pes&quot;</span>))) </span>
-<span id="cb202-6"><a href="repeated-measures-anova.html#cb202-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb202-7"><a href="repeated-measures-anova.html#cb202-7" aria-hidden="true" tabindex="-1"></a>fit_wl_noGG</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="repeated-measures-anova.html#cb212-1" aria-hidden="true" tabindex="-1"></a>fit_wl_noGG <span class="ot">&lt;-</span> WeightLoss_long <span class="sc">%&gt;%</span> </span>
+<span id="cb212-2"><a href="repeated-measures-anova.html#cb212-2" aria-hidden="true" tabindex="-1"></a>  afex<span class="sc">::</span><span class="fu">aov_4</span>(wl <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (month<span class="sc">|</span>id),</span>
+<span id="cb212-3"><a href="repeated-measures-anova.html#cb212-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> .,</span>
+<span id="cb212-4"><a href="repeated-measures-anova.html#cb212-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">anova_table =</span> <span class="fu">list</span>(<span class="at">correction =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb212-5"><a href="repeated-measures-anova.html#cb212-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">es =</span> <span class="fu">c</span>(<span class="st">&quot;ges&quot;</span>, <span class="st">&quot;pes&quot;</span>))) </span>
+<span id="cb212-6"><a href="repeated-measures-anova.html#cb212-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb212-7"><a href="repeated-measures-anova.html#cb212-7" aria-hidden="true" tabindex="-1"></a>fit_wl_noGG</span></code></pre></div>
 <pre><code>Anova Table (Type 3 tests)
 
 Response: wl
@@ -767,8 +779,8 @@ Response: wl
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Estimated marginal means</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="repeated-measures-anova.html#cb204-1" aria-hidden="true" tabindex="-1"></a>fit_wl <span class="sc">%&gt;%</span> </span>
-<span id="cb204-2"><a href="repeated-measures-anova.html#cb204-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> month)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="repeated-measures-anova.html#cb214-1" aria-hidden="true" tabindex="-1"></a>fit_wl <span class="sc">%&gt;%</span> </span>
+<span id="cb214-2"><a href="repeated-measures-anova.html#cb214-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> month)</span></code></pre></div>
 <pre><code> month emmean    SE df lower.CL upper.CL
  X1      5.29 0.288 33     4.71     5.88
  X2      4.35 0.295 33     3.75     4.95
@@ -776,17 +788,17 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&
 
 Confidence level used: 0.95 </code></pre>
 <p>pairwise post hoc</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="repeated-measures-anova.html#cb206-1" aria-hidden="true" tabindex="-1"></a>fit_wl <span class="sc">%&gt;%</span> </span>
-<span id="cb206-2"><a href="repeated-measures-anova.html#cb206-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> month) <span class="sc">%&gt;%</span> </span>
-<span id="cb206-3"><a href="repeated-measures-anova.html#cb206-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(<span class="at">adjust =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="repeated-measures-anova.html#cb216-1" aria-hidden="true" tabindex="-1"></a>fit_wl <span class="sc">%&gt;%</span> </span>
+<span id="cb216-2"><a href="repeated-measures-anova.html#cb216-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmeans</span>(<span class="sc">~</span> month) <span class="sc">%&gt;%</span> </span>
+<span id="cb216-3"><a href="repeated-measures-anova.html#cb216-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairs</span>(<span class="at">adjust =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <pre><code> contrast estimate    SE df t.ratio p.value
  X1 - X2     0.941 0.250 33   3.771  0.0006
  X1 - X3     3.118 0.256 33  12.178  &lt;.0001
  X2 - X3     2.176 0.251 33   8.656  &lt;.0001</code></pre>
 <p>means plot</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="repeated-measures-anova.html#cb208-1" aria-hidden="true" tabindex="-1"></a>fit_wl <span class="sc">%&gt;%</span> </span>
-<span id="cb208-2"><a href="repeated-measures-anova.html#cb208-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmip</span>( <span class="sc">~</span> month)</span></code></pre></div>
-<p><img src="eBook_install_files/figure-html/unnamed-chunk-146-1.png" width="75%" /></p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="repeated-measures-anova.html#cb218-1" aria-hidden="true" tabindex="-1"></a>fit_wl <span class="sc">%&gt;%</span> </span>
+<span id="cb218-2"><a href="repeated-measures-anova.html#cb218-2" aria-hidden="true" tabindex="-1"></a>  emmeans<span class="sc">::</span><span class="fu">emmip</span>( <span class="sc">~</span> month)</span></code></pre></div>
+<p><img src="eBook_install_files/figure-html/unnamed-chunk-161-1.png" width="75%" /></p>
 
 </div>
 </div>
@@ -796,7 +808,7 @@ Confidence level used: 0.95 </code></pre>
           </div>
         </div>
       </div>
-<a href="poison-example-1-2-way-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="helpful-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="mixed-design-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

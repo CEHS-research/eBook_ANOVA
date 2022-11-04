@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="twitter:image" content="/EQM_v1_cover.png" />
 
-<meta name="author" content="Sarah Schwartz &amp; Tyson Barrett" />
+<meta name="author" content="Sarah Schwartz" />
 
 
 
@@ -252,7 +252,8 @@ div.csl-indent {
 <li class="chapter" data-level="5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#assumption-checks"><i class="fa fa-check"></i><b>5.3</b> Assumption Checks</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#independent-random-samples"><i class="fa fa-check"></i><b>5.3.1</b> Independent, Random Samples</a></li>
-<li class="chapter" data-level="5.3.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#normality-2"><i class="fa fa-check"></i><b>5.3.2</b> Normality</a></li>
+<li class="chapter" data-level="5.3.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#normality-of-the-dv-in-each-group"><i class="fa fa-check"></i><b>5.3.2</b> Normality of the DV in each Group</a></li>
+<li class="chapter" data-level="5.3.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#homogeneity-of-variance-hov-in-the-dv-between-groups"><i class="fa fa-check"></i><b>5.3.3</b> Homogeneity of Variance (HOV) in the DV between groups</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#one-way-anova-model"><i class="fa fa-check"></i><b>5.4</b> One-way ANOVA Model</a>
 <ul>
@@ -262,10 +263,16 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#followup-tests"><i class="fa fa-check"></i><b>5.5</b> Followup-tests</a>
 <ul>
-<li class="chapter" data-level="5.5.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#estimated-marginal-means-with-emmeansemmeans-group_var"><i class="fa fa-check"></i><b>5.5.1</b> Estimated Marginal Means with <code>emmeans::emmeans(~ group_var)</code></a></li>
-<li class="chapter" data-level="5.5.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#all-pairwise-comparisons-with-pairs"><i class="fa fa-check"></i><b>5.5.2</b> All Pairwise Comparisons with <code>pairs()</code></a></li>
-<li class="chapter" data-level="5.5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#plot-marginal-means-with-emmeansemmip-group_var"><i class="fa fa-check"></i><b>5.5.3</b> Plot Marginal Means with <code>emmeans::emmip(~ group_var)</code></a></li>
-<li class="chapter" data-level="5.5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#contrast-statements-with-emmeanscontrast"><i class="fa fa-check"></i><b>5.5.4</b> Contrast Statements with <code>emmeans::contrast()</code></a></li>
+<li class="chapter" data-level="5.5.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#calculate-estimated-marginal-means"><i class="fa fa-check"></i><b>5.5.1</b> Calculate Estimated Marginal Means</a></li>
+<li class="chapter" data-level="5.5.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#plot-estimated-marginal-means"><i class="fa fa-check"></i><b>5.5.2</b> Plot Estimated Marginal Means</a></li>
+<li class="chapter" data-level="5.5.3" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#all-pairwise-comparisons"><i class="fa fa-check"></i><b>5.5.3</b> All Pairwise Comparisons</a></li>
+<li class="chapter" data-level="5.5.4" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#effect-size-for-pairwise-comparisons"><i class="fa fa-check"></i><b>5.5.4</b> Effect Size for Pairwise Comparisons</a></li>
+<li class="chapter" data-level="5.5.5" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#contrast-statements"><i class="fa fa-check"></i><b>5.5.5</b> Contrast Statements</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#apa-write-up"><i class="fa fa-check"></i><b>5.6</b> APA Write-up</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#methods-section"><i class="fa fa-check"></i><b>5.6.1</b> Methods Section</a></li>
+<li class="chapter" data-level="5.6.2" data-path="one-way-anova-code.html"><a href="one-way-anova-code.html#results-section"><i class="fa fa-check"></i><b>5.6.2</b> Results Section</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html"><i class="fa fa-check"></i><b>6</b> Poison Example: 1 &amp; 2-way ANOVA</a>
@@ -281,7 +288,7 @@ div.csl-indent {
 <li class="chapter" data-level="6.2.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#assumption-checks-1"><i class="fa fa-check"></i><b>6.2.3</b> Assumption Checks</a></li>
 <li class="chapter" data-level="6.2.4" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#fitting-one-way-anova-model"><i class="fa fa-check"></i><b>6.2.4</b> Fitting One-way ANOVA Model</a></li>
 <li class="chapter" data-level="6.2.5" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#followup-tests-1"><i class="fa fa-check"></i><b>6.2.5</b> Followup-tests</a></li>
-<li class="chapter" data-level="6.2.6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#apa-write-up"><i class="fa fa-check"></i><b>6.2.6</b> APA Write Up</a></li>
+<li class="chapter" data-level="6.2.6" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#apa-write-up-1"><i class="fa fa-check"></i><b>6.2.6</b> APA Write Up</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#example-2-survival-time-by-treatment-type"><i class="fa fa-check"></i><b>6.3</b> Example 2) Survival Time by Treatment Type</a>
 <ul>
@@ -296,31 +303,36 @@ div.csl-indent {
 <li class="chapter" data-level="6.4.3" data-path="poison-example-1-2-way-anova.html"><a href="poison-example-1-2-way-anova.html#followup-tests-3"><i class="fa fa-check"></i><b>6.4.3</b> Followup-tests</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>7</b> Repeated Measures ANOVA</a>
+<li class="chapter" data-level="7" data-path="helpful-functions.html"><a href="helpful-functions.html"><i class="fa fa-check"></i><b>7</b> Helpful Functions</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>7.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
-<li class="chapter" data-level="7.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a"><i class="fa fa-check"></i><b>7.2</b> Words Recalled Data Example (Chapter 15, section A)</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#data-prep"><i class="fa fa-check"></i><b>7.2.1</b> Data Prep</a></li>
-<li class="chapter" data-level="7.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-independent-anova"><i class="fa fa-check"></i><b>7.2.2</b> One-Way Independent ANOVA</a></li>
-<li class="chapter" data-level="7.2.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-rm-anova"><i class="fa fa-check"></i><b>7.2.3</b> One-Way RM ANOVA</a></li>
+<li class="chapter" data-level="7.1" data-path="helpful-functions.html"><a href="helpful-functions.html#p-value-formatting"><i class="fa fa-check"></i><b>7.1</b> P-value Formatting</a></li>
+<li class="chapter" data-level="7.2" data-path="helpful-functions.html"><a href="helpful-functions.html#apa-table-formatting"><i class="fa fa-check"></i><b>7.2</b> APA Table Formatting</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#another-example---weight-loss"><i class="fa fa-check"></i><b>7.3</b> Another Example - Weight Loss</a>
+<li class="chapter" data-level="8" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html"><i class="fa fa-check"></i><b>8</b> Repeated Measures ANOVA</a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format"><i class="fa fa-check"></i><b>7.3.1</b> Restructure the data from wide to long format</a></li>
-<li class="chapter" data-level="7.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#does-weight-long-change-over-time"><i class="fa fa-check"></i><b>7.3.2</b> Does weight long change over time?</a></li>
+<li class="chapter" data-level="8.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#tutorial---fitting-rm-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>8.1</b> Tutorial - Fitting RM ANOVA Models with afex::aov_4()</a></li>
+<li class="chapter" data-level="8.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#words-recalled-data-example-chapter-15-section-a"><i class="fa fa-check"></i><b>8.2</b> Words Recalled Data Example (Chapter 15, section A)</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#data-prep"><i class="fa fa-check"></i><b>8.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="8.2.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-independent-anova"><i class="fa fa-check"></i><b>8.2.2</b> One-Way Independent ANOVA</a></li>
+<li class="chapter" data-level="8.2.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#one-way-rm-anova"><i class="fa fa-check"></i><b>8.2.3</b> One-Way RM ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#another-example---weight-loss"><i class="fa fa-check"></i><b>8.3</b> Another Example - Weight Loss</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#restructure-the-data-from-wide-to-long-format"><i class="fa fa-check"></i><b>8.3.1</b> Restructure the data from wide to long format</a></li>
+<li class="chapter" data-level="8.3.2" data-path="repeated-measures-anova.html"><a href="repeated-measures-anova.html#does-weight-long-change-over-time"><i class="fa fa-check"></i><b>8.3.2</b> Does weight long change over time?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html"><i class="fa fa-check"></i><b>8</b> Mixed Design ANOVA</a>
+<li class="chapter" data-level="9" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html"><i class="fa fa-check"></i><b>9</b> Mixed Design ANOVA</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>8.1</b> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code></a></li>
-<li class="chapter" data-level="8.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a"><i class="fa fa-check"></i><b>8.2</b> Words Recalled Data Example (Chapter 16, section A)</a>
+<li class="chapter" data-level="9.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#tutorial---fitting-mixed-design-anova-models-with-afexaov_4"><i class="fa fa-check"></i><b>9.1</b> Tutorial - Fitting Mixed Design ANOVA Models with <code>afex::aov_4()</code></a></li>
+<li class="chapter" data-level="9.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#words-recalled-data-example-chapter-16-section-a"><i class="fa fa-check"></i><b>9.2</b> Words Recalled Data Example (Chapter 16, section A)</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#data-prep-1"><i class="fa fa-check"></i><b>8.2.1</b> Data Prep</a></li>
-<li class="chapter" data-level="8.2.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#one-way-rm-anova-1"><i class="fa fa-check"></i><b>8.2.2</b> One-Way RM ANOVA</a></li>
-<li class="chapter" data-level="8.2.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#mixed-anova"><i class="fa fa-check"></i><b>8.2.3</b> Mixed ANOVA</a></li>
+<li class="chapter" data-level="9.2.1" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#data-prep-1"><i class="fa fa-check"></i><b>9.2.1</b> Data Prep</a></li>
+<li class="chapter" data-level="9.2.2" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#one-way-rm-anova-1"><i class="fa fa-check"></i><b>9.2.2</b> One-Way RM ANOVA</a></li>
+<li class="chapter" data-level="9.2.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#mixed-anova"><i class="fa fa-check"></i><b>9.2.3</b> Mixed ANOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#conclusion"><i class="fa fa-check"></i><b>8.3</b> Conclusion</a></li>
+<li class="chapter" data-level="9.3" data-path="mixed-design-anova.html"><a href="mixed-design-anova.html#conclusion"><i class="fa fa-check"></i><b>9.3</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -345,8 +357,8 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</h1>
-<p class="author"><em>Sarah Schwartz &amp; Tyson Barrett</em></p>
-<p class="date"><em>Last updated: 2022-11-03</em></p>
+<p class="author"><em>Sarah Schwartz</em></p>
+<p class="date"><em>Last updated: 2022-11-04</em></p>
 </div>
 <div id="welcome" class="section level1 unnumbered hasAnchor">
 <h1>Welcome<a href="index.html#welcome" class="anchor-section" aria-label="Anchor link to header"></a></h1>

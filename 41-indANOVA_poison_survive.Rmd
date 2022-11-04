@@ -6,10 +6,17 @@ Required Packages
 ```{r}
 library(tidyverse)    # Loads several very helpful 'tidy' packages
 library(furniture)    # Nice tables (by our own Tyson Barrett)
+library(psych)        # Descriptive helpers
+library(pastecs)      # Normality Tests
 library(afex)         # Analysis of Factorial Experiments
 library(emmeans)      # Estimated marginal means (Least-squares means)
-library(readxl)       # Necessary for reading in an example data set
+library(ggpubr)
 ```
+
+```{r, echo=FALSE}
+knitr::knit("5-functions.Rmd", output = tempfile())
+```
+
 
 ## Prepare for Modeling
 
@@ -123,15 +130,15 @@ df_survival %>%
 
 Things you should notice, but not a firm conclusion yet!
 
-**SAMPLE BALANCE**
+**SAMPLE BALANCE (*N*)**
 
 The sample of 48 guinea pigs is balanced between the three poisons.  There are the sample number of animals in each group (*n* = 16).
 
-**CENTER = MEANS**  
+**CENTER (MEANS)**  
 
 Guinea pigs given Type 3 poison had shorter survival times (*M* = 0.28), on average, compared to Type 1 (*M* = 0.48) and Type 2 (*M* = 0.54).
 
-**SPREAD = STANDARD DEVIATIONS**  
+**SPREAD (STANDARD DEVIATIONS)**  
 
 There was much less variation in survival times among the 16 guinea pics given Type 3 poison (*SD* = 0.06) compared to the other types (Type 1, *SD* = 0.21; Type 2, *SD* = 0.29).
 
@@ -161,7 +168,7 @@ The Sample(s) was drawn at **random** (at least as representative as possible) a
 ```{r, fig.cap = "Distribution of Survival Time by Poison Type: Histograms used to Judge Normality"}
 df_survival %>% 
   ggplot(aes(time)) + 
-  geom_histogram(binwidth = .10,
+  geom_histogram(binwidth = .05,
                  fill = "gray",
                  color = "black",
                  alpha = .5) +
@@ -185,86 +192,44 @@ df_survival %>%
 
 ```{r}
 df_survival %>% 
-  psych::describeBy(time ~ poison,
-                    data = .,
-                    mat = TRUE,
-                    digits = 2) 
-```
-
-```{r}
-df_survival %>% 
-  dplyr::filter(poison == "1") %>%    # select one group
-  dplyr::pull(time) %>%              # extract the continuous variable
-  shapiro.test()                        # test for normality
+  dplyr::group_by(poison) %>% 
+  dplyr::summarise(skewness = psych::skew(time),
+                   kurtosis = psych::kurtosi(time))
 ```
 
 
 ```{r}
 df_survival %>% 
   dplyr::group_by(poison) %>% 
-  dplyr::summarise(W.stat  = shapiro.test(time)$statistic,
+  dplyr::summarise(SW.stat  = shapiro.test(time)$statistic,
                    p.value = shapiro.test(time)$p.value)
 ```
 
-
 ```{r}
-x<- df_survival %>% 
-  dplyr::group_by(poison) %>% 
-  tidyr::nest() %>% 
-  dplyr::mutate(ks = purrr::map(data, ~ ks.test))
-  
-
-df_survival %>% ks.test(time, subset = (poision == "1"))
-
-```
-
-
-
-
-```{r}
-x <- df_survival %>% 
-  dplyr::filter(poison == 1) %>% 
+df_survival %>% 
   dplyr::nest_by(poison) %>% 
-  dplyr::mutate(ks = map(data, 
-                         ~ funciton(x) x %>% dplyr::pull(time) %>% ks.test()))
-
-x$data[1]
-
-
-df_survival %>% 
-  dplyr::group_by(poison) %>% 
-  tidyr::nest() %>% 
-  dplyr::mutate(ks = purrr::map.df(data, ks.test(time, data = .)))
-
-
-%>% dplyr::select(data)
-  dplyr::mutate(W.stat  = ks.test(data$time)$statistic,
-                p.value = ks.test(data$time)$p.value)
-```
-
-```{r}
-df_survival %>% 
-  dplyr::filter(poison == 1) %>% 
-  ks.test(y = time)
-```
-
-```{r}
-df_survival %>% 
-  dplyr::filter(poison == 2) %>% 
-  ks.test(time) 
-```
-
-```{r}
-df_survival %>% 
-  dplyr::filter(poison == 3) %>% 
-  ks.test(time) 
+  dplyr::summarise(summ = list(pastecs::stat.desc(data$time, 
+                                                  norm = TRUE))) %>% 
+  dplyr::mutate(summ = list(summ %>% 
+                              unlist() %>% 
+                              data.frame() %>% 
+                              dplyr::rename("value" = ".") %>% 
+                              tibble::rownames_to_column(var = "stat"))) %>% 
+  tidyr::unnest(summ) %>% 
+  dplyr::filter(stat %in% c("skewness", "skew.2SE",
+                               "kurtosis", "kurt.2SE",
+                               "normtest.W", "normtest.p")) %>% 
+  tidyr::pivot_wider(names_from = stat,
+                     values_from = value)
 ```
 
 
 
-#### Homogeneity of Variance (HOV)
 
-Levene's Test of HOV
+#### Homogeneity of Variance (HOV) in the DV between groups
+
+Since the distribution of survival time might not be normally distributed, Bartlett's test is not the best. 
+
 
 ```{r}
 df_survival %>% 
@@ -273,21 +238,27 @@ df_survival %>%
                   center = "mean")     
 ```
 
-Bartlett's Test of HOV
-
 ```{r}
 df_survival %>% 
-  bartlett.test(time ~ poison, data = .)
+  fligner.test(time ~ poison, 
+               data = .)
 ```
-
-
-
 
 
 
 #### Summary
 
-Very skewed and violate HOV
+
+**NORMALITY**
+
+The distribution of survival time does not seem to be normal based on visual inspection.  For poison Type 2, survival time significantly deviates from normality (skew = 1.07, kurtosis = -0.08), *W* = 0.85, *p* = .015.
+
+
+**HOMOGENEITY OF VARIANCE**
+
+Survival time is significantly less variable for poison Type 3 (*SD* = 0.06), compared to the others (Type 1, *SD* = 0.21; Type 2, *SD* = 0.29), *F*(2, 45) = 8.09, *p* < .001.
+
+
 
 
 
@@ -309,6 +280,12 @@ aov_poison <- df_survival %>%
 #### Basic Output - stored name of model
 
 ```{r}
+apa::anova_apa(aov_poison)
+```
+
+
+
+```{r}
 aov_poison
 ```
 
@@ -321,7 +298,10 @@ aov_poison
 aov_poison$Anova
 ```
 
+#### Summary
 
+
+There is statistically significant evidence that survival time varies by poison type, *F*(2, 45) = 11.79, *p* < .001, $\eta^2$ = 0.34.
 
 
 ### Followup-tests
@@ -330,7 +310,7 @@ aov_poison$Anova
 
 ```{r}
 aov_poison %>% 
-  emmeans::emmeans(~ poison)         # Calculate Estimated Marginal Means
+  emmeans::emmeans(~ poison)         
 ```
 
 ```{r}
@@ -344,18 +324,43 @@ aov_poison %>%
 
 
 
+
+
+
 #### All Pairwise Comparisons with `pairs()`
 
 Pairwise post hoc: Fisher's LSD adjustment for multiple comparisons
 
 ```{r}
-aov_poison %>% 
-  emmeans::emmeans(~ poison) %>%        # Calculate Estimated Marginal Means
-  pairs(adjust = "none")                  # Is each pair signif different?
+aov_pairs <- aov_poison %>% 
+  emmeans::emmeans(~ poison) %>%        
+  pairs(adjust = "none")  
+
+
+aov_pairs
 ```
 
 
+
+#### Effect Size for Pairs
+
+
+
+```{r}
+aov_eff <- aov_poison %>% 
+  emmeans::emmeans(~ poison) %>% 
+  emmeans::eff_size(sigma = sigma(aov_poison$lm),
+                    edf = df.residual(aov_poison$lm))
+
+aov_eff
+```
+
+
+
+
 #### Contrast Statements with `emmeans::contrast()`
+
+Compare the mean of Type 3 to the other two types.
 
 
 ```{r}
@@ -367,23 +372,70 @@ aov_poison %>%
 
 
 
+#### Summary
+
+
+**PAIRS**
+
+Survival time for Type 3 (*M* = 0.28) is is lower than type 1 (*M* = 0.62), *t*(45) = 4.61, *p* < .001, *d* = 1.63, and type 2 (*M* = 0.54), *t*(45) = 3.62, *p* < .001, *d* = 1.28.  There is no evidence between types 1 & 2, *t*(45) = 0.99, *p* = .328, *d* = 0.35.
+
+
+**CONTRAST**
+
+Survival time for Type 3 (*M* = 0.28) is is lower than  both type 1 (*M* = 0.62) and type 2 (*M* = 0.54), *t*(45) = 4.75, p < .001.
 
 
 
 ### APA Write Up
 
+> Note: There are many unkowns regarding the situation of this experiment and can not be include in this write-up.
+
 #### Methods Section
 
 
-
+To investigate potency of poisons, 48 guinea pigs were randomized to three types of poison (*n* = 16) and time till mortality was measured.  Survival time (dependent variable) was then subjected to a 1-way independent groups analysis of variance (ANOVA) comparing the three types of poison (independent variable).  Prior to analysis, the assumptions of normality and homogeneity of variance were assessed with with Shapiro-Wilks and Levene's Test respectively. The significant omnibus effect was investigated further with pairwise and appropriate contrast comparisons to determine which of the types different on survival time.  Fisher's method was used for all pairwise tests and effects sizes are given as Cohen's d-like standardized mean differences.
 
 
 
 #### Results Section
 
+The distribution of survival time did not seem to be normal based on visual inspection.  For poison Type 2, survival time significantly deviates from normality (skew = 1.07, kurtosis = -0.08), *W* = 0.85, *p* = .015. Survival time also was significantly less variable for poison Type 3 (*SD* = 0.06), compared to the others (Type 1, *SD* = 0.21; Type 2, *SD* = 0.29), *F*(2, 45) = 8.09, *p* < .001.  The ANOVA was still conducted and found statistically significant evidence that survival time do indeed varry by poison type, *F*(2, 45) = 11.79, *p* < .001, $\eta^2$ = 0.34.  Specifically, survival time for Type 3 (*M* = 0.28) was shorter than type 1 (*M* = 0.62), *t*(45) = 4.61, *p* < .001, *d* = 1.63, and type 2 (*M* = 0.54), *t*(45) = 3.62, *p* < .001, *d* = 1.28.  There was no evidence of a difference in survival time between types 1 & 2, *t*(45) = 0.99, *p* = .328, *d* = 0.35.
 
 
+> Here is a publication worthy plot
 
+```{r}
+aov_poison_label <- dplyr::left_join(data.frame(aov_pairs), 
+                 data.frame(aov_eff), 
+                 by = "contrast") %>% 
+  tidyr::separate(col = contrast,
+                  into = c("start", "stop")) %>% 
+  dplyr::mutate_at(vars(start, stop),
+                   stringr::str_sub,
+                   start = -1) %>% 
+  dplyr::mutate(lab = glue::glue("d = {round(effect.size, 2)}, {pval_label_apa(p.value)}"))
+
+aov_poison %>% 
+  emmeans::emmeans(~ poison) %>% 
+  data.frame() %>% 
+  ggplot(aes(x = poison,
+             y = emmean)) +
+  geom_errorbar(aes(ymin = emmean - SE,
+                    ymax = emmean + SE),
+                width = .3) +
+  geom_point() +
+  geom_line(aes(group = 1)) +
+  theme_bw() +
+  labs(x = "Poison Type",
+       y = "Estimated MArginal Mean Survival Time") +
+  ggpubr::geom_bracket(data = aov_poison_label %>% dplyr::filter(p.value < .06),
+               aes(xmin = start,
+                   xmax = stop,
+                   label = lab),
+               y.position = 0.7,
+               step.increase = -0.15,
+               type = "text") 
+```
 
 
 

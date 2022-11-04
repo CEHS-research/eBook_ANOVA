@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Intro: Cancer Experiemnt | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
+  <title>7 Helpful Functions | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences</title>
   <meta name="description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Intro: Cancer Experiemnt | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta property="og:title" content="7 Helpful Functions | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/EQM_v1_cover.png" />
   <meta property="og:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="github-repo" content="cehs-research/eBook_wrangle" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Intro: Cancer Experiemnt | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
+  <meta name="twitter:title" content="7 Helpful Functions | Encyclopedia of Quantitative Methods in R, vol. 3: Testing Mean Differences" />
   
   <meta name="twitter:description" content="t-tests, ANOVA, RM ANOVA, and post hoc tests." />
   <meta name="twitter:image" content="/EQM_v1_cover.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ihnoprep.html"/>
-<link rel="next" href="one-sample-t-test-for-the-mean.html"/>
+<link rel="prev" href="poison-example-1-2-way-anova.html"/>
+<link rel="next" href="repeated-measures-anova.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -355,119 +355,81 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cancerprep" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">2</span> Intro: Cancer Experiemnt<a href="cancerprep.html#cancerprep" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="cancerprep.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)       <span class="co"># super helpful everything!</span></span>
-<span id="cb13-2"><a href="cancerprep.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)           <span class="co"># inporting SPSS, SAS, &amp; Stata data files</span></span>
-<span id="cb13-3"><a href="cancerprep.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)           <span class="co"># lots of nice tidbits </span></span></code></pre></div>
-<div id="source-of-data" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Source of Data<a href="cancerprep.html#source-of-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Mid-Michigan Medical Center, Midland, Michigan, 1999: A study of oral condition of cancer patients.</p>
+<div id="helpful-functions" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Helpful Functions<a href="helpful-functions.html#helpful-functions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="p-value-formatting" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> P-value Formatting<a href="helpful-functions.html#p-value-formatting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="helpful-functions.html#cb169-1" aria-hidden="true" tabindex="-1"></a>pval_label_apa <span class="ot">&lt;-</span> <span class="cf">function</span>(value,</span>
+<span id="cb169-2"><a href="helpful-functions.html#cb169-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">breaks =</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">01</span>, .<span class="dv">001</span>),</span>
+<span id="cb169-3"><a href="helpful-functions.html#cb169-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">symbols =</span> <span class="fu">c</span>(<span class="st">&quot;*&quot;</span>, <span class="st">&quot;**&quot;</span>, <span class="st">&quot;***&quot;</span>),</span>
+<span id="cb169-4"><a href="helpful-functions.html#cb169-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">decimals =</span> <span class="dv">3</span>,</span>
+<span id="cb169-5"><a href="helpful-functions.html#cb169-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">leading =</span> <span class="cn">FALSE</span>){</span>
+<span id="cb169-6"><a href="helpful-functions.html#cb169-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb169-7"><a href="helpful-functions.html#cb169-7" aria-hidden="true" tabindex="-1"></a>  value_apa <span class="ot">=</span> MOTE<span class="sc">::</span><span class="fu">apa</span>(<span class="at">value =</span> value,</span>
+<span id="cb169-8"><a href="helpful-functions.html#cb169-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">decimals =</span> decimals,</span>
+<span id="cb169-9"><a href="helpful-functions.html#cb169-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">leading =</span> leading)</span>
+<span id="cb169-10"><a href="helpful-functions.html#cb169-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb169-11"><a href="helpful-functions.html#cb169-11" aria-hidden="true" tabindex="-1"></a>  value_apa_min <span class="ot">=</span> MOTE<span class="sc">::</span><span class="fu">apa</span>(<span class="at">value =</span> breaks[<span class="dv">3</span>],</span>
+<span id="cb169-12"><a href="helpful-functions.html#cb169-12" aria-hidden="true" tabindex="-1"></a>                            <span class="at">decimals =</span> decimals,</span>
+<span id="cb169-13"><a href="helpful-functions.html#cb169-13" aria-hidden="true" tabindex="-1"></a>                            <span class="at">leading =</span> leading)</span>
+<span id="cb169-14"><a href="helpful-functions.html#cb169-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb169-15"><a href="helpful-functions.html#cb169-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">case_when</span>(value <span class="sc">&lt;</span>  breaks[<span class="dv">3</span>] <span class="sc">~</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;p &lt; {value_apa_min} {symbols[3]}&quot;</span>),</span>
+<span id="cb169-16"><a href="helpful-functions.html#cb169-16" aria-hidden="true" tabindex="-1"></a>                   value <span class="sc">==</span> breaks[<span class="dv">3</span>] <span class="sc">~</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;p = {value_apa_min} {symbols[3]}&quot;</span>),</span>
+<span id="cb169-17"><a href="helpful-functions.html#cb169-17" aria-hidden="true" tabindex="-1"></a>                   value <span class="sc">&lt;=</span>  breaks[<span class="dv">2</span>] <span class="sc">~</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;p = {value_apa} {symbols[2]}&quot;</span>),</span>
+<span id="cb169-18"><a href="helpful-functions.html#cb169-18" aria-hidden="true" tabindex="-1"></a>                   value <span class="sc">&lt;=</span>  breaks[<span class="dv">1</span>] <span class="sc">~</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;p = {value_apa} {symbols[1]}&quot;</span>),</span>
+<span id="cb169-19"><a href="helpful-functions.html#cb169-19" aria-hidden="true" tabindex="-1"></a>                   value <span class="sc">&gt;</span> breaks[<span class="dv">1</span>] <span class="sc">~</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;p = {value_apa}&quot;</span>))</span>
+<span id="cb169-20"><a href="helpful-functions.html#cb169-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="helpful-functions.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fl">0.23</span>, <span class="fl">0.023</span>, <span class="fl">0.0023</span>, <span class="fl">0.00023</span>) <span class="sc">%&gt;%</span> <span class="fu">pval_label_apa</span>()</span></code></pre></div>
+<pre><code>p = .230
+p = .023 *
+p = .002 **
+p &lt; .001 ***</code></pre>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="helpful-functions.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.01</span>, <span class="fl">0.001</span>) <span class="sc">%&gt;%</span> <span class="fu">pval_label_apa</span>()</span></code></pre></div>
+<pre><code>p = .050 *
+p = .010 **
+p = .001 ***</code></pre>
 </div>
-<div id="description-of-the-study" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Description of the Study<a href="cancerprep.html#description-of-the-study" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The data set contains part of the data for a study of <strong>oral condition</strong> of cancer patients conducted at the Mid-Michigan Medical Center. The oral conditions of the patients were measured and recorded at the <em>initial</em> stage, at the end of the <em>second week</em>, at the end of the <em>fourth week</em>, and at the end of the <em>sixth week</em>. The variables age, initial weight and initial cancer stage of the patients were recorded. Patients were divided into two groups <strong>at random</strong>: One group received a placebo and the other group received aloe juice treatment.</p>
-<blockquote>
-<p>Sample size n = 25 patients with neck cancer.</p>
-<p>The treatment is Aloe Juice.</p>
-</blockquote>
-</div>
-<div id="variables" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Variables<a href="cancerprep.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><p><code>ID</code> patient identification number</p></li>
-<li><p><code>trt</code> treatment group</p>
-<ul>
-<li><code>0</code> <em>placebo</em></li>
-<li><code>1</code> <em>aloe juice</em></li>
-</ul></li>
-<li><p><code>age</code> patient’s age, <em>in years</em></p></li>
-<li><p><code>weightin</code> patient’s weight <em>(pounds)</em> at the initial stage</p></li>
-<li><p><code>stage</code> initial cancer stage</p>
-<ul>
-<li>coded <code>1</code> through <code>4</code></li>
-</ul></li>
-<li><p><code>totalcin</code> oral condition at the <em>initial stage</em></p></li>
-<li><p><code>totalcw2</code> oral condition at the end of <em>week 2</em></p></li>
-<li><p><code>totalcw4</code> oral condition at the end of <em>week 4</em></p></li>
-<li><p><code>totalcw6</code> oral condition at the end of <em>week 6</em></p></li>
-</ul>
-</div>
-<div id="import-data" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> Import Data<a href="cancerprep.html#import-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The <code>Cancer</code> dataset is saved in SPSS format, which is evident from the <code>.sav</code> ending on the file name.</p>
-<p>The <code>haven</code> package is downloaded as part of the <code>tidyverse</code> set of packages, but is not automatically loaded. It must have its own <code>library()</code> function call <em>(see above)</em>. The <code>haven::read_spss()</code> function works very simarly to the <code>readxl::read_excel()</code> function we used last chapter <span class="citation">(<a href="references.html#ref-R-haven" role="doc-biblioref">Wickham, Miller, and Smith 2022</a>)</span>.</p>
-<ul>
-<li>Make sure the <strong>dataset</strong> is saved in the same <em>folder</em> as this file</li>
-<li>Make sure the that <em>folder</em> is the <strong>working directory</strong></li>
-</ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="cancerprep.html#cb14-1" aria-hidden="true" tabindex="-1"></a>cancer_raw <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_spss</span>(<span class="st">&quot;https://github.com/CEHS-research/PSY-6600_students/raw/master/Data/Cancer.sav&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="cancerprep.html#cb15-1" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">glimpse</span>(cancer_raw)</span></code></pre></div>
-<pre><code>Rows: 25
-Columns: 9
-$ ID       &lt;dbl&gt; 1, 5, 6, 9, 11, 15, 21, 26, 31, 35, 39, 41, 45, 2, 12, 14, 16…
-$ TRT      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1…
-$ AGE      &lt;dbl&gt; 52, 77, 60, 61, 59, 69, 67, 56, 61, 51, 46, 65, 67, 46, 56, 4…
-$ WEIGHIN  &lt;dbl&gt; 124.0, 160.0, 136.5, 179.6, 175.8, 167.6, 186.0, 158.0, 212.8…
-$ STAGE    &lt;dbl&gt; 2, 1, 4, 1, 2, 1, 1, 3, 1, 1, 4, 1, 1, 2, 4, 1, 2, 1, 4, 2, 1…
-$ TOTALCIN &lt;dbl&gt; 6, 9, 7, 6, 6, 6, 6, 6, 6, 6, 7, 6, 8, 7, 6, 4, 6, 6, 12, 5, …
-$ TOTALCW2 &lt;dbl&gt; 6, 6, 9, 7, 7, 6, 11, 11, 9, 4, 8, 6, 8, 16, 10, 6, 11, 7, 11…
-$ TOTALCW4 &lt;dbl&gt; 6, 10, 17, 9, 16, 6, 11, 15, 6, 8, 11, 9, 9, 9, 11, 8, 11, 6,…
-$ TOTALCW6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, 7, 14, 6…</code></pre>
-</div>
-<div id="wrangle-data" class="section level2 hasAnchor" number="2.5">
-<h2><span class="header-section-number">2.5</span> Wrangle Data<a href="cancerprep.html#wrangle-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="cancerprep.html#cb17-1" aria-hidden="true" tabindex="-1"></a>cancer_clean <span class="ot">&lt;-</span> cancer_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb17-2"><a href="cancerprep.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename_all</span>(tolower) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-3"><a href="cancerprep.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">factor</span>(id)) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-4"><a href="cancerprep.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">trt =</span> <span class="fu">factor</span>(trt,</span>
-<span id="cb17-5"><a href="cancerprep.html#cb17-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Placebo&quot;</span>, </span>
-<span id="cb17-6"><a href="cancerprep.html#cb17-6" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Aloe Juice&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-7"><a href="cancerprep.html#cb17-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">stage =</span> <span class="fu">factor</span>(stage))</span></code></pre></div>
-</div>
-<div id="overview-1" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> Overview<a href="cancerprep.html#overview-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="dimentions-size-of-the-dataset-1" class="section level3 hasAnchor" number="2.6.1">
-<h3><span class="header-section-number">2.6.1</span> Dimentions (size) of the dataset<a href="cancerprep.html#dimentions-size-of-the-dataset-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="cancerprep.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(cancer_clean)</span></code></pre></div>
-<pre><code>[1] 25  9</code></pre>
-</div>
-<div id="variable-names-1" class="section level3 hasAnchor" number="2.6.2">
-<h3><span class="header-section-number">2.6.2</span> Variable Names<a href="cancerprep.html#variable-names-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="cancerprep.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(cancer_clean)</span></code></pre></div>
-<pre><code>[1] &quot;id&quot;       &quot;trt&quot;      &quot;age&quot;      &quot;weighin&quot;  &quot;stage&quot;    &quot;totalcin&quot; &quot;totalcw2&quot;
-[8] &quot;totalcw4&quot; &quot;totalcw6&quot;</code></pre>
-</div>
-<div id="quick-glimpse-1" class="section level3 hasAnchor" number="2.6.3">
-<h3><span class="header-section-number">2.6.3</span> Quick Glimpse<a href="cancerprep.html#quick-glimpse-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="cancerprep.html#cb22-1" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">glimpse</span>(cancer_clean)</span></code></pre></div>
-<pre><code>Rows: 25
-Columns: 9
-$ id       &lt;fct&gt; 1, 5, 6, 9, 11, 15, 21, 26, 31, 35, 39, 41, 45, 2, 12, 14, 16…
-$ trt      &lt;fct&gt; Placebo, Placebo, Placebo, Placebo, Placebo, Placebo, Placebo…
-$ age      &lt;dbl&gt; 52, 77, 60, 61, 59, 69, 67, 56, 61, 51, 46, 65, 67, 46, 56, 4…
-$ weighin  &lt;dbl&gt; 124.0, 160.0, 136.5, 179.6, 175.8, 167.6, 186.0, 158.0, 212.8…
-$ stage    &lt;fct&gt; 2, 1, 4, 1, 2, 1, 1, 3, 1, 1, 4, 1, 1, 2, 4, 1, 2, 1, 4, 2, 1…
-$ totalcin &lt;dbl&gt; 6, 9, 7, 6, 6, 6, 6, 6, 6, 6, 7, 6, 8, 7, 6, 4, 6, 6, 12, 5, …
-$ totalcw2 &lt;dbl&gt; 6, 6, 9, 7, 7, 6, 11, 11, 9, 4, 8, 6, 8, 16, 10, 6, 11, 7, 11…
-$ totalcw4 &lt;dbl&gt; 6, 10, 17, 9, 16, 6, 11, 15, 6, 8, 11, 9, 9, 9, 11, 8, 11, 6,…
-$ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, 7, 14, 6…</code></pre>
-</div>
-<div id="top-and-bottom-rows-1" class="section level3 hasAnchor" number="2.6.4">
-<h3><span class="header-section-number">2.6.4</span> Top and Bottom Rows<a href="cancerprep.html#top-and-bottom-rows-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="cancerprep.html#cb24-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">headTail</span>(cancer_clean)</span></code></pre></div>
-<pre><code>    id        trt age weighin stage totalcin totalcw2 totalcw4 totalcw6
-1    1    Placebo  52     124     2        6        6        6        7
-2    5    Placebo  77     160     1        9        6       10        9
-3    6    Placebo  60   136.5     4        7        9       17       19
-4    9    Placebo  61   179.6     1        6        7        9        3
-5 &lt;NA&gt;       &lt;NA&gt; ...     ...  &lt;NA&gt;      ...      ...      ...      ...
-6   42 Aloe Juice  73   181.5     0        8       11       16     &lt;NA&gt;
-7   44 Aloe Juice  67     187     1        5        7        7        7
-8   50 Aloe Juice  60     164     2        6        8       16     &lt;NA&gt;
-9   58 Aloe Juice  54   172.8     4        7        8       10        8</code></pre>
+<div id="apa-table-formatting" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> APA Table Formatting<a href="helpful-functions.html#apa-table-formatting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="helpful-functions.html#cb174-1" aria-hidden="true" tabindex="-1"></a>gt_apa <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">title =</span> <span class="st">&quot; &quot;</span>, ...) {</span>
+<span id="cb174-2"><a href="helpful-functions.html#cb174-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(x, ...) <span class="sc">%&gt;%</span></span>
+<span id="cb174-3"><a href="helpful-functions.html#cb174-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tab_options</span>(</span>
+<span id="cb174-4"><a href="helpful-functions.html#cb174-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">table.border.top.color =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb174-5"><a href="helpful-functions.html#cb174-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">heading.title.font.size =</span> <span class="fu">px</span>(<span class="dv">16</span>),</span>
+<span id="cb174-6"><a href="helpful-functions.html#cb174-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">column_labels.border.top.width =</span> <span class="dv">3</span>,</span>
+<span id="cb174-7"><a href="helpful-functions.html#cb174-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">column_labels.border.top.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb174-8"><a href="helpful-functions.html#cb174-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">column_labels.border.bottom.width =</span> <span class="dv">3</span>,</span>
+<span id="cb174-9"><a href="helpful-functions.html#cb174-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">column_labels.border.bottom.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb174-10"><a href="helpful-functions.html#cb174-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">table_body.border.bottom.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb174-11"><a href="helpful-functions.html#cb174-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">table.border.bottom.color =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb174-12"><a href="helpful-functions.html#cb174-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">table.width =</span> <span class="fu">pct</span>(<span class="dv">100</span>),</span>
+<span id="cb174-13"><a href="helpful-functions.html#cb174-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">table.background.color =</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb174-14"><a href="helpful-functions.html#cb174-14" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb174-15"><a href="helpful-functions.html#cb174-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cols_align</span>(<span class="at">align=</span><span class="st">&quot;center&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb174-16"><a href="helpful-functions.html#cb174-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tab_style</span>(</span>
+<span id="cb174-17"><a href="helpful-functions.html#cb174-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb174-18"><a href="helpful-functions.html#cb174-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cell_borders</span>(</span>
+<span id="cb174-19"><a href="helpful-functions.html#cb174-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">sides =</span> <span class="fu">c</span>(<span class="st">&quot;top&quot;</span>, <span class="st">&quot;bottom&quot;</span>),</span>
+<span id="cb174-20"><a href="helpful-functions.html#cb174-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb174-21"><a href="helpful-functions.html#cb174-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">1</span>)</span>
+<span id="cb174-22"><a href="helpful-functions.html#cb174-22" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb174-23"><a href="helpful-functions.html#cb174-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cell_text</span>(</span>
+<span id="cb174-24"><a href="helpful-functions.html#cb174-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">align=</span><span class="st">&quot;center&quot;</span></span>
+<span id="cb174-25"><a href="helpful-functions.html#cb174-25" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb174-26"><a href="helpful-functions.html#cb174-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">alpha =</span> <span class="cn">NULL</span>)</span>
+<span id="cb174-27"><a href="helpful-functions.html#cb174-27" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb174-28"><a href="helpful-functions.html#cb174-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb174-29"><a href="helpful-functions.html#cb174-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">columns =</span> <span class="fu">everything</span>(),</span>
+<span id="cb174-30"><a href="helpful-functions.html#cb174-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">rows =</span> <span class="fu">everything</span>()</span>
+<span id="cb174-31"><a href="helpful-functions.html#cb174-31" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb174-32"><a href="helpful-functions.html#cb174-32" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb174-33"><a href="helpful-functions.html#cb174-33" aria-hidden="true" tabindex="-1"></a>    <span class="co">#title setup</span></span>
+<span id="cb174-34"><a href="helpful-functions.html#cb174-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tab_header</span>(</span>
+<span id="cb174-35"><a href="helpful-functions.html#cb174-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="fu">html</span>(<span class="st">&quot;&lt;i&gt;&quot;</span>, title, <span class="st">&quot;&lt;/i&gt;&quot;</span>)</span>
+<span id="cb174-36"><a href="helpful-functions.html#cb174-36" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb174-37"><a href="helpful-functions.html#cb174-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">opt_align_table_header</span>(<span class="at">align =</span> <span class="st">&quot;left&quot;</span>)</span>
+<span id="cb174-38"><a href="helpful-functions.html#cb174-38" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 
-</div>
 </div>
 </div>
             </section>
@@ -475,8 +437,8 @@ $ totalcw6 &lt;dbl&gt; 7, 9, 19, 3, 13, 11, 10, 15, 8, 7, 11, 6, 10, 10, 9, 7, 1
           </div>
         </div>
       </div>
-<a href="ihnoprep.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="one-sample-t-test-for-the-mean.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="poison-example-1-2-way-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="repeated-measures-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

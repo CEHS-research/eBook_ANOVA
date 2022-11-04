@@ -44,10 +44,15 @@ Variables:
 
 ### Compute Summary Statistics
 
-Calculate summary statistics of the DV by the groups to the data to eyeball the potential effect or differences in the means.  Also check if the standard deviations and samples sizes are somewhat similar in each group.
+
+
+```{block type='rmdlightbulb', echo=TRUE}
+**NOTE:** Calculate summary statistics of the DV by the groups to the data to eyeball the potential effect or differences in the means.  Also check if the standard deviations and samples sizes are somewhat similar in each group.
+```
+
+
 
 ```{r, eval=FALSE}
-# Observed DV by group: summary table
 data_long %>% 
   dplyr::group_by(group_IV) %>%          # divide into groups
   furniture::table1(continuous_DV        # gives M(SD)
@@ -63,36 +68,44 @@ data_long %>%
 
 ### Plot the Observed Data
 
-Plot the data to eyeball the potential effect.  Remember the center line in each box represents the median, not the mean. 
+
+
+```{block type='rmdlightbulb', echo=TRUE}
+**NOTE:** Plot the data to eyeball the potential effect.  Remember the center line in each box represents the median, not the mean. 
+```
+
+
+
+#### Side-by-Side Boxplots
 
 ```{r, eval=FALSE}
-# Observed DV by group: boxplots
 data_long %>% 
-  ggplot(aes(x = group_IV,
-             y = continuous_DV)) + 
+  ggplot(aes(x = group_IV,           # groups along the x-axis
+             y = continuous_DV)) +   # DV on the y-axis
   geom_boxplot() +
   geom_point() +
   theme_bw()
 ```
 
 
+#### Mean by Group Dot-Plot
+
+
 ```{r, eval=FALSE}
-# Observed DV by group: Mean-SD plots
 data_long %>% 
-  ggplot(aes(x = group_IV,
-             y = continuous_DV)) + 
+  ggplot(aes(x = group_IV,           # groups along the x-axis
+             y = continuous_DV)) +   # DV on the y-axis 
   stat_summary() +
   theme_bw()
 ```
 
 
-
+#### Violin-&-Boxplots
 
 ```{r, eval=FALSE}
-# Observed DV by group: violin-boxplot w/means
 data_long %>% 
-  ggplot(aes(x = continuous_DV,
-             y = group_IV)) + 
+  ggplot(aes(x = group_IV,           # groups along the x-axis
+             y = continuous_DV)) +   # DV on the y-axis
   geom_violin(fill = "gray") +
   geom_boxplot(width = .07,
                fill = "white") +
@@ -113,12 +126,13 @@ data_long %>%
 
 The Sample(s) was drawn at random (at least as representative as possible)
 
-* Nothing can be done to fix NON-representative samples!
-* Can not for with any statistically test
+
+```{block type='rmdlightbulb', echo=TRUE}
+**NOTE:** Nothing can be done to fix NON-representative samples and there is no statistically test to test this.
+```
 
 
-
-### Normality
+### Normality of the DV in each Group
 
 > A variable is said to follow the normal distribution if it resembles the normal curve.  Specifically it is symetrical, unimodal, and bell shaped.
 
@@ -129,8 +143,7 @@ The continuous variable has a **NORMAL** distribution in ALL relevant population
 
 
 
-Options to judging normality:
-
+```{block type='rmdlightbulb', echo=TRUE}
 **Options to judging normality:**
 
 1. Visualization of each sample's distribution    
@@ -138,37 +151,59 @@ Options to judging normality:
     + Side-by-side **boxplots**, shows *median* instead of *mean* as central line
     + Seperate **QQ plots** (straight $45^\circ$ line), but is sensitive to outliers! 
     
+2. Calculate **Skewness** and **Kurtosis** 
+    + Divided each value by its standard error (SE)    
+    + A result $\gt \pm 2$ indicates issues  
+    + Best used when sample is small, *n* < 30'ish
     
+
+3. Formal Inferential Tests for Normality  
+    + Null-hypothesis: population is normally distributed
+    + A $p \lt .05$ ???indicate snon-normality
+    + For smaller samples, use **Shapiro-Wilk's Test** 
+    + For larger samples, use **Kolmogorov-Smirnov's Test**    
+```
+
+
+
+
+
+#### Histogram by Groups    
+
 ```{r, eval=FALSE}
 data_long %>% 
-  ggplot(aes(continuous_var)) + 
+  ggplot(aes(continuous_var)) +           # DV along the x-axis
   geom_histogram(fill = "gray",
                  color = "black",
                  alpha = .5) +
-  facet_grid(group_var ~ .,
+  facet_grid(group_var ~ .,               # Panel by group
              labeller = label_both) +
   theme_bw()
 ```
 
 
+#### QQ Plot by Group
+
+
 ```{r, eval=FALSE}
 data_long %>% 
-  ggplot(aes(sample = continuous_var)) +    # make sure to include "sample = "
-  geom_qq() +                               # layer on the dots
-  stat_qq_line() +                          # layer on the line
-  facet_wrap(~ group_var,                   # seperate panels for each group
+  ggplot(aes(sample = continuous_var)) +    # make sure to include "sample = DV"
+  geom_qq() +                               
+  stat_qq_line() +                          
+  facet_wrap(~ group_var,                   # Panel by group
              labeller = label_both) +    
   theme_bw()
 ```
 
     
-2. Calculate **Skewness** and **Kurtosis** 
-    + Divided each value by its standard error (SE)    
-    + A result $\gt \pm 2$ indicates issues  
+
+    
+    
+#### Skewness and Kurtosis Values    
     
 ```{r, eval=FALSE}
 data_long %>% 
-  psych::describeBy(continuous_var ~ group_var,
+  psych::describeBy(continuous_var ~ group_var,    # Formula: DV ~ groups
                     data = .,
                     mat = TRUE,
                     digits = 2) 
@@ -176,38 +211,95 @@ data_long %>%
     
     
 
-3. Formal Inferential Tests for Normality  
-    + Null-hypothesis: population is normally distributed
-    + A $p \lt .05$ ???indicate snon-normality
-    + For smaller samples, use **Shapiro-Wilk's Test** 
-    + For larger samples, use **Kolmogorov-Smirnov's Test**
+
+
+#### Skapiro-Wilk's Test
 
 ```{r, eval=FALSE}
 data_long %>% 
-  dplyr::group_by(group_var) %>% 
-  dplyr::summarise(W.stat  = shapiro.test(continuous_var)$statistic,
-                   p.value = shapiro.test(continuous_var)$p.value)
+  dplyr::group_by(group_var) %>%                                      # By group
+  dplyr::summarise(W.stat  = shapiro.test(continuous_var)$statistic,  # For the DV
+                   p.value = shapiro.test(continuous_var)$p.value)    # For the DV
 ```
     
+
+#### Skewness, Kurtosis, & Shapiro-Wilk's Test
+
+```{r, eval=FALSE}
+data_long %>% 
+  dplyr::nest_by(group_var) %>%                                        # By group
+  dplyr::summarise(summ = list(pastecs::stat.desc(data$continuous_var, # For the DV
+                                                  norm = TRUE))) %>% 
+  dplyr::mutate(summ = list(summ %>% 
+                              unlist() %>% 
+                              data.frame() %>% 
+                              dplyr::rename("value" = ".") %>% 
+                              tibble::rownames_to_column(var = "stat"))) %>% 
+  tidyr::unnest(summ) %>% 
+  dplyr::filter(stat %in% c("skewness", "skew.2SE",
+                            "kurtosis", "kurt.2SE",
+                            "normtest.W", "normtest.p")) %>% 
+  tidyr::pivot_wider(names_from = stat,
+                     values_from = value)
+```
+
+     
+* `skew.2SE` 
+    - Calculateed as `skew` divided by 2 times the SE of skewness
+    - If > 1, then we can conclude violations to normality
+    
+* `kurt.2SE` 
+    - Calculateed as `kurt` divided by 2 times the SE of skewness
+    - If > 1, then we can conclude violations to normality 
+    
+    
+    
+    
     
 
-It is important that we test for violations of the assumption of *Homogeneity of variance*.
+### Homogeneity of Variance (HOV) in the DV between groups
+
+
+
+All three of the Tests below have:
+
+* $H_0$: all populations' variances are equal
+* $H_1$ At least two of the populations have different variances
+
+
+
+
+```{block type='rmdlightbulb', echo=TRUE}
+**NOTE:** When using **Bartlett’s test** one of the main assumptions data should be normally distributed. In the case of non-normal data, the **Levene's test** is an alternative to the Bartlett test. The **Fligner-Killeen test** is one of the many tests for homogeneity of variances which is most robust against departures from normality.
+```
+
+#### Bartlett's Test
+
+```{r, eval=FALSE}
+df_long %>% 
+  bartlett.test(continuous_var ~ group_var,     # Formula: DV ~ groups
+                data = .)
+```
+
+#### Leven's Test 
 
 ```{r EX_hov, eval=FALSE}
-# Levene's Test of HOV
 data_long %>% 
-  car::leveneTest(continuous_var ~ group_var, 
+  car::leveneTest(continuous_var ~ group_var,     # Formula: DV ~ groups
                   data = .,            
                   center = "mean")     
 ```
 
+#### Filgner-Killeen's Test
 
-```{r. eval=FALSE}
-# Bartlett's Test of HOV
+```{r, eval=FALSE}
 df_long %>% 
-  bartlett.test(continuous_var ~ group_var, 
+  fligner.test(continuous_var ~ group_var,     # Formula: DV ~ groups
                 data = .)
 ```
+
+
+
 
 
 
@@ -227,13 +319,13 @@ The `aov_4()` function from the `afex` package fits ANOVA models *(oneway, two-w
 Here is an outline of what your syntax should look like when you **fit and save a one-way ANOVA**.  Of course you will replace the dataset name and the variable names, as well as the name you are saving it as.
 
 ```{block type='rmdlightbulb', echo=TRUE}
-**NOTE:** The `aov_4()` function works on data in LONG format only.  Each observation needs to be on its one line or row with seperate variables for the group membership (categorical factor or `fct`) and the continuous measurement (numberic or `dbl`).
+**NOTE:** The `aov_4()` function works on data in LONG format only.  Each observation needs to be on its one line or row with seperate variables for the group membership (categorical factor or `fct`) and the continuous measurement (numberic or `dbl`).  The `(1|id_var)` indicates there is only ONE observation PER individual.
 ```
 
 ```{r, eval=FALSE}
 # One-way ANOVA: fit and save
 aov_name <- data_long %>% 
-  afex::aov_4(continuous_DV ~ group_IV + (1|id_var),
+  afex::aov_4(continuous_DV ~ group_IV + (1|id_var),       # Formula: DV ~ groups + (1| id_var)
               data = .)
 ```
 
@@ -274,42 +366,23 @@ aov_name$Anova
 ## Followup-tests
 
 
-### Estimated Marginal Means with `emmeans::emmeans(~ group_var)`
+### Calculate Estimated Marginal Means
+
+
+```{block type='rmdlightbulb', echo=TRUE}
+ **NOTE:** Estimated Marginal Means (EMM) will we identical WHEN the groups are exactly the same size AND there is only ONE grouping variable.
+```
 
 
 ```{r EX_emm, eval=FALSE}
 aov_name %>% 
-  emmeans::emmeans(~ group_var)        # Calculate Estimated Marinal Means
+  emmeans::emmeans(~ group_var)        # by groups
 ```
 
 
 
 
-
-### All Pairwise Comparisons with `pairs()`
-
-There are two steps to conduct all possible pairwise comparisons:
-
-1. `emmeans::emmeans(~ group_var)` - Calculate the *Estimated Marinal Means*
-2. `pairs()` - Determine if each pair is *significantly different*
-
-Within the `pairs()` function there are several options for controling for multiple comparisons, including:
-
-* `adjust = "none"` - Fisher's LSD
-* `adjust = "tukey"` - Tukey's HSD
-* `adjust = "bon"` - Bonferroni
-
-
-```{r EX_tukey, eval=FALSE}
-# Pairwise post hoc: Tukey's HSD adjustment for multiple comparisons
-aov_name %>% 
-  emmeans::emmeans(~ group_var) %>%        # Calculate Estimated Marginal Means
-  pairs(adjust = "tukey")                  # Is each pair signif different?
-```
-
-
-
-### Plot Marginal Means with `emmeans::emmip(~ group_var)`
+### Plot Estimated Marginal Means
 
 
 ```{r EX_emmip, eval=FALSE}
@@ -322,7 +395,47 @@ aov_name %>%
 
 
 
-### Contrast Statements with `emmeans::contrast()`
+### All Pairwise Comparisons
+
+There are two steps to conduct all possible pairwise comparisons:
+
+1. `emmeans::emmeans(~ group_var)` - Calculate the *Estimated Marinal Means*
+2. `pairs()` - Determine if each pair is *significantly different*
+
+Within the `pairs()` function there are several options for controling for multiple comparisons, including:
+
+* `adjust = "none"` - Fisher's LSD
+* `adjust = "tukey"` - Tukey's HSD
+* `adjust = "bon"` - Bonferroni
+
+```{block type='rmdlightbulb', echo=TRUE}
+**NOTE:** Fisher's LSD approach is valid if you have 2-3 groups.  If there are 4 or more groups, Tukey's HSD adjustment is more appropriate, provided the groups are the same size.  Bonferroni's adjustment is most conservative.
+```
+
+
+```{r EX_tukey, eval=FALSE}
+aov_name %>% 
+  emmeans::emmeans(~ group_var) %>%        # Calculate Estimated Marginal Means
+  pairs(adjust = "tukey")                  # Is each pair signif different?
+```
+
+
+### Effect Size for Pairwise Comparisons
+
+
+Cohen's d like "Standardized Mean Differences"
+
+
+```{r, eval=FALSE}
+aov_name %>% 
+  emmeans::emmeans(~ group_var) %>% 
+  emmeans::eff_size(sigma = sigma(aov_name$lm),
+                    edf = df.residual(aov_name$lm))
+```
+
+
+
+### Contrast Statements
 
 There are two steps to conduct a contrast comparison:
 
@@ -330,13 +443,68 @@ There are two steps to conduct a contrast comparison:
 2. `contrast()` - Determine if each pair is *significantly different*
 
 Inside the contrast statement, list the named sets of linear contrast weights.  We will only be doing one-at-a-time, but we must still use a nested `list`.  
+
 ```{block type='rmdlightbulb', echo=TRUE}
 **NOTE:** You must provide one weight ($c_i$) for each of the $k$ groups.  If you wish to ignore a group, that group's weight is $c_i = 0$.  The sum total of all the weights must be zero ($\sum c_i = 0$), so use positive and negative numbers.
 ```
 
 ```{r EX_contrast, eval=FALSE}
-# Contrast statement : Impossible vs. Rest
 aov_name %>% 
   emmeans::emmeans(~ group_var) %>% 
   emmeans::contrast(list("your contrast name" = c(c_1, c_2, ... , c_k)))
 ```
+
+
+## APA Write-up
+
+
+### Methods Section
+
+* Research Question(s)
+    - Specific testable hypotheses
+* Sample
+    - participants
+    - inclusion & exclusion criteria
+* Procedure
+    - setting 
+    - timeline
+    - intervention & placebo (if applicable)
+* Variables
+   - Measures used
+   - DV & IV(s)
+* Analytic Plan
+    - Main Method Used, options
+    - Assumptions & How Tested
+    - Follow-up tests
+    - Effect Size
+
+
+
+
+### Results Section
+
+
+* Descriptive Summary
+    - Table 1 with sample and variables
+    - Eyeball treands seen
+* Main Test Results
+    - Assumptions of interest
+    - May need a table(s) and/or plot(s)
+* Follow-up Tests
+    - final conclusion
+
+Make sure to include:
+* Effect Sizes
+* Direction of any Significant relationship
+* Contex (not "reject the null")
+
+
+
+
+
+
+
+
+
+
+
